@@ -107,9 +107,14 @@ class Usuario{
     }
 
     function getRol($email){
-    	$sql = "SELECT rol FROM usuario WHERE email=$email;";
+    	$sql = "SELECT rol FROM usuario WHERE email='$email';";
     	$tool = new Tools();
         $array = $tool->getArraySQL($sql);
-        return $array;
+        if($array[0]["rol"] == "0"){
+        	$resul = "profesor";
+        }else if($array[0]["rol"] == "1"){
+        	$resul = "alumno";
+        }
+        return $resul;
     }
 }

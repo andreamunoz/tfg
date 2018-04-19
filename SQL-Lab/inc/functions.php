@@ -10,5 +10,7 @@ if(DEBUG == "true"){
 }
 
 require_once("Tools.php");
-require_once("Usuario.php");
-//require_once("Table2Class.php");
+
+?>
+<!--require_once("Usuario.php");
+//require_once("Table2Class.php"); -->

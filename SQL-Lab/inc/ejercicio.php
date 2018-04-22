@@ -4,12 +4,12 @@ include_once 'functions.php';
 class Ejercicio{
 
   
-    function create($nivel,$enun,$descrip,$deshab,$tipo,$user,$sol){
+    function createEjercicio($nombre,$nivel,$enun,$descrip,$deshab,$tipo,$user,$sol){
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "insert into ejercicio (nivel,enunciado,descripcion,deshabilitar,tipo,user,solucion) 
-        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."');";
+        $sql = "insert into ejercicio (nombre,nivel,enunciado,descripcion,deshabilitar,tipo,user,solucion) 
+        values ('".$nombre."','".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."');";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -46,6 +46,19 @@ class Ejercicio{
         return $consulta;
     }
    
+    function getEjercicio($nombre){
+       
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT nombre FROM ejercicio WHERE nombre = '$nombre';";
+        $consulta = mysqli_query($conexion,$sql);
+        if($consulta){
+            $result = $consulta->fetch_array();
+        }
+        $connect->disconnectDB($conexion);
+        return $result[0];
+    }
+
     function getEjercicioById($id){
        
         $sql = "SELECT * FROM ejercicio WHERE id_ejercicio = '$id';";

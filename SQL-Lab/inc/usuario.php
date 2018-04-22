@@ -4,38 +4,21 @@ include_once 'functions.php';
 class Usuario{
 
     public $ID = 0;
-    /**
-     * Crea una nueva fila en la tabla table1.
-     * @param type $name
-     * @param type $name_twitter
-     * @param type $fecha_inicio
-     * @param type $fecha_final
-     * @return type
-     */
-    function create($campo1,$campo2,$campo3/*,...*/){
-        
-       
+    public $email;
+    public $password;
+
+
+    function createUser($name,$apellidos,$name_user,$rol,$email,$pass){
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "insert into table1 (campo1,campo2,campo3) 
-        values ('".$campo1."','".$campo2."','".$campo3."');";
+        $sql = "insert into usuario (nombre,apellidos,user,rol,email,password) 
+        values ('".$name."','".$apellidos."','".$name_user."','".$rol."','".$email."','".$pass."');";
         $consulta = mysqli_query($conexion,$sql);
-        if($consulta){
-        }else{
-               echo "No se ha podido insertar en la base de datos<br><br>".mysqli_error($conexion);
-        }
         $connect->disconnectDB($conexion);
         return $consulta;
     }
-    /**
-     * Modifica la tabla con los datos introducidos
-     * @param type $name
-     * @param type $name_twitter
-     * @param type $fecha_inicio
-     * @param type $fecha_final
-     * @return type
-     */
+    
     function update($campo1,$campo2,$campo3/*,...*/){
         
         $connect = new Tools();
@@ -51,70 +34,53 @@ class Usuario{
         }
         $connect->disconnectDB($conexion);
         return $consulta;
-        
     }
-    /**
-     * Borra el elemento a partir de un ID dado
-     * @param type $ID
-     * @return type
-     */ 
-    function delete($ID){
+
+    function getEmail($email){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "DELETE FROM table1 WHERE ID=$ID;";
+        $sql = "SELECT email FROM usuario WHERE email='$email';";
         $consulta = mysqli_query($conexion,$sql);
         if($consulta){
-        }else{
-               echo "No se ha podido borrar la table1<br><br>".mysqli_error($conexion);
+            $result = $consulta->fetch_array();
         }
         $connect->disconnectDB($conexion);
-        return $consulta;
+        return $result[0];
     }
-    /**
-     * Devuelve un array con la información de una fila a partir de un ID
-     * @return type
-     */
-    
-    function getData(){
-        //Creamos la consulta
-        $sql = "SELECT * FROM usuario WHERE ID = $this->ID;";
-        //obtenemos el array
-        $tool = new Tools();
-        $array = $tool->getArraySQL($sql);
-        return $array;
+
+    function getUser($email){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT user FROM usuario WHERE email='$email';";
+        $consulta = mysqli_query($conexion,$sql);
+        if($consulta){
+            $result = $consulta->fetch_array();
+        }
+        $connect->disconnectDB($conexion);
+        return $result[0];
     }
-    
-    function getCampo1(){
-        //Creamos la consulta
-        $sql = "SELECT email FROM usuario WHERE ID = $this->ID;";
-        //obtenemos el array
-        $tool = new Tools();
-        $array = $tool->getArraySQL($sql);
-        return $array[0][0];
-    }
-    
-    /**
-     * Devuelve Toda la información de la tabla table1
-     * @return type
-     */
-    function getAllInfo(){
-        //Creamos la consulta
-        $sql = "SELECT * FROM usuario;";
-        //obtenemos el array
-        $tool = new Tools();
-        $array = $tool->getArraySQL($sql);
-        return $array;
+
+    function getPassword($email){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT password FROM usuario WHERE email='$email';";
+        $consulta = mysqli_query($conexion,$sql);
+        if($consulta){
+            $result = $consulta->fetch_array();
+        }
+        $connect->disconnectDB($conexion);
+        return $result[0];
     }
 
     function getRol($email){
-    	$sql = "SELECT rol FROM usuario WHERE email='$email';";
-    	$tool = new Tools();
-        $array = $tool->getArraySQL($sql);
-        if($array[0]["rol"] == "0"){
-        	$resul = "profesor";
-        }else if($array[0]["rol"] == "1"){
-        	$resul = "alumno";
+    	$connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT rol FROM usuario WHERE email='$email';";
+        $consulta = mysqli_query($conexion,$sql);
+        if($consulta){
+            $result = $consulta->fetch_array();
         }
-        return $resul;
+        $connect->disconnectDB($conexion);
+        return $result[0];
     }
 }

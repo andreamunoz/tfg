@@ -128,6 +128,15 @@
   padding-top: 20px;
 }
 
+.card-body {
+  margin-top: -21px;
+  margin-bottom: -30px !important;
+}
+
+.btn-link {
+  color: #fc6502 !important;
+}
+
 /********************************************/
 
 .panel-primary{

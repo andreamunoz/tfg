@@ -71,7 +71,7 @@
 				<div class="hrg"></div>
 		  		<div class="form-row pt-4">	
 					<div class="form-group col-md-3 offset-9 ">
-						<button class="btn btn-log btn-tertiary btn-block" type="submit" onclick="location.href='administrator.html'">Guardar Cambios</button>
+						<button class="btn btn-log btn-tertiary btn-block" type="submit" >Guardar Cambios</button>
 					</div>
 		  		</div>
 	  		</form>

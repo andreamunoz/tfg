@@ -7,6 +7,7 @@ $(document).ready(function()
     $('.editar-hoja').hide();
     $('.adm-ejercicios').hide();
     $('.adm-estadisticas').hide();
+    $('.adm-tablas').hide();
     $('.configuracion').hide();
 
     $("#crear_hoja").click(function(){
@@ -131,6 +132,26 @@ $(document).ready(function()
       $('.adm-ejercicios').hide();
       $('.adm-estadisticas').show();
         
+       /* var that = $(this);
+        that.closest('.sub-menu').find('li.active').removeClass('active');
+        that.parent().addClass('active');*/
+        
+  });
+
+  /*---------------Tablas-------------------*/
+  $("#estadistic").click(function(){
+        
+        /*if($('.adm-hojas').show() || $('.adm-ejercicios').show() || $('.configuracion').show()) {
+          $('.adm-hojas').hide();
+          $('.configuracion').hide();
+          $('.adm-ejercicios').hide();
+          $('adm-estadisticas').show();
+        }*/
+      $('.adm-hojas').hide();
+      $('.configuracion').hide();
+      $('.adm-ejercicios').hide();
+      $('.adm-estadisticas').hide();
+      $('.adm-tablas').show();
        /* var that = $(this);
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');*/

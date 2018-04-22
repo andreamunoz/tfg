@@ -1,9 +1,12 @@
+<?php
+  session_start();
+?>
 
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/php charset=utf-8"/>
-		<link href="css/prueba.css" rel="stylesheet" type="text/css">
+		<link href="../css/prueba.css" rel="stylesheet" type="text/css">
 		
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -13,95 +16,12 @@
 		<title>SQLab</title>
 	</head>	
 	<body>
-    <!-- MODAL INICIAR SESION-->
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header text-center">
-          <h4 class="modal-title" id="myModalLabel">Iniciar Sesión</h4>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label for="inputEmail">Correo Electrónico</label>  
-                  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required></input>
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="inputPassword">Contraseña</label>
-                  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required></input>
-                </div>
-              </div>
-              <div class="form-row">
-                <a class="col-md-12 text-right" href="#myMoReg" data-toggle="modal">¿Has olvidado la contraseña?</a>
-              </div>
-              <div class="form-row">
-                <a class="col-md-12 text-right" href="#myMoReg" data-toggle="modal">Registrate</a>
-              </div>
-              <div class="form-row">
-                <button class="col-md-4 btn btn-log btn-primary btn-block" type="submit" onclick="location.href='index_profesor.php'">Sign in</button>
-              </div>
-            </form>
-        </div>
-          
-      </div>
-    </div>
-  </div>
-  <!-- MODAL REGISTRO USUARIO-->
-  <div class="modal fade" id="myMoReg" tabindex="-1" role="dialog" aria-labelledby="myModalRegLabel" aria-hidden="true">
-    <div class="modal-dialog " role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title" id="myModalRegLabel" >Registro de usuario</h4>
-        </div>
-        <div class="modal-body">
-          <form >
-            <div class="form-row">
-              <div class="form-group col-md-5">
-                <label for="name">Nombre</label>  
-                  <input type="text" id="name" class="form-control" required></input>
-              </div>
-              <div class="form-group col-md-7">
-                  <label for="apellido">Apellidos</label> 
-                  <input type="text" id="apellido" class="form-control" required></input>
-                </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-8">
-                <label for="dire">Dirección</label> 
-                  <input type="text" id="dire" class="form-control" required></input>
-              </div>
-              <div class="form-group col-md-4">
-                  <label for="codPostal">Código Postal</label>  
-                  <input type="text" id="codPostal" class="form-control" required></input>
-                </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-12">
-                <label for="inputEmail">Correo Electrónico</label>
-                  <input type="email" id="inputEmail" class="form-control" required></input>
-                </div>
-                <div class="form-group col-md-12">
-                  <label for="inputPassword">Contraseña</label>
-                  <input type="password" id="inputPassword" class="form-control" required></input>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                <button class="btn btn-log btn-primary btn-block" data-dismiss="modal" >Cancelar</button>
-              </div>
-              <div class="form-group col-md-6">
-                  <button class="btn btn-log btn-primary btn-block" type="submit" onclick="location.href='index_profesor.php'">Crear Cuenta</button>
-                </div>
-              </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-		<?php include("navbar_menu.php"); ?>
+    
+    <?php 
+      include("modals/modals_iniciar_sesion.php");
+    ?>
+    <?php include("modals/modals_registro_sesion.php");?>
+		<?php include("navbar/navbar_menu.php");?>
 
 		<main role="main">
 
@@ -113,7 +33,7 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item">
-            <img class="first-slide" src="img/img1_carrusel.jpg" width="100%" alt="First slide">
+            <img class="first-slide" src="../img/img1_carrusel.jpg" width="100%" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
                 <h1>Example headline.</h1>
@@ -123,7 +43,7 @@
             </div>
           </div>
           <div class="carousel-item active">
-            <img class="second-slide" src="img/img2_carrusel.jpg" alt="Second slide">
+            <img class="second-slide" src="../img/img2_carrusel.jpg" alt="Second slide">
             <div class="container">
               <div class="carousel-caption">
                 <h1>Another example headline.</h1>
@@ -133,7 +53,7 @@
             </div>
           </div>
           <div class="carousel-item">
-            <img class="third-slide" src="img/img1_carrusel.jpg" alt="Third slide">
+            <img class="third-slide" src="../img/img1_carrusel.jpg" alt="Third slide">
             <div class="container">
               <div class="carousel-caption text-right">
                 <h1>One more for good measure.</h1>
@@ -225,7 +145,7 @@
         </main>
 	</body>
 	<footer class="footer py-3 text-center">
-		© 2018 <a id="pie" href="prueba_index.php">Sqlab</a> 
+		© 2018 <a id="pie" href="index.php">Sqlab</a> 
 	</footer>
 </html>
 

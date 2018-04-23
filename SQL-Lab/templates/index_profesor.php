@@ -25,7 +25,6 @@
 			<?php include("adm_profesor/adm_tablas.php"); ?>
 			<?php include("adm_profesor/adm_estadisticas.php"); ?>
 			<?php include("adm_profesor/adm_configuracion.php"); ?>
-			
 		</div> 
 		
 	<script type="text/javascript" src="../js/functions.js"></script>

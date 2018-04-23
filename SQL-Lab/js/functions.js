@@ -110,6 +110,7 @@ $(document).ready(function()
         that.parent().addClass('active');
     });
   
+  
 /*--------------Configuracion-----------------*/
   $("#perfil").click(function(){
         

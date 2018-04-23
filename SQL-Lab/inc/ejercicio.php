@@ -110,6 +110,7 @@ class Ejercicio{
         }*/
         $connect->disconnectDB($conexion);
         return $consulta;
+        
     }
     
 }

@@ -280,10 +280,11 @@
 										echo "</td><td>";
 										echo $fila['nivel'];
 										echo "</td>";
+										
 										?>
 										<td>							    
 							      			<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
-							      			
+
 											<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
 							      		</td>
 							      	<?php

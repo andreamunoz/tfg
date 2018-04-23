@@ -14,6 +14,7 @@
 							<div class="panel-footer" >
 		  						<textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="5" placeholder="CREATE TABLE coches..."></textarea>
 		  					</div>
+		  					
 		  				</div>
 		  				<div class="form-group col-md-3 offset-9 pr-4">
 							<button class="btn btn-log btn-tertiary btn-block" type="submit">Guardar</button>

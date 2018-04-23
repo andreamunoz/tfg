@@ -14,9 +14,9 @@
               <a id="ejercicio" href="#"><i class="fa fa-file-o" aria-hidden="true"></i>Ejercicios <span class="arrow"></span></a>
             </li>  
             <ul class="sub-menu collapse" id="ejercicios">
-              <li class=""><a id="crear_ejercicio" href="#">Crear Ejercicio</a></li>
-              <li class=""><a id="editar_ejercicio" href="#">Editar Ejercicio</a></li>
-              <li class=""><a id="lista_ejercicio" href="#">Lista de Ejercicio</a></li>
+              <li class=""><a id="crear_ejercicio" href="#crear">Crear Ejercicio</a></li>
+              <li class=""><a id="editar_ejercicio" href="#editar">Editar Ejercicio</a></li>
+              <li class=""><a id="lista_ejercicio" href="#lista">Lista de Ejercicio</a></li>
             </ul>
 
              <li data-toggle="collapse" data-target="#tablas" class="collapsed">

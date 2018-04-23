@@ -36,7 +36,7 @@ class Ejercicio{
         return $consulta;
     }
    
-    function delete($id){
+    function deleteEjercicio($id){
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
@@ -105,12 +105,9 @@ class Ejercicio{
         $conexion = $connect->connectDB();
         $sql = "SELECT nombre,tipo,nivel FROM ejercicio;";
         $consulta = mysqli_query($conexion,$sql);
-        /*if($consulta){
-            $result = $consulta->fetch_array();
-        }*/
         $connect->disconnectDB($conexion);
         return $consulta;
-        
+
     }
     
 }

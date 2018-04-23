@@ -4,6 +4,10 @@
   padding: 10px;
 }*/
 
+#icon_añadir {
+  color: #fc6502;
+}
+
 .icon_edit {
   color: rgba(0,0,0,.3);
 }
@@ -63,6 +67,29 @@
   background-color: #fc6502 !important;
   border-color: #fc6502 !important;
 }
+
+
+
+.table-fixed tbody {
+  height: 180px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.table-fixed tbody{
+  display: block;
+  width: 97%;
+}
+.table-fixed tbody td, 
+.table-fixed thead > tr> th {
+  float: left;
+  
+}
+
+.table tr{
+  
+}
+
 
 .cabecera{
 	padding-top: 20px;

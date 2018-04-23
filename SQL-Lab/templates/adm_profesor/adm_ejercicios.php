@@ -39,7 +39,7 @@
 				  			</div>
 				  		</div>
 					</div>
-					<div class="form-group col-md-3 pr-4">
+					<div class="form-group col-md-2">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
 								<label for="nivel">Nivel</label>
@@ -53,7 +53,7 @@
 				  			</div>
 				  		</div>
 					</div>
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-3 pr-4">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
 								<label for="deshabilitar">Ejercicio</label>
@@ -112,28 +112,23 @@
 				<p class="pl-5">Podrás editar todos los campos del ejercicio.</p>
 				<div class="hrr"></div>
 				<div class="form-row pt-4 ">
-					<div class="form-group col-md-3 pl-4">
+					<div class="form-group col-md-2 pl-4">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
-								<label for="name">Nombre del Ejercicio</label>	
+								<label for="name">Nombre</label>	
 							</div>
 							<div class="panel-footer">
-		  						<input type="text" id="titulo" class="form-control" placeholder="Nombre" required />
+		  						<input type="text" id="titulo" name="name_ejercicio" class="form-control" placeholder="Nombre" required />
 		  					</div>
 		  				</div>
 					</div>
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-2">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
-		  						<label for="tablas">Tablas</label>	
+		  						<label for="tablas">Descripción Tablas</label>	
 		  					</div>
 		  					<div class="panel-footer" >
-		  						<select type="text" id="tablas" class="form-control" required>
-		  							<option>Tabla 1</option>
-		  							<option>Tabla 2</option>
-		  							<option>Tabla 3</option>
-		  							<option>Tabla 4</option>
-		  						</select>
+		  						<input type="text" id="tablas" name="descripcion" class="form-control" placeholder="Tablas" required />
 		  					</div>
 		  				</div>
 		  			</div>
@@ -143,11 +138,23 @@
 								<label for="categoria">Categoría</label>
 							</div>	
 							<div class="panel-footer" >
-				  				<select type="text" id="categoria" class="form-control" required>
-				  					<option>Categoría 1</option>
-				  					<option>Categoría 2</option>
-				  					<option>Categoría 3</option>
-				  					<option>Categoría 4</option>
+				  				<select type="text" id="categoria" name="categoria" class="form-control" required>
+				  					<option value="c1">1.Select-Basico</option>
+				  					<option value="c2">2.Select-Join</option>
+				  				</select>
+				  			</div>
+				  		</div>
+					</div>
+					<div class="form-group col-md-2">
+		  				<div class="panel panel-primary">
+	                        <div class="panel-heading">
+								<label for="nivel">Nivel</label>
+							</div>	
+							<div class="panel-footer" >
+				  				<select type="text" id="nivel" name="nivel" class="form-control" required>
+				  					<option value="Principiante">Principiante</option>
+				  					<option value="Intermedio">Intermedio</option>
+				  					<option value="Avanzado">Avanzado</option>			  	
 				  				</select>
 				  			</div>
 				  		</div>
@@ -155,13 +162,12 @@
 					<div class="form-group col-md-3 pr-4">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
-								<label for="nivel">Nivel</label>
+								<label for="deshabilitar">Ejercicio</label>
 							</div>	
 							<div class="panel-footer" >
-				  				<select type="text" id="nivel" class="form-control" required>
-				  					<option>Principiante</option>
-				  					<option>Intermedio</option>
-				  					<option>Avanzado</option>			  	
+				  				<select type="text" id="deshabilitar" name="deshabilitar" class="form-control" required>
+				  					<option value="1">Habilitado</option>
+				  					<option value="0">Deshabilitado</option>
 				  				</select>
 				  			</div>
 				  		</div>
@@ -191,10 +197,10 @@
 				</div>
 		  		<div class="form-row">	
 		  			<div class="form-group col-md-3 offset-6">
-						<button class="btn btn-log btn-tertiary-border btn-block" type="submit" onclick="location.href='administrator.html'">Cancelar</button>
+						<button class="btn btn-log btn-tertiary-border btn-block" type="submit">Cancelar</button>
 					</div>
 					<div class="form-group col-md-3 pr-4">
-						<button class="btn btn-log btn-tertiary btn-block" type="submit" onclick="location.href='administrator.html'">Guardar</button>
+						<button class="btn btn-log btn-tertiary btn-block" type="submit">Guardar</button>
 					</div>
 		  		</div>
 	  		</form>
@@ -257,7 +263,7 @@
 						<button class="btn btn-log btn-tertiary-border btn-block filtrar" >Filtrar</button>
 					</div>
 					<div class="form-group col-md-12 ">
-						<table class="table text-center">
+						<table class="table table-fixed text-center">
 							<thead class="thead-dark">
 							    <tr>
 							      <th scope="col">Nombre</th>
@@ -280,27 +286,16 @@
 										echo "</td><td>";
 										echo $fila['nivel'];
 										echo "</td>";
-										
+
 										?>
 										<td>							    
-							      			<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
+							      			<a href="#editar"id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
+											<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true" onclick="eliminar_Ejercicio()"></i></a>
 
-											<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
 							      		</td>
 							      	<?php
-									}
-									
-								?>
-							    <!--<tr>
-							      <th scope="row">Ejercicio 1</th>
-							      <td>Categoría 1</td>
-							      <td>Intermedio</td>						  
-							      	<td>							    
-							      	<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
-									<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
-							      	</td>
-							    </tr>-->
-							    
+									}		
+								?>					    
 							</tbody>
 						</table>	
 		  			</div>

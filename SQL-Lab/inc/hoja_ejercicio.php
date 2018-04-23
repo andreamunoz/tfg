@@ -4,7 +4,7 @@ include_once 'functions.php';
 class HojaEjercicio{
 
   
-    function create($user){
+    function createHoja($user){
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
@@ -15,7 +15,7 @@ class HojaEjercicio{
         return $consulta;
     }
    
-    function delete($id){
+    function deleteHoja($id){
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
@@ -26,11 +26,13 @@ class HojaEjercicio{
     }
 
     function getAllHojas(){
-    	// * cambiarlo por nombre de hoja
-    	$sql = "SELECT * FROM hoja_ejercicios;";
-        $tool = new Tools();
-        $array = $tool->getArraySQL($sql);
-        return $array;
+    	
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+    	$sql = "SELECT nombre FROM hoja_ejercicios;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
     }
 
     function getHojasById($id){

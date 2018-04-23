@@ -24,10 +24,16 @@
               </div>
               <div class="form-group col-md-4">
                   <label for="profe_alumno" required>Rol</label> 
-                  <select type="text" id="profe_alumno" name="profe_alumno" class="form-control" >
+                  <select type="text" id="profe_alumno" name="rol" class="form-control" onclick="cambiaRol()">
                   		<option value="profe">Profesor</option>
                   		<option value="alumno">Alumno</option>
                   </select> 
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                  <input type="checkbox" id="myCheck" name="ckeckAutoriza" style="display: none;" value="0">
+                  <span id="myCheckText" style="display: none"> Permito a otros profesores usar las tablas creadas por mí.</span>
                 </div>
             </div>
             <div class="form-row">
@@ -53,5 +59,18 @@
       </div>
     </div>
 </div>
+<script>
+function cambiaRol() {
+    var rol = document.getElementById("profe_alumno");
+    var myCheck = document.getElementById("myCheck");
+    if (rol.value == "profe"){
+        myCheck.style.display = "inline-block";
+        myCheckText.style.display = "inline-block";
+    } else {
+       myCheck.style.display = "none";
+       myCheckText.style.display = "none";
+    }
+}
+</script>
 
 

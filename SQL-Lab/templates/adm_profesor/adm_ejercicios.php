@@ -239,6 +239,13 @@
 			</div>
 
 	  	</div>
+
+
+
+
+
+
+	  	
 		<div class="col-md-11 jumbotron-propio lista-ejercicio">
 			
 			<form class="jumbotron-propio ">
@@ -260,7 +267,30 @@
 							    </tr>
 							</thead>
 							<tbody>
-							    <tr>
+								<?php 
+									include_once '../inc/ejercicio.php';
+									$ejer = new Ejercicio();
+									$result = $ejer->getNCNEjercicio();
+									
+									while($fila = mysqli_fetch_array($result)){
+										echo "<tr><th scope='row'>";
+										echo $fila['nombre'];
+										echo "</th><td>";
+										echo $fila['tipo'];
+										echo "</td><td>";
+										echo $fila['nivel'];
+										echo "</td>";
+										?>
+										<td>							    
+							      			<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
+							      			
+											<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
+							      		</td>
+							      	<?php
+									}
+									
+								?>
+							    <!--<tr>
 							      <th scope="row">Ejercicio 1</th>
 							      <td>Categoría 1</td>
 							      <td>Intermedio</td>						  
@@ -268,34 +298,8 @@
 							      	<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
 									<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
 							      	</td>
-							    </tr>
-							    <tr>
-							      	<th scope="row">Ejercicio 2</th>
-							      	<td>Categoría 2</td>
-							      	<td>Avanzado</td>
-									<td>
-							      	<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
-									<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
-							      </td>
-							    </tr>
-							    <tr>
-							      	<th scope="row">Ejercicio 3</th>
-							      	<td>Categoría 3</td>
-							      	<td>Avanzado</td>
-							      	<td>
-							      	<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
-									<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
-							      	</td>
-							    </tr>
-							     <tr>
-							      	<th scope="row">Ejercicio 4</th>
-							      	<td>Categoría 4</td>
-							      	<td>Principiante</td>
-							      	<td>
-							      	<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
-									<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
-							      	</td>
-							    </tr>
+							    </tr>-->
+							    
 							</tbody>
 						</table>	
 		  			</div>

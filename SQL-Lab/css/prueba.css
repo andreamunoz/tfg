@@ -538,3 +538,17 @@ li:hover {
 li:hover .description {
   display: block;
 }
+
+
+/* ------ Selecciona archivo ---- */
+
+.custom-file-label {
+  border: 1px solid #fc6502 !important;
+  color: #fc6502 !important;
+}
+
+.btn-outline-secondary {
+   border: 1px solid #fc6502 !important;
+   background-color: #fc6502 !important;
+   color: white !important;
+}

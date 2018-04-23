@@ -98,5 +98,18 @@ class Ejercicio{
         $array = $tool->getArraySQL($sql);
         return $array;
     }
+
+     function getNCNEjercicio(){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT nombre,tipo,nivel FROM ejercicio;";
+        $consulta = mysqli_query($conexion,$sql);
+        /*if($consulta){
+            $result = $consulta->fetch_array();
+        }*/
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
     
 }

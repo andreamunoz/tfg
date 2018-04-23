@@ -11,46 +11,49 @@ $(document).ready(function()
     $('.configuracion').hide();
 
     $("#crear_hoja").click(function(){
-        if($('.configuracion').show() || $('.adm-ejercicios').show() || $('.adm-estadisticas').show()){
-          $('.adm-hojas').show();
-          $('.configuracion').hide();
-          $('.adm-ejercicios').hide();
-          $('.adm-estadisticas').hide();
-        }
+        
+        $('.adm-hojas').show();
+        $('.configuracion').hide();
+        $('.adm-ejercicios').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-tablas').hide();
+       
         $('.crear-hoja').show("slow");
         $('.editar-hoja').hide();
         $('.lista-hoja').hide();
+        
         var that = $(this);
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
-        
     });
-
     $("#editar_hoja").click(function(){
-        if($('.configuracion').show() || $('.adm-ejercicios').show() || $('.adm-estadisticas').show()){
-          $('.adm-hojas').show();
-          $('.configuracion').hide();
-          $('.adm-ejercicios').hide();
-          $('.adm-estadisticas').hide();
-        }           
+        
+        $('.adm-hojas').show();
+        $('.configuracion').hide();
+        $('.adm-ejercicios').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-tablas').hide();
+                  
         $('.crear-hoja').hide("linear");
         $('.editar-hoja').show();
         $('.lista-hoja').hide("linear");
+        
         var that = $(this);
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
-
     $("#lista_hoja").click(function(){
-        if($('.configuracion').show() || $('.adm-ejercicios').show() || $('.adm-estadisticas').show()){
-            $('.adm-hojas').show();
-            $('.configuracion').hide();
-            $('.adm-ejercicios').hide();
-            $('.adm-estadisticas').hide();
-        }
+       
+        $('.adm-hojas').show();
+        $('.configuracion').hide();
+        $('.adm-ejercicios').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-tablas').hide();
+        
         $('.crear-hoja').hide("linear");
         $('.editar-hoja').hide();
         $('.lista-hoja').show("swing");
+        
         var that = $(this);
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
@@ -59,44 +62,49 @@ $(document).ready(function()
 	/*--------------Ejercicios----------------*/
 
     $("#crear_ejercicio").click(function(){
-        if($('.configuracion').show() || $('.adm-hojas').show() || $('.adm-estadisticas').show()){
-          $('.adm-hojas').hide();
-          $('.configuracion').hide();
-          $('.adm-estadisticas').hide();
-          $('.adm-ejercicios').show();
-        }
-          $('.crear-ejercicio').show("slow");
-          $('.editar-ejercicio').hide();
-          $('.lista-ejercicio').hide();
-          var that = $(this);
-          that.closest('.sub-menu').find('li.active').removeClass('active');
-          that.parent().addClass('active');
         
+        $('.adm-hojas').hide();
+        $('.configuracion').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-ejercicios').show();
+        $('.adm-tablas').hide();
+        
+        $('.crear-ejercicio').show("slow");
+        $('.editar-ejercicio').hide();
+        $('.lista-ejercicio').hide();
+        
+        var that = $(this);
+        that.closest('.sub-menu').find('li.active').removeClass('active');
+        that.parent().addClass('active');
     });
     $("#editar_ejercicio").click(function(){
-        if($('.configuracion').show() || $('.adm-hojas').show() || $('.adm-estadisticas').show()){
-          $('.adm-hojas').hide();
-          $('.configuracion').hide();
-          $('.adm-estadisticas').hide();
-          $('.adm-ejercicios').show();
-        }           
+       
+        $('.adm-hojas').hide();
+        $('.configuracion').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-ejercicios').show();
+        $('.adm-tablas').hide();
+                 
         $('.crear-ejercicio').hide("linear");
         $('.editar-ejercicio').show();
         $('.lista-ejercicio').hide("linear");
+        
         var that = $(this);
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
     $("#lista_ejercicio").click(function(){
-        if($('.configuracion').show() || $('.adm-hojas').show() || $('.adm-estadisticas').show()){
-          $('.adm-hojas').hide();
-          $('.configuracion').hide();
-          $('.adm-estadisticas').hide();
-          $('.adm-ejercicios').show();
-        }
+        
+        $('.adm-hojas').hide();
+        $('.configuracion').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-tablas').hide();
+        $('.adm-ejercicios').show();
+       
         $('.crear-ejercicio').hide("linear");
         $('.editar-ejercicio').hide();
         $('.lista-ejercicio').show("swing");
+        
         var that = $(this);
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
@@ -104,15 +112,13 @@ $(document).ready(function()
   
 /*--------------Configuracion-----------------*/
   $("#perfil").click(function(){
-        /*$('.adm-noticias').hide();
-        $('.configuracion').show();*/
-        if($('.adm-hojas').show() || $('.adm-ejercicios').show() || $('.adm-estadisticas').show()) {
-          $('.configuracion').show();
-          $('.adm-hojas').hide();
-          $('.adm-ejercicios').hide();
-          $('.adm-estadisticas').hide();
-        }
-        $('.conf_perfil').show("swing");
+        
+        $('.configuracion').show();
+        $('.adm-hojas').hide();
+        $('.adm-ejercicios').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-tablas').hide();
+        
         var that = $(this);
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
@@ -121,41 +127,21 @@ $(document).ready(function()
   /*---------------Estadisticas-------------------*/
   $("#estadistic").click(function(){
         
-        /*if($('.adm-hojas').show() || $('.adm-ejercicios').show() || $('.configuracion').show()) {
-          $('.adm-hojas').hide();
-          $('.configuracion').hide();
-          $('.adm-ejercicios').hide();
-          $('adm-estadisticas').show();
-        }*/
-      $('.adm-hojas').hide();
-      $('.configuracion').hide();
-      $('.adm-ejercicios').hide();
-      $('.adm-estadisticas').show();
-        
-       /* var that = $(this);
-        that.closest('.sub-menu').find('li.active').removeClass('active');
-        that.parent().addClass('active');*/
-        
+        $('.adm-hojas').hide();
+        $('.configuracion').hide();
+        $('.adm-ejercicios').hide();
+        $('.adm-tablas').hide();
+        $('.adm-estadisticas').show();
   });
 
   /*---------------Tablas-------------------*/
-  $("#estadistic").click(function(){
+  $("#adjuntar_tabla").click(function(){
         
-        /*if($('.adm-hojas').show() || $('.adm-ejercicios').show() || $('.configuracion').show()) {
-          $('.adm-hojas').hide();
-          $('.configuracion').hide();
-          $('.adm-ejercicios').hide();
-          $('adm-estadisticas').show();
-        }*/
       $('.adm-hojas').hide();
       $('.configuracion').hide();
       $('.adm-ejercicios').hide();
       $('.adm-estadisticas').hide();
-      $('.adm-tablas').show();
-       /* var that = $(this);
-        that.closest('.sub-menu').find('li.active').removeClass('active');
-        that.parent().addClass('active');*/
-        
+      $('.adm-tablas').show(); 
   });
 
 });

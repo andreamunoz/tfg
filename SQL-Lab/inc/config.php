@@ -2,7 +2,7 @@
 define("SERVER","localhost");
 define("USER","root");
 define("PASS","");
-define("DB","bd_sqlab17");
+define("DB","tfg17sql");
 //OTROS DATOS
 define("DEBUG","true");
 ?> 

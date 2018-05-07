@@ -41,8 +41,15 @@
 						      	 	
 					      	</div>
 					      	<div class="row">
+						      		<div class="col-md-3 pl-5 pt-2 ">
+						      			<p>Categoría: <?php	
+										echo $fila['tipo'];
+										?></p> 
+						      		</div>
 						      		<div class="col-md-2 pl-5 pt-2">
-						      			<p>NºEjercicios: </p> 
+						      			<p>Nivel: <?php	
+										echo $fila['nivel'];
+										?></p> 
 						      		</div>
 						      		<div class="col-md-2 pl-5 pt-2">
 						      			<p>Intentos: </p> 

@@ -32,8 +32,7 @@
 							?>
 							<div class="card-header" id="headingOne">
 								<h5 class="mb-0">
-								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >	
-								'.$fila['nombre'].'</a>';
+								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >'.$fila['nombre'].'</a>';
 								?>
 						      	</h5>					    
 					      	</div>

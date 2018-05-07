@@ -19,68 +19,46 @@
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("navbar/navbar_menu_alumno.php"); ?>
 		<div class="container pt-4">
-				<h3 class="text-center" >HOJA DE EJERCICIOS</h3>
+				<?php $hojaparameter = $_GET['hoja']; ?>
+				<h3 class="text-center" ><?php echo $hojaparameter ?></h3>
 				<div class="hrr mb-3"></div>		
   				<div id="accordion">
 						<div class="card">
 							<?php 
 							include_once '../inc/hoja_ejercicio.php';
-							$ejer = new HojaEjercicio();
-							$result = $ejer->getAllHojas();
-									
+							$hojaejer = new HojaEjercicio();
+							$res = $hojaejer->getIdByName($hojaparameter);
+							while($fila = mysqli_fetch_array($res)){
+								$id = $fila['id_hoja'];
+							}
+							include_once '../inc/ejercicio.php';
+							$ejer = new Ejercicio();
+							$result = $ejer->getEjerciciosHoja($id);					
 							while($fila = mysqli_fetch_array($result)){
 							?>
 							<div class="card-header" id="headingOne">
 								<h5 class="mb-0">
-								<?php echo '<a href="hoja_ejercicio.php?hoja='.$fila['nombre'].'">'.$fila['nombre'].'</a>';							
+								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >'.$fila['nombre'].'</a>';
 								?>
-						      	</h5>
-						      	 	
+						      	</h5>					    
 					      	</div>
 					      	<div class="row">
-						      		<div class="col-md-2 pl-5 pt-2">
-						      			<p>NºEjercicios: 5</p> 
+						      		<div class="col-md-3 pl-5 pt-2 ">
+						      			<p>Categoría: <?php	
+										echo $fila['tipo'];
+										?></p> 
 						      		</div>
 						      		<div class="col-md-2 pl-5 pt-2">
-						      			<p>Intentos: 2</p> 
+						      			<p>Nivel: <?php	
+										echo $fila['nivel'];
+										?></p> 
+						      		</div>
+						      		<div class="col-md-2 pl-5 pt-2">
+						      			
+						      			<p>Intentos: </p> 
 						      		</div> 
 						      	</div>    
-							<?php } ?>						     						     								    	
-						    <!--<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-							      <div class="card-body">
-							        	<table class="table text-center">
-											<tbody>
-											    <tr>
-											      <th scope="row">Ejercicio 1</th>
-											      <td>Categoría 1</td>
-											      <td>Intermedio</td>						  
-											      	<td>					    
-											      	<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
-													<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
-											      	</td>
-											    </tr>
-											    <tr>
-											      	<th scope="row">Ejercicio 2</th>
-											      	<td>Categoría 2</td>
-											      	<td>Avanzado</td>
-													<td>
-											      	<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
-													<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
-											      </td>
-											    </tr>
-											    <tr>
-											      	<th scope="row">Ejercicio 2</th>
-											      	<td>Categoría 2</td>
-											      	<td>Avanzado</td>
-													<td>
-											      	<a id="edit" href="#"><i id="icon_edit" class="fa fa-edit pr-3" title="editar" aria-hidden="true"></i></a>
-													<a id="delete" href="#"><i id="icon_delete" class="fa fa-times pr-3" title="eliminar" aria-hidden="true"></i></a>
-											      </td>
-											    </tr>
-											</tbody>
-										</table>	
-							      </div>
-							    </div>-->
+							<?php } ?>							    		
 					</div>
 				</div>
 		</div>

@@ -50,4 +50,13 @@ class HojaEjercicio{
         $array = $tool->getArraySQL($sql);
         return $array;
     }
+
+    function getIdByName($nombre){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT id_hoja FROM hoja_ejercicios WHERE nombre='$nombre';";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
 }

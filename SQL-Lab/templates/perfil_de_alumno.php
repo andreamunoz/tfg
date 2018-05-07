@@ -1,3 +1,19 @@
+<?php 
+    require('languages.php');
+    session_start();
+
+    $lang = null;
+    if(isset($_GET['lang'])){
+      $lang = $_GET['lang'];
+      $_SESSION['lang'] = $lang;
+    }else{
+      if(isset($_SESSION['lang'])){
+        $lang = $_SESSION['lang'];
+      }else{
+        $_SESSION['lang'] = null;
+      }
+    }
+?>
 <!DOCTYPE html>
 <html>
 	<head>

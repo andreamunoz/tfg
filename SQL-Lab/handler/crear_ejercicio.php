@@ -13,7 +13,7 @@
 	$enunciado = $_POST['enunciado'];
 	$solucion = $_POST['solucion'];
 	$deshabilitar = $_POST['deshabilitar'];
-	$user = "andrea";
+	$user = $_SESSION['email'];
 	$ejer = new Ejercicio();
 	
 	if( $ejer->getEjercicio($nombre_ejercicio) == null ){

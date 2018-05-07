@@ -8,19 +8,71 @@
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
 
-
 	    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 	    <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
   		<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>
   		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
-
-  		
 
 		<title>SQLab</title>
 	</head>	
 	<body>
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("navbar/navbar_menu_alumno.php"); ?>
-		
+		<div class="container pt-25">
+			<div class = "row">
+   
+			   <div class = "col-sm-6 col-md-3">
+			      <div class = "thumbnail">
+			         <img src = "../img/images_prueba.jpg" alt = "Generic placeholder thumbnail">
+			      </div>
+			      <div class = "caption">
+			         <h3>Hoja de Ejercicios</h3>
+			         <p>Some sample text. Some sample text.</p>
+			         <p>
+			            <a href = "hoja_de_ejercicios.php" class = "btn btn-tertiary" role = "button">Entrar</a> 
+			         </p>
+			      </div>
+			   </div>
+			   
+			   <div class = "col-sm-6 col-md-3">
+			      <div class = "thumbnail">
+			         <img src = "../img/images_prueba.jpg" alt = "Generic placeholder thumbnail">
+			      </div>
+			      <div class = "caption">
+			         <h3>Ejercicios</h3>
+			         <p>Some sample text. Some sample text.</p>
+			         <p>
+			            <a href = "ejercicios.php" class = "btn btn-tertiary" role = "button">Entrar</a> 
+			         </p>
+			      </div>
+			   </div>
+			   
+			   <div class = "col-sm-6 col-md-3">
+			      <div class = "thumbnail">
+			         <img src = "../img/images_prueba.jpg" alt = "Generic placeholder thumbnail">
+			      </div>
+			      <div class = "caption">
+			         <h3>Estadísticas</h3>
+			         <p>Some sample text. Some sample text.</p> 
+			         <p>
+			            <a href = "estadisticas_de_ejercicios.php" class = "btn btn-tertiary" role = "button">Entrar</a>
+			         </p>
+			      </div>
+			   </div>
+			   
+			   <div class = "col-sm-6 col-md-3">
+			      <div class = "thumbnail">
+			         <img src = "../img/images_prueba.jpg" alt = "Generic placeholder thumbnail">
+			      </div>     
+			      <div class = "caption">
+			         <h3>Perfil</h3>
+			         <p>Some sample text. Some sample text.</p>         
+			         <p>
+			            <a href = "perfil_de_alumno.php" class = "btn btn-tertiary" role = "button">Entrar</a>
+			         </p>
+			      </div>
+			   </div>
+			</div>
+		</div>
 	</body>
 </html>

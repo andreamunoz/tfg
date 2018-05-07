@@ -7,7 +7,6 @@ class Usuario{
     public $email;
     public $password;
 
-
     function createUser($name,$apellidos,$name_user,$rol,$email,$pass){
         
         $connect = new Tools();
@@ -82,5 +81,14 @@ class Usuario{
         }
         $connect->disconnectDB($conexion);
         return $result[0];
+    }
+
+    function getAllDatosUser($email){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM usuario WHERE email='$email';";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
     }
 }

@@ -91,12 +91,14 @@ class Ejercicio{
         return $array;
     }
 
-    function getAllEjercicio(){
+    function getAllEjercicios(){
         
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
         $sql = "SELECT * FROM ejercicio;";
-        $tool = new Tools();
-        $array = $tool->getArraySQL($sql);
-        return $array;
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
     }
 
      function getNCNEjercicio(){

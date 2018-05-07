@@ -7,12 +7,11 @@ class Usuario{
     public $email;
     public $password;
 
-<<<<<<< HEAD
-    //Crear profesor
+
+
+    //Crear usuario
     function createUser($name,$apellidos,$name_user,$rol,$email,$pass,$autoriza){
-=======
-    function createUser($name,$apellidos,$name_user,$rol,$email,$pass){
->>>>>>> 387d0a80e5f0c3583d0fbce6d4bebcce49829d1b
+
         
         $connect = new Tools();
         $conexion = $connect->connectDB();

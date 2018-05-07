@@ -1,5 +1,5 @@
 <?php 
-<<<<<<< HEAD
+
     require('languages.php');
     session_start();
 
@@ -14,9 +14,7 @@
         $_SESSION['lang'] = null;
       }
     }
-=======
-	session_start();
->>>>>>> 387d0a80e5f0c3583d0fbce6d4bebcce49829d1b
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -34,11 +32,7 @@
 		<title>SQLab</title>
 	</head>	
 	<body>
-<<<<<<< HEAD
 
-=======
-		
->>>>>>> 387d0a80e5f0c3583d0fbce6d4bebcce49829d1b
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("navbar/navbar_menu_profesor.php"); ?>
 		<?php include("navbar/navbar_menu_lateral.php"); ?>

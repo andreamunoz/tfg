@@ -1,5 +1,4 @@
 <?php 
-<<<<<<< HEAD
     require('languages.php');
     session_start();
 
@@ -17,9 +16,7 @@
 
     //print( "lang:".$lang);
     //print(" sesionlang:".$_SESSION['lang']);
-=======
-  session_start();
->>>>>>> 387d0a80e5f0c3583d0fbce6d4bebcce49829d1b
+
 ?>
 
 <!DOCTYPE html>

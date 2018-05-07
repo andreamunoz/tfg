@@ -32,13 +32,12 @@
 							?>
 							<div class="card-header" id="headingOne">
 								<h5 class="mb-0">
-								<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								<?php	
-								echo $fila['nombre'];
+
+								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >	
+								'.$fila['nombre'].'</a>';
 								?>
-								</button>
-						      	</h5>
-						      	 	
+						      	</h5>					    
+
 					      	</div>
 					      	<div class="row">
 						      		<div class="col-md-3 pl-5 pt-2 ">

@@ -48,11 +48,8 @@
 							?>
 							<div class="card-header" id="headingOne">
 								<h5 class="mb-0">
-								<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-								<?php	
-								echo $fila['nombre'];
+								<?php echo '<a href="hoja_ejercicio.php?hoja='.$fila['nombre'].'">'.$fila['nombre'].'</a>';							
 								?>
-								</button>
 						      	</h5>
 						      	 	
 					      	</div>

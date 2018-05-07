@@ -1,20 +1,3 @@
-<?php 
-    require('languages.php');
-    session_start();
-
-    $lang = null;
-    if(isset($_GET['lang'])){
-      $lang = $_GET['lang'];
-      $_SESSION['lang'] = $lang;
-    }else{
-      if(isset($_SESSION['lang'])){
-        $lang = $_SESSION['lang'];
-      }else{
-        $_SESSION['lang'] = null;
-      }
-    }
-?>
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -36,29 +19,28 @@
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("navbar/navbar_menu_alumno.php"); ?>
 		<div class="container pt-4">
-			<h3 class="text-center" >EJERCICIOS</h3>
+				<?php $hojaparameter = $_GET['hoja']; ?>
+				<h3 class="text-center" ><?php echo $hojaparameter ?></h3>
 				<div class="hrr mb-3"></div>		
   				<div id="accordion">
 						<div class="card">
 							<?php 
+							include_once '../inc/hoja_ejercicio.php';
+							$hojaejer = new HojaEjercicio();
+							$res = $hojaejer->getIdByName($hojaparameter);
+							while($fila = mysqli_fetch_array($res)){
+								$id = $fila['id_hoja'];
+							}
 							include_once '../inc/ejercicio.php';
 							$ejer = new Ejercicio();
-							$result = $ejer->getAllEjercicios();
-									
+							$result = $ejer->getEjerciciosHoja($id);					
 							while($fila = mysqli_fetch_array($result)){
 							?>
 							<div class="card-header" id="headingOne">
 								<h5 class="mb-0">
-<<<<<<< HEAD
 								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >'.$fila['nombre'].'</a>';
-=======
-
-								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >	
-								'.$fila['nombre'].'</a>';
->>>>>>> 875ec7c23e93acca6d90297a26d0eef1cf66e24f
 								?>
 						      	</h5>					    
-
 					      	</div>
 					      	<div class="row">
 						      		<div class="col-md-3 pl-5 pt-2 ">
@@ -72,12 +54,13 @@
 										?></p> 
 						      		</div>
 						      		<div class="col-md-2 pl-5 pt-2">
+						      			
 						      			<p>Intentos: </p> 
 						      		</div> 
 						      	</div>    
-							<?php } ?>
-						</div>
-				</div>	
+							<?php } ?>							    		
+					</div>
+				</div>
 		</div>
 	</body>
 </html>

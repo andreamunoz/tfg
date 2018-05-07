@@ -98,6 +98,26 @@ class Ejercicio{
         return $consulta;
     }
 
+    function getEjerciciosHoja($id){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM hoja_ejercicios as he, esta_contenido as ec, ejercicio as e WHERE ec.id_ejercicio = e.id_ejercicio AND he.id_hoja = ec.id_hoja AND he.id_hoja = '$id'";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
+    function getSolucionEjercicios($id) {
+
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM solucion WHERE ";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
      function getNCNEjercicio(){
         
         $connect = new Tools();

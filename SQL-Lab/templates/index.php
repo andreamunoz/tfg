@@ -1,5 +1,25 @@
-<?php
+<?php 
+<<<<<<< HEAD
+    require('languages.php');
+    session_start();
+
+    $lang = null;
+    if(isset($_GET['lang'])){
+      $lang = $_GET['lang'];
+      $_SESSION['lang'] = $lang;
+    }else{
+      if(isset($_SESSION['lang'])){
+        $lang = $_SESSION['lang'];
+      }else{
+        $_SESSION['lang'] = null;
+      }
+    }
+
+    //print( "lang:".$lang);
+    //print(" sesionlang:".$_SESSION['lang']);
+=======
   session_start();
+>>>>>>> 387d0a80e5f0c3583d0fbce6d4bebcce49829d1b
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +35,7 @@
 		
 		<title>SQLab</title>
 	</head>	
-	<body>
-    
+	<body>  
     <?php 
       include("modals/modals_iniciar_sesion.php");
     ?>
@@ -36,7 +55,7 @@
             <img class="first-slide" src="../img/img1_carrusel.jpg" width="100%" alt="First slide">
             <div class="container">
               <div class="carousel-caption text-left">
-                <h1>Example headline.</h1>
+                <h1><?php echo trad('Ejemplo uno', $lang) ?></h1>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
               </div>
@@ -46,7 +65,7 @@
             <img class="second-slide" src="../img/img2_carrusel.jpg" alt="Second slide">
             <div class="container">
               <div class="carousel-caption">
-                <h1>Another example headline.</h1>
+                <h1><?php echo trad("Ejemplo dos", $lang) ?></h1>
                 <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                 <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
               </div>
@@ -65,11 +84,11 @@
         </div>
         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
+          <span class="sr-only"> <?php echo trad('Anterior',$lang) ?></span>
         </a>
         <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
+          <span class="sr-only"> <?php echo trad('Siguiente',$lang) ?> </span>
         </a>
       </div>
 

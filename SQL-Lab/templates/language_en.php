@@ -1,0 +1,80 @@
+<?php 
+	$texts = array(
+		//Barra Navegación superior y login
+		'Idioma'=>'Language',
+		'Español'=>'Spanish',
+		'Inglés'=>'English',
+		'Modo Profesor'=>'Teacher View',
+		'Modo Alumno'=>'Student View',
+		'Entrar'=>'Log in',
+		'¿Desea cerrar la sesión?'=>'Are you sure?',
+		'NO'=>'NO',
+		'SI'=>'YES',
+		'Iniciar Sesión'=>'Sign in',
+		'Correo Electrónico'=>'Email',
+		'Contraseña'=>'Password',
+		'¿Has olvidado la contraseña?'=>'Forgot password?',
+		'Regístrate'=>'Sign up',
+		'Registro de usuario'=>'User Sign up',
+		'Nombre'=>'Name',
+		'Apellidos'=>'Last name',
+		'Nombre de usuario'=>'Username',
+		'Rol'=>'Role',
+		'Alumno'=>'Student',
+		'Profesor'=>'Teacher',
+		'Permito a otros profesores usar las tablas creadas por mí'=>'I allow to other teachers to use the tables created by me',
+		'Cancelar'=>'Cancel',
+		'Crear Cuenta'=>'Create Account',
+		'Salir'=>'Log out',
+
+		//Index
+		'Anterior' => 'Previous',
+		'Siguiente' => 'Next',
+		'Ejemplo uno' => 'Example headline',
+		'Ejemplo dos' => 'Another example headline',
+
+		//Menu lateral
+		'Hojas de Ejercicios' => 'Worksheets',
+		'Hoja de Ejercicios' => 'Worksheet',
+		'Crear Hoja'=>'Create Worksheet',
+		'Editar Hoja'=>'Edit Worksheet',
+		'Listar Hojas'=>'Show Worksheets',
+		'Ejercicios'=>'Exersices',
+		'Ejercicio'=>'Exercise',
+		'Crear Ejercicio'=>'Create Exercise',
+		'Editar Ejercicio'=>'Edit Exercise',
+		'Listar Ejercicios'=>'Show Exersices',
+		'Insertar Datos BBDD'=>'Add Data to DB',
+		'Añadir Datos'=>'Add Data',
+		'Estadísticas'=>'Statistics',
+		'Configuración'=>'Settings',
+		'Perfil'=>'Profile',
+
+		//adm profesor -> configuracion
+		'Perfil de usuario'=>'User profile',
+		'Editar'=>'Change',
+		'Guardar cambios'=>'Save changes',
+		'Autorizo'=>'Allow',
+
+		//adm profesor -> ejercicios
+		'Insertar un nombre al ejercicio, las tablas a utilizar, la categoría, el nivel del ejercicio, insertar un enunciado y la solución'=>'Input exercice name, the used tables, the category, the level, the statement and the solution',
+		'Tablas usadas'=>'Used tables',
+		'Categoría'=>'Category',
+		'Nivel'=>'Level',
+		'Principiante'=>'Basic',
+		'Intermedio'=>'Medium',
+		'Avanzado'=>'Advanced',
+		'Habilitado'=>'Enabled',
+		'Deshabilitado'=>'Disabled',
+		'Enunciado'=>'Statement',
+		'Escribe el enunciado aquí...'=>'Write the statement here...',
+		'Tablas'=>'Tables',
+		'Escribe la solución aquí...'=>'Write the solution here...',
+		'Crear ejercicio'=>'Create exercice',
+		''=>'',
+		''=>'',
+		''=>'',
+
+	);
+
+?>

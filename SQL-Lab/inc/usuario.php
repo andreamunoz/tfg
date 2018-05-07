@@ -7,17 +7,59 @@ class Usuario{
     public $email;
     public $password;
 
-    function createUser($name,$apellidos,$name_user,$rol,$email,$pass){
+
+
+    //Crear usuario
+    function createUser($name,$apellidos,$name_user,$rol,$email,$pass,$autoriza){
+
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "insert into usuario (nombre,apellidos,user,rol,email,password) 
-        values ('".$name."','".$apellidos."','".$name_user."','".$rol."','".$email."','".$pass."');";
-        $consulta = mysqli_query($conexion,$sql);
+        $sql = "insert into usuario (nombre, apellidos, user, rol, email, password, autoriza) 
+        values ('".$name."','".$apellidos."','".$name_user."','".$rol."','".$email."', AES_ENCRYPT('".$pass."','SQLab'),'".$autoriza."');";
+        
+        if(!($consulta = mysqli_query($conexion,$sql))){
+            echo "Falló la llamada para crear usuario: ".$conexion->error;
+        }else{
+            if($rol == 0){
+                if (!($res = mysqli_query($conexion, "CALL sp_crea_esquema('".$name_user."');"))) {
+                    echo "Falló la llamada para crear el esquema: " . $conexion->error;
+                }else{
+                    $sql = "USE schema_".$name_user.";";
+        
+                    if(!($consulta = mysqli_query($conexion,$sql))){
+                        echo "Falló la llamada para seleccionar schema del profesor: ".$conexion->error;
+                    }else{
+                        if (!($resul = mysqli_query($conexion, "CREATE PROCEDURE sp_ejecutar_script(IN codigo TEXT)
+                                                                BEGIN   
+                                                                    SET @mycode = codigo;
+                                                                                
+                                                                        PREPARE stmt FROM @mycode; 
+                                                                        EXECUTE stmt; 
+                                                                        DEALLOCATE PREPARE stmt;
+                                                                END;"))) {
+                            echo "Falló la llamada para crear procedimiento: " . $conexion->error;
+                        }else{
+                            if(!($consulta = mysqli_query($conexion,"USE bd_sqlab17;"))){
+                                echo "Falló la llamada para seleccionar schema general: ".$conexion->error;
+                            }
+                        }
+                    }
+                }
+            }else if($rol == 1){
+                if(!($res = mysqli_query($conexion, "CALL sp_alumno_autoriza_null('".$name_user."');"))){
+                    echo "Falló el procedimiento alumno_autoriza_null";
+                }
+                
+            }
+        }
+        var_dump($resul);
+        //echo $conexion->error;
         $connect->disconnectDB($conexion);
         return $consulta;
     }
     
+    //NO SE UTILIZA
     function update($campo1,$campo2,$campo3/*,...*/){
         
         $connect = new Tools();
@@ -62,7 +104,7 @@ class Usuario{
     function getPassword($email){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT password FROM usuario WHERE email='$email';";
+        $sql = "SELECT AES_DECRYPT(password,'SQLab') FROM usuario WHERE email='$email';";
         $consulta = mysqli_query($conexion,$sql);
         if($consulta){
             $result = $consulta->fetch_array();

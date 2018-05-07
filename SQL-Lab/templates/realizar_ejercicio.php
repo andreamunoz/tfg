@@ -1,3 +1,20 @@
+<?php 
+    require('languages.php');
+    session_start();
+
+    $lang = null;
+    if(isset($_GET['lang'])){
+      $lang = $_GET['lang'];
+      $_SESSION['lang'] = $lang;
+    }else{
+      if(isset($_SESSION['lang'])){
+        $lang = $_SESSION['lang'];
+      }else{
+        $_SESSION['lang'] = null;
+      }
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -37,6 +54,7 @@
   				</div>
   				<div class="col-md-3"> 
   					<p>Nivel: <?php echo $fila['nivel'] ?></p>
+
   				</div>
   				<div class="col-md-3"> 
   					<p>Intentos: </p>
@@ -44,13 +62,17 @@
   			</div>	
   			<div class="row pt-1">
   				<div class="col-md-6">
+
   					<p>Enunciado: <?php echo $fila['enunciado'] ?></p> 
+
   				</div>
 
   				<div class="col-md-6"> 
   					<textarea  id="solucion" name="sol_ejercicio" class="form-control" rows="18" placeholder="Escribe la solución aquí..." required></textarea>
   				</div>
+
           <?php } ?>
+
   			</div> 	
 		</div>
 	</body>

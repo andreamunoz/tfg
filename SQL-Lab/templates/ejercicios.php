@@ -1,3 +1,20 @@
+<?php 
+    require('languages.php');
+    session_start();
+
+    $lang = null;
+    if(isset($_GET['lang'])){
+      $lang = $_GET['lang'];
+      $_SESSION['lang'] = $lang;
+    }else{
+      if(isset($_SESSION['lang'])){
+        $lang = $_SESSION['lang'];
+      }else{
+        $_SESSION['lang'] = null;
+      }
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -32,9 +49,16 @@
 							?>
 							<div class="card-header" id="headingOne">
 								<h5 class="mb-0">
+<<<<<<< HEAD
 								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >'.$fila['nombre'].'</a>';
+=======
+
+								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >	
+								'.$fila['nombre'].'</a>';
+>>>>>>> 875ec7c23e93acca6d90297a26d0eef1cf66e24f
 								?>
 						      	</h5>					    
+
 					      	</div>
 					      	<div class="row">
 						      		<div class="col-md-3 pl-5 pt-2 ">

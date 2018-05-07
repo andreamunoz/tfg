@@ -1,5 +1,20 @@
 <?php 
-	session_start();
+
+    require('languages.php');
+    session_start();
+
+    $lang = null;
+    if(isset($_GET['lang'])){
+      $lang = $_GET['lang'];
+      $_SESSION['lang'] = $lang;
+    }else{
+      if(isset($_SESSION['lang'])){
+        $lang = $_SESSION['lang'];
+      }else{
+        $_SESSION['lang'] = null;
+      }
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +32,7 @@
 		<title>SQLab</title>
 	</head>	
 	<body>
-		
+
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("navbar/navbar_menu_profesor.php"); ?>
 		<?php include("navbar/navbar_menu_lateral.php"); ?>

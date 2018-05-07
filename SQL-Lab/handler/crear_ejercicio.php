@@ -1,6 +1,7 @@
 <?php 
 	
 	include_once '../inc/ejercicio.php';
+	session_start();
 	$nombre_ejercicio = $_POST['name_ejercicio'];
 	$descrip = $_POST['descripcion'];
 	/*comprobar vacios y el tipo tendriamos que hacer una consulta getCategoria()*/
@@ -15,6 +16,7 @@
 	$deshabilitar = $_POST['deshabilitar'];
 	$user = $_SESSION['email'];
 	$ejer = new Ejercicio();
+
 	
 	if( $ejer->getEjercicio($nombre_ejercicio) == null ){
 		

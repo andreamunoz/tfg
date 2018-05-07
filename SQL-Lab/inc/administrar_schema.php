@@ -19,7 +19,7 @@ class Administrar_schema{
             }
         }
 
-        if(!($consulta = mysqli_query($conexion, "USE bd_sqlab17;"))){
+        if(!($consulta = mysqli_query($conexion, "USE tfg17sql;"))){
             echo "Falló la llamada para seleccionar schema original: ".$conexion->error;
         }
         // echo $conexion->error;

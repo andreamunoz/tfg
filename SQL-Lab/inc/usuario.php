@@ -40,7 +40,7 @@ class Usuario{
                                                                 END;"))) {
                             echo "Falló la llamada para crear procedimiento: " . $conexion->error;
                         }else{
-                            if(!($consulta = mysqli_query($conexion,"USE bd_sqlab17;"))){
+                            if(!($consulta = mysqli_query($conexion,"USE tfg17sql;"))){
                                 echo "Falló la llamada para seleccionar schema general: ".$conexion->error;
                             }
                         }

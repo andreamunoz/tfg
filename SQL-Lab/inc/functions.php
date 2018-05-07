@@ -9,7 +9,7 @@ if(DEBUG == "true"){
     ini_set('display_errors', 0);
 }
 
-require_once("Tools.php");
+require_once("tools.php");
 
 ?>
 <!--require_once("Usuario.php");

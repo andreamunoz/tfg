@@ -50,13 +50,10 @@ class Ejercicio{
        
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT nombre FROM ejercicio WHERE nombre = '$nombre';";
+        $sql = "SELECT * FROM ejercicio WHERE nombre = '$nombre';";
         $consulta = mysqli_query($conexion,$sql);
-        if($consulta){
-            $result = $consulta->fetch_array();
-        }
         $connect->disconnectDB($conexion);
-        return $result[0];
+        return $consulta;
     }
 
     function getEjercicioById($id){

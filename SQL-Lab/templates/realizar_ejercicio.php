@@ -20,16 +20,23 @@
 		<?php include("navbar/navbar_menu_alumno.php"); ?>
 		<div class="container pt-4">
 			<h3 class="text-center" >REALIZAR EJERCICIO</h3>
-			<div class="hrr mb-3"></div>		
-  			<div class="row pt-1"> 
+			<div class="hrr mb-3"></div>
+        <?php 
+              include_once '../inc/ejercicio.php';
+              $ejer = new Ejercicio();
+              $ejerparameter = $_GET['ejercicio'];
+              $result = $ejer->getEjercicio($ejerparameter);
+              while($fila = mysqli_fetch_array($result)){
+        ?>		
+  			<div class="row pt-1">  
   				<div class="col-md-3">
-  					<p>Nombre: </p> 
+  					<p>Nombre: <?php echo $fila['nombre'] ?></p> 
   				</div>
   				<div class="col-md-3"> 
-  					<p>Categoria: </p>
+  					<p>Categoria: <?php echo $fila['tipo'] ?></p>
   				</div>
   				<div class="col-md-3"> 
-  					<p>Nivel: </p>
+  					<p>Nivel: <?php echo $fila['nivel'] ?></p>
   				</div>
   				<div class="col-md-3"> 
   					<p>Intentos: </p>
@@ -37,12 +44,13 @@
   			</div>	
   			<div class="row pt-1">
   				<div class="col-md-6">
-  					<p>Enunciado: </p> 
+  					<p>Enunciado: <?php echo $fila['enunciado'] ?></p> 
   				</div>
 
   				<div class="col-md-6"> 
   					<textarea  id="solucion" name="sol_ejercicio" class="form-control" rows="18" placeholder="Escribe la solución aquí..." required></textarea>
   				</div>
+          <?php } ?>
   			</div> 	
 		</div>
 	</body>

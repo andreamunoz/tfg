@@ -6,14 +6,15 @@
         </div>
         <div class="hrr"></div>
         <div class="modal-body">
-          <form >
+          <form> 
             
               <div class="form-row">
                 <div class="form-group col-md-6">
                 	<button class="btn btn-log btn-tertiary-border btn-block" data-dismiss="modal" ><?php echo trad('NO',$lang) ?></button>
               	</div>
                 <div class="form-group col-md-6">
-                  <button class="btn btn-log btn-tertiary btn-block" type="submit" onclick="location.href='index_profesor.php'"><?php echo trad('SI',$lang) ?></button>
+                  
+                  <input type="button" class="btn btn-log btn-tertiary btn-block" value="<?php echo trad('SI',$lang) ?>" name="si" onclick="window.location.href='../handler/validar_logout.php'" />
                 </div>
               </div>
            

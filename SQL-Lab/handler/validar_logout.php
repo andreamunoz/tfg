@@ -1,13 +1,16 @@
 <?php  
 
-unset($_SESSION["email"]);
-unset($_SESSION["user"]);
-unset($_SESSION["password"]);
+session_start();
 
+unset($_SESSION['email']);
+unset($_SESSION['user']);
+unset($_SESSION['password']);
+unset($_SESSION['rol']);
+unset($_SESSION['lang']);
 
 session_destroy();
 
-echo "<meta http-equiv=\"Refresh\" content=\"1;url=index.php\">"; 
+header("Location: ../templates/index.php");
 
 ?>
  

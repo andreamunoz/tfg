@@ -53,6 +53,7 @@
 	}
 	
 	unlink($target_file);
+	header("Location: ../templates/index_profesor.php");
 	var_dump($arrayResultado);
 	exit();
 ?>

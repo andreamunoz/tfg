@@ -13,6 +13,7 @@
         $_SESSION['lang'] = null;
       }
     }
+
 ?>
   
 <!DOCTYPE html>

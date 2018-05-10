@@ -69,11 +69,38 @@
 		'Enunciado'=>'Statement',
 		'Escribe el enunciado aquí...'=>'Write the statement here...',
 		'Tablas'=>'Tables',
+		'Solución'=>'Solution',
 		'Escribe la solución aquí...'=>'Write the solution here...',
 		'Crear ejercicio'=>'Create exercice',
+		'Editar Ejercicio'=>'Edit exercice',
+		'Podrás editar algunos campos del ejercicio'=>'You can edit some data of the exercises',
+		'Búsqueda Avanzada'=>'Advanced search',
+		'Realiza una búsqueda detalla por campos'=>'Do a search for fields',
+		'Buscar'=>'Search',
+		'Limpiar filtros'=>'Clear filters',
+		'Podrás editar y eliminar un ejercicio de la lista, además podrás filtar por el/los campo/s que quieras'=>'You will be able to edit and to erase an exercise of the list, also you will be able to filter for the fields that you want',
+		'Filtrar'=>'Filter',
+
+		////adm profesor -> tablas
+		'Introduzca el código para crear las tablas e introducir los datos'=>'Introduce the code to create the tables and to insert the information',
+		'Inserte el código aquí'=>'Insert the code here',
+		'CREATE TABLE coches...'=>'CREATE TABLE cars...',
+		'Seleccione un fichero con el código para crear las tablas e introducir en ellas los datos.'=>'Select a file with the code to create the tables and to introduce in them the information.',
+		'Seleccionar archivo'=>'Select file',
+		'Examinar...'=>'Upload...',
+		'Adjuntar'=>'Send',
 		''=>'',
 		''=>'',
 		''=>'',
+		''=>'',
+		''=>'',
+		''=>'',
+		''=>'',
+		''=>'',
+		''=>'',
+
+
+
 
 	);
 

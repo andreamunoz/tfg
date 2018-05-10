@@ -11,7 +11,8 @@
 	$admin_schema = new Administrar_schema();
 	
 	$arrayResultado = $admin_schema->obtenerSentencias($code, $user_name);
-	header("Location: ../templates/index_profesor.php");
 	//var_dump($arrayResultado);
+	$_SESSION['resultadoIntroducirDatos'] = $arrayResultado; 
+	header("Location: ../templates/index_profesor.php");
 	exit();
 ?>

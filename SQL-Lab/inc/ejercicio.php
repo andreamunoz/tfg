@@ -8,7 +8,7 @@ class Ejercicio{
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "insert into ejercicio (nombre,nivel,enunciado,descripcion,deshabilitar,tipo,user,solucion) 
+        $sql = "insert into sqlab_ejercicio (nombre,nivel,enunciado,descripcion,deshabilitar,tipo,user,solucion) 
         values ('".$nombre."','".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."');";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
@@ -20,7 +20,7 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "UPDATE ejercicio SET "
+        $sql = "UPDATE sqlab_ejercicio SET "
                 . "nivel = '$nivel', "
                 . "enunciado = '$enun', "
                 . "descripcion = '$descrip', "
@@ -40,7 +40,7 @@ class Ejercicio{
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "DELETE FROM ejercicio WHERE id_ejercicio=$id and deshabilitar=0;";
+        $sql = "DELETE FROM sqlab_ejercicio WHERE id_ejercicio=$id and deshabilitar=0;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -50,7 +50,7 @@ class Ejercicio{
        
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM ejercicio WHERE nombre = '$nombre';";
+        $sql = "SELECT * FROM sqlab_ejercicio WHERE nombre = '$nombre';";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -58,7 +58,7 @@ class Ejercicio{
 
     function getEjercicioById($id){
        
-        $sql = "SELECT * FROM ejercicio WHERE id_ejercicio = '$id';";
+        $sql = "SELECT * FROM sqlab_ejercicio WHERE id_ejercicio = '$id';";
         $tool = new Tools();
         $array = $tool->getArraySQL($sql);
         return $array;
@@ -66,7 +66,7 @@ class Ejercicio{
     
     function getEjercicioByNivel($nivel){
         
-        $sql = "SELECT * FROM ejercicio WHERE nivel = '$nivel';";
+        $sql = "SELECT * FROM sqlab_ejercicio WHERE nivel = '$nivel';";
         $tool = new Tools();
         $array = $tool->getArraySQL($sql);
         return $array;
@@ -74,7 +74,7 @@ class Ejercicio{
    
     function getEjercicioByTipo($tipo){
        
-        $sql = "SELECT * FROM ejercicio WHERE tipo = '$tipo';";
+        $sql = "SELECT * FROM sqlab_ejercicio WHERE tipo = '$tipo';";
         $tool = new Tools();
         $array = $tool->getArraySQL($sql);
         return $array;
@@ -82,7 +82,7 @@ class Ejercicio{
 
     function getEjercicioByUser($user){
         
-        $sql = "SELECT * FROM ejercicio WHERE user = '$user';";
+        $sql = "SELECT * FROM sqlab_ejercicio WHERE user = '$user';";
         $tool = new Tools();
         $array = $tool->getArraySQL($sql);
         return $array;
@@ -92,7 +92,7 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM ejercicio;";
+        $sql = "SELECT * FROM sqlab_ejercicio;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -102,7 +102,7 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM hoja_ejercicios as he, esta_contenido as ec, ejercicio as e WHERE ec.id_ejercicio = e.id_ejercicio AND he.id_hoja = ec.id_hoja AND he.id_hoja = '$id'";
+        $sql = "SELECT * FROM sqlab_hoja_ejercicios as he, sqlab_esta_contenido as ec, sqlab_ejercicio as e WHERE ec.id_ejercicio = e.id_ejercicio AND he.id_hoja = ec.id_hoja AND he.id_hoja = '$id'";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -112,7 +112,7 @@ class Ejercicio{
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM solucion WHERE ";
+        $sql = "SELECT * FROM sqlab_solucion WHERE ";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -122,7 +122,7 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT nombre,tipo,nivel FROM ejercicio;";
+        $sql = "SELECT nombre,tipo,nivel FROM sqlab_ejercicio;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

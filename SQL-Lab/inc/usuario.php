@@ -15,7 +15,7 @@ class Usuario{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "insert into usuario (nombre, apellidos, user, rol, email, password, autoriza) 
+        $sql = "insert into sqlab_usuario (nombre, apellidos, user, rol, email, password, autoriza) 
         values ('".$name."','".$apellidos."','".$name_user."','".$rol."','".$email."', AES_ENCRYPT('".$pass."','SQLab'),'".$autoriza."');";
         
         if(!($consulta = mysqli_query($conexion,$sql))){
@@ -55,7 +55,7 @@ class Usuario{
     function getEmail($email){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT email FROM usuario WHERE email='$email';";
+        $sql = "SELECT email FROM sqlab_usuario WHERE email='$email';";
         $consulta = mysqli_query($conexion,$sql);
         if($consulta){
             $result = $consulta->fetch_array();
@@ -67,7 +67,7 @@ class Usuario{
     function getUser($email){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT user FROM usuario WHERE email='$email';";
+        $sql = "SELECT user FROM sqlab_usuario WHERE email='$email';";
         $consulta = mysqli_query($conexion,$sql);
         if($consulta){
             $result = $consulta->fetch_array();
@@ -79,7 +79,7 @@ class Usuario{
     function getPassword($email){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT AES_DECRYPT(password,'SQLab') FROM usuario WHERE email='$email';";
+        $sql = "SELECT AES_DECRYPT(password,'SQLab') FROM sqlab_usuario WHERE email='$email';";
         $consulta = mysqli_query($conexion,$sql);
         if($consulta){
             $result = $consulta->fetch_array();
@@ -91,7 +91,7 @@ class Usuario{
     function getRol($email){
     	$connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT rol FROM usuario WHERE email='$email';";
+        $sql = "SELECT rol FROM sqlab_usuario WHERE email='$email';";
         $consulta = mysqli_query($conexion,$sql);
         if($consulta){
             $result = $consulta->fetch_array();
@@ -103,7 +103,7 @@ class Usuario{
     function getAllDatosUser($email){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM usuario WHERE email='$email';";
+        $sql = "SELECT * FROM sqlab_usuario WHERE email='$email';";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

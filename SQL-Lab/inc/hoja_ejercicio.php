@@ -8,7 +8,7 @@ class HojaEjercicio{
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "insert into hoja_ejercicios (user) 
+        $sql = "insert into sqlab_hoja_ejercicios (user) 
         values ('".$user."');";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
@@ -19,7 +19,7 @@ class HojaEjercicio{
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "DELETE FROM hoja_ejercicios WHERE id_hoja=$id";
+        $sql = "DELETE FROM sqlab_hoja_ejercicios WHERE id_hoja=$id";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -29,7 +29,7 @@ class HojaEjercicio{
     	
         $connect = new Tools();
         $conexion = $connect->connectDB();
-    	$sql = "SELECT nombre FROM hoja_ejercicios;";
+    	$sql = "SELECT nombre FROM sqlab_hoja_ejercicios;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -37,7 +37,7 @@ class HojaEjercicio{
 
     function getHojasById($id){
 
-    	$sql = "SELECT * FROM hoja_ejercicios WHERE id_hoja=$id;";
+    	$sql = "SELECT * FROM sqlab_hoja_ejercicios WHERE id_hoja=$id;";
         $tool = new Tools();
         $array = $tool->getArraySQL($sql);
         return $array;
@@ -45,7 +45,7 @@ class HojaEjercicio{
 
 	function getHojasByUser($user){
 
-    	$sql = "SELECT * FROM hoja_ejercicios WHERE user=$user;";
+    	$sql = "SELECT * FROM sqlab_hoja_ejercicios WHERE user=$user;";
         $tool = new Tools();
         $array = $tool->getArraySQL($sql);
         return $array;
@@ -54,7 +54,7 @@ class HojaEjercicio{
     function getIdByName($nombre){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT id_hoja FROM hoja_ejercicios WHERE nombre='$nombre';";
+        $sql = "SELECT id_hoja FROM sqlab_hoja_ejercicios WHERE nombre='$nombre';";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

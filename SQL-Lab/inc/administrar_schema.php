@@ -29,7 +29,7 @@ class Administrar_schema{
         for($i = 0; $i<count($array); $i++) {
             $nombre_todas_tablas_profe[$i] = $array[$i][0];
         }
-        $sql2 = "SELECT nombre FROM tablas_disponibles WHERE schema_prof = '".$profe."';";
+        $sql2 = "SELECT nombre FROM sqlab_tablas_disponibles WHERE schema_prof = '".$profe."';";
         $array2 = $connect->getArraySQL($sql2);
         if(!empty($array2) ){
             for($i = 0; $i<count($array2); $i++) {
@@ -41,7 +41,7 @@ class Administrar_schema{
 
         foreach ($nuevos_nombres as $key=>$value) {
             if($value !==""){
-                $sql = "INSERT INTO tablas_disponibles(nombre, schema_prof) VALUES ('".$value."','".$profe."');";
+                $sql = "INSERT INTO sqlab_tablas_disponibles(nombre, schema_prof) VALUES ('".$value."','".$profe."');";
                  if(!($consulta = mysqli_query($conexion,$sql))){
                     echo "Falló la llamada para insertar en tablas_disponibles: ".$conexion->error;
                 }

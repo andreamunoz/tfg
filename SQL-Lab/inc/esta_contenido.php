@@ -8,9 +8,9 @@ class EstaContenido{
     	// * cambiarlo por nombre de hoja
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $orden = "SELECT max(orden) FROM esta_contenido WHERE id_hoja=$id_hoja;";
+        $orden = "SELECT max(orden) FROM sqlab_esta_contenido WHERE id_hoja=$id_hoja;";
         $orden = $orden + 1;
-    	$sql = "INSERT INTO esta_contenido(id_ejercicio,id_hoja,orden) VALUES ('".$id_ejercicio."','".$id_hoja."','".$orden."');";
+    	$sql = "INSERT INTO sqlab_esta_contenido(id_ejercicio,id_hoja,orden) VALUES ('".$id_ejercicio."','".$id_hoja."','".$orden."');";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -20,7 +20,7 @@ class EstaContenido{
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-    	$sql = "DELETE FROM esta_contenido WHERE id_hoja=$id_hoja and id_ejercicio=$id_ejercicio;";
+    	$sql = "DELETE FROM sqlab_esta_contenido WHERE id_hoja=$id_hoja and id_ejercicio=$id_ejercicio;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -30,7 +30,7 @@ class EstaContenido{
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-    	$sql = "DELETE FROM esta_contenido WHERE id_hoja=$id_hoja;";
+    	$sql = "DELETE FROM sqlab_esta_contenido WHERE id_hoja=$id_hoja;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -38,7 +38,7 @@ class EstaContenido{
 
     function getEjerciciosNoHoja($id_hoja){
 
-        $sql = "SELECT * FROM esta_contenido WHERE id_hoja<>$id_hoja;";
+        $sql = "SELECT * FROM sqlab_esta_contenido WHERE id_hoja<>$id_hoja;";
         $tool = new Tools();
         $array = $tool->getArraySQL($sql);
         return $array;

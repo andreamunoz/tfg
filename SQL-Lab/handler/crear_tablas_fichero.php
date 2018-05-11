@@ -55,6 +55,6 @@
 	unlink($target_file);
 	var_dump($arrayResultado);
 	$_SESSION['resultadoIntroducirDatos'] = $arrayResultado; 
-	header("Location: ../templates/index_profesor.php");
+	header("Location: ../templates/index_profesor.php#adjuntar_tabla");
 	exit();
 ?>

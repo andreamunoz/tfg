@@ -36,6 +36,7 @@
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("navbar/navbar_menu_profesor.php"); ?>
 		<?php include("navbar/navbar_menu_lateral.php"); ?>
+		<?php include("navbar/navbar_show_message.php"); ?>
 		
 		<!--CONTENEDOR -->
 		<div class="container-center "> 

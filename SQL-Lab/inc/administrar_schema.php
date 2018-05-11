@@ -11,6 +11,10 @@ class Administrar_schema{
             
         if (!($resultado = mysqli_query($conexion, "CALL sp_ejecutar_script('".$code."');"))) {
             echo "Falló la llamada para ejecutar el codigo: " . $conexion->error;
+            $resultado = $conexion->error;
+            echo $resultado;
+        }else{
+            $resultado = true;
         }
         
         // echo $conexion->error;
@@ -19,6 +23,7 @@ class Administrar_schema{
     }
 
     function updateTablasDisponibles($profe){
+        $respuesta = "";
         $nombre_todas_tablas_profe = array();
         $nombre_tablas_antiguas = array();
         $connect = new Tools();
@@ -50,7 +55,6 @@ class Administrar_schema{
 
         // echo $conexion->error;
         $connect->disconnectDB($conexion);
-        // return $resultado;
     }
 
     function obtenerSentencias($contenido, $profe){
@@ -72,9 +76,16 @@ class Administrar_schema{
             $nombreTabla_sinComillas = str_replace($arrayComillas, "", $subsentencia[2]);
 
             if(((strcmp(strtoupper($subsentencia[0]." ".$subsentencia[1]), "CREATE TABLE"))===0) || ((strcmp(strtoupper($subsentencia[0]." ".$subsentencia[1]), "INSERT INTO"))===0)){
-                 $arrayResultado[$i] = $admin->executeCode($subsentencia[0]." ".$subsentencia[1]." ".$profe."_".$nombreTabla_sinComillas." ".$subsentencia[3].";");
+                $respuesta = $admin->executeCode($subsentencia[0]." ".$subsentencia[1]." ".$profe."_".$nombreTabla_sinComillas." ".$subsentencia[3].";");
+                if($respuesta !== true){
+                    $arrayResultado[$i] = "La sentencia número ".($i+1)." falló. Mensaje: ".$respuesta;
+                }else{
+                    $arrayResultado[$i] = $respuesta;
+                }
+
+                
             }else{
-                $arrayResultado[$i] = "No se ha podido ejecutar la sentencia numero: ".$i;
+                $arrayResultado[$i] = "La sentencia número ". ($i+1) ." no está permitida.";
             }
             $i = $i+1;
         }

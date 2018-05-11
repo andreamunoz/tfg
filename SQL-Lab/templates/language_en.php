@@ -89,7 +89,7 @@
 		'Seleccionar archivo'=>'Select file',
 		'Examinar...'=>'Upload...',
 		'Adjuntar'=>'Send',
-		''=>'',
+		'Revise el código e inténtelo de nuevo.'=>'Check the code and try it again.',
 		''=>'',
 		''=>'',
 		''=>'',

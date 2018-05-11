@@ -6,6 +6,12 @@
 a {
   color: #fc6502 !important;
 }
+.equis_alert_success {
+  color:#155724 !important;
+}
+.equis_alert_warning{
+  color:#856404 !important;
+}
 .navbar .nav-link{
   color:rgba(255,255,255,.5) !important;
 }

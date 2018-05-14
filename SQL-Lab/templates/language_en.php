@@ -67,7 +67,7 @@
 		'Habilitado'=>'Enabled',
 		'Deshabilitado'=>'Disabled',
 		'Descripcion'=>'Description',
-		'Descripcion breve aquí...'=>'Description here...'
+		'Descripcion breve aquí...'=>'Description here...',
 		'Enunciado'=>'Statement',
 		'Escribe el enunciado aquí...'=>'Write the statement here...',
 		'Tablas'=>'Tables',
@@ -85,13 +85,14 @@
 		'Filtrar'=>'Filter',
 
 		////adm profesor -> tablas
-		'Introduzca el código para crear las tablas e introducir los datos'=>'Introduce the code to create the tables and to insert the information',
+		'Introduzca el código para crear las tablas e introducir los datos. Sólo se permiten las sentencias CREATE TABLE e INSERT INTO.'=>'Introduce the code to create the tables and to insert the information. Only the CREATE TABLE and INSERT INTO statements are allowed.',
 		'Inserte el código aquí'=>'Insert the code here',
 		'CREATE TABLE coches...'=>'CREATE TABLE cars...',
 		'Seleccione un fichero con el código para crear las tablas e introducir en ellas los datos.'=>'Select a file with the code to create the tables and to introduce in them the information.',
 		'Seleccionar archivo'=>'Select file',
 		'Examinar...'=>'Upload...',
 		'Adjuntar'=>'Send',
+		'Guardar'=>'Save',
 		'Revise el código e inténtelo de nuevo.'=>'Check the code and try it again.',
 		''=>'',
 		''=>'',

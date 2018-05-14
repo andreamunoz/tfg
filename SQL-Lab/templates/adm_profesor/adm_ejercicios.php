@@ -54,9 +54,9 @@
 							</div>	
 							<div class="panel-footer" >
 				  				<select type="text" id="nivel" name="nivel" class="form-control" required>
-				  					<option value="Principiante"><?php echo trad('Principiante',$lang) ?></option>
-				  					<option value="Intermedio"><?php echo trad('Intermedio',$lang) ?></option>
-				  					<option value="Avanzado"><?php echo trad('Avanzado',$lang) ?></option>			  	
+				  					<option value="facil"><?php echo trad('Principiante',$lang) ?></option>
+				  					<option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
+				  					<option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>			  	
 				  				</select>
 				  			</div>
 				  		</div>

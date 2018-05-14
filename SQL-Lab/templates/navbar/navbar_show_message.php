@@ -9,17 +9,21 @@
           <?php
             $success = array();
             $warning = array();
-            foreach ($_SESSION['message'] as $key => $value) {
-              if( $value == 1){
-                $success[$key] = $key+1;
-              }else if($value != ""){
-                $warning[$key] = $value;
-              }else{
-                $warning[$key] = "Ha habido un error al ejecutar la sentencia ".$key+1; 
+            $info = "";
+            if(is_array($_SESSION['message'])){
+              foreach ($_SESSION['message'] as $key => $value) {
+                if( $value == 1){
+                  $success[$key] = $key+1;
+                }else if($value != ""){
+                  $warning[$key] = $value;
+                }else{
+                  $warning[$key] = "Ha habido un error al ejecutar la sentencia ".$key+1; 
+                }
               }
-              //echo "\n esto es key: ". $key ." esto es value: ". $value;
-
+            }else{
+              $info = $_SESSION['message'];
             }
+            
 
             if(count($success) !== 0){ ?>
                 <div class="alert alert-success alert-dismissible">
@@ -44,7 +48,14 @@
                     echo trad("Revise el código e inténtelo de nuevo.", $lang);
                    ?>
                 </div>
-             <?php  } ?>
+            <?php  } 
+            if($info !== ""){ ?>
+              <div class="alert alert-info  alert-dismissible">
+                <a href="#" class="close equis_alert_info" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Info! </strong> 
+                <?php echo $info ?>
+              </div>
+            <?php } ?>
         </div> 
         </div>
       </div>

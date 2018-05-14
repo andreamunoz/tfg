@@ -4,15 +4,36 @@ include_once 'functions.php';
 class Ejercicio{
 
   
-    function createEjercicio($nombre,$nivel,$enun,$descrip,$deshab,$tipo,$user,$sol){
+    function createEjercicio($nivel,$enun,$descrip,$deshab,$tipo,$user,$sol, $tablas){
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "insert into sqlab_ejercicio (nombre,nivel,enunciado,descripcion,deshabilitar,tipo,user,solucion) 
-        values ('".$nombre."','".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."');";
-        $consulta = mysqli_query($conexion,$sql);
+        $resul = "";
+        $sql = "insert into sqlab_ejercicio (nivel,enunciado,descripcion,deshabilitar,tipo,creador_ejercicio,solucion) 
+        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."');";
+        $resul = mysqli_query($conexion,$sql);
+        if(!($resul)){
+            $resul = $conexion->error;
+        }else{
+            // $rs = mysql_insert_id();
+            $rs = mysqli_query($conexion,"SELECT MAX(id_ejercicio) AS id FROM sqlab_ejercicio");
+            if( $row = mysqli_fetch_row($rs)){
+                $id = trim($row[0]);
+                foreach ($tablas as $key => $value) {
+                    $dividido = explode("_", $value, 2);
+                    $sql = "insert into sqlab_usa (id_ejercicio, nombre, schema_prof) values (".$id.",'".trim($value)."','".$dividido[0]."');";
+                    
+                    $resul = mysqli_query($conexion,$sql);
+                    if(!($resul)){ 
+                        $resul = $conexion->error;
+                    }
+                }
+            }
+            
+            
+        }
         $connect->disconnectDB($conexion);
-        return $consulta;
+        return $resul;
     }
  
  	//No se utiliza en estos momentos
@@ -127,6 +148,43 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
 
+    }
+
+    function getTablasDisponibles(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT td.nombre, td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.autoriza = 1";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
+    function getCategorias(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "show columns from sqlab_categoria like 'tipo'";
+        $consulta = mysqli_query($conexion,$sql);
+        while ($fila = $consulta->fetch_assoc()) {
+            $name = $fila["Type"];
+            $beginStr=strpos($name,"(")+1;
+            $endStr=strpos($name,")");
+            $name=substr($name,$beginStr,$endStr-$beginStr);
+            $name=str_replace("'","",$name);
+            $name=split(',',$name);
+        }
+        $connect->disconnectDB($conexion);
+        return $name;
+    }
+
+    function executeSolucion($solucion){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $consulta = mysqli_query($conexion,$solucion);
+        if(!$consulta){
+            $consulta = $conexion->error;
+        }
+        $connect->disconnectDB($conexion);
+        return $consulta;
     }
     
 }

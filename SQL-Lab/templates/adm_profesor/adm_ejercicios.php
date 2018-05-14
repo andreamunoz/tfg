@@ -6,23 +6,24 @@
 				<p class="pl-5"><?php echo trad('Insertar un nombre al ejercicio, las tablas a utilizar, la categoría, el nivel del ejercicio, insertar un enunciado y la solución',$lang) ?>.</p>
 				<div class="hrr"></div>
 				<div class="form-row pt-4 ">
-					<div class="form-group col-md-2 pl-4">
-						<div class="panel panel-primary">
-	                        <div class="panel-heading">
-								<label for="name"><?php echo trad('Nombre',$lang) ?></label>	
-							</div>
-							<div class="panel-footer">
-		  						<input type="text" id="titulo" name="name_ejercicio" class="form-control" placeholder=<?php echo trad('Nombre',$lang) ?> required />
-		  					</div>
-		  				</div>
-					</div>
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-3">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
 		  						<label for="tablas"><?php echo trad('Tablas usadas',$lang) ?></label>	
 		  					</div>
 		  					<div class="panel-footer" >
-		  						<input type="text" id="tablas" name="descripcion" class="form-control" placeholder=<?php echo trad('Tablas',$lang) ?> required />
+		  						<select multiple type="text" id="tablas" name="tablas[]" class="form-control" required>
+		  						<?php include_once '../inc/ejercicio.php';
+			  						$ejer = new Ejercicio();
+			  						$resultado = $ejer->getTablasDisponibles();
+			  					
+									while ($fila = $resultado->fetch_assoc()) {
+								?>
+									<option value=<?php echo '"'.$fila["nombre"].'
+									"'?>> <?php echo $fila["nombre"] ?> </option> 
+							    <?php  } ?>
+
+				  				</select>
 		  					</div>
 		  				</div>
 		  			</div>
@@ -33,13 +34,20 @@
 							</div>	
 							<div class="panel-footer" >
 				  				<select type="text" id="categoria" name="categoria" class="form-control" required>
-				  					<option value="c1">1.Select-Basico</option>
-				  					<option value="c2">2.Select-Join</option>
+				  					<?php 
+				  						$ejer = new Ejercicio();
+								        $resultado = $ejer->getCategorias();
+									    foreach ($resultado as $key => $value) { 
+									    	$newKey = "c".($key+1);
+									?>
+								        <option value=<?php echo $newKey?> > <?php echo $value ?> </option>
+
+								    <?php  } ?> 
 				  				</select>
 				  			</div>
 				  		</div>
 					</div>
-					<div class="form-group col-md-2">
+					<div class="form-group col-md-3">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
 								<label for="nivel"><?php echo trad('Nivel',$lang) ?></label>
@@ -53,7 +61,7 @@
 				  			</div>
 				  		</div>
 					</div>
-					<div class="form-group col-md-3 pr-4">
+					<div class="form-group col-md-3">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
 								<label for="deshabilitar"><?php echo trad('Ejercicio',$lang) ?></label>
@@ -68,7 +76,20 @@
 					</div>
 				</div>
 				<div class="form-row">
-					<div class="form-group col-md-6 pl-4">
+					<div class="form-group col-md-12">
+						<div class="panel panel-primary">
+	                        <div class="panel-heading">
+								<label for="descripcion"><?php echo trad('Descripcion',$lang) ?></label>
+							</div>	
+							<div class="panel-footer" >
+								<input type="text" id="descripcion" name="descripcion" class="form-control" placeholder=<?php echo trad('Descripcion breve aquí...',$lang) ?>  maxlength="200" required />
+		  						<!-- <textarea  id="descripcion" name="descripcion" class="form-control" rows="5" placeholder=<?php echo trad('',$lang) ?> required></textarea> -->
+		  					</div>
+		  				</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-6">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
 								<label for="enunciado"><?php echo trad('Enunciado',$lang) ?></label>
@@ -78,7 +99,7 @@
 		  					</div>
 		  				</div>
 					</div>
-					<div class="form-group col-md-6 pr-4">
+					<div class="form-group col-md-6">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
 								<label for="solucion"><?php echo trad('Solución',$lang) ?></label>
@@ -90,11 +111,14 @@
 					</div>
 				</div>
 		  		<div class="form-row">	
-		  			<div class="form-group col-md-3 offset-6">
-						<button class="btn btn-log btn-tertiary-border btn-block" type="submit"><?php echo trad('Cancelar',$lang) ?></button>
+		  			<div class="form-group col-md-3">
+						<button class="btn btn-log btn-tertiary-border btn-block" type="reset"><?php echo trad('Cancelar',$lang) ?></button>
 					</div>
-					<div class="form-group col-md-3 pr-4">
-						<button class="btn btn-log btn-tertiary btn-block" type="submit"><?php echo trad('Crear ejercicio',$lang) ?></button>
+		  			<!-- <div class="form-group col-md-3 offset-3">
+						<button class="btn btn-log btn-tertiary-border btn-block" type="submit" name="visualizar"><?php echo trad('Visualizar resultado',$lang) ?></button>
+					</div> -->
+					<div class="form-group col-md-3 offset-6 pr-4">
+						<button class="btn btn-log btn-tertiary btn-block" name="crear" type="submit"><?php echo trad('Crear ejercicio',$lang) ?></button>
 					</div>
 		  		</div>
 	  		</form>

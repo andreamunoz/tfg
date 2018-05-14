@@ -35,20 +35,26 @@
 	$deshabilitar = $_POST['deshabilitar'];
 	$user = $_SESSION['user'];
 
-	$ejer = new Ejercicio();
-	$resultadoCrear = "";
-	$resultadoSolucion = $ejer->executeSolucion($solucion);
-	if($resultadoSolucion){
-		
-		$resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $tablas);
-		if($resultadoCrear){
-			$_SESSION['message'] = "El ejercicio se ha creado correctamente.";
+	$sentencia = explode(" ", $solucion, 2);
+	if (strtoupper($sentencia[0]) === "SELECT"){
+		$ejer = new Ejercicio();
+		$resultadoCrear = "";
+		$resultadoSolucion = $ejer->executeSolucion($solucion);
+		if($resultadoSolucion){
+			
+			$resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $tablas);
+			if($resultadoCrear){
+				$_SESSION['message'] = "El ejercicio se ha creado correctamente.";
+			}else{
+				$_SESSION['message'] = "Error al crear el ejercicio.";
+			}
 		}else{
-			$_SESSION['message'] = "Error al crear el ejercicio.";
+			$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
 		}
 	}else{
-		$_SESSION['message'] = "Error. La consulta no es correcta";
+		$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
 	}
+	
 	
 	header("Location: ../templates/index_profesor.php");
 	exit();

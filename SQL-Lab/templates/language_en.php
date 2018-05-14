@@ -57,7 +57,7 @@
 		'Autorizo'=>'Allow',
 
 		//adm profesor -> ejercicios
-		'Insertar un nombre al ejercicio, las tablas a utilizar, la categoría, el nivel del ejercicio, insertar un enunciado y la solución'=>'Input exercice name, the used tables, the category, the level, the statement and the solution',
+		'Insertar las tablas sobre las que ejecutar la consulta, la categoría, el nivel del ejercicio, una descripción que sirva de ayuda al alumno, un enunciado y la solución. Si se va a utilizar más de una tabla, asegúsese de que están relacionadas.'=>'Input the used tables, the category, the level, a description for the student, the statement and the solution. If you are going to use more than one table, please check the tables first.',
 		'Tablas usadas'=>'Used tables',
 		'Categoría'=>'Category',
 		'Nivel'=>'Level',

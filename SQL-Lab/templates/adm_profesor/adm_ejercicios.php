@@ -3,7 +3,7 @@
 		<div class="col-md-11 crear-ejercicio">	
 			<form class="jumbotron-propio" method="post" action="../handler/crear_ejercicio.php">
 				<h3><?php echo trad('Crear Ejercicio',$lang) ?></h3>
-				<p class="pl-5"><?php echo trad('Insertar un nombre al ejercicio, las tablas a utilizar, la categoría, el nivel del ejercicio, insertar un enunciado y la solución',$lang) ?>.</p>
+				<p class="pl-5"><?php echo trad('Insertar las tablas sobre las que ejecutar la consulta, la categoría, el nivel del ejercicio, una descripción que sirva de ayuda al alumno, un enunciado y la solución. Si se va a utilizar más de una tabla, asegúsese de que están relacionadas.',$lang) ?></p>
 				<div class="hrr"></div>
 				<div class="form-row pt-4 ">
 					<div class="form-group col-md-3">
@@ -68,8 +68,8 @@
 							</div>	
 							<div class="panel-footer" >
 				  				<select type="text" id="deshabilitar" name="deshabilitar" class="form-control" required>
-				  					<option value="1"><?php echo trad('Habilitado',$lang) ?></option>
-				  					<option value="0"><?php echo trad('Deshabilitado',$lang) ?></option>
+				  					<option value="0"><?php echo trad('Habilitado',$lang) ?></option>
+				  					<option value="1"><?php echo trad('Deshabilitado',$lang) ?></option>
 				  				</select>
 				  			</div>
 				  		</div>

@@ -57,7 +57,7 @@
 		'Autorizo'=>'Allow',
 
 		//adm profesor -> ejercicios
-		'Insertar un nombre al ejercicio, las tablas a utilizar, la categoría, el nivel del ejercicio, insertar un enunciado y la solución'=>'Input exercice name, the used tables, the category, the level, the statement and the solution',
+		'Insertar las tablas sobre las que ejecutar la consulta, la categoría, el nivel del ejercicio, una descripción que sirva de ayuda al alumno, un enunciado y la solución. Si se va a utilizar más de una tabla, asegúsese de que están relacionadas.'=>'Input the used tables, the category, the level, a description for the student, the statement and the solution. If you are going to use more than one table, please check the tables first.',
 		'Tablas usadas'=>'Used tables',
 		'Categoría'=>'Category',
 		'Nivel'=>'Level',
@@ -66,14 +66,45 @@
 		'Avanzado'=>'Advanced',
 		'Habilitado'=>'Enabled',
 		'Deshabilitado'=>'Disabled',
+		'Descripcion'=>'Description',
+		'Descripcion breve aquí...'=>'Description here...',
 		'Enunciado'=>'Statement',
 		'Escribe el enunciado aquí...'=>'Write the statement here...',
 		'Tablas'=>'Tables',
+		'Solución'=>'Solution',
 		'Escribe la solución aquí...'=>'Write the solution here...',
+		'Visualizar resultado'=>'View the results',
 		'Crear ejercicio'=>'Create exercice',
+		'Editar Ejercicio'=>'Edit exercice',
+		'Podrás editar algunos campos del ejercicio'=>'You can edit some data of the exercises',
+		'Búsqueda Avanzada'=>'Advanced search',
+		'Realiza una búsqueda detalla por campos'=>'Do a search for fields',
+		'Buscar'=>'Search',
+		'Limpiar filtros'=>'Clear filters',
+		'Podrás editar y eliminar un ejercicio de la lista, además podrás filtar por el/los campo/s que quieras'=>'You will be able to edit and to erase an exercise of the list, also you will be able to filter for the fields that you want',
+		'Filtrar'=>'Filter',
+
+		////adm profesor -> tablas
+		'Introduzca el código para crear las tablas e introducir los datos. Sólo se permiten las sentencias CREATE TABLE e INSERT INTO.'=>'Introduce the code to create the tables and to insert the information. Only the CREATE TABLE and INSERT INTO statements are allowed.',
+		'Inserte el código aquí'=>'Insert the code here',
+		'CREATE TABLE coches...'=>'CREATE TABLE cars...',
+		'Seleccione un fichero con el código para crear las tablas e introducir en ellas los datos.'=>'Select a file with the code to create the tables and to introduce in them the information.',
+		'Seleccionar archivo'=>'Select file',
+		'Examinar...'=>'Upload...',
+		'Adjuntar'=>'Send',
+		'Guardar'=>'Save',
+		'Revise el código e inténtelo de nuevo.'=>'Check the code and try it again.',
 		''=>'',
 		''=>'',
 		''=>'',
+		''=>'',
+		''=>'',
+		''=>'',
+		''=>'',
+		''=>'',
+
+
+
 
 	);
 

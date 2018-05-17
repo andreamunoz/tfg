@@ -1,6 +1,6 @@
 <header>
     <nav class="navbar navbar-expand-md navbar-dark bg-tertiary">
-        <a href="/" class="navbar-brand">SQLab</a>
+        <a href="index.php" class="navbar-brand">SQLab</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPrincipal">
             <span class="navbar-toggler-icon"></span>
         </button>

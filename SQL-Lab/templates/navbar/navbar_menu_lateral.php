@@ -23,7 +23,7 @@
               <a id="tabla" href="#"><i class="fa fa-table" aria-hidden="true"></i><?php echo trad('Insertar Datos BBDD',$lang) ?><span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="tablas">
-                <li class=""><a id="adjuntar_tabla" href="#"><?php echo trad('Añadir Datos',$lang) ?></a></li>   
+                <li class=""><a id="adjuntar_tabla" href="#adjuntar_tabla"><?php echo trad('Añadir Datos',$lang) ?></a></li>   
             </ul> 
 
             <li data-toggle="collapse" data-target="#estadisticas" class="collapsed">

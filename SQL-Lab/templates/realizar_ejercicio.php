@@ -47,7 +47,7 @@
         ?>		
   			<div class="row pt-1">  
   				<div class="col-md-3">
-  					<p>Nombre: <?php echo $fila['nombre'] ?></p> 
+  					<p>Nombre: <?php echo 'Ejercicio '.$fila['id_ejercicio'] ?></p> 
   				</div>
   				<div class="col-md-3"> 
   					<p>Categoria: <?php echo $fila['tipo'] ?></p>

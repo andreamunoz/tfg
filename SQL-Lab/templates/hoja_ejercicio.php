@@ -36,48 +36,94 @@
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("navbar/navbar_menu_alumno.php"); ?>
 		<div class="container pt-4">
-				<?php $hojaparameter = $_GET['hoja']; ?>
-				<h3 class="text-center" ><?php echo $hojaparameter ?></h3>
-				<div class="hrr mb-3"></div>		
-  				<div id="accordion">
-						<div class="card">
+			<?php $hojaparameter = $_GET['hoja']; ?>
+			<h2><?php echo 'Hoja '.$hojaparameter ?></h2>
+			<div class="hrr mt-3 mb-3"></div>
+
+			<div class="row pt-4 pb-4">
+				<div class="col-md-3  offset-9">
+					 <div class="progress">
+					  <div class="progress-bar" role="progressbar" aria-valuenow="70"
+					  aria-valuemin="0" aria-valuemax="100" style="width:70%">
+					    70%
+					  </div>
+					</div> 
+				</div>
+			</div>			
+  			<div id="accordion">
+				<div class="card">
+					<table id="myTable" class="table table-hover tablesorter">
+						<thead>
+							<tr>
+							    <th>Nombre Ejercicio</th>
+							    <th>Nivel</th>
+							    <th>Tipo</th>
+							    <th>Profesor</th>
+							    <th>Ultima Modificación</th>
+							    <th>Intentos</th>
+							    <th></th>
+
+							</tr>
+						</thead>
+						<tbody>
 							<?php 
 							include_once '../inc/hoja_ejercicio.php';
 							$hojaejer = new HojaEjercicio();
 							$res = $hojaejer->getIdByName($hojaparameter);
-							while($fila = mysqli_fetch_array($res)){
-								$id = $fila['id_hoja'];
-							}
+							$id_h = $res['id_hoja'];
 							include_once '../inc/ejercicio.php';
 							$ejer = new Ejercicio();
-							$result = $ejer->getEjerciciosHoja($id);					
+							$result = $ejer->getEjerciciosHoja($id_h);
+							include_once '../inc/solucion.php';
+							$sol = new Solucion();		
 							while($fila = mysqli_fetch_array($result)){
 							?>
-							<div class="card-header" id="headingOne">
-								<h5 class="mb-0">
-								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >'.$fila['nombre'].'</a>';
+
+								<?php $id = $fila['id_ejercicio'];
+								$solucion = $sol->getAllEjerciciosByName($id);
+
+								$fila_sol = mysqli_fetch_array($solucion);
+									if($fila_sol['veredicto']=='1'){
 								?>
-						      	</h5>					    
-					      	</div>
-					      	<div class="row">
-						      		<div class="col-md-3 pl-5 pt-2 ">
-						      			<p>Categoría: <?php	
-										echo $fila['tipo'];
-										?></p> 
-						      		</div>
-						      		<div class="col-md-2 pl-5 pt-2">
-						      			<p>Nivel: <?php	
-										echo $fila['nivel'];
-										?></p> 
-						      		</div>
-						      		<div class="col-md-2 pl-5 pt-2">
-						      			
-						      			<p>Intentos: </p> 
-						      		</div> 
-						      	</div>    
-							<?php } ?>							    		
-					</div>
+									<tr class="border-veredictoV">
+								<?php } else if($fila_sol['veredicto']=='0') { ?>
+										<tr class="border-veredictoR">
+								<?php } else { ?>
+										<tr class="border-veredictoA">	
+										<?php } ?>	
+										<?php echo '<td>Ejercicio '.$fila['id_ejercicio'].'</td>'; ?>
+										<?php echo '<td>'.$fila['nivel'].'</td>'; ?>
+										<?php echo '<td>'.$fila['tipo'].'</td>'; ?>
+										<?php echo '<td>'.$fila['creador_ejercicio'].'</td>'; ?>
+										 
+										<?php if($fila_sol['fecha']) 
+												echo '<td>'.$fila_sol['fecha'].'</td>'; 
+											  else
+											  	echo '<td>No tiene última modificación</td>'; 
+										?>
+										<?php if($fila_sol['intentos']) 
+												echo '<td>'.$fila_sol['intentos'].'</td>'; 
+											  else
+											  	echo '<td>0</td>'; 
+										?>
+
+										<?php echo '<td><a href="realizar_ejercicio.php?ejercicio='.$fila['id_ejercicio'].'">Ver</a></td>'; ?>
+
+									</tr>
+
+							<?php  					     				     			
+							}
+							?>
+							
+						</tbody>
+					</table>
+
+
+
+
+										    		
 				</div>
+			</div>
 		</div>
 	</body>
 </html>

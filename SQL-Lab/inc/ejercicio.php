@@ -50,7 +50,7 @@ class Ejercicio{
        
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM ejercicio WHERE nombre = '$nombre';";
+        $sql = "SELECT * FROM ejercicio WHERE id_ejercicio = '$nombre';";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

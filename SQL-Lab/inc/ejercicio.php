@@ -73,11 +73,9 @@ class Ejercicio{
        
         $connect = new Tools();
         $conexion = $connect->connectDB();
-<<<<<<< HEAD
-        $sql = "SELECT * FROM ejercicio WHERE id_ejercicio = '$nombre';";
-=======
+
         $sql = "SELECT * FROM sqlab_ejercicio WHERE nombre = '$nombre';";
->>>>>>> a505122e2cdc29386511e87b36990de1f099ee2c
+
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

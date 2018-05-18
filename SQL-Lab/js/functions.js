@@ -143,6 +143,29 @@ $(document).ready(function()
       $('.adm-ejercicios').hide();
       $('.adm-estadisticas').hide();
       $('.adm-tablas').show(); 
+
+      $('.adjuntar-tablas').show();
+      $('.mostrar-tablas').hide("linear");
+
+      var that = $(this);
+      that.closest('.sub-menu').find('li.active').removeClass('active');
+      that.parent().addClass('active');
+  });
+
+  $("#mostrar-tablas").click(function(){
+        
+      $('.adm-hojas').hide();
+      $('.configuracion').hide();
+      $('.adm-ejercicios').hide();
+      $('.adm-estadisticas').hide();
+      $('.adm-tablas').show(); 
+
+      $('.mostrar-tablas').show();
+      $('.adjuntar-tablas').hide("linear");
+
+      var that = $(this);
+      that.closest('.sub-menu').find('li.active').removeClass('active');
+      that.parent().addClass('active');
   });
 
 });

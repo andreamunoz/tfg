@@ -24,6 +24,7 @@
             </li>
             <ul class="sub-menu collapse" id="tablas">
                 <li class=""><a id="adjuntar_tabla" href="#adjuntar_tabla"><?php echo trad('Añadir Datos',$lang) ?></a></li>   
+                <!-- <li class=""><a id="mostrar-tablas" href="#mostrar-tablas"><?php echo trad('Mostrar tablas',$lang) ?></a></li>    -->
             </ul> 
 
             <li data-toggle="collapse" data-target="#estadisticas" class="collapsed">

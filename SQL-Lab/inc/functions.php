@@ -12,5 +12,3 @@ if(DEBUG == "true"){
 require_once("tools.php");
 
 ?>
-<!--require_once("Usuario.php");
-//require_once("Table2Class.php"); -->

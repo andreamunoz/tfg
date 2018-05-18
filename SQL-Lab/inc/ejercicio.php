@@ -9,8 +9,10 @@ class Ejercicio{
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $resul = "";
-        $sql = "insert into sqlab_ejercicio (nivel,enunciado,descripcion,deshabilitar,tipo,creador_ejercicio,solucion) 
-        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."');";
+        $dueño = explode("_", $tablas[0], 2);
+
+        $sql = "insert into sqlab_ejercicio (nivel,enunciado,descripcion,deshabilitar,tipo,creador_ejercicio,solucion,dueño_tablas) 
+        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".$dueño[0]."');";
         $resul = mysqli_query($conexion,$sql);
         if(!($resul)){
             $resul = $conexion->error;
@@ -157,6 +159,38 @@ class Ejercicio{
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
+    }
+
+    function getTodasTablas(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT td.nombre from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.autoriza = 1";
+        $consulta = mysqli_query($conexion,$sql);
+        $tablasDisponibles = array();
+        while ($fila = $consulta->fetch_assoc()) {
+            array_push($tablasDisponibles, strtoupper($fila["nombre"]));
+        }
+        $connect->disconnectDB($conexion);
+        return $tablasDisponibles;
+    }
+
+    function getUserTablasDisponibles($user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT DISTINCT td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.autoriza = 1";
+        $consulta = mysqli_query($conexion,$sql);
+        $usuarios = array();
+        $i = 1;
+        while ($fila = $consulta->fetch_assoc()) {
+            if($fila["schema_prof"] === $user){
+                $usuarios[0]=$user;
+            }else{
+                $usuarios[$i] = $fila["schema_prof"];
+                $i++;
+            }
+        }
+        $connect->disconnectDB($conexion);
+        return $usuarios;
     }
 
     function getCategorias(){

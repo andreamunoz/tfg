@@ -3,31 +3,97 @@
 		<div class="col-md-11 crear-ejercicio">	
 			<form class="jumbotron-propio" method="post" action="../handler/crear_ejercicio.php">
 				<h3><?php echo trad('Crear Ejercicio',$lang) ?></h3>
-				<p class="pl-5"><?php echo trad('Insertar las tablas sobre las que ejecutar la consulta, la categoría, el nivel del ejercicio, una descripción que sirva de ayuda al alumno, un enunciado y la solución. Si se va a utilizar más de una tabla, asegúsese de que están relacionadas.',$lang) ?></p>
+				<p class="pl-5"><?php echo trad('Insertar las tablas sobre las que ejecutar la consulta, la categoría, el nivel del ejercicio, una descripción que sirva de ayuda al alumno, un enunciado y la solución. Si se va a utilizar más de una tabla, asegúrese de que están relacionadas.',$lang) ?></p>
 				<div class="hrr"></div>
 				<div class="form-row pt-4 ">
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-4">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
-		  						<label for="tablas"><?php echo trad('Tablas usadas',$lang) ?></label>	
+		  						<label for="user_tablas"><?php echo trad('Creador de las tablas',$lang) ?></label>	
 		  					</div>
-		  					<div class="panel-footer" >
-		  						<select multiple type="text" id="tablas" name="tablas[]" class="form-control" required>
-		  						<?php include_once '../inc/ejercicio.php';
-			  						$ejer = new Ejercicio();
-			  						$resultado = $ejer->getTablasDisponibles();
-			  					
-									while ($fila = $resultado->fetch_assoc()) {
-								?>
-									<option value=<?php echo '"'.$fila["nombre"].'
-									"'?>> <?php echo $fila["nombre"] ?> </option> 
-							    <?php  } ?>
+		  					<div class="panel-footer selector-user" >
 
-				  				</select>
+		  						<select id="user_tablas" name="user_tablas" class="form-control" required></select>								
+								<script type="text/javascript">
+		  							$(document).ready(function(){
+		  								$.ajax({
+		  									type: "POST",
+		  									url: "adm_profesor/getUser.php",
+		  									success: function(response)
+		  									{
+		  										$(".selector-user select").html(response).fadeIn();
+		  									}
+		  								});
+		  							});
+
+		  						</script>
+				  				
 		  					</div>
 		  				</div>
 		  			</div>
-		  			<div class="form-group col-md-3">
+		  			<div class="form-group col-md-4">
+		  				<div class="panel panel-primary">
+	                        <div class="panel-heading">
+		  						<label for="tablas"><?php echo trad('Tablas usadas',$lang) ?></label>	
+		  					</div>
+		  					<div class="panel-footer selector-tabla" >
+		  						<select multiple="" type="text" id="tablas" name="tablas[]" class="form-control" required></select>
+		  						<script type="text/javascript">
+					                $(document).ready(function() {
+					                    $(".selector-user select").change(function() {
+					                        var form_data = {
+					                                is_ajax: 1,
+					                                dueno: $(".selector-user select option:checked").val()
+					                        };
+					                        $.ajax({
+					                                type: "POST",
+					                                url: "adm_profesor/getTablas.php",
+					                                data: form_data,
+					                                success: function(response)
+					                                {	
+					                                    $('.selector-tabla select').html(response).fadeIn();
+					                                }
+					                        });
+					                    });
+
+					                });
+					            </script>				  				
+		  					</div>
+		  				</div>
+		  			</div>
+		  			<div class="form-group col-md-4">
+		  				<div class="panel panel-primary">
+	                        <div class="panel-heading">
+		  						<label for="tablas"><?php echo trad('Columnas tabla',$lang) ?></label>	
+		  					</div>
+		  					<div class="panel-footer columnas-tabla" >
+		  						<table id="columnas" class="form-control" ><tbody></tbody></table>
+		  						<script type="text/javascript">
+					                $(document).ready(function() {
+					                    $(".selector-tabla select").change(function() {
+					                        var form_data = {
+					                                is_ajax: 1,
+					                                tabla: $(".selector-tabla select option:checked").val()
+					                        };
+					                        $.ajax({
+					                                type: "POST",
+					                                url: "adm_profesor/getColumns.php",
+					                                data: form_data,
+					                                success: function(response)
+					                                {	
+					                                    $('.columnas-tabla #columnas tbody').html(response).fadeIn();
+					                                }
+					                        });
+					                    });
+
+					                });
+					            </script>				  				
+		  					</div>
+		  				</div>
+		  			</div>
+		  		</div>
+		  		<div class="form-row pt-4 ">
+		  			<div class="form-group col-md-4">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
 								<label for="categoria"><?php echo trad('Categoría',$lang) ?></label>
@@ -47,7 +113,7 @@
 				  			</div>
 				  		</div>
 					</div>
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-4">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
 								<label for="nivel"><?php echo trad('Nivel',$lang) ?></label>
@@ -61,7 +127,7 @@
 				  			</div>
 				  		</div>
 					</div>
-					<div class="form-group col-md-3">
+					<div class="form-group col-md-4">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
 								<label for="deshabilitar"><?php echo trad('Ejercicio',$lang) ?></label>
@@ -121,6 +187,9 @@
 						<button class="btn btn-log btn-tertiary btn-block" name="crear" type="submit"><?php echo trad('Crear ejercicio',$lang) ?></button>
 					</div>
 		  		</div>
+		  		<br>
+		  		<br>
+		  		<br>
 	  		</form>
 		</div>
 

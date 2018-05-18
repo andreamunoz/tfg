@@ -46,6 +46,7 @@
 		'Listar Ejercicios'=>'Show Exersices',
 		'Insertar Datos BBDD'=>'Add Data to DB',
 		'Añadir Datos'=>'Add Data',
+		'Mostrar tablas'=>'',
 		'Estadísticas'=>'Statistics',
 		'Configuración'=>'Settings',
 		'Perfil'=>'Profile',

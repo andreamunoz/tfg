@@ -36,6 +36,15 @@ class Solucion{
         return $consulta;
     }
 
+    function getAllEjerciciosByName($id){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM solucion WHERE id_ejercicio=$id;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
 	function getAllEjerciciosByHoja($id_hoja){
 
         $connect = new Tools();

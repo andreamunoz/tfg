@@ -29,7 +29,20 @@ class HojaEjercicio{
     	
         $connect = new Tools();
         $conexion = $connect->connectDB();
+<<<<<<< HEAD
+    	$sql = "SELECT * FROM hoja_ejercicios;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    function getAllHojasDesc(){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM hoja_ejercicios ORDER BY nombre_hoja DESC;";
+=======
     	$sql = "SELECT nombre FROM sqlab_hoja_ejercicios;";
+>>>>>>> a505122e2cdc29386511e87b36990de1f099ee2c
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -51,12 +64,17 @@ class HojaEjercicio{
         return $array;
     }
 
-    function getIdByName($nombre){
+    function getIdByName($id){
         $connect = new Tools();
         $conexion = $connect->connectDB();
+<<<<<<< HEAD
+        $sql = "SELECT id_hoja FROM hoja_ejercicios WHERE id_hoja='$id';";
+=======
         $sql = "SELECT id_hoja FROM sqlab_hoja_ejercicios WHERE nombre='$nombre';";
+>>>>>>> a505122e2cdc29386511e87b36990de1f099ee2c
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
-        return $consulta;
+        $res = mysqli_fetch_assoc($consulta);
+        return $res;
     }
 }

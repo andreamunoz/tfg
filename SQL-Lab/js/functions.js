@@ -192,8 +192,6 @@ $(document).ready(function()
 
 });  
 
-
-
 $(document).ready(function(){
     $('.filterable .btn-filter').click(function(){
         var $panel = $(this).parents('.filterable'),

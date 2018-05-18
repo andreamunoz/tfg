@@ -44,4 +44,14 @@ class EstaContenido{
         return $array;
     }
 
+    function getNumberEjerciciosByHoja($id_hoja){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT COUNT(id_ejercicio) FROM esta_contenido WHERE id_hoja=$id_hoja;";
+        $consulta = mysqli_query($conexion,$sql);
+        $count = mysqli_fetch_assoc($consulta);
+        $connect->disconnectDB($conexion);
+        return $count;
+    }
+
 }

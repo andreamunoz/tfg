@@ -14,70 +14,108 @@
       }
     }
 ?>
+<!DOCTYPE html>  
+ <html>  
+      <head>  
+           <meta http-equiv="Content-Type" content="text/php charset=utf-8"/>
+           <link href="../css/prueba.css" rel="stylesheet" type="text/css">
+           <script src="../js/jquery-1.12.4.js"></script> 
+           <script src="../js/jquery.dataTables.js"></script> 
+           <script src="../js/dataTable/dataTables.bootstrap.min.js"></script>
+           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+           <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/php charset=utf-8"/>
-		<link href="../css/prueba.css" rel="stylesheet" type="text/css">
-	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
+           
+      </head>  
+      <body>  
+           <?php include("modals/modals_cerrar_sesion.php"); ?>
+           <?php include("navbar/navbar_menu_alumno.php"); ?>
+           <div class="container pt-4 pb-5">
+              <h2>Ejercicios</h2>
+              <p>Texto a añadir aquí...</p>
+              <div class="hrr mb-3"></div>
+              <div class="row pt-2 pb-2">
+                <div class="col-md-1 offset-8">
+                  <p class="border-V pr-2">Acierto</p>
+                </div>
+                <div class="col-md-1">
+                  <p class="border-R">Fallo</p>
+                </div>
+                <div class="col-md-2">
+                  <p class="border-A">No intentado</p>
+                </div>
+              </div>  
+              
+              <div id="accordion ">
+              <div class="card">  
+                <div class="table-responsive">  
+                     <table id="employee_data" class="table table-striped table-bordered">  
+                        <thead>
+                          <tr>
+                              <th>Nombre Ejercicio</th>
+                              
+                              <th>Nivel</th>
+                              <th>Tipo</th>
+                              <th>Profesor</th>
+                              <th>Ultima Modificación</th>
+                              <th>Intentos</th>
+                              <th></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <?php 
+                            include_once '../inc/ejercicio.php';
+                            $ejer = new Ejercicio();
+                            include_once '../inc/solucion.php';
+                            $sol = new Solucion();
+                            $result = $ejer->getAllEjercicios();    
+                            while($fila = mysqli_fetch_array($result)){
+                            ?>
 
-	    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	    <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
-  		<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>
-  		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+                              <?php $id = $fila['id_ejercicio'];
+                              $solucion = $sol->getAllEjerciciosByName($id);
 
-		<title>SQLab</title>
-	</head>	
-	<body>
-		<?php include("modals/modals_cerrar_sesion.php"); ?>
-		<?php include("navbar/navbar_menu_alumno.php"); ?>
-		<div class="container pt-4">
-			<h3 class="text-center" >EJERCICIOS</h3>
-				<div class="hrr mb-3"></div>		
-  				<div id="accordion">
-						<div class="card">
-							<?php 
-							include_once '../inc/ejercicio.php';
-							$ejer = new Ejercicio();
-							$result = $ejer->getAllEjercicios();
-									
-							while($fila = mysqli_fetch_array($result)){
-							?>
-							<div class="card-header" id="headingOne">
-								<h5 class="mb-0">
-<<<<<<< HEAD
-								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >'.$fila['nombre'].'</a>';
-=======
+                              $fila_sol = mysqli_fetch_array($solucion);
+                                if($fila_sol['veredicto']=='1'){
+                              ?>
+                                <tr class="border-veredictoV">
+                              <?php } else if($fila_sol['veredicto']=='0') { ?>
+                                  <tr class="border-veredictoR">
+                              <?php } else { ?>
+                                  <tr class="border-veredictoA">  
+                                  <?php } ?>  
+                                  <?php echo '<td>Ejercicio '.$fila['id_ejercicio'].'</td>'; ?>
+                                  <?php echo '<td>'.$fila['nivel'].'</td>'; ?>
+                                  <?php echo '<td>'.$fila['tipo'].'</td>'; ?>
+                                  <?php echo '<td>'.$fila['creador_ejercicio'].'</td>'; ?>
+                                   
+                                  <?php if($fila_sol['fecha']) 
+                                      echo '<td>'.$fila_sol['fecha'].'</td>'; 
+                                      else
+                                        echo '<td>No tiene última modificación</td>'; 
+                                  ?>
+                                  <?php if($fila_sol['intentos']) 
+                                      echo '<td>'.$fila_sol['intentos'].'</td>'; 
+                                      else
+                                        echo '<td>0</td>'; 
+                                  ?>
 
-								<?php echo '<a href="realizar_ejercicio.php?ejercicio='.$fila['nombre'].'" >	
-								'.$fila['nombre'].'</a>';
->>>>>>> 875ec7c23e93acca6d90297a26d0eef1cf66e24f
-								?>
-						      	</h5>					    
+                                  <?php echo '<td><a  href="realizar_ejercicio.php?ejercicio='.$fila['id_ejercicio'].'">Ver</a></td>'; ?>
 
-					      	</div>
-					      	<div class="row">
-						      		<div class="col-md-3 pl-5 pt-2 ">
-						      			<p>Categoría: <?php	
-										echo $fila['tipo'];
-										?></p> 
-						      		</div>
-						      		<div class="col-md-2 pl-5 pt-2">
-						      			<p>Nivel: <?php	
-										echo $fila['nivel'];
-										?></p> 
-						      		</div>
-						      		<div class="col-md-2 pl-5 pt-2">
-						      			<p>Intentos: </p> 
-						      		</div> 
-						      	</div>    
-							<?php } ?>
-						</div>
-				</div>	
-		</div>
-	</body>
-</html>
+                                </tr>
+                            <?php                                 
+                            }
+                            ?>
+                            
+                        </tbody>
+                      </table>
+                    </div>  
+                </div> 
+            </div>  
+      </body>  
+ </html>  
+ <script>  
+ $(document).ready(function(){  
+      $('#employee_data').DataTable();  
+ });  
+ </script>  

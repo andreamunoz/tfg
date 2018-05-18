@@ -35,12 +35,12 @@
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("navbar/navbar_menu_alumno.php"); ?>
 		<div class="container pt-4">
-			<h3 class="text-center" >PERFIL DEL ALUMNO</h3>
+			<h2 class="text-center" >Perfil</h2>
 			<div class="hrr mb-2"></div>
 			<?php 
 				include_once '../inc/usuario.php';
 				$ejer = new Usuario();
-				$result = $ejer->getAllDatosUser("p@p.es");
+				$result = $ejer->getAllDatosUser("rodi01@ucm.es");
 				while($fila = mysqli_fetch_array($result)){
 			?>
   			<form class="jumbotron-propio ">
@@ -119,4 +119,8 @@
 	  		</form>	
 		</div>
 	</body>
+	<footer class="footer py-3 text-center">
+		© 2018 <a id="pie" href="index_profesor.php">Sqlab</a> 
+		
+	</footer>
 </html>

@@ -112,7 +112,7 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM sqlab_ejercicio WHERE deshabilitar='0';";
+        $sql = "SELECT * FROM sqlab_ejercicio;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

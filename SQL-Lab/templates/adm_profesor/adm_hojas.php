@@ -82,40 +82,7 @@
 	  		</form>
 		  	
 		</div>
-		
-
-		<!-- <div class="col-md-11 editar-hoja">		
-			<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/editar_hojaejercicios.php">
-				<h3>Editar Hoja de Ejercicio</h3>
-				<p class="pl-5">Se podrá editar el nombre de la hoja y sus respectivos ejercicios.</p>
-				<div class="hrr"></div>
-				<div class="form-row pl-4 pr-4 pt-4">
-					<div class="form-group col-md-12">
-						<div class="panel panel-primary">
-	                        <div class="panel-heading">
-								<label for="name">Nombre de la Hoja</label>
-							</div>
-							<div class="panel-footer">	
-	  							<input type="text" id="nombre" class="form-control" placeholder="Nombre" required />
-	  						</div>
-	  					</div>
-					</div>
-				</div>
-				<div class="form-row pl-4 pr-4">
-					<div class="form-group col-md-12">
-						<div class="panel panel-primary">
-	                        <div class="panel-heading">
-								<label for="name">Lista de Ejercicios</label>
-							</div>
-							<div class="panel-footer">	
-	  							<input type="text" id="nombre" class="form-control" placeholder="Nombre" required />
-	  						</div>
-	  					</div>
-					</div>
-				</div>
-	  		</form>
-		</div> -->
-		
+				
 
 		<div class="col-md-11 lista-hoja">
 			<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/listar_hojasejercicios.php">

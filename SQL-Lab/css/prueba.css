@@ -207,14 +207,8 @@ a {
 }
 
 .btn-tertiary{
-
-<<<<<<< HEAD
-  background-color: #fc6502 !important;
-  color: white !important;
-=======
   background-color: #24609d !important;
   color: white;
->>>>>>> 23491af40331297dbbe380d0c713d2dc965e933a
   border-radius: 30px !important;
   border: 1px solid;
 }
@@ -723,14 +717,10 @@ li:hover .description {
 }
 
 .progress-bar {
-<<<<<<< HEAD
-  background-color: #fc6502 !important;
-=======
+
   background-color: #24609d !important;
 }
->>>>>>> 23491af40331297dbbe380d0c713d2dc965e933a
 
-}
 .progress-bar p{
   margin-top: 15px;
   margin-left: 95px;
@@ -825,22 +815,23 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   padding-top: 1px;
   padding-bottom: 2px;
 }
-<<<<<<< HEAD
+
 .active a {
-  background-color: #fc6502;
+  background-color: #24609d;
   color: #fff !important;
-  border-color: #fc6502;
+  border-color: #24609d;
 }
 .active a:hover{
   background-color: #fff;
-  color: #fc6502 !important;
+  color: #24609d !important;
 }
 .paginate_button .active{
-  background-color: #fc6502;
-=======
+  background-color: #24609d;
+  color: #fff;
+}
+
 .paginate_button .active a{
   background-color: #24609d;
->>>>>>> 23491af40331297dbbe380d0c713d2dc965e933a
   color: #fff;
 }
 
@@ -848,11 +839,12 @@ table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td
   border-bottom: 1px solid rgba(48,48,48,0.1) !important;
 }
 
-<<<<<<< HEAD
+
 .thumbnail img{
   width: 170px;
   height: 170px;
-=======
+}
+
 #tabla_crear_hoja_ejercicios .primera{
   padding-right: 20px;
 }
@@ -864,5 +856,4 @@ table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td
 .message{
   margin-top: 50px;
   margin-left: 70px;
->>>>>>> 23491af40331297dbbe380d0c713d2dc965e933a
 }

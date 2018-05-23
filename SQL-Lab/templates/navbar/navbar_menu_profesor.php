@@ -10,7 +10,7 @@
 	                <div class="dropdown">
 	                    <a class="nav-link dropdown-toggle " id="dropdownMenuButton_Profesor" data-toggle="dropdown" aria-haspopup="true" href="#"><?php echo trad('Modo Profesor',$lang) ?></a> 
 	                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton_Profesor">                   
-	                        <a class="dropdown-item " href="#"><?php echo trad('Modo Alumno',$lang) ?></a> 
+	                        <a class="dropdown-item " href="../templates/index_alumno.php"><?php echo trad('Modo Alumno',$lang) ?></a> 
 	                    </div>
 	                </div>
 	            </li> 

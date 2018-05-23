@@ -1,4 +1,5 @@
 <?php 
+
     require('languages.php');
     session_start();
 
@@ -24,7 +25,7 @@
            <script src="../js/dataTable/dataTables.bootstrap.min.js"></script>
            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" />
-
+          <title>SQLab</title>
            
       </head>  
       <body>  
@@ -35,8 +36,8 @@
               <p>Texto a añadir aquí...</p>
               <div class="hrr mb-3"></div>     
               <div id="accordion ">
-              <div class="card">  
-                <div class="table-responsive">  
+                <div class="card">  
+                    <div class="table-responsive">  
                      <table id="employee_data" class="table table-striped table-bordered">  
                         <thead>
                             <tr>
@@ -77,7 +78,8 @@
                       </table>
                     </div>  
                 </div> 
-            </div>  
+              </div>
+           </div>  
       </body>  
  </html>  
  <script>  

@@ -48,6 +48,7 @@ class EstaContenido{
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $sql = "SELECT COUNT(id_ejercicio) FROM sqlab_esta_contenido WHERE id_hoja=$id_hoja;";
+<<<<<<< HEAD
         $consulta = mysqli_query($conexion,$sql);
         $count = mysqli_fetch_assoc($consulta);
         $connect->disconnectDB($conexion);
@@ -59,6 +60,8 @@ class EstaContenido{
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $sql = "SELECT COUNT(id_ejercicio) as num FROM sqlab_esta_contenido WHERE id_hoja=$id_hoja;";
+=======
+>>>>>>> 23491af40331297dbbe380d0c713d2dc965e933a
         $consulta = mysqli_query($conexion,$sql);
         $count = mysqli_fetch_assoc($consulta);
         $connect->disconnectDB($conexion);

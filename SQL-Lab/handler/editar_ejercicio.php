@@ -2,8 +2,17 @@
 	
 	include_once '../inc/ejercicio.php';
 	session_start();
-	$user_tablas= $_POST['user_tablas'];
-	$tablas = $_POST['tablas'];
+	$id = $_SESSION['editar'];
+	$ejer = new Ejercicio();
+	$resul = $ejer->getEjercicioById($id);
+	$tablasUsa = $ejer->getTablasUsa($id);
+
+	$user_tablas= $resul[0][7];
+	$tablas = array();
+	foreach ($tablasUsa as $key => $value) {
+		$tablas[$key] = $value['nombre'];
+	} 
+
 	$descripcion = $_POST['descripcion'];
 	$tipo = $_POST['categoria'];
 	switch ($tipo) {
@@ -32,7 +41,7 @@
 	}
 	$nivel = $_POST['nivel'];
 	$enunciado = $_POST['enunciado'];
-	$solucion = $_POST['solucion'];
+	$solucion = trim($_POST['solucion']);
 	$deshabilitar = $_POST['deshabilitar'];
 	$user = $_SESSION['user'];
 
@@ -126,27 +135,28 @@
 
 		$resultado = array();
 		$resultado[0] = $ok;
-		$resultado[1] = $tablasSolucion;
+		$resultado[1] = $tablasSolución;
 		return $resultado;
 	}
 
 	$resultado = validarSolucion($solucion, $user_tablas); 
 	if($resultado[0]){
 		$sentencia = explode(" ", $solucion, 2);
+
 		if (strtoupper($sentencia[0]) === "SELECT"){
 			$ejer = new Ejercicio();
 			$resultadoCrear = "";
 			$resultadoSolucion = $ejer->executeSolucion($solucion);
 			if($resultadoSolucion){
 				
-				$resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $resultado[1]);
+				$resultadoCrear = $ejer->update($id,$nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$solucion,$user);
 				if($resultadoCrear){
-					$_SESSION['message'] = "El ejercicio se ha creado correctamente.";
+					$_SESSION['message'] = "El ejercicio se ha modificado correctamente.";
 				}else{
-					$_SESSION['message'] = "Error al crear el ejercicio.";
+					$_SESSION['message'] = "Error al modificar el ejercicio.";
 				}
 			}else{
-				$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
+				$_SESSION['message'] = "Error al ejecutar la solucion. La consulta no es válida. Intentelo de nuevo.";
 			}
 		}else{
 			$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";

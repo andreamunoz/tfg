@@ -63,11 +63,18 @@ class Solucion{
         return $array;
     }
 
+<<<<<<< HEAD
     function getHojaEstadisticas(){
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $sql = "SELECT count(veredicto) as veredicto FROM sqlab_solucion WHERE veredicto='1';";
+=======
+    function getCuantosEjerciciosByName($id){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT COUNT(id_ejercicio) AS cantidad FROM sqlab_solucion WHERE id_ejercicio=$id;";
+>>>>>>> 23491af40331297dbbe380d0c713d2dc965e933a
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

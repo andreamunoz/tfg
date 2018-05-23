@@ -37,22 +37,26 @@
 
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("navbar/navbar_menu_profesor.php"); ?>
-		<?php include("navbar/navbar_menu_lateral.php"); ?>
-		<?php include("navbar/navbar_show_message.php"); ?>
-		
-		<!--CONTENEDOR -->
-		<div class="container-center "> 
-			<?php include("adm_profesor/adm_hojas.php"); ?>
-			<?php include("adm_profesor/adm_ejercicios.php"); ?>
-			<?php include("adm_profesor/adm_tablas.php"); ?>
-			<?php include("adm_profesor/adm_estadisticas.php"); ?>
-			<?php include("adm_profesor/adm_configuracion.php"); ?>
-		</div> 
-		
+		<div class="contenedor">
+			
+			<?php include("navbar/navbar_menu_lateral.php"); ?>
+			<?php include("navbar/navbar_show_message.php"); ?>
+			
+			
+			<!--CONTENEDOR -->
+			<div class="container-center "> 
+				<?php include("adm_profesor/adm_principal.php"); ?>
+				<?php include("adm_profesor/adm_hojas.php"); ?>
+				<?php include("adm_profesor/adm_ejercicios.php"); ?>
+				<?php include("adm_profesor/adm_tablas.php"); ?>
+				<?php include("adm_profesor/adm_estadisticas.php"); ?>
+				<?php include("adm_profesor/adm_configuracion.php"); ?>
+			</div> 
+		</div>
 	<script type="text/javascript" src="../js/functions.js"></script>
 	</body>
 	<footer class="footer py-3 text-center">
-		© 2018 <a id="pie" href="index_profesor.php">Sqlab</a> 
+		<span>© 2018</span> <a id="pie" href="index_profesor.php">SQLab</a> 
 		
 	</footer>
 </html>

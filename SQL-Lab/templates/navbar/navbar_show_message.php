@@ -3,7 +3,7 @@
   ?>
     <div class="row">
 
-      <div class="container-center">
+      <div class="container">
         <div class="col-sm-9 col-xs-12">
         <div class="message">
           <?php

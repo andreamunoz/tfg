@@ -4,8 +4,5 @@
 
 	$id = $_POST["id"];
 	$_SESSION['editar'] = intval($id);
-
-	echo $_SESSION['editar'];
-
 	
  ?>

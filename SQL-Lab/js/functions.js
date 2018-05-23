@@ -309,7 +309,7 @@ $(document).ready(function(){
 
     $('.boton_deshabilitar_ejercicio').click(function(){      
         var mi_id = $(this).attr("data-number");
-        console.log(mi_id);
+
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/getDeshabilitarEjercicio.php",
@@ -324,7 +324,7 @@ $(document).ready(function(){
 
     $('.boton_habilitar_ejercicio').click(function(){      
         var mi_id = $(this).attr("data-number");
-        console.log(mi_id);
+
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/getHabilitarEjercicio.php",
@@ -333,7 +333,30 @@ $(document).ready(function(){
             {
                 location.reload();
             }
-        });
-                
+        });      
     });
+
+    $('input[id=checkbox-crear-hoja] ').change(function(e){
+       if ($('input[type=checkbox]:checked').length > 2) {
+            $(this).prop('checked', false);
+            console.log($(this));
+            alert("Máximo 10 ejercicios");
+       }
+    });
+
+    $('.boton_editar_hojaejercicio').click(function(){      
+        var mi_id = $(this).attr("data-number");
+        
+        $.ajax({
+            
+            method: "POST",
+            url: "../templates/adm_profesor/getEditarHojaEjercicio.php",
+            data: { id: mi_id },
+            success: function(response)
+            {   
+                location.href = "../templates/adm_profesor/adm_editar_hojaejercicio.php";
+            }            
+        });     
+    });
+
 });

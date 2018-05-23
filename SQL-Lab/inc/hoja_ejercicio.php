@@ -63,7 +63,7 @@ class HojaEjercicio{
         return $array;
     }
 
-    function getIdByName($id){
+    function getIdByName($nombre){
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $sql = "SELECT id_hoja FROM sqlab_hoja_ejercicios WHERE nombre='$nombre';";
@@ -71,5 +71,35 @@ class HojaEjercicio{
         $connect->disconnectDB($conexion);
         $res = mysqli_fetch_assoc($consulta);
         return $res;
+    }
+    function createHojaAnadirEjercicios($user, $nombre, $ejercicios){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "insert into sqlab_hoja_ejercicios (nombre_hoja, creador_hoja) 
+        values ('".$nombre."', '".$user."');";
+        $consulta = mysqli_query($conexion,$sql);
+        $rs = mysqli_query($conexion,"SELECT MAX(id_hoja) AS id FROM sqlab_hoja_ejercicios");
+            if( $row = mysqli_fetch_row($rs)){
+                $id = trim($row[0]);
+                foreach ($ejercicios as $key => $value) {
+                    $sql2 = "insert into sqlab_esta_contenido (id_ejercicio, id_hoja, orden) values ('".$value."','".$id."','".($key + 1)."');";
+                    $consulta2 = mysqli_query($conexion,$sql2);
+                    if(!($consulta2)){ 
+                        echo $conexion->error;
+                    }
+                }
+            }
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
+    function getHojasYEjerciciosById($id){
+
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM sqlab_hoja_ejercicios he, sqlab_esta_contenido ec, sqlab_ejercicio e WHERE e.id_ejercicio = ec.id_ejercicio AND he.id_hoja = ec.id_hoja AND he.id_hoja=$id ORDER BY ec.orden;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
     }
 }

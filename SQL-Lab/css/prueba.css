@@ -395,7 +395,7 @@ a {
   background-color:  #163a5f;
   position: relative;
   width: 300px;
-  height: 100vh;
+  height: calc(100vh - 56px);
   color: #fff ;
   float: left; 
 }
@@ -576,14 +576,14 @@ a {
 /******************************************/
 
 /* ---- Timeline ---- */
-ol {
+/*ol {
   position: relative;
   display: block;
   margin: 100px;
   height: 4px;
   background: #31708F;
-}
-ol::before,
+}*/
+/*ol::before,
 ol::after {
   content: "";
   position: absolute;
@@ -603,7 +603,7 @@ ol::after {
   border-right: 0;
   border-left: 20px solid #31708F;
   border-radius: 3px;
-}
+}*/
 
 /* ---- Timeline elements ---- */
 li .hojita{
@@ -766,4 +766,17 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 
 table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
   border-bottom: 1px solid rgba(48,48,48,0.1) !important;
+}
+
+#tabla_crear_hoja_ejercicios .primera{
+  padding-right: 20px;
+}
+#tabla_crear_hoja_ejercicios .form-check-input{
+  margin-left: 0px; 
+  margin-top: 7px;
+}
+
+.message{
+  margin-top: 50px;
+  margin-left: 70px;
 }

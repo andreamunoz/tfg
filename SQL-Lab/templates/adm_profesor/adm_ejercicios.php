@@ -101,6 +101,7 @@
 							<div class="panel-footer" >
 				  				<select type="text" id="categoria" name="categoria" class="form-control" required>
 				  					<?php 
+				  						include_once '../inc/ejercicio.php';
 				  						$ejer = new Ejercicio();
 								        $resultado = $ejer->getCategorias();
 									    foreach ($resultado as $key => $value) { 

@@ -4,7 +4,6 @@
 	session_start();
 	$user_tablas= $_POST['user_tablas'];
 	$tablas = $_POST['tablas'];
-	print_r($tablas);
 	$descripcion = $_POST['descripcion'];
 	$tipo = $_POST['categoria'];
 	switch ($tipo) {

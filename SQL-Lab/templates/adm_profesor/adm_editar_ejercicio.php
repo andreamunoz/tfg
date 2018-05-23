@@ -51,8 +51,7 @@
 						<?php 
 							if(isset($_SESSION['editar'])){
 								$id = $_SESSION['editar'];
-								// echo $id;
-								include_once '../../inc/ejercicio.php';
+
 								include_once '../../inc/ejercicio.php';
 								$ejer = new Ejercicio();
 								$resul = $ejer->getEjercicioById($id);

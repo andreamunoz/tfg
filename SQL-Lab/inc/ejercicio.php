@@ -244,4 +244,13 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+
+    function getAllEjerciciosAutorizados(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM `sqlab_ejercicio` AS e, `sqlab_usuario` AS u WHERE e.creador_ejercicio = u.user AND u.autoriza = 1;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
 }

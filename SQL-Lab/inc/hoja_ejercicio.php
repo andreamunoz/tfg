@@ -66,10 +66,10 @@ class HojaEjercicio{
     function getIdByName($id){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT id_hoja FROM sqlab_hoja_ejercicios WHERE nombre='$nombre';";
+        $sql = "SELECT id_hoja FROM sqlab_hoja_ejercicios WHERE id_hoja=$id;";
         $consulta = mysqli_query($conexion,$sql);
-        $connect->disconnectDB($conexion);
         $res = mysqli_fetch_assoc($consulta);
+        $connect->disconnectDB($conexion);
         return $res;
     }
 }

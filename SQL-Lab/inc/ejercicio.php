@@ -73,20 +73,19 @@ class Ejercicio{
        
         $connect = new Tools();
         $conexion = $connect->connectDB();
-
         $sql = "SELECT * FROM sqlab_ejercicio WHERE nombre = '$nombre';";
-
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
     }
 
     function getEjercicioById($id){
-       
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
         $sql = "SELECT * FROM sqlab_ejercicio WHERE id_ejercicio = '$id';";
-        $tool = new Tools();
-        $array = $tool->getArraySQL($sql);
-        return $array;
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
     }
     
     function getEjercicioByNivel($nivel){
@@ -117,7 +116,27 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM sqlab_ejercicio;";
+        $sql = "SELECT * FROM sqlab_ejercicio WHERE deshabilitar='0';";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
+     function getAllEjerciciosHabilitados(){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM sqlab_ejercicio WHERE deshabilitar='0';";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
+    function getAllEjerciciosDesHabilitados(){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM sqlab_ejercicio WHERE deshabilitar='1';";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

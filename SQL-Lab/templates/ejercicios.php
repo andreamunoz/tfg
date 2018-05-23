@@ -64,11 +64,11 @@
                         </thead>
                         <tbody>
                             <?php 
-                            include_once '../inc/ejercicio.php';
-                            $ejer = new Ejercicio();
+                            include_once '../inc/esta_contenido.php';
+                            $ejer = new EstaContenido();
                             include_once '../inc/solucion.php';
                             $sol = new Solucion();
-                            $result = $ejer->getAllEjercicios();    
+                            $result = $ejer->getAllEjerciciosHabilitados();    
                             while($fila = mysqli_fetch_array($result)){
                             ?>
 
@@ -76,12 +76,14 @@
                               $solucion = $sol->getAllEjerciciosByName($id);
 
                               $fila_sol = mysqli_fetch_array($solucion);
+                                
                                 if($fila_sol['veredicto']=='1'){
                               ?>
                                 <tr class="border-veredictoV">
                               <?php } else if($fila_sol['veredicto']=='0') { ?>
                                   <tr class="border-veredictoR">
-                              <?php } else { ?>
+                              <?php } else {  ?>
+
                                   <tr class="border-veredictoA">  
                                   <?php } ?>  
                                   <?php echo '<td>Ejercicio '.$fila['id_ejercicio'].'</td>'; ?>

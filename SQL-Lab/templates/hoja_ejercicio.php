@@ -43,10 +43,31 @@
 			<div class="row pt-4 pb-4">
 				<div class="col-md-3  offset-9">
 					 <div class="progress">
-					  <div class="progress-bar" role="progressbar" aria-valuenow="70"
-					  aria-valuemin="0" aria-valuemax="100" style="width:70%">
-					    70%
-					  </div>
+					 <?php   
+					 	include_once '../inc/hoja_ejercicio.php';
+						$hojaejer = new HojaEjercicio();
+						$res = $hojaejer->getIdByName($hojaparameter);
+					 	$idHoja = $res['id_hoja'];
+
+					 	include_once '../inc/esta_contenido.php';
+					 	$estaCon = new EstaContenido();
+					 	$r = $estaCon->getNumEjercicios($idHoja);
+
+					 	include_once '../inc/estadisticas.php';
+                        $contenido = new Estadisticas(); 
+                        $rCon = $contenido->getPorcentajeAciertos($idHoja);
+
+                        if($rCon['veredicto'] > '0'){                    
+                       		$resultadoDec = ($rCon['veredicto'] / $r['num']) * 100;
+                       		$resultado = round($resultadoDec);
+                       		echo '<div class="progress-bar" role="progressbar" aria-valuenow="70"
+					  aria-valuemin="0" aria-valuemax="100" style="width:'.$resultado.'%"><p>'.$resultado.'%</p>
+					  </div>';                 	
+                       	}else{
+                       		echo '<div class="progress-bar" role="progressbar" aria-valuenow="0"
+					  aria-valuemin="0" aria-valuemax="100" style="width:0%"><p>0%</p>
+					  </div>'; }					
+					  ?>
 					</div> 
 				</div>
 			</div>			
@@ -67,9 +88,7 @@
 						</thead>
 						<tbody>
 							<?php 
-							include_once '../inc/hoja_ejercicio.php';
-							$hojaejer = new HojaEjercicio();
-							$res = $hojaejer->getIdByName($hojaparameter);
+							
 							$id_h = $res['id_hoja'];
 							include_once '../inc/ejercicio.php';
 							$ejer = new Ejercicio();
@@ -116,12 +135,7 @@
 							?>
 							
 						</tbody>
-					</table>
-
-
-
-
-										    		
+					</table>									    		
 				</div>
 			</div>
 		</div>

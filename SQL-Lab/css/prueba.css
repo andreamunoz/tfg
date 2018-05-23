@@ -97,18 +97,31 @@ a {
 .show-ejer td {
    border-bottom: none !important;
 }
-.border-veredictoV{
-    border-left: 15px solid green;
+#myTable .border-veredictoV{
+    border-left: 8px solid green;
     border-bottom: 1px solid rgba(48,48,48,0.1);
 }
-.border-veredictoR{
-    border-left: 15px solid red;
+#myTable .border-veredictoR{
+    border-left: 8px solid red;
     border-bottom: 1px solid rgba(48,48,48,0.1);
 }
-.border-veredictoA{
-    border-left: 15px solid yellow;
+#myTable .border-veredictoA{
+    border-left: 8px solid yellow;
     border-bottom: 1px solid rgba(48,48,48,0.1);
 }
+#employee_data .border-veredictoV{
+    border-left: 17px solid green;
+    border-bottom: 1px solid rgba(48,48,48,0.1);
+}
+#employee_data .border-veredictoR{
+    border-left: 17px solid red;
+    border-bottom: 1px solid rgba(48,48,48,0.1);
+}
+#employee_data .border-veredictoA{
+    border-left: 17px solid yellow;
+    border-bottom: 1px solid rgba(48,48,48,0.1);
+}
+
 .border-V{
     border-left: 20px solid green;
     padding-left: 10px;
@@ -139,6 +152,10 @@ a {
   box-shadow: 0px 0px 0px #fff;
   border-color: #fff !important;
   border-left: 0px;
+}
+.table-hover tbody tr:hover {
+  box-shadow: 1px 1px 4px 1px rgba(48,48,48,0.3);
+  background: transparent !important;
 }
 
 .table .thead-dark th{
@@ -179,6 +196,9 @@ a {
 	color: #f58d12 !important;
 }
 
+.pt-30 {
+  padding-top: 30px ;
+}
 .pt-25 {
   padding-top: 125px;
 }
@@ -186,7 +206,7 @@ a {
 .btn-tertiary{
 
   background-color: #fc6502 !important;
-  color: white;
+  color: white !important;
   border-radius: 30px !important;
   border: 1px solid;
 }
@@ -668,7 +688,7 @@ li:hover .description {
   color: #fc6502 !important;
   padding-top: 1px !important;
   height: 31px !important;
-
+  border-radius: 30px !important;
 }
 .custom-select:focus {
   box-shadow: none !important;
@@ -691,8 +711,12 @@ li:hover .description {
 
 .progress-bar {
   background-color: #fc6502 !important;
-}
 
+}
+.progress-bar p{
+  margin-top: 15px;
+  margin-left: 95px;
+}
 div.table-responsive > div.dataTables_wrapper > div.row {
   width: 100%;
 }
@@ -709,48 +733,94 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 .table-bordered td, .table-bordered th {
   border:0px !important;
 }
+.table-striped tbody tr:hover{
+  box-shadow: 1px 1px 4px 1px rgba(48,48,48,0.3) !important;
+}
 .table-striped tbody tr:nth-of-type(2n+1) {
-  background-color: #fff !important;
+  background-color: transparent !important;
 
+}
+.table-striped tbody tr:nth-of-type(2n+1):hover {
+   box-shadow: 1px 1px 4px 1px rgba(48,48,48,0.3) !important;
+  
 }
 div.dataTables_wrapper div.dataTables_length label {
   font-size: 12px;
   color: rgba(48,48,48,0.5);
 }
 select.form-control:not([size]):not([multiple]) {
-  height: 30px !important;
+  height: 28px !important;
   width: 110px;
-  padding-top: 1px;
+  padding-top: 0px;
+}
+.form-control {
+  border-radius: 30px !important;
+  color: rgba(48,48,48,0.6) !important;
+  border-color: rgba(48,48,48,0.1) !important;
+  background: #fff !important;
+  
+}
+.form-control:focus {
+  box-shadow: none !important;
+
+}
+select option:focus{
+  background-color: #fc6502 !important;
+  color: #fff !important;
 }
 div.dataTables_wrapper div.dataTables_filter label {
   font-size: 12px;
   color: rgba(48,48,48,0.5);
 }
 div.dataTables_wrapper div.dataTables_filter input {
-  height: 30px;
+  height: 28px;
+  padding-top: 0px;
 }
 div.dataTables_wrapper div.dataTables_length select {
   width: 120px;
 }
+div.dataTables_length label {
+  margin-left: 12px;
+  display: block;
+}
+div.dataTables_length select{
+  margin-left: 10px;
+}
 div.dataTables_wrapper div.dataTables_paginate ul.pagination {
-  margin: 20px !important;
+  margin-top: 30px !important;
+  margin-bottom: 10px !important;
 }
 .col-sm-6 {
   max-width: 20% !important;
 }
 .paginate_button a{
   border: 1px solid;
+  border-radius: 30px;
   padding-right: 15px;
   padding-left: 15px;
   margin: 1px;
   padding-top: 1px;
   padding-bottom: 2px;
 }
-.paginate_button .active a{
+.active a {
+  background-color: #fc6502;
+  color: #fff !important;
+  border-color: #fc6502;
+}
+.active a:hover{
+  background-color: #fff;
+  color: #fc6502 !important;
+}
+.paginate_button .active{
   background-color: #fc6502;
   color: #fff;
 }
 
 table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
   border-bottom: 1px solid rgba(48,48,48,0.1) !important;
+}
+
+.thumbnail img{
+  width: 170px;
+  height: 170px;
 }

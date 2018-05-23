@@ -39,7 +39,7 @@ class Solucion{
     function getAllEjerciciosByName($id){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM solucion WHERE id_ejercicio=$id;";
+        $sql = "SELECT * FROM sqlab_solucion WHERE id_ejercicio=$id;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -61,6 +61,16 @@ class Solucion{
         $tool = new Tools();
         $array = $tool->getArraySQL($sql);
         return $array;
+    }
+
+    function getHojaEstadisticas(){
+
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT count(veredicto) as veredicto FROM sqlab_solucion WHERE veredicto='1';";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
     }
 
 }

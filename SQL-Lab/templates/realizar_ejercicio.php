@@ -42,8 +42,9 @@
               include_once '../inc/ejercicio.php';
               $ejer = new Ejercicio();
               $ejerparameter = $_GET['ejercicio'];
-              $result = $ejer->getEjercicio($ejerparameter);
-              while($fila = mysqli_fetch_array($result)){
+
+              $result = $ejer->getEjercicioById($ejerparameter);
+              $fila = mysqli_fetch_array($result)
         ?>		
   			<div class="row pt-1">  
   				<div class="col-md-3">
@@ -71,7 +72,6 @@
   					<textarea  id="solucion" name="sol_ejercicio" class="form-control" rows="18" placeholder="Escribe la solución aquí..." required></textarea>
   				</div>
 
-          <?php } ?>
 
   			</div> 	
 		</div>

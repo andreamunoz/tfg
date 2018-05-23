@@ -38,59 +38,72 @@
 		<?php include("navbar/navbar_menu_alumno.php"); ?>
 		<div class="container pt-25">
 			<div class = "row">
-   
-			   <div class = "col-sm-6 col-md-3">
+			   <div class = "col-md-3">
 			      <div class = "thumbnail">
-			         <img src = "../img/images_prueba.jpg" alt = "Generic placeholder thumbnail">
+			         <img src = "../img/hoja.jpg" alt = "Generic placeholder thumbnail">
 			      </div>
-			      <div class = "caption">
-			         <h3>Hoja de Ejercicios</h3>
-			         <p>Some sample text. Some sample text.</p>
-			         <p>
-			            <a href = "hoja_de_ejercicios.php" class = "btn btn-tertiary" role = "button">Entrar</a> 
-			         </p>
-			      </div>
+			      
 			   </div>
 			   
-			   <div class = "col-sm-6 col-md-3">
+			   <div class = "col-md-3">
 			      <div class = "thumbnail">
-			         <img src = "../img/images_prueba.jpg" alt = "Generic placeholder thumbnail">
+			         <img src = "../img/database.jpg" alt = "Generic placeholder thumbnail">
 			      </div>
-			      <div class = "caption">
-			         <h3>Ejercicios</h3>
-			         <p>Some sample text. Some sample text.</p>
-			         <p>
-			            <a href = "ejercicios.php" class = "btn btn-tertiary" role = "button">Entrar</a> 
-			         </p>
-			      </div>
+			      
 			   </div>
 			   
-			   <div class = "col-sm-6 col-md-3">
+			   <div class = "col-md-3">
 			      <div class = "thumbnail">
-			         <img src = "../img/images_prueba.jpg" alt = "Generic placeholder thumbnail">
+			         <img src = "../img/estadistica.png" alt = "Generic placeholder thumbnail">
 			      </div>
-			      <div class = "caption">
-			         <h3>Estadísticas</h3>
-			         <p>Some sample text. Some sample text.</p> 
-			         <p>
-			            <a href = "estadisticas_de_ejercicios.php" class = "btn btn-tertiary" role = "button">Entrar</a>
-			         </p>
-			      </div>
+			      
 			   </div>
 			   
-			   <div class = "col-sm-6 col-md-3">
+			   <div class = "col-md-3">
 			      <div class = "thumbnail">
 			         <img src = "../img/images_prueba.jpg" alt = "Generic placeholder thumbnail">
 			      </div>     
-			      <div class = "caption">
-			         <h3>Perfil</h3>
-			         <p>Some sample text. Some sample text.</p>         
-			         <p>
-			            <a href = "perfil_de_alumno.php" class = "btn btn-tertiary" role = "button">Entrar</a>
-			         </p>
-			      </div>
+			      
 			   </div>
 			</div>
+			<div class = "row pt-30">
+			   		<div class = "col-md-3">
+			   			<div class = "caption">
+				         <h3>Hoja de Ejercicios</h3>
+				         <p>Some sample text. Some sample text.</p>
+				         <p>
+				            <a href = "hoja_de_ejercicios.php" class = "btn btn-tertiary" role = "button">Entrar</a> 
+				         </p>
+				      </div>
+			   		</div>
+			   		<div class = "col-md-3">
+			   			<div class = "caption">
+				         <h3>Ejercicios</h3>
+				         <p>Some sample text. Some sample text.</p>
+				         <p>
+				            <a href = "ejercicios.php" class = "btn btn-tertiary" role = "button">Entrar</a> 
+				         </p>
+				      </div>
+			   		</div>
+			   		<div class = "col-md-3">
+			   			<div class = "caption">
+				         <h3>Estadísticas</h3>
+				         <p>Some sample text. Some sample text.</p> 
+				         <p>
+				            <a href = "estadisticas_de_ejercicios.php" class = "btn btn-tertiary" role = "button">Entrar</a>
+				         </p>
+				      </div>
+			   		</div>
+			   		<div class = "col-md-3">
+			   			<div class = "caption">
+				         <h3>Perfil</h3>
+				         <p>Some sample text. Some sample text.</p>         
+				         <p>
+				            <a href = "perfil_de_alumno.php" class = "btn btn-tertiary" role = "button">Entrar</a>
+				         </p>
+				      </div>
+			   		</div>
+			   </div>
 		</div>
 	</body>
 </html>

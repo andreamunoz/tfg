@@ -1,17 +1,33 @@
-
 $(document).ready(function()
 {
   /*--------------Hoja de Ejercicios----------------*/
- 
-    $('.lista-hoja').hide();
-    $('.editar-hoja').hide();
+
+    $('.principal').show();
+    $('.adm-hojas').hide();
     $('.adm-ejercicios').hide();
     $('.adm-estadisticas').hide();
     $('.adm-tablas').hide();
     $('.configuracion').hide();
 
+    $("#principal").click(function(){
+        
+        $('.adm-hojas').hide();
+        $('.configuracion').hide();
+        $('.adm-ejercicios').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-tablas').hide();
+        $('.principal').show();
+        
+        var that = $(this);
+        that.closest('#menu-content').find('li.active').removeClass('active');
+        that.closest('.sub-menu').find('li.active').removeClass('active');
+        that.parent().addClass('active');
+        
+    });
+
     $("#crear_hoja").click(function(){
         
+        $('.principal').hide();
         $('.adm-hojas').show();
         $('.configuracion').hide();
         $('.adm-ejercicios').hide();
@@ -23,27 +39,30 @@ $(document).ready(function()
         $('.lista-hoja').hide();
         
         var that = $(this);
+        that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
-    $("#editar_hoja").click(function(){
+    // $("#editar_hoja").click(function(){
         
-        $('.adm-hojas').show();
-        $('.configuracion').hide();
-        $('.adm-ejercicios').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-tablas').hide();
+    //     $('.principal').hide();
+    //     $('.adm-hojas').show();
+    //     $('.configuracion').hide();
+    //     $('.adm-ejercicios').hide();
+    //     $('.adm-estadisticas').hide();
+    //     $('.adm-tablas').hide();
                   
-        $('.crear-hoja').hide("linear");
-        $('.editar-hoja').show();
-        $('.lista-hoja').hide("linear");
+    //     $('.crear-hoja').hide("linear");
+    //     $('.editar-hoja').show();
+    //     $('.lista-hoja').hide("linear");
         
-        var that = $(this);
-        that.closest('.sub-menu').find('li.active').removeClass('active');
-        that.parent().addClass('active');
-    });
+    //     var that = $(this);
+    //     that.closest('.sub-menu').find('li.active').removeClass('active');
+    //     that.parent().addClass('active');
+    // });
     $("#lista_hoja").click(function(){
        
+        $('.principal').hide();
         $('.adm-hojas').show();
         $('.configuracion').hide();
         $('.adm-ejercicios').hide();
@@ -55,6 +74,7 @@ $(document).ready(function()
         $('.lista-hoja').show("swing");
         
         var that = $(this);
+        that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
@@ -63,6 +83,7 @@ $(document).ready(function()
 
     $("#crear_ejercicio").click(function(){
         
+        $('.principal').hide();
         $('.adm-hojas').hide();
         $('.configuracion').hide();
         $('.adm-estadisticas').hide();
@@ -74,27 +95,31 @@ $(document).ready(function()
         $('.lista-ejercicio').hide();
         
         var that = $(this);
+        console.log(that);
+        that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
-    $("#editar_ejercicio").click(function(){
-       
-        $('.adm-hojas').hide();
-        $('.configuracion').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-ejercicios').show();
-        $('.adm-tablas').hide();
-                 
-        $('.crear-ejercicio').hide("linear");
-        $('.editar-ejercicio').show();
-        $('.lista-ejercicio').hide("linear");
+    // $("#editar_ejercicio").click(function(){
         
-        var that = $(this);
-        that.closest('.sub-menu').find('li.active').removeClass('active');
-        that.parent().addClass('active');
-    });
+    //     $('.principal').hide();
+    //     $('.adm-hojas').hide();
+    //     $('.configuracion').hide();
+    //     $('.adm-estadisticas').hide();
+    //     $('.adm-ejercicios').show();
+    //     $('.adm-tablas').hide();
+                 
+    //     $('.crear-ejercicio').hide("linear");
+    //     $('.editar-ejercicio').show();
+    //     $('.lista-ejercicio').hide("linear");
+        
+    //     var that = $(this);
+    //     that.closest('.sub-menu').find('li.active').removeClass('active');
+    //     that.parent().addClass('active');
+    // });
     $("#lista_ejercicio").click(function(){
         
+        $('.principal').hide();
         $('.adm-hojas').hide();
         $('.configuracion').hide();
         $('.adm-estadisticas').hide();
@@ -106,6 +131,7 @@ $(document).ready(function()
         $('.lista-ejercicio').show("swing");
         
         var that = $(this);
+        that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
@@ -114,6 +140,7 @@ $(document).ready(function()
 /*--------------Configuracion-----------------*/
   $("#perfil").click(function(){
         
+        $('.principal').hide();
         $('.configuracion').show();
         $('.adm-hojas').hide();
         $('.adm-ejercicios').hide();
@@ -121,6 +148,7 @@ $(document).ready(function()
         $('.adm-tablas').hide();
         
         var that = $(this);
+        that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
   });
@@ -128,44 +156,35 @@ $(document).ready(function()
   /*---------------Estadisticas-------------------*/
   $("#estadistic").click(function(){
         
+        $('.principal').hide();
         $('.adm-hojas').hide();
         $('.configuracion').hide();
         $('.adm-ejercicios').hide();
         $('.adm-tablas').hide();
         $('.adm-estadisticas').show();
+
+        var that = $(this);
+        that.closest('#menu-content').find('li.active').removeClass('active');
+        that.closest('.sub-menu').find('li.active').removeClass('active');
+        that.parent().addClass('active');
   });
 
   /*---------------Tablas-------------------*/
   $("#adjuntar_tabla").click(function(){
         
-      $('.adm-hojas').hide();
-      $('.configuracion').hide();
-      $('.adm-ejercicios').hide();
-      $('.adm-estadisticas').hide();
-      $('.adm-tablas').show(); 
+        $('.principal').hide();
+        $('.adm-hojas').hide();
+        $('.configuracion').hide();
+        $('.adm-ejercicios').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-tablas').show(); 
 
-      $('.adjuntar-tablas').show();
-      $('.mostrar-tablas').hide("linear");
+        $('.adjuntar-tablas').show();
 
-      var that = $(this);
-      that.closest('.sub-menu').find('li.active').removeClass('active');
-      that.parent().addClass('active');
-  });
-
-  $("#mostrar-tablas").click(function(){
-        
-      $('.adm-hojas').hide();
-      $('.configuracion').hide();
-      $('.adm-ejercicios').hide();
-      $('.adm-estadisticas').hide();
-      $('.adm-tablas').show(); 
-
-      $('.mostrar-tablas').show();
-      $('.adjuntar-tablas').hide("linear");
-
-      var that = $(this);
-      that.closest('.sub-menu').find('li.active').removeClass('active');
-      that.parent().addClass('active');
+        var that = $(this);
+        that.closest('#menu-content').find('li.active').removeClass('active');
+        that.closest('.sub-menu').find('li.active').removeClass('active');
+        that.parent().addClass('active');
   });
 
 });
@@ -254,3 +273,67 @@ $(document).ready(function()
     });
 
 });  
+
+$(document).ready(function(){
+    $('.boton_editar_ejercicio').click(function(){      
+        var mi_id = $(this).attr("data-number");
+        
+        $.ajax({
+            
+            method: "POST",
+            url: "../templates/adm_profesor/getEditarEjercicio.php",
+            data: { id: mi_id },
+            success: function(response)
+            {   
+                location.href = "../templates/adm_profesor/adm_editar_ejercicio.php";
+            }            
+        });     
+    });
+
+    $('.boton_borrar_ejercicio').click(function(){      
+        var mi_id = $(this).attr("data-number");
+
+        var r = confirm("Vas a eliminar el ejercicio "+mi_id+".¿Estás seguro?");
+        if (r == true){
+            $.ajax({
+                method: "POST",
+                url: "../templates/adm_profesor/getBorrarEjercicio.php",
+                data: { id: mi_id },
+                success: function(response)
+                {
+                    location.reload();
+                }
+            });
+        }        
+    });
+
+    $('.boton_deshabilitar_ejercicio').click(function(){      
+        var mi_id = $(this).attr("data-number");
+        console.log(mi_id);
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getDeshabilitarEjercicio.php",
+            data: { id: mi_id },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+               
+    });
+
+    $('.boton_habilitar_ejercicio').click(function(){      
+        var mi_id = $(this).attr("data-number");
+        console.log(mi_id);
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getHabilitarEjercicio.php",
+            data: { id: mi_id },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+                
+    });
+});

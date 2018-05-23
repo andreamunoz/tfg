@@ -41,7 +41,7 @@
 		</div>
 
 
-		<div class="col-md-11 mostrar-tablas">
+		<!-- <div class="col-md-11 mostrar-tablas">
 			<h3><?php echo trad( "Mostrar la estructura de las tablas", $lang) ?></h3>
 			<p class="pl-5"><?php echo trad( "Seleccione una tabla y pulse el boton para obtener sus columnas.", $lang) ?></p>
 			<div class="hrr"></div>
@@ -74,6 +74,6 @@
 				<div class="">
 				</div>				
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>

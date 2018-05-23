@@ -12,7 +12,7 @@ class Ejercicio{
         $dueño = explode("_", $tablas[0], 2);
 
         $sql = "insert into sqlab_ejercicio (nivel,enunciado,descripcion,deshabilitar,tipo,creador_ejercicio,solucion,dueño_tablas) 
-        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".$dueño[0]."');";
+        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".strtolower($dueño[0])."');";
         $resul = mysqli_query($conexion,$sql);
         if(!($resul)){
             $resul = $conexion->error;
@@ -38,19 +38,11 @@ class Ejercicio{
         return $resul;
     }
  
- 	//No se utiliza en estos momentos
-    function update($id,$nivel,$enun,$descrip,$deshab,$tipo,$sol){
+    function update($id,$nivel,$enun,$descrip,$deshab,$tipo,$sol,$user){
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "UPDATE sqlab_ejercicio SET "
-                . "nivel = '$nivel', "
-                . "enunciado = '$enun', "
-                . "descripcion = '$descrip', "
-                . "deshabilitar = '$deshab', "
-                . "tipo = '$tipo', " 
-                . "solucion = '$sol'
-        WHERE id_ejercicio = $id ;";
+        $sql = "UPDATE sqlab_ejercicio SET nivel = '$nivel', enunciado = '$enun', descripcion = '$descrip', deshabilitar = '$deshab', tipo = '$tipo', solucion = '$sol' WHERE id_ejercicio = $id;";
         $consulta = mysqli_query($conexion,$sql);
         if(!$consulta){
                echo "No se ha podido modificar la base de datos<br><br>".mysqli_error($conexion);
@@ -63,10 +55,14 @@ class Ejercicio{
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "DELETE FROM sqlab_ejercicio WHERE id_ejercicio=$id and deshabilitar=0;";
+        $sql = "DELETE FROM `sqlab_usa` WHERE id_ejercicio = $id;";
         $consulta = mysqli_query($conexion,$sql);
+        if($consulta){;
+            $sql2 = "DELETE FROM sqlab_ejercicio WHERE id_ejercicio=$id;";
+            $consulta2 = mysqli_query($conexion,$sql2);
+        }
         $connect->disconnectDB($conexion);
-        return $consulta;
+        return ($consulta && $consulta2);
     }
    
     function getEjercicio($nombre){
@@ -222,5 +218,30 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+
+    function getTablasUsa($id){
+
+        $sql = "SELECT nombre FROM `sqlab_usa` WHERE id_ejercicio =".$id.";";
+        $tool = new Tools();
+        $array = $tool->getArraySQL($sql);
+        return $array;
+    }
     
+    function setDeshabilitar($id){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "UPDATE `sqlab_ejercicio` SET `deshabilitar`= 1 WHERE `id_ejercicio` = $id;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
+    function setHabilitar($id){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "UPDATE `sqlab_ejercicio` SET `deshabilitar`= 0 WHERE `id_ejercicio` = $id;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
 }

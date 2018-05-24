@@ -85,7 +85,7 @@
 	function anadirDueno($tablas, $dueno){
 		$solucion = array();
 		for($i = 0; $i < count($tablas); $i++){
-			$solucion[$i] = strtoupper($dueno)."_".$tablas[$i]; 
+			$solucion[$i] = $dueno."_".$tablas[$i]; 
 		}
 		return $solucion;
 	}
@@ -137,23 +137,23 @@
 			$ejer = new Ejercicio();
 			$resultadoCrear = "";
 			$resultadoSolucion = $ejer->executeSolucion($solucion);
-			if($resultadoSolucion){
+			// if($resultadoSolucion){
 				
-				$resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $resultado[1]);
-				if($resultadoCrear){
-					$_SESSION['message'] = "El ejercicio se ha creado correctamente.";
-				}else{
-					$_SESSION['message'] = "Error al crear el ejercicio.";
-				}
-			}else{
-				$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
-			}
+			// 	$resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $resultado[1]);
+			// 	if($resultadoCrear){
+			// 		$_SESSION['message'] = "El ejercicio se ha creado correctamente.";
+			// 	}else{
+			// 		$_SESSION['message'] = "Error al crear el ejercicio.";
+			// 	}
+			// }else{
+			// 	$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
+			// }
 		}else{
 			$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
 		}
 	}else{
 		$_SESSION['message'] = "Error. Por favor repase las tablas de la solución y asegurese de que sean válidas.";
 	}
-	header("Location: ../templates/index_profesor.php");
-	exit();
+	// header("Location: ../templates/index_profesor.php");
+	// exit();
 ?>

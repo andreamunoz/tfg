@@ -3,7 +3,7 @@
 		<div class="col-md-11 adjuntar-tablas">	
 
 			<h3><?php echo trad( "Añadir Datos", $lang) ?></h3>
-			<p class="pl-5"><?php echo trad( "Introduzca el código para crear las tablas e introducir los datos. Sólo se permiten las sentencias CREATE TABLE e INSERT INTO.", $lang) ?></p>
+			<p class="pl-5"><?php echo trad( "Introduzca el código para crear las tablas e introducir los datos. Sólo se permiten las sentencias CREATE TABLE, INSERT INTO, DROP TABLE y ALTER TABLE.", $lang) ?></p>
 			<div class="hrr"></div>
 			<div class="form-row pt-4 ">
 				<div class="form-group col-md-12 pl-4">

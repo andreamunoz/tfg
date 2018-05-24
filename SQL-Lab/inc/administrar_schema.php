@@ -17,7 +17,6 @@ class Administrar_schema{
             $resultado = true;
         }
         
-        // echo $conexion->error;
         $connect->disconnectDB($conexion);
         return $resultado;
     }
@@ -66,7 +65,6 @@ class Administrar_schema{
         $connect->disconnectDB($conexion);
     }
 
-
     function comprobarSintaxis($sentencia){
         $sentencia = preg_replace('/\s+/', ' ', $sentencia);
         $miarray = explode(" ", $sentencia);
@@ -103,6 +101,7 @@ class Administrar_schema{
         }
         return $tabla;
     }
+
     function reemplazar_primero($buscar, $remplazar, $texto){
         $pos = strpos($texto, $buscar);
         if($pos !== false){
@@ -110,6 +109,7 @@ class Administrar_schema{
         }
         return $texto;
     }
+
     function reemplazar_referencias($buscar, $reemplazar, $texto){
         return $texto = str_replace($buscar, $reemplazar, $texto);
     }
@@ -143,8 +143,7 @@ class Administrar_schema{
                 $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla, $nuevoNombre, $miSentenciaEntera);
 
                 //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
-                $arrayComillasPermitidas = array("`", "'");
-                $miSentenciaEntera = str_replace($arrayComillasPermitidas, '"', $miSentenciaEntera);
+                $miSentenciaEntera = str_replace("'", '"', $miSentenciaEntera);
 
                 if((stripos($sentencias[$i], "CREATE"))!==FALSE){
 

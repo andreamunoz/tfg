@@ -154,6 +154,6 @@
 	}else{
 		$_SESSION['message'] = "Error. Por favor repase las tablas de la solución y asegurese de que sean válidas.";
 	}
-	// header("Location: ../templates/index_profesor.php");
-	// exit();
+	header("Location: ../templates/index_profesor.php");
+	exit();
 ?>

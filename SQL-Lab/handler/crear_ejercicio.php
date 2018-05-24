@@ -137,17 +137,17 @@
 			$ejer = new Ejercicio();
 			$resultadoCrear = "";
 			$resultadoSolucion = $ejer->executeSolucion($solucion);
-			// if($resultadoSolucion){
+			if($resultadoSolucion){
 				
-			// 	$resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $resultado[1]);
-			// 	if($resultadoCrear){
-			// 		$_SESSION['message'] = "El ejercicio se ha creado correctamente.";
-			// 	}else{
-			// 		$_SESSION['message'] = "Error al crear el ejercicio.";
-			// 	}
-			// }else{
-			// 	$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
-			// }
+				$resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $resultado[1]);
+				if($resultadoCrear){
+					$_SESSION['message'] = "El ejercicio se ha creado correctamente.";
+				}else{
+					$_SESSION['message'] = "Error al crear el ejercicio.";
+				}
+			}else{
+				$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
+			}
 		}else{
 			$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
 		}

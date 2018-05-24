@@ -17,25 +17,25 @@
 	$tipo = $_POST['categoria'];
 	switch ($tipo) {
 		case 'c1':
-			$categoria = "1.Select-Basico";
+			$categoria = "Select-Basico";
 			break;
 		case 'c2':
-			$categoria = "2.Select-Join";
+			$categoria = "Select-Join";
 			break;
 		case 'c3':
-			$categoria = "3.Select-Group-Basico";
+			$categoria = "Select-Group-Basico";
 			break;
 		case 'c4':
-			$categoria = "4.Select-Group-Having";
+			$categoria = "Select-Group-Having";
 			break;
 		case 'c5':
-			$categoria = "5.Subqueries-Valor";
+			$categoria = "Subqueries-Valor";
 			break;
 		case 'c6':
-			$categoria = "6.Subqueries-Conjuntos";
+			$categoria = "Subqueries-Conjuntos";
 			break;
 		case 'c7':
-			$categoria = "7.Operaciones Manipulacion de Datos";
+			$categoria = "Operaciones Manipulacion de Datos";
 			break;
 		
 	}

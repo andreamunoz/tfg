@@ -272,4 +272,16 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+
+    function comprobarSiEstaUsada($tabla){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT count(id_ejercicio) as c from  sqlab_usa WHERE nombre='$tabla';";
+        $consulta = mysqli_query($conexion,$sql);
+        foreach ($consulta as $key => $value) {
+            $resultado = intval($value["c"]);
+        }
+        $connect->disconnectDB($conexion);
+        return $resultado;
+    }
 }

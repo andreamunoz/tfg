@@ -141,9 +141,9 @@
                         labels: ["Aciertos", "Fallos", "No intentados"],
                         datasets: [
                           {
-                            <?php $vSBT = $estadisticas->getStadisticTipoVeredictoTrue("1.Select-Basico","roberdi"); 
+                            <?php $vSBT = $estadisticas->getStadisticTipoVeredictoTrue("Select-Basico","roberdi"); 
                             $veredictoSBT = mysqli_fetch_array($vSBT);?>
-                            <?php $vSBF = $estadisticas->getStadisticNivelVeredictoFalse("1.Select-Basico","roberdi");
+                            <?php $vSBF = $estadisticas->getStadisticNivelVeredictoFalse("Select-Basico","roberdi");
                             $veredictoSBF = mysqli_fetch_array($vSBF);?>
                             backgroundColor: ["green", "red","yellow"],
                             data: [<?php echo $veredictoSBT['veredicto']; ?>,<?php echo $veredictoSBF['veredicto'] ?>,2]
@@ -167,9 +167,9 @@
                         labels: ["Aciertos", "Fallos", "No intentados"],
                         datasets: [
                           {
-                            <?php $vSJT = $estadisticas->getStadisticTipoVeredictoTrue("2.Select-Join","roberdi"); 
+                            <?php $vSJT = $estadisticas->getStadisticTipoVeredictoTrue("Select-Join","roberdi"); 
                             $veredictoSJT = mysqli_fetch_array($vSJT);?>
-                            <?php $vSJF = $estadisticas->getStadisticTipoVeredictoFalse("2.Select-Join","roberdi");
+                            <?php $vSJF = $estadisticas->getStadisticTipoVeredictoFalse("Select-Join","roberdi");
                             $veredictoSJF = mysqli_fetch_array($vSJF);?>
                             backgroundColor: ["green", "red","yellow"],
                             data: [<?php echo $veredictoSJT['veredicto']; ?>,<?php echo $veredictoSJF['veredicto'] ?>,2]
@@ -193,9 +193,9 @@
                         labels: ["Aciertos", "Fallos", "No intentados"],
                         datasets: [
                           {
-                            <?php $vSGBT = $estadisticas->getStadisticTipoVeredictoTrue("3.Select-Group-Basico","roberdi"); 
+                            <?php $vSGBT = $estadisticas->getStadisticTipoVeredictoTrue("Select-Group-Basico","roberdi"); 
                             $veredictoSGBT = mysqli_fetch_array($vSGBT);?>
-                            <?php $vSGBF = $estadisticas->getStadisticTipoVeredictoFalse("3.Select-Group-Basico","roberdi");
+                            <?php $vSGBF = $estadisticas->getStadisticTipoVeredictoFalse("Select-Group-Basico","roberdi");
                             $veredictoSGBF = mysqli_fetch_array($vSGBF);?>
                             backgroundColor: ["green", "red","yellow"],
                             data: [<?php echo $veredictoSGBT['veredicto']; ?>,<?php echo $veredictoSGBF['veredicto'] ?>,2]
@@ -221,9 +221,9 @@
                         labels: ["Aciertos", "Fallos", "No intentados"],
                         datasets: [
                           {
-                            <?php $vSGHT = $estadisticas->getStadisticTipoVeredictoTrue("4.Select-Group-Having","roberdi"); 
+                            <?php $vSGHT = $estadisticas->getStadisticTipoVeredictoTrue("Select-Group-Having","roberdi"); 
                             $veredictoSGHT = mysqli_fetch_array($vSGHT);?>
-                            <?php $vSGHF = $estadisticas->getStadisticTipoVeredictoFalse("4.Select-Group-Having","roberdi");
+                            <?php $vSGHF = $estadisticas->getStadisticTipoVeredictoFalse("Select-Group-Having","roberdi");
                             $veredictoSGHF = mysqli_fetch_array($vSGHF);?>
                             backgroundColor: ["green", "red","yellow"],
                             data: [<?php echo $veredictoSGHT['veredicto']; ?>,<?php echo $veredictoSGHF['veredicto'] ?>,2]
@@ -247,9 +247,9 @@
                         labels: ["Aciertos", "Fallos", "No intentados"],
                         datasets: [
                           {
-                            <?php $vSVT = $estadisticas->getStadisticTipoVeredictoTrue("5.Subqueries-Valor","roberdi"); 
+                            <?php $vSVT = $estadisticas->getStadisticTipoVeredictoTrue("Subqueries-Valor","roberdi"); 
                             $veredictoSVT = mysqli_fetch_array($vSVT);?>
-                            <?php $vSVF = $estadisticas->getStadisticTipoVeredictoFalse("5.Subqueries-Valor","roberdi");
+                            <?php $vSVF = $estadisticas->getStadisticTipoVeredictoFalse("Subqueries-Valor","roberdi");
                             $veredictoSVF = mysqli_fetch_array($vSVF);?>
                             backgroundColor: ["green", "red","yellow"],
                             data: [<?php echo $veredictoSVT['veredicto']; ?>,<?php echo $veredictoSVF['veredicto'] ?>,2]
@@ -273,9 +273,9 @@
                         labels: ["Aciertos", "Fallos", "No intentados"],
                         datasets: [
                           {
-                            <?php $vSCT = $estadisticas->getStadisticTipoVeredictoTrue("6.Subqueries-Conjuntos","roberdi"); 
+                            <?php $vSCT = $estadisticas->getStadisticTipoVeredictoTrue("Subqueries-Conjuntos","roberdi"); 
                             $veredictoSCT = mysqli_fetch_array($vSCT);?>
-                            <?php $vSCF = $estadisticas->getStadisticTipoVeredictoFalse("6.Subqueries-Conjuntos","roberdi");
+                            <?php $vSCF = $estadisticas->getStadisticTipoVeredictoFalse("Subqueries-Conjuntos","roberdi");
                             $veredictoSCF = mysqli_fetch_array($vSCF);?>
                             backgroundColor: ["green", "red","yellow"],
                             data: [<?php echo $veredictoSCT['veredicto']; ?>,<?php echo $veredictoSCF['veredicto'] ?>,2]

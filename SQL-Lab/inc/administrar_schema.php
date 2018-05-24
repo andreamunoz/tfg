@@ -42,6 +42,16 @@ class Administrar_schema{
             }
         }
 
+        $viejos_nombres = array_diff( $nombre_tablas_antiguas, $nombre_todas_tablas_profe);
+        foreach ($viejos_nombres as $key=>$value) {
+            if($value !==""){
+                $sql = "DELETE FROM sqlab_tablas_disponibles WHERE nombre='$value';";
+                 if(!($consulta = mysqli_query($conexion,$sql))){
+                    echo "Falló la llamada para borrar tablas_disponibles: ".$conexion->error;
+                }
+            }
+        }
+
         $nuevos_nombres = array_diff($nombre_todas_tablas_profe, $nombre_tablas_antiguas);
 
         foreach ($nuevos_nombres as $key=>$value) {
@@ -53,8 +63,55 @@ class Administrar_schema{
             }
         }
 
-        // echo $conexion->error;
         $connect->disconnectDB($conexion);
+    }
+
+
+    function comprobarSintaxis($sentencia){
+        $sentencia = preg_replace('/\s+/', ' ', $sentencia);
+        $miarray = explode(" ", $sentencia);
+        $tabla = false;
+    
+        if(in_array("CREATE",$miarray) && in_array("TABLE",$miarray) ){
+            $agujas = array("TEMPORARY ", "IF ", "NOT ", "EXISTS ");
+            foreach ($agujas as $value) {
+                $sentencia = str_replace($value, "", $sentencia);
+            }
+        }else if(in_array("INSERT",$miarray) && in_array("INTO",$miarray)){
+            $agujas = array("LOW_PRIORITY ", "DELAYED ", "HIGH_PRIORITY ", "IGNORE ");
+            foreach ($agujas as $value) {
+                $sentencia = str_replace($value, "", $sentencia);
+            }
+        }else if(in_array("DROP",$miarray) && in_array("TABLE",$miarray)){
+            $agujas = array("TEMPORARY ", "IF ", "EXISTS ");
+            foreach ($agujas as $value) {
+                $sentencia = str_replace($value, "", $sentencia);
+            }
+        }else if(in_array("ALTER",$miarray) && in_array("TABLE",$miarray)){
+            $agujas = array("ONLINE ", "OFFLINE ", "IGNORE ");
+            foreach ($agujas as $value) {
+                $sentencia = str_replace($value, "", $sentencia);
+            }
+        }
+
+        $sentencia = preg_replace('/\s+/', ' ', $sentencia);
+        $miarray = explode(" ", $sentencia);
+        if(count($miarray) < 3){
+            $tabla = false;
+        }else{
+            $tabla= $miarray[2];
+        }
+        return $tabla;
+    }
+    function reemplazar_primero($buscar, $remplazar, $texto){
+        $pos = strpos($texto, $buscar);
+        if($pos !== false){
+            $texto = substr_replace($texto, $remplazar, $pos, strlen($buscar));
+        }
+        return $texto;
+    }
+    function reemplazar_referencias($buscar, $reemplazar, $texto){
+        return $texto = str_replace($buscar, $reemplazar, $texto);
     }
 
     function obtenerSentencias($contenido, $profe){
@@ -71,21 +128,54 @@ class Administrar_schema{
         while ($i < $contador ) {
 
             $subsentencia = explode(" ", $sentencias[$i], 4);
+            $nombre_tabla = $admin->comprobarSintaxis($sentencias[$i]);
 
-            $arrayComillas = array("`", '"', "'");
-            $nombreTabla_sinComillas = str_replace($arrayComillas, "", $subsentencia[2]);
+            if($nombre_tabla !== FALSE){
 
-            if(((strcmp(strtoupper($subsentencia[0]." ".$subsentencia[1]), "CREATE TABLE"))===0) || ((strcmp(strtoupper($subsentencia[0]." ".$subsentencia[1]), "INSERT INTO"))===0)){
-                $respuesta = $admin->executeCode($subsentencia[0]." ".$subsentencia[1]." ".$profe."_".$nombreTabla_sinComillas." ".$subsentencia[3].";");
+                $miSentenciaEntera = $sentencias[$i];
+
+                //QUITAR COMILLAS DEL NOMBRE
+                $arrayComillas = array("`", '"', "'");
+                $nombre_tabla = str_replace($arrayComillas, "", $nombre_tabla);
+                
+                //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
+                $nuevoNombre = $profe."_".$nombre_tabla;
+                $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla, $nuevoNombre, $miSentenciaEntera);
+
+                //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
+                $arrayComillasPermitidas = array("`", "'");
+                $miSentenciaEntera = str_replace($arrayComillasPermitidas, '"', $miSentenciaEntera);
+
+                if((stripos($sentencias[$i], "CREATE"))!==FALSE){
+
+                    //SI ES UN CREATE TABLE, BUSCAMOS SI TIENE REFERENCIAS PARA AÑADIR EL PREFIJO AL NOMBRE DE LA TABLA
+                    $miSentenciaEntera = $admin->reemplazar_referencias("REFERENCES ", "REFERENCES ".$profe."_", $miSentenciaEntera);
+                    //EJECUTAMOS LA SENTENCIA
+                    $respuesta = $admin->executeCode($miSentenciaEntera.";");
+
+                } elseif(((stripos($sentencias[$i], "DROP"))!==FALSE) || ((stripos($sentencias[$i], "ALTER"))!==FALSE) ){
+                    include_once 'ejercicio.php';
+                    $ejer = new Ejercicio();
+                    $resultado = $ejer->comprobarSiEstaUsada($nuevoNombre);
+                    if ($resultado === 0) {
+                        //EJECUTAMOS LA SENTENCIA
+                        $respuesta = $admin->executeCode($miSentenciaEntera.";");        
+                    } else{
+                        $respuesta = "No se puede ejecutar porque las tablas están siendo usadas.";
+                    }
+                }elseif((stripos($sentencias[$i], "INSERT"))!==FALSE){
+                    //EJECUTAMOS LA SENTENCIA
+                    $respuesta = $admin->executeCode($miSentenciaEntera.";");
+                }
+                    
                 if($respuesta !== true){
                     $arrayResultado[$i] = "La sentencia número ".($i+1)." falló. Mensaje: ".$respuesta;
                 }else{
                     $arrayResultado[$i] = $respuesta;
                 }
-
                 
             }else{
-                $arrayResultado[$i] = "La sentencia número ". ($i+1) ." no está permitida.";
+                $arrayResultado[$i] = "La sentencia número ". ($i+1) ." no tiene una sintaxis correcta.";
             }
             $i = $i+1;
         }

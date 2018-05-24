@@ -39,41 +39,5 @@
 				</div>				
 			</div>
 		</div>
-
-
-		<!-- <div class="col-md-11 mostrar-tablas">
-			<h3><?php echo trad( "Mostrar la estructura de las tablas", $lang) ?></h3>
-			<p class="pl-5"><?php echo trad( "Seleccione una tabla y pulse el boton para obtener sus columnas.", $lang) ?></p>
-			<div class="hrr"></div>
-			<div class="form-row pt-4 ">
-				<div class="form-group col-md-10 offset-1 pl-4 center">
-				<form class="jumbotron-propio" method="post" action="../handler/obtener_columnas_tabla.php">
-					<div class="panel panel-primary">
-                        <div class="panel-heading">
-	  						<label for="tablas"><?php echo trad('Tablas Disponibles',$lang) ?></label>	
-	  					</div>
-	  					<div class="panel-footer" >
-	  						<select multiple type="text" id="tablas" name="tablas[]" class="form-control" required>
-	  						<?php include_once '../inc/ejercicio.php';
-		  						$ejer = new Ejercicio();
-		  						$resultado = $ejer->getTablasDisponibles();
-		  					
-								while ($fila = $resultado->fetch_assoc()) {
-							?>
-								<option value=<?php echo '"'.$fila["nombre"].'
-								"'?>> <?php echo $fila["nombre"] ?> </option> 
-						    <?php  } ?>
-
-			  				</select>
-	  					</div>
-	  				</div>	
-		  			<div class="form-group col-md-3 offset-9 pr-4">
-						<button class="btn btn-log btn-tertiary btn-block" type="submit"><?php echo trad( "Guardar", $lang) ?></button>
-					</div>
-				</form>
-				<div class="">
-				</div>				
-			</div>
-		</div> -->
 	</div>
 </div>

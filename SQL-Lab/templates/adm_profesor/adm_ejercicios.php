@@ -149,8 +149,7 @@
 								<label for="descripcion"><?php echo trad('Descripcion',$lang) ?></label>
 							</div>	
 							<div class="panel-footer" >
-								<input type="text" id="descripcion" name="descripcion" class="form-control" placeholder=<?php echo trad('Descripcion breve aquí...',$lang) ?>  maxlength="200" required />
-		  						<!-- <textarea  id="descripcion" name="descripcion" class="form-control" rows="5" placeholder=<?php echo trad('',$lang) ?> required></textarea> -->
+								<input type="text" id="descripcion" name="descripcion" class="form-control" placeholder=<?php echo trad('Descripcion breve aquí...',$lang) ?>  maxlength="50" required />
 		  					</div>
 		  				</div>
 					</div>
@@ -205,9 +204,7 @@
                      <table id="employee_data" class="table table-striped table-bordered" style="text-align: center">  
                         <thead>
                           <tr>
-                              <th>Nombre Ejercicio</th>
-                              
-                              <th>Enunciado</th>
+                              <th>Descripcion</th>
                               <th>Nivel</th>
                               <th>Tipo</th>
                               <th>Creador</th>
@@ -228,8 +225,7 @@
                             	$fila_sol = $resul_sol->fetch_array(MYSQLI_ASSOC);
                             ?>
                                 <tr>
-                                  	<?php echo '<td><p>Ejercicio '.$fila['id_ejercicio'].'</p></td>'; ?>
-                                  	<?php echo '<td>'.$fila['enunciado'].'</td>'; ?>
+                                  	<?php echo '<td>'.$fila['descripcion'].'</td>'; ?>
                                   	<?php echo '<td>'.$fila['nivel'].'</td>'; ?>
                                   	<?php echo '<td>'.$fila['tipo'].'</td>'; ?>
                                   	<?php echo '<td>'.$fila['creador_ejercicio'].'</td>'; ?>

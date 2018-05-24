@@ -762,7 +762,7 @@ select.form-control:not([size]):not([multiple]) {
   padding-top: 0px;
 }
 .form-control {
-  border-radius: 30px !important;
+  /*border-radius: 30px !important;*/
   color: rgba(48,48,48,0.6) !important;
   border-color: rgba(48,48,48,0.1) !important;
   background: #fff !important;

@@ -3,6 +3,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h4 class="modal-title" id="myModalForgotLabel" ><?php echo trad('¿Has olvidado la contraseña?',$lang) ?></h4>
+          <p>
         </div>
         <div class="hrr"></div>
         <div class="modal-body">
@@ -18,7 +19,7 @@
               	</div>
                 <div class="form-group col-md-6">
                   
-                  <input type="button" class="btn btn-log btn-tertiary btn-block" value="<?php echo trad('SI',$lang) ?>" name="si" onclick="window.location.href='../handler/validar_olvido_pwd.php'" />
+                  <input type="button" class="btn btn-log btn-tertiary btn-block" value="<?php echo trad('SI',$lang) ?>" name="si" onclick="window.location.href='../handler/recuperar_contrasena.php'" />
                 </div>
               </div>
            

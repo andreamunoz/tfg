@@ -37,7 +37,9 @@
       include("modals/modals_iniciar_sesion.php");
     ?>
     <?php include("modals/modals_registro_sesion.php");?>
+    <?php include("modals/modals_olvido_pwd.php");?>
 		<?php include("navbar/navbar_menu.php");?>
+
 
 		<main role="main">
 

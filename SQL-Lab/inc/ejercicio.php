@@ -185,7 +185,7 @@ class Ejercicio{
         $consulta = mysqli_query($conexion,$sql);
         $tablasDisponibles = array();
         while ($fila = $consulta->fetch_assoc()) {
-            array_push($tablasDisponibles, strtoupper($fila["nombre"]));
+            array_push($tablasDisponibles, $fila["nombre"]);
         }
         $connect->disconnectDB($conexion);
         return $tablasDisponibles;
@@ -229,11 +229,33 @@ class Ejercicio{
 
     function executeSolucion($solucion){
         $connect = new Tools();
+        $consulta = array();
         $conexion = $connect->connectDB();
-        $consulta = mysqli_query($conexion,$solucion);
-        if(!$consulta){
-            $consulta = $conexion->error;
+        $resultado = mysqli_query($conexion,$solucion);
+        if(!$resultado){
+            $consulta[0] = false;
+            $consulta[1] = $conexion->error;
+        }else{
+            $consulta[0] = $resultado;
         }
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    function executeSolucionNoSelect($solucion){
+        $connect = new Tools();
+        $consulta = array();
+        $conexion = $connect->connectDB();
+        $conexion->autocommit(FALSE);
+
+        $conexion->begin_transaction();
+        $resultado = mysqli_query($conexion,$solucion);
+        if(!$resultado){
+            $consulta[0] = false;
+            $consulta[1] = $conexion->error;
+        }else{
+            $consulta[0] = $resultado;
+        }
+        $conexion->rollback();
         $connect->disconnectDB($conexion);
         return $consulta;
     }

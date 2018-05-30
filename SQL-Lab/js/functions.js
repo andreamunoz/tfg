@@ -359,4 +359,34 @@ $(document).ready(function(){
         });     
     });
 
+    $(this).on("click", "#rowVer", function(){
+        var mi_id = $(this).attr("data-number");
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getVerEjercicio.php",
+            data: { id: mi_id },
+            success: function(response){
+                var resultado = response.substring(23);
+                var res = JSON.parse(resultado);
+
+                if(response !== null){
+                    $("#modalVerEejercicio").modal();
+                    $("#verNombre").text("Ejercicio "+res.nombre);
+                    $("#verDueno").text(res.dueno);
+                    $("#verTablas").text(res.tablas);
+                    $("#verCategoria").text(res.categoria);
+                    $("#verNivel").text(res.nivel);
+                    if(res.deshabilitar === "0"){
+                        $("#verDeshabilitar").text("Habilitado");
+                    }else{
+                        $("#verDeshabilitar").text("Deshabilitado");
+                    }
+                    $("#verDescripcion").text(res.descripcion);
+                    $("#verEnunciado").text(res.enunciado);
+                    $("#verSolucion").text(res.solucion);
+                }
+            }
+        })
+    });
+
 });

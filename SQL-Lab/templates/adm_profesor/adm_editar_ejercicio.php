@@ -55,6 +55,10 @@
 								include_once '../../inc/ejercicio.php';
 								$ejer = new Ejercicio();
 								$resul = $ejer->getEjercicioById($id);
+								$row = mysqli_fetch_array($resul, MYSQLI_NUM);
+								var_dump($row);
+								// $raw = mysqli_fetch_array($resul, MYSQLI_ASSOC);
+								// var_dump($raw);
 								$tablasUsa = $ejer->getTablasUsa($id);						
 						 ?>
 							<div class="pt-4"><p>Datos permanentes del ejercicio: Nombre, propietario de las tablas y tablas usadas. </p></div>
@@ -68,7 +72,7 @@
 											<table id="nombre" class="form-control" >
 					  							<tbody>
 					  							<?php 
-					  								echo "<tr><td>Ejercicio ".$resul[0][0]."</td></tr>";
+					  								echo "<tr><td>Ejercicio ".$row[0]."</td></tr>";
 					  							?>		
 					  							</tbody>
 					  						</table>
@@ -84,7 +88,7 @@
 					  						<table id="dueno" class="form-control" >
 					  							<tbody>
 					  							<?php 
-					  								echo "<tr><td>".$resul[0][7]."</td></tr>";
+					  								echo "<tr><td>".$row[7]."</td></tr>";
 					  							?>		
 					  							</tbody>
 					  						</table>
@@ -212,7 +216,7 @@
 											        $resultado = $ejer->getCategorias();
 												    foreach ($resultado as $key => $value) { 
 												    	$newKey = "c".($key+1);
-												    	if($value === $resul[0]['tipo']){ ?>
+												    	if($value === $row[5]){ ?>
 											    			<option value=<?php echo $newKey?> selected> <?php echo $value ?> </option>
 												    	<?php }else{ ?>
 												    		<option value=<?php echo $newKey?> > <?php echo $value ?> </option>
@@ -230,15 +234,15 @@
 										</div>	
 										<div class="panel-footer" >
 							  				<select type="text" id="nivel" name="nivel" class="form-control" required>
-							  					<?php if($resul[0]['nivel'] === "facil"){ ?>
+							  					<?php if($row[1] === "facil"){ ?>
 							  						<option value="facil" selected><?php echo trad('Principiante',$lang) ?></option>
 							  						<option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
 							  						<option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>
-							  					<?php } else if($resul[0]['nivel'] === "medio"){ ?>
+							  					<?php } else if($row[1] === "medio"){ ?>
 							  						<option value="facil"><?php echo trad('Principiante',$lang) ?></option>
 							  						<option value="medio" selected><?php echo trad('Intermedio',$lang) ?></option>
 							  						<option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>			  	
-							  					<?php } else if($resul[0]['nivel'] === "medio"){ ?>
+							  					<?php } else if($row[1] === "medio"){ ?>
 							  						<option value="facil"><?php echo trad('Principiante',$lang) ?></option>
 							  						<option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
 							  						<option value="dificil" selected><?php echo trad('Avanzado',$lang) ?></option>
@@ -254,7 +258,7 @@
 										</div>	
 										<div class="panel-footer" >
 							  				<select type="text" id="deshabilitar" name="deshabilitar" class="form-control" required>
-							  					<?php if($resul[0]['deshabilitar'] === "0"){ ?>
+							  					<?php if($row[4] === "0"){ ?>
 							  						<option value="0" selected><?php echo trad('Habilitado',$lang) ?></option>
 							  						<option value="1"><?php echo trad('Deshabilitado',$lang) ?></option>
 							  					<?php } else { ?>
@@ -273,7 +277,7 @@
 											<label for="descripcion"><?php echo trad('Descripcion',$lang) ?></label>
 										</div>	
 										<div class="panel-footer" >
-											<input type="text" id="descripcion" name="descripcion" class="form-control" placeholder=<?php echo trad('Descripcion breve aquí...',$lang) ?>  maxlength="200"  value="<?php echo $resul[0]['descripcion'] ?>" required />
+											<input type="text" id="descripcion" name="descripcion" class="form-control" placeholder=<?php echo trad('Descripcion breve aquí...',$lang) ?>  maxlength="50"  value="<?php echo $row[3] ?>" required />
 					  					</div>
 					  				</div>
 								</div>
@@ -285,7 +289,7 @@
 											<label for="enunciado"><?php echo trad( "Enunciado", $lang) ?></label>
 										</div>	
 										<div class="panel-footer" >
-					  						<textarea  id="enunciado" name="enunciado" class="form-control" rows="5" placeholder=<?php echo trad( "Escribe el enunciado aquí...", $lang) ?> required><?php echo $resul[0]['enunciado'] ?></textarea>
+					  						<textarea  id="enunciado" name="enunciado" class="form-control" rows="4" placeholder=<?php echo trad( "Escribe el enunciado aquí...", $lang) ?> required><?php echo $row[2] ?></textarea>
 					  					</div>
 					  				</div>
 								</div>
@@ -295,7 +299,7 @@
 											<label for="solucion"><?php echo trad( "Solución", $lang) ?></label>
 										</div>	
 										<div class="panel-footer" >
-					  						<textarea  id="solucion" name="solucion" class="form-control" rows="5" placeholder=<?php echo trad( "Escribe la solución aquí...", $lang) ?> required> <?php echo $resul[0]['solucion'] ?> </textarea>
+					  						<textarea  id="solucion" name="solucion" class="form-control" rows="4" placeholder=<?php echo trad( "Escribe la solución aquí...", $lang) ?> required> <?php echo $row[8] ?> </textarea>
 					  					</div>
 					  				</div>
 								</div>

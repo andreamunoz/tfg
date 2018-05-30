@@ -36,6 +36,7 @@
 	<body>
 
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
+		<?php include("modals/modals_ver_ejercicio.php"); ?>
 		<?php include("navbar/navbar_menu_profesor.php"); ?>
 		<div class="contenedor">
 			

@@ -201,7 +201,7 @@
 			<div id="accordion ">
               <div class="card">  
                 <div class="table-responsive">  
-                     <table id="employee_data" class="table table-striped table-bordered" style="text-align: center">  
+                     <table id="employee_data" class="table table-striped table-bordered tablaListarEjercicios" style="text-align: center">  
                         <thead>
                           <tr>
                               <th>Descripcion</th>
@@ -224,12 +224,12 @@
                             	$resul_sol = $sol->getCuantosEjerciciosByName($fila['id_ejercicio']);
                             	$fila_sol = $resul_sol->fetch_array(MYSQLI_ASSOC);
                             ?>
-                                <tr>
+                                <tr data-number="<?php echo $fila["id_ejercicio"] ?>">
                                   	<?php echo '<td>'.$fila['descripcion'].'</td>'; ?>
                                   	<?php echo '<td>'.$fila['nivel'].'</td>'; ?>
                                   	<?php echo '<td>'.$fila['tipo'].'</td>'; ?>
                                   	<?php echo '<td>'.$fila['creador_ejercicio'].'</td>'; ?>
-                                  	 <?php echo '<td class="boton_ver_ejercicio" data-number='. $fila["id_ejercicio"] .'><a href="#"><i id="icon_ver" class="fa fa-eye" title="editar" aria-hidden="true"></i></a></td>'; ?>
+                                  	<?php echo '<td id="rowVer" class="boton_ver_ejercicio" data-number='. $fila["id_ejercicio"] .'><a data-toggle="modal" href="#modalVerEejercicio"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'; ?>
 									<?php if($fila['creador_ejercicio'] === $_SESSION['user']) {
 											if( $fila_sol["cantidad"] === "0"){ ?>	
 		                                  		<?php echo '<td class="boton_editar_ejercicio" data-number='. $fila["id_ejercicio"] .'><a href="#"><i id="icon_edit" class="fa fa-edit" title="editar" aria-hidden="true"></i></a></td>'; ?>
@@ -254,7 +254,9 @@
                     </div>  
                 </div> 
             </div> 	
-			
+			<br>
+	  		<br>
+	  		<br>	
 		</div>
 	</div>
 </div>

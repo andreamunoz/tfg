@@ -31,11 +31,11 @@
 				                        <thead>
 				                            <tr>
 				                            	<th class="primera"></th>
-				                                <th>Nombre Ejercicio</th>
-				                                <th>Enunciado</th>
+				                                <th>Descripción</th>
 				                                <th>Nivel</th>
 				                                <th>Tipo</th>
 				                                <th>Creador</th>
+				                                <th>Ver</th>
 				                          	</tr>
 				                          </thead>
 				                          <tbody >
@@ -48,13 +48,13 @@
 				                            	
 				                            ?>
 				                            <?php if($fila['deshabilitar'] === "0"){ ?>	
-				                                <tr>
+				                                <tr >
 				                                	<?php echo '<td class="primera"><input type="checkbox" class="form-check-input" id="checkbox-crear-hoja" name="seleccionados[]" value='. $fila["id_ejercicio"] .'></td>'?>
-				                                  	<?php echo '<td><p>Ejercicio '.$fila['id_ejercicio'].'</p></td>'; ?>
-				                                  	<?php echo '<td>'.$fila['enunciado'].'</td>'; ?>
+				                                  	<?php echo '<td>'.$fila['descripcion'].'</td>'; ?>
 				                                  	<?php echo '<td>'.$fila['nivel'].'</td>'; ?>
 				                                  	<?php echo '<td>'.$fila['tipo'].'</td>'; ?>
 				                                  	<?php echo '<td>'.$fila['creador_ejercicio'].'</td>'; ?>
+													<?php echo '<td id="rowVer" class="boton_ver_ejercicio" data-number='. $fila["id_ejercicio"] .'><a data-toggle="modal" href="#modalVerEejercicio"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'; ?>
 
 				                                </tr>
 												<?php } ?>	
@@ -80,7 +80,9 @@
 
 		  		</div>
 	  		</form>
-		  	
+		  	<br>
+		  	<br>
+		  	<br>
 		</div>
 				
 

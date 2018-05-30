@@ -111,7 +111,7 @@ class Administrar_schema{
     }
 
     function reemplazar_referencias($buscar, $reemplazar, $texto){
-        return $texto = str_replace($buscar, $reemplazar, $texto);
+        return $texto = str_ireplace($buscar, $reemplazar, $texto);
     }
 
     function obtenerSentencias($contenido, $profe){

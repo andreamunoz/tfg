@@ -193,8 +193,137 @@
 
 	
 
+
+		<div class="col-md-12 editar-ejercicio" id="editarEjercicio" >
+			
+				<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/editar_ejercicio.php">
+					<h3><?php echo trad( "Editar Ejercicio", $lang) ?></h3>
+					<p class="pl-5"><?php echo trad( "Podrás editar algunos campos del ejercicio", $lang) ?>.</p>
+					<div class="hrr"></div>
+											
+							<div class="pt-4"><p>Datos permanentes del ejercicio: Nombre, propietario de las tablas y tablas usadas. </p></div>
+							<div class="form-row pt-4 ">
+								<input type="text" name="e_id" id="editaId" style="display: none">
+								<div class="form-group col-md-4">
+					  				<div class="panel panel-primary">
+				                        <div class="panel-heading">
+					  						<label for="duenoOld"><?php echo trad('Propietario tablas',$lang) ?></label>	
+					  					</div>
+					  					<div class="panel-footer user_tablas" >	
+					  						<input type="text" class="form-control" name="dueno" id="editaDueno" value="" readonly="readonly">
+				  				
+					  					</div>
+					  				</div>
+					  			</div>
+					  			<div class="form-group col-md-4">
+					  				<div class="panel panel-primary">
+				                        <div class="panel-heading">
+					  						<label for="tablasOld"><?php echo trad('Tablas usadas',$lang) ?></label>	
+					  					</div>
+					  					<div class="panel-footer columnas-tabla" >
+					  						
+					  						<input type="text" class="form-control" name="tablas" id="editaTablas" value="" readonly="readonly">					  				
+					  					</div>
+					  				</div>
+					  			</div>
+							</div>
+					  		<div class="pt-4"><p>Datos que se pueden modificar: Categoría, nivel, estado, descripcion y solución. </p></div>
+					  		<div class="form-row pt-2 ">
+					  			<div class="form-group col-md-4">
+					  				<div class="panel panel-primary">
+				                        <div class="panel-heading">
+											<label for="categoria"><?php echo trad('Categoría',$lang) ?></label>
+										</div>	
+										<div class="panel-footer" >
+							  				<select type="text" id="editaCategoria" name="categoria" class="form-control" required>
+							  					
+							  				</select>
+							  			</div>
+							  		</div>
+								</div>
+								<div class="form-group col-md-4">
+					  				<div class="panel panel-primary">
+				                        <div class="panel-heading">
+											<label for="nivel"><?php echo trad('Nivel',$lang) ?></label>
+										</div>	
+										<div class="panel-footer" >
+							  				<select type="text" id="editaNivel" name="nivel" class="form-control" required>
+							  					
+							  				</select>
+							  			</div>
+							  		</div>
+								</div>
+								<div class="form-group col-md-4">
+					  				<div class="panel panel-primary">
+				                        <div class="panel-heading">
+											<label for="deshabilitar"><?php echo trad(' Estado del ejercicio',$lang) ?></label>
+										</div>	
+										<div class="panel-footer" >
+							  				<select type="text" id="editaDeshabilitar" name="deshabilitar" class="form-control" required>
+							  					
+							  				</select>
+							  			</div>
+							  		</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-12">
+									<div class="panel panel-primary">
+				                        <div class="panel-heading">
+											<label for="descripcion"><?php echo trad('Descripcion',$lang) ?></label>
+										</div>	
+										<div class="panel-footer" >
+											<input type="text" id="editaDescripcion" name="descripcion" class="form-control" placeholder=<?php echo trad('Descripcion breve aquí...',$lang) ?>  maxlength="50"  value="" required />
+					  					</div>
+					  				</div>
+								</div>
+							</div>
+							<div class="form-row">
+								<div class="form-group col-md-6">
+									<div class="panel panel-primary">
+				                        <div class="panel-heading">
+											<label for="enunciado"><?php echo trad( "Enunciado", $lang) ?></label>
+										</div>	
+										<div class="panel-footer" >
+					  						<textarea  id="editaEnunciado" name="enunciado" class="form-control" rows="4" placeholder=<?php echo trad( "Escribe el enunciado aquí...", $lang) ?> required></textarea>
+					  					</div>
+					  				</div>
+								</div>
+								<div class="form-group col-md-6">
+									<div class="panel panel-primary">
+				                        <div class="panel-heading">
+											<label for="solucion"><?php echo trad( "Solución", $lang) ?></label>
+										</div>	
+										<div class="panel-footer" >
+					  						<textarea  id="editaSolucion" name="solucion" class="form-control" rows="4" placeholder=<?php echo trad( "Escribe la solución aquí...", $lang) ?> required></textarea>
+					  					</div>
+					  				</div>
+								</div>
+							</div>
+					  		<div class="form-row">	
+					  			<div class="form-group col-md-3">
+									<button class="btn btn-log btn-tertiary-border btn-block" type="reset" onclick="location.href = '../templates/index_profesor.php'"><?php echo trad( "Cancelar", $lang) ?></button>
+								</div>
+								<div class="form-group col-md-3 offset-6 pr-4">
+									<button class="btn btn-log btn-tertiary btn-block" type="submit"><?php echo trad( "Guardar cambios", $lang) ?></button>
+								</div>
+					  		</div>
+				  		<!-- <?php //} 
+				  		//unset($_SESSION['editar']);
+				  		?> -->
+				  	<br>
+			  		<br>
+			  		<br>
+		  		</form>
+			</div>
+
+
+
+
+
+
 	  	
-		<div class="col-md-11 jumbotron-propio lista-ejercicio">
+		<div class="col-md-11 jumbotron-propio lista-ejercicio" id="listarEjercicios">
 			<h3><?php echo trad( "Listar Ejercicios", $lang) ?></h3>
 			<p class="pl-5"><?php echo trad( "Aquí se muestran todos los ejercicios almacenados.", $lang); unset($_SESSION['editar']); ?>.</p>
 			<div class="hrr"></div><br>
@@ -232,8 +361,8 @@
                                   	<?php echo '<td id="rowVer" class="boton_ver_ejercicio" data-number='. $fila["id_ejercicio"] .'><a data-toggle="modal" href="#modalVerEejercicio"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'; ?>
 									<?php if($fila['creador_ejercicio'] === $_SESSION['user']) {
 											if( $fila_sol["cantidad"] === "0"){ ?>	
-		                                  		<?php echo '<td class="boton_editar_ejercicio" data-number='. $fila["id_ejercicio"] .'><a href="#"><i id="icon_edit" class="fa fa-edit" title="editar" aria-hidden="true"></i></a></td>'; ?>
-												<?php echo '<td class="boton_borrar_ejercicio" data-number='. $fila['id_ejercicio'] .'><a href="#"><i id="icon_delete" class="fa fa-times" title="eliminar" aria-hidden="true"></i></a></td>'; ?>
+		                                  		<?php echo '<td id="rowEditarEjer" class="boton_editar_ejercicio" data-number='. $fila["id_ejercicio"] .'><a href="#editarEjercicio"><i id="icon_edit" class="fa fa-edit" title="editar" aria-hidden="true"></i></a></td>'; ?>
+												<?php echo '<td  class="boton_borrar_ejercicio" data-number='. $fila['id_ejercicio'] .'><a href="#"><i id="icon_delete" class="fa fa-times" title="eliminar" aria-hidden="true"></i></a></td>'; ?>
 											<?php }else{ 
 												if($fila['deshabilitar'] === "0"){ ?>
 													<?php echo '<td colspan="2" class="boton_deshabilitar_ejercicio" data-number='. $fila["id_ejercicio"] .'><a href="#">Deshabilitar</a></td>'; ?>

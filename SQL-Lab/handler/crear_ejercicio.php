@@ -40,12 +40,13 @@
 	$solucion = str_replace($arrayComillas, '"', $solucion);
 
 	function quitarPalabrasFinales($frase){
-		$palabras = array("WHERE","ORDER","HAVING","GROUP","LIMIT","ON", ";");
+		$palabrasBuscar = array(" WHERE "," ORDER "," HAVING "," GROUP "," LIMIT "," ON ", ";");
+		$palabras = array("WHERE","ORDER ","HAVING ","GROUP","LIMIT","ON", ";");
 		$quitarFinal[0] = $frase;
 		$nuevafrase = $frase;
 		for($i=0; $i<count($palabras); $i++){
 			// var_dump($quitarFinal);
-			if(stripos($nuevafrase, $palabras[$i])!== false){
+			if(stripos($nuevafrase, $palabrasBuscar[$i])!== false){
 				
 				$quitarFinal = preg_split("/".$palabras[$i]."/i", $quitarFinal[0],2);
 				$nuevafrase = $quitarFinal[0];
@@ -66,16 +67,16 @@
 			$quitarMedio = $frase;
 			$frasebuena = $frase;
 		}
-		//var_dump($frase);
+
 		for($i=0; $i<count($palabras); $i++){
 			if(stripos($frasebuena, $palabras[$i])!== false){
 				$quitarMedio = preg_split("/".$palabras[$i]."/i", $quitarMedio);
 				$i = count($palabras)+1;
 			}
-		}
-		//var_dump($quitarMedio);		
+		}		
 		return $quitarMedio;
 	}
+
 
 	function quitarAlias($tablas){
 
@@ -328,9 +329,9 @@
 		
 			$ejer = new Ejercicio();
 			$resultadoCrear = "";
-			print_r($resultado[1]);
+
 			$resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $resultado[1]);
-			var_dump($resultadoCrear);
+			
 			if($resultadoCrear){
 				$_SESSION['message'] = "El ejercicio se ha creado correctamente.";
 			}else{

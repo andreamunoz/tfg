@@ -63,7 +63,7 @@
 						 ?>
 							<div class="pt-4"><p>Datos permanentes del ejercicio: Nombre, propietario de las tablas y tablas usadas. </p></div>
 							<div class="form-row pt-4 ">
-								<div class="form-group col-md-4">
+								<!-- <div class="form-group col-md-4">
 									<div class="panel panel-primary">
 				                        <div class="panel-heading">
 											<label for="name">Nombre</label>	
@@ -78,7 +78,7 @@
 					  						</table>
 					  					</div>
 					  				</div>
-								</div>
+								</div> -->
 								<div class="form-group col-md-4">
 					  				<div class="panel panel-primary">
 				                        <div class="panel-heading">
@@ -114,94 +114,6 @@
 					  				</div>
 					  			</div>
 							</div>
-							<!-- <div class="form-row pt-4 ">
-								<div class="form-group col-md-4">
-									<div class="panel panel-primary">
-				                        <div class="panel-heading">
-					  						<label for="user_tablas"><?php echo trad('Nuevo creador de las tablas',$lang) ?></label>	
-					  					</div>
-					  					<div class="panel-footer selector-user" >
-
-					  						<select id="user_tablas" name="user_tablas" class="form-control" required></select>								
-											<script type="text/javascript">
-					  							$(document).ready(function(){
-					  								$.ajax({
-					  									type: "POST",
-					  									url: "adm_profesor/getUser.php",
-					  									success: function(response)
-					  									{
-						                                	console.log("nuevo user de editar");
-					  										$(".selector-user select").html(response).fadeIn();
-					  									}
-					  								});
-					  							});
-
-					  						</script>
-							  				
-					  					</div>
-					  				</div>
-					  			</div>
-					  			<div class="form-group col-md-4">
-					  				<div class="panel panel-primary">
-				                        <div class="panel-heading">
-					  						<label for="tablas"><?php echo trad('Nuevas tablas',$lang) ?></label>	
-					  					</div>
-					  					<div class="panel-footer selector-tabla" >
-					  						<select multiple="" type="text" id="tablas" name="tablas[]" class="form-control" required></select>
-					  						<script type="text/javascript">
-								                $(document).ready(function() {
-								                    $(".selector-user select").change(function() {
-								                        var form_data = {
-								                                is_ajax: 1,
-								                                dueno: $(".selector-user select option:checked").val()
-								                        };
-								                        $.ajax({
-								                                type: "POST",
-								                                url: "adm_profesor/getTablas.php",
-								                                data: form_data,
-								                                success: function(response)
-								                                {	
-								                                    $('.selector-tabla select').html(response).fadeIn();
-								                                }
-								                        });
-								                    });
-
-								                });
-								            </script>				  				
-					  					</div>
-					  				</div>
-					  			</div>
-					  			<div class="form-group col-md-4">
-					  				<div class="panel panel-primary">
-				                        <div class="panel-heading">
-					  						<label for="tablas"><?php echo trad('Columnas tabla',$lang) ?></label>	
-					  					</div>
-					  					<div class="panel-footer columnas-tabla" >
-					  						<table id="columnas" class="form-control" ><tbody></tbody></table>
-					  						<script type="text/javascript">
-								                $(document).ready(function() {
-								                    $(".selector-tabla select").change(function() {
-								                        var form_data = {
-								                                is_ajax: 1,
-								                                tabla: $(".selector-tabla select option:checked").val()
-								                        };
-								                        $.ajax({
-								                                type: "POST",
-								                                url: "adm_profesor/getColumns.php",
-								                                data: form_data,
-								                                success: function(response)
-								                                {	
-								                                    $('.columnas-tabla #columnas tbody').html(response).fadeIn();
-								                                }
-								                        });
-								                    });
-
-								                });
-								            </script>				  				
-					  					</div>
-					  				</div>
-					  			</div>
-					  		</div> -->
 					  		<div class="pt-4"><p>Datos que se pueden modificar: Categoría, nivel, estado, descripcion y solución. </p></div>
 					  		<div class="form-row pt-2 ">
 					  			<div class="form-group col-md-4">

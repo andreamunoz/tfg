@@ -2,16 +2,7 @@
 	
 	include_once '../inc/ejercicio.php';
 	session_start();
-	$id = $_SESSION['editar'];
-	$ejer = new Ejercicio();
-	$resul = $ejer->getEjercicioById($id);
-	$tablasUsa = $ejer->getTablasUsa($id);
-
-	$user_tablas= $resul[0][7];
-	$tablas = array();
-	foreach ($tablasUsa as $key => $value) {
-		$tablas[$key] = $value['nombre'];
-	} 
+	$id = intval($_POST['e_id']);
 
 	$descripcion = $_POST['descripcion'];
 	$tipo = $_POST['categoria'];
@@ -39,42 +30,64 @@
 			break;
 		
 	}
+
 	$nivel = $_POST['nivel'];
 	$enunciado = $_POST['enunciado'];
 	$solucion = trim($_POST['solucion']);
 	$deshabilitar = $_POST['deshabilitar'];
+	$user_tablas = $_POST['dueno'];
 	$user = $_SESSION['user'];
+
+	$arrayComillas = array("`", "'");
+	$solucion = str_replace($arrayComillas, '"', $solucion);
 
 	function quitarPalabrasFinales($frase){
 		$palabras = array("WHERE","ORDER","HAVING","GROUP","LIMIT","ON", ";");
 		$quitarFinal[0] = $frase;
 		$nuevafrase = $frase;
 		for($i=0; $i<count($palabras); $i++){
-
-			if(strpos($nuevafrase, $palabras[$i])!== false){
+			// var_dump($quitarFinal);
+			if(stripos($nuevafrase, $palabras[$i])!== false){
 				
-				$quitarFinal = explode($palabras[$i], $quitarFinal[0],2);
+				$quitarFinal = preg_split("/".$palabras[$i]."/i", $quitarFinal[0],2);
 				$nuevafrase = $quitarFinal[0];
 				$quitarFinal = trim($quitarFinal[0]);
 				
 			}
 		}
-
 		return $quitarFinal;
 	}
 
 	function quitarPalabrasIntermadias($frase){
 		$palabras = array(',','NATURAL RIGHT OUTER JOIN','NATURAL LEFT OUTER JOIN','NATURAL LEFT JOIN','NATURAL RIGHT JOIN','LEFT OUTER JOIN','RIGHT OUTER JOIN','INNER JOIN','CROSS JOIN','LEFT JOIN','RIGHT JOIN','NATURAL JOIN','JOIN');
-		// var_dump($frase);
-		$quitarMedio = $frase;
+		$frasebuena = "";
+		if(is_array($frase)){
+			$quitarMedio = $frase[0];
+			$frasebuena = $frase[0];
+		}else{
+			$quitarMedio = $frase;
+			$frasebuena = $frase;
+		}
+		//var_dump($frase);
 		for($i=0; $i<count($palabras); $i++){
-			if(strpos($frase, $palabras[$i])!== false){
-				$quitarMedio = explode($palabras[$i], $quitarMedio);
+			if(stripos($frasebuena, $palabras[$i])!== false){
+				$quitarMedio = preg_split("/".$palabras[$i]."/i", $quitarMedio);
 				$i = count($palabras)+1;
 			}
 		}
-				
+		//var_dump($quitarMedio);		
 		return $quitarMedio;
+	}
+
+	function quitarAlias($tablas){
+
+		foreach ($tablas as $key => $value) {
+			$value = trim($value);
+			$nombre = explode(" ", $value, 2);
+
+			$tablas[$key] = $nombre[0];
+		}
+		return $tablas;
 	}
 
 	function juntarArrayRecursivo(&$total, $array1, &$count){
@@ -94,7 +107,7 @@
 	function anadirDueno($tablas, $dueno){
 		$solucion = array();
 		for($i = 0; $i < count($tablas); $i++){
-			$solucion[$i] = strtoupper($dueno)."_".$tablas[$i]; 
+			$solucion[$i] = $dueno."_".$tablas[$i]; 
 		}
 		return $solucion;
 	}
@@ -102,6 +115,7 @@
 	function validarTablas($tSolucion, $tDisponibles){
 		$ok = true;
 		for($i = 0; $i < count($tSolucion); $i++){
+
 			if(!(in_array($tSolucion[$i], $tDisponibles))){
 				$ok = false;
 			}
@@ -109,61 +123,226 @@
 		return $ok;
 	}
 
-	function validarSolucion($solucion, $dueno){
-		$quitarFrom = explode(" FROM ", strtoupper($solucion));
+	function validarSelect($solucion, $dueno){
+		//$quitarFrom = explode(" FROM ", $solucion);
+		$quitarFrom = preg_split("/ FROM /i", $solucion);
+
 		$i=1;
 		$tablas= array();
 		while ($i < count($quitarFrom)){
 			$tablas[$i - 1] = quitarPalabrasFinales($quitarFrom[$i]);
-			var_dump($tablas[$i - 1]);
+			// var_dump($tablas[$i - 1]);
 			$tablas[$i - 1] = quitarPalabrasIntermadias($tablas[$i - 1]);
-			var_dump($tablas[$i - 1]);
+			// var_dump($tablas[$i - 1]);
+			$tablas[$i - 1] = quitarAlias($tablas[$i - 1]);
+			// var_dump($tablas[$i - 1]);
 			$i++;
 		}
 		$total = array();
 		$count = 0; 
-		
+		//var_dump($tablas);
 		juntarArrayRecursivo($total, $tablas, $count);
 		
-		$tablasSolucion = array_unique($total);
-	
-		$tablasSolucion = anadirDueno($tablasSolucion, $dueno);
-
+		$tablasSolucionSinDueno = array_unique($total);
+		$tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
+		//var_dump($tablasSolucion);
 		$ejer = new Ejercicio();
 		$tablasDisponibles = $ejer->getTodasTablas();
+
 		$ok = validarTablas($tablasSolucion, $tablasDisponibles);
 
 		$resultado = array();
-		$resultado[0] = $ok;
-		$resultado[1] = $tablasSolución;
+		if($ok){
+			$ejer = new Ejercicio();
+			for ($i =0; $i<count($tablasSolucion); $i++) {
+				$nombreAntiguo = " ".$tablasSolucionSinDueno[$i];
+				$solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[$i], $solucion );
+			}
+			$resultadoSolucion = $ejer->executeSolucion($solucion);
+
+			if($resultadoSolucion[0] === false){
+				$resultado[0] = false;
+				$resultado[1] = $resultadoSolucion[1];
+			}else{
+				$resultado[0] = true;
+				$resultado[1] = $tablasSolucion;
+				$resultado[2] = $resultadoSolucion;
+			}
+			
+		}else{
+			$resultado[0] = false;
+		}		
+
 		return $resultado;
 	}
 
-	$resultado = validarSolucion($solucion, $user_tablas); 
-	if($resultado[0]){
-		$sentencia = explode(" ", $solucion, 2);
+	function validarInsert($solucion, $dueno){
+		$sentencia = explode(" ", $solucion);
 
-		if (strtoupper($sentencia[0]) === "SELECT"){
-			$ejer = new Ejercicio();
-			$resultadoCrear = "";
-			$resultadoSolucion = $ejer->executeSolucion($solucion);
-			if($resultadoSolucion){
-				
-				$resultadoCrear = $ejer->update($id,$nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$solucion,$user);
-				if($resultadoCrear){
-					$_SESSION['message'] = "El ejercicio se ha modificado correctamente.";
-				}else{
-					$_SESSION['message'] = "Error al modificar el ejercicio.";
-				}
+		$i=0;
+		$palabras = array("LOW_PRIORITY","DELAYED","HIGH_PRIORITY","IGNORE","INTO",";");
+		while ($i < count($palabras)){
+			if(in_array($palabras[$i], $sentencia)){
+				$pos = array_search($palabras[$i], $sentencia);
+				unset($sentencia[$pos]);
+			}
+			$i++;
+		}
+		$contador = 0;
+		foreach ($sentencia as $key => $value) {
+			if($contador > 1){
+				unset($sentencia[$key]);
+			}
+			$contador++;
+		}
+		$tabla = array();
+		$tabla[0] = array_pop($sentencia);
+
+		$tablasSolucion = anadirDueno($tabla, $dueno);
+		
+		$ejer = new Ejercicio();
+		$tablasDisponibles = $ejer->getTodasTablas();
+
+		$ok = validarTablas($tablasSolucion, $tablasDisponibles);
+		
+		if($ok){
+			$nombreAntiguo = " ".$tabla[0];
+			$solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+			$resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+
+			if($resultadoSolucion[0] === false){
+				$resultado[0] = false;
+				$resultado[1] = $resultadoSolucion[1];
 			}else{
-				$_SESSION['message'] = "Error al ejecutar la solucion. La consulta no es válida. Intentelo de nuevo.";
+				$resultado[0] = true;
+				$resultado[1] = $tablasSolucion;
+				$resultado[2] = $resultadoSolucion;
+			}
+			
+		}else{
+			$resultado[0] = false;
+		}
+		return $resultado;
+	}
+
+	function validarUpdate($solucion, $dueno){
+		$solucionCopia = strtoupper($solucion);
+		$sentencia = explode(" ", $solucion);
+		$sentenciaCopia = explode(" ", $solucionCopia);
+
+		if(in_array("SET", $sentenciaCopia)){
+			
+			$pos = array_search("SET", $sentenciaCopia);
+			$tabla[0] = $sentencia[$pos - 1];
+			$tablasSolucion = anadirDueno($tabla, $dueno);
+		
+			$ejer = new Ejercicio();
+			$tablasDisponibles = $ejer->getTodasTablas();
+
+			$ok = validarTablas($tablasSolucion, $tablasDisponibles);
+			
+			if($ok){
+				$nombreAntiguo = " ".$tabla[0];
+				$solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+				$resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+				
+				if($resultadoSolucion[0] === false){
+					$resultado[0] = false;
+					$resultado[1] = $resultadoSolucion[1];
+				}else{
+					$resultado[0] = true;
+					$resultado[1] = $tablasSolucion;
+					$resultado[2] = $resultadoSolucion;
+				}
+				
+			}else{
+				$resultado[0] = false;
 			}
 		}else{
-			$_SESSION['message'] = "Error. La consulta no es correcta. Intentelo de nuevo.";
+			$resultado[0] = false;
 		}
+		return $resultado;	
+	}
+
+	function validarDelete($solucion, $dueno){
+		$solucionCopia = strtoupper($solucion);
+		$sentencia = explode(" ", $solucion);
+		$sentenciaCopia = explode(" ", $solucionCopia);
+		// var_dump($sentenciaCopia);
+		if(in_array("FROM", $sentenciaCopia)){
+			
+			$pos = array_search("FROM", $sentenciaCopia);
+			$tabla[0] = $sentencia[$pos + 1];
+			$tablasSolucion = anadirDueno($tabla, $dueno);
+
+			$ejer = new Ejercicio();
+			$tablasDisponibles = $ejer->getTodasTablas();
+
+			$ok = validarTablas($tablasSolucion, $tablasDisponibles);
+			
+			if($ok){
+				$nombreAntiguo = " ".$tabla[0];
+				$solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+				$resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+				
+				if($resultadoSolucion[0] === false){
+					$resultado[0] = false;
+					$resultado[1] = $resultadoSolucion[1];
+				}else{
+					$resultado[0] = true;
+					$resultado[1] = $tablasSolucion;
+					$resultado[2] = $resultadoSolucion;
+				}
+				
+			}else{
+				$resultado[0] = false;
+			}
+		}else{
+			$resultado[0] = false;
+		}
+		return $resultado;
+	}
+
+	function distinguirSentencia($solucionPropuesta, $user_tablas){
+		$solucionPropuesta = preg_replace("[\n|\r|\n\r|\t]", " ",$solucionPropuesta);
+		$solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
+		$sentencia = explode(" ", $solucionPropuesta, 2);
+
+		$resultado = array();
+		if (strtoupper($sentencia[0]) === "SELECT"){
+			$resultado = validarSelect($solucionPropuesta, $user_tablas);
+		}elseif (strtoupper($sentencia[0]) === "INSERT"){
+			$resultado = validarInsert($solucionPropuesta, $user_tablas);
+		}elseif (strtoupper($sentencia[0]) === "UPDATE") {
+			$resultado = validarUpdate($solucionPropuesta, $user_tablas);
+		}elseif (strtoupper($sentencia[0]) === "DELETE"){
+			$resultado = validarDelete($solucionPropuesta, $user_tablas);
+
+		}else{
+			$resultado[0] = FALSE;
+		}
+
+		return $resultado;
+	}
+
+	$resultado = distinguirSentencia($solucion, $user_tablas); 
+	if($resultado[0]){
+		
+			$ejer = new Ejercicio();
+			$resultadoEditar = "";
+
+			$resultadoEditar = $ejer->update($id,$nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$solucion,$user);
+			var_dump($resultadoEditar);
+			if($resultadoEditar){
+				$_SESSION['message'] = "El ejercicio se ha modificado correctamente.";
+			}else{
+				$_SESSION['message'] = "Error al modificar el ejercicio.";
+			}
+			var_dump($_SESSION['message']);
 	}else{
-		$_SESSION['message'] = "Error. Por favor repase las tablas de la solución y asegurese de que sean válidas.";
+		$_SESSION['message'] = "Error. Por favor repase la solución y asegurese de que sea válida.";
 	}
 	header("Location: ../templates/index_profesor.php");
 	exit();
+
 ?>

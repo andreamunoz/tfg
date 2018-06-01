@@ -1,13 +1,30 @@
-$(document).ready(function()
-{
-  /*--------------Hoja de Ejercicios----------------*/
+$(document).ready(function(){
 
-    $('.principal').show();
-    $('.adm-hojas').hide();
-    $('.adm-ejercicios').hide();
-    $('.adm-estadisticas').hide();
-    $('.adm-tablas').hide();
-    $('.configuracion').hide();
+    var dondeEstoyPadre = "";
+    var dondeEstoyHijo = "";
+    console.log("PADRE GLOBAL: "+ dondeEstoyPadre);
+    console.log("HIJO GLOBAL: "+ dondeEstoyHijo);
+
+    if(dondeEstoyPadre === ""){
+        $('.principal').show();
+        $('.adm-hojas').hide();
+        $('.adm-ejercicios').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-tablas').hide();
+        $('.configuracion').hide();
+    }else{
+        $('.principal').hide();
+        $('.adm-hojas').hide();
+        $('.adm-ejercicios').hide();
+        $('.adm-estadisticas').hide();
+        $('.adm-tablas').hide();
+        $('.configuracion').hide();
+        $("'."+dondeEstoyPadre+"'").show();
+        if(dondeEstoyHijo !== ""){
+            $("'."+dondeEstoyHijo+"'").show();
+        }
+    }
+    
 
     $("#principal").click(function(){
         
@@ -27,6 +44,8 @@ $(document).ready(function()
 
     $("#crear_hoja").click(function(){
         
+        dondeEstoyPadre = "adm-hojas";
+        dondeEstoyHijo = "crear-hoja";
         $('.principal').hide();
         $('.adm-hojas').show();
         $('.configuracion').hide();
@@ -34,7 +53,7 @@ $(document).ready(function()
         $('.adm-estadisticas').hide();
         $('.adm-tablas').hide();
        
-        $('.crear-hoja').show("slow");
+        $('.crear-hoja').show();
         $('.editar-hoja').hide();
         $('.lista-hoja').hide();
         
@@ -43,25 +62,10 @@ $(document).ready(function()
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
-    // $("#editar_hoja").click(function(){
-        
-    //     $('.principal').hide();
-    //     $('.adm-hojas').show();
-    //     $('.configuracion').hide();
-    //     $('.adm-ejercicios').hide();
-    //     $('.adm-estadisticas').hide();
-    //     $('.adm-tablas').hide();
-                  
-    //     $('.crear-hoja').hide("linear");
-    //     $('.editar-hoja').show();
-    //     $('.lista-hoja').hide("linear");
-        
-    //     var that = $(this);
-    //     that.closest('.sub-menu').find('li.active').removeClass('active');
-    //     that.parent().addClass('active');
-    // });
+
     $("#lista_hoja").click(function(){
-       
+        dondeEstoyPadre = "adm-hojas";
+        dondeEstoyHijo = "lista-hoja";
         $('.principal').hide();
         $('.adm-hojas').show();
         $('.configuracion').hide();
@@ -69,9 +73,9 @@ $(document).ready(function()
         $('.adm-estadisticas').hide();
         $('.adm-tablas').hide();
         
-        $('.crear-hoja').hide("linear");
+        $('.crear-hoja').hide();
         $('.editar-hoja').hide();
-        $('.lista-hoja').show("swing");
+        $('.lista-hoja').show();
         
         var that = $(this);
         that.closest('#menu-content').find('li.active').removeClass('active');
@@ -100,23 +104,7 @@ $(document).ready(function()
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
-    // $("#editar_ejercicio").click(function(){
-        
-    //     $('.principal').hide();
-    //     $('.adm-hojas').hide();
-    //     $('.configuracion').hide();
-    //     $('.adm-estadisticas').hide();
-    //     $('.adm-ejercicios').show();
-    //     $('.adm-tablas').hide();
-                 
-    //     $('.crear-ejercicio').hide("linear");
-    //     $('.editar-ejercicio').show();
-    //     $('.lista-ejercicio').hide("linear");
-        
-    //     var that = $(this);
-    //     that.closest('.sub-menu').find('li.active').removeClass('active');
-    //     that.parent().addClass('active');
-    // });
+    
     $("#lista_ejercicio").click(function(){
         
         $('.principal').hide();
@@ -137,8 +125,7 @@ $(document).ready(function()
     });
   
   
-/*--------------Configuracion-----------------*/
-  $("#perfil").click(function(){
+    $("#perfil").click(function(){
         
         $('.principal').hide();
         $('.configuracion').show();
@@ -151,10 +138,10 @@ $(document).ready(function()
         that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
-  });
+    });
 
-  /*---------------Estadisticas-------------------*/
-  $("#estadistic").click(function(){
+    /*---------------Estadisticas-------------------*/
+    $("#estadistic").click(function(){
         
         $('.principal').hide();
         $('.adm-hojas').hide();
@@ -167,10 +154,13 @@ $(document).ready(function()
         that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
-  });
+    });
 
-  /*---------------Tablas-------------------*/
-  $("#adjuntar_tabla").click(function(){
+    /*---------------Tablas-------------------*/
+    $("#adjuntar_tabla").click(function(){
+        
+        dondeEstoyPadre= "adm-tablas";
+        dondeEstoyHijo="";
         
         $('.principal').hide();
         $('.adm-hojas').hide();
@@ -185,33 +175,9 @@ $(document).ready(function()
         that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
-  });
-
-});
-
-
-
-$(document).ready(function()
-{
-    
-
-   /* $("#configurar").click(function(){
-        
-        var that = $(this);
-        that.closest('.menu-content').find('li.active').removeClass('active');
-        that.closest('.menu-content').find('ul').removeClass('show');    
-        that.parent().addClass('active');
     });
-    $("#noticias").click(function(){
-       
-        var that = $(this);
-        that.closest('.menu-content').find('li.active').removeClass('active');
-        that.parent().addClass('active');
-    });*/
 
-});  
 
-$(document).ready(function(){
     $('.filterable .btn-filter').click(function(){
         var $panel = $(this).parents('.filterable'),
         $filters = $panel.find('.filters input'),
@@ -252,43 +218,41 @@ $(document).ready(function(){
             $table.find('tbody').prepend($('<tr class="no-result text-center"><td colspan="'+ $table.find('.filters th').length +'">No result found</td></tr>'));
         }
     });
-});
 
 
 
-/***BUSQUEDA AVANZADA*****/
-/***********************************/
 
-$(document).ready(function()
-{
+    /***BUSQUEDA AVANZADA*****/
+
     $('.busqueda_avanzada').hide();
 
     $('.filtrar').click(function(){
         
         $('.busqueda_avanzada').show();
     });
+
     $("#cerrar").click(function(){
        
         $('.busqueda_avanzada').toggle("slow");
     });
 
-});  
+ 
 
-$(document).ready(function(){
-    $('.boton_editar_ejercicio').click(function(){      
-        var mi_id = $(this).attr("data-number");
+
+    // $('.boton_editar_ejercicio').click(function(){      
+    //     var mi_id = $(this).attr("data-number");
         
-        $.ajax({
+    //     $.ajax({
             
-            method: "POST",
-            url: "../templates/adm_profesor/getEditarEjercicio.php",
-            data: { id: mi_id },
-            success: function(response)
-            {   
-                location.href = "../templates/adm_profesor/adm_editar_ejercicio.php";
-            }            
-        });     
-    });
+    //         method: "POST",
+    //         url: "../templates/adm_profesor/getEditarEjercicio.php",
+    //         data: { id: mi_id },
+    //         success: function(response)
+    //         {   
+    //             location.href = "../templates/adm_profesor/adm_editar_ejercicio.php";
+    //         }            
+    //     });     
+    // });
 
     $('.boton_borrar_ejercicio').click(function(){      
         var mi_id = $(this).attr("data-number");
@@ -384,6 +348,65 @@ $(document).ready(function(){
                     $("#verDescripcion").text(res.descripcion);
                     $("#verEnunciado").text(res.enunciado);
                     $("#verSolucion").text(res.solucion);
+                }
+            }
+        })
+    });
+
+    
+    $(this).on("click", "#rowEditarEjer", function(){
+        var mi_id = $(this).attr("data-number");
+        // console.log(mi_id);
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getEditarEjercicio.php",
+            data: { id: mi_id },
+            success: function(response){
+                var resultado = response.substring(23);
+                var res = JSON.parse(resultado);
+
+                if(response !== null){
+                    $("#editarEjercicio").show();
+                    $("#listarEjercicios").hide();
+                    
+                    $("#editaId").val(res.nombre);
+                    $("#editaDueno").val(res.dueno);
+                    $("#editaTablas").val(res.tablas);
+                    var cont = 1;
+                    $.each(res.todasCategorias,function(registro, value) {
+                        if(res.categoria === value){
+                            $("#editaCategoria").append('<option value=c'+cont+' selected>'+value+'</option>');
+                        }else{
+                            $("#editaCategoria").append('<option value=c'+cont+'>'+value+'</option>');
+
+                        }
+                        cont++;
+                    });
+                    
+                    if("facil" === res.nivel){
+                        $("#editaNivel").append('<option value="facil" selected>Principiante</option>');
+                        $("#editaNivel").append('<option value="medio">Intermedio</option>');
+                        $("#editaNivel").append('<option value="dificil">Avanzado</option>');
+                    }else if("medio" === res.nivel){
+                        $("#editaNivel").append('<option value="facil">Principiante</option>');
+                        $("#editaNivel").append('<option value="medio" selected>Intermedio</option>');
+                        $("#editaNivel").append('<option value="dificil">Avanzado</option>');
+                    }else if("dificil" === res.nivel){
+                        $("#editaNivel").append('<option value="facil">Principiante</option>');
+                        $("#editaNivel").append('<option value="medio">Intermedio</option>');
+                        $("#editaNivel").append('<option value="dificil" selected>Avanzado</option>');
+                    }
+
+                    if(res.deshabilitar === "0"){
+                        $("#editaDeshabilitar").append('<option value="0" selected>Habilitado</option>');
+                        $("#editaDeshabilitar").append('<option value="1" >Deshabilitado</option>');
+                    }else{
+                        $("#editaDeshabilitar").append('<option value="0" >Habilitado</option>');
+                        $("#editaDeshabilitar").append('<option value="1" selected>Deshabilitado</option>');
+                    }
+                    $("#editaDescripcion").val(res.descripcion);
+                    $("#editaEnunciado").val(res.enunciado);
+                    $("#editaSolucion").val(res.solucion);
                 }
             }
         })

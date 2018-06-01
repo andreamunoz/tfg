@@ -9,10 +9,10 @@ class Ejercicio{
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $resul = "";
-        $dueño = explode("_", $tablas[0], 2);
+        $dueno = explode("_", $tablas[0], 2);
 
         $sql = "insert into sqlab_ejercicio (nivel,enunciado,descripcion,deshabilitar,tipo,creador_ejercicio,solucion,dueño_tablas) 
-        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".strtolower($dueño[0])."');";
+        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".strtolower($dueno[0])."');";
         $resul = mysqli_query($conexion,$sql);
         if(!($resul)){
             $resul = $conexion->error;

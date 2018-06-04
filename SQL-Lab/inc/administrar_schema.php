@@ -118,6 +118,7 @@ class Administrar_schema{
         $admin = new Administrar_schema();
         $sentencias = explode(";", $contenido);
         $contador = count($sentencias) - 1;
+        $bienEjecutadas = 0;
         
         for ($j = 0; $j < $contador; $j++) {
             $sentencias[$j] = trim($sentencias[$j]);
@@ -170,7 +171,8 @@ class Administrar_schema{
                 if($respuesta !== true){
                     $arrayResultado[$i] = "La sentencia número ".($i+1)." falló. Mensaje: ".$respuesta;
                 }else{
-                    $arrayResultado[$i] = $respuesta;
+                    $bienEjecutadas++;
+                    // $arrayResultado[$i] = $respuesta;
                 }
                 
             }else{
@@ -180,7 +182,9 @@ class Administrar_schema{
         }
 
         $admin->updateTablasDisponibles($profe);
-
+        if($bienEjecutadas === $contador){
+            $arrayResultado = "Sentencias ejecutadas correctamente.";
+        }
         return $arrayResultado;
     }
 

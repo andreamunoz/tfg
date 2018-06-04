@@ -22,7 +22,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/php charset=utf-8"/>
+		<meta http-equiv="Content-Type" content="text/php; charset=utf-8"/>
 		<link href="../css/prueba.css" rel="stylesheet" type="text/css">
 		
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -40,10 +40,18 @@
     <?php include("modals/modals_olvido_pwd.php");?>
 		<?php include("navbar/navbar_menu.php");?>
 
-
+    <div class="index_fix">
 		<main role="main">
-
-      <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div class="my_form">
+        <div class="my_boton">
+          <a class="nav-link" data-toggle="modal" href="#myModal"><?php echo trad('Entrar',$lang) ?></a>
+        </div>
+        <br>
+        <div class="my_boton">
+          <a class="nav-link" data-toggle="modal" href="#myMoReg"><?php echo trad('Resístrate',$lang) ?></a>
+        </div>
+      </div>
+      <!-- <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
           <li data-target="#myCarousel" data-slide-to="1" class=""></li>
@@ -89,7 +97,7 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only"> <?php echo trad('Siguiente',$lang) ?> </span>
         </a>
-      </div>
+      </div> -->
 
 
       <!-- Marketing messaging and featurettes
@@ -151,9 +159,13 @@
           </div>
         </div> -->
         </main>
+        </div>
 	</body>
 	<footer class="footer py-3 text-center">
 		© 2018 <a id="pie" href="index.php">Sqlab</a> 
 	</footer>
+  <script type="text/javascript">
+    sessionStorage.clear();
+  </script>
 </html>
 

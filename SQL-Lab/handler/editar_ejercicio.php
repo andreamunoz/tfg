@@ -42,19 +42,18 @@
 	$solucion = str_replace($arrayComillas, '"', $solucion);
 
 	function quitarPalabrasFinales($frase){
-		$palabras = array("WHERE","ORDER","HAVING","GROUP","LIMIT","ON", ";");
+		$palabrasBuscar = array(" WHERE "," ORDER "," HAVING "," GROUP "," LIMIT "," ON ", ";");
+		$palabras = array("WHERE","ORDER","HAVING ","GROUP","LIMIT","ON", ";");
 		$quitarFinal[0] = $frase;
 		$nuevafrase = $frase;
 		for($i=0; $i<count($palabras); $i++){
-			// var_dump($quitarFinal);
-			if(stripos($nuevafrase, $palabras[$i])!== false){
-				
+			if(stripos($nuevafrase, $palabrasBuscar[$i])!== false){
 				$quitarFinal = preg_split("/".$palabras[$i]."/i", $quitarFinal[0],2);
 				$nuevafrase = $quitarFinal[0];
 				$quitarFinal = trim($quitarFinal[0]);
-				
 			}
 		}
+
 		return $quitarFinal;
 	}
 
@@ -305,6 +304,9 @@
 
 	function distinguirSentencia($solucionPropuesta, $user_tablas){
 		$solucionPropuesta = preg_replace("[\n|\r|\n\r|\t]", " ",$solucionPropuesta);
+		$solucionPropuesta = utf8_decode($solucionPropuesta);
+		var_dump($solucionPropuesta); 
+		$solucionPropuesta = str_replace('?', '', $solucionPropuesta);
 		$solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
 		$sentencia = explode(" ", $solucionPropuesta, 2);
 

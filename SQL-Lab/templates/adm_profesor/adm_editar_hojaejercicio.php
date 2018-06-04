@@ -62,7 +62,7 @@
 						<div class="form-group col-md-12">
 							<div class="panel panel-primary">
 		                        <div class="panel-heading">
-									<label for="name"> Nombre de la Hoja</label>
+									<label for="name"> Nombre de la Hoja<span class="red"> *</span></label>
 								</div>
 								<div class="panel-footer">	
 		  							<input type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre" required value="<?php echo $nombre ?>" />

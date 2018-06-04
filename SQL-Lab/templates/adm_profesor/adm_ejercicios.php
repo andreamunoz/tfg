@@ -1,32 +1,19 @@
 <div class="adm-ejercicios">
 	<div class="row ">
 		<div class="col-md-11 crear-ejercicio">	
-			<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/crear_ejercicio.php">
+			<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/crear_ejercicio.php" onsubmit="return validarFormulario()">
 				<h3><?php echo trad('Crear Ejercicio',$lang) ?></h3>
-				<p class="pl-5"><?php echo trad('Insertar las tablas sobre las que ejecutar la consulta, la categoría, el nivel del ejercicio, una descripción que sirva de ayuda al alumno, un enunciado y la solución. Si se va a utilizar más de una tabla, asegúrese de que están relacionadas.',$lang) ?></p>
+				<p class="pl-5"><?php echo trad('Indicar el propietario de las tablas que se desean utilizar así como la categoría y nivel del ejercicio, una descripción que sirva de ayuda al alumno, elenunciado y una solución.',$lang) ?></p>
 				<div class="hrr"></div>
 				<div class="form-row pt-4 ">
 					<div class="form-group col-md-4">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
-		  						<label for="user_tablas"><?php echo trad('Creador de las tablas',$lang) ?></label>	
+		  						<label for="user_tablas"><?php echo trad('Origen tablas',$lang) ?><span class="red"> *</span></label>	
 		  					</div>
 		  					<div class="panel-footer selector-user" >
 
-		  						<select id="user_tablas" name="user_tablas" class="form-control" required></select>								
-								<script type="text/javascript">
-		  							$(document).ready(function(){
-		  								$.ajax({
-		  									type: "POST",
-		  									url: "adm_profesor/getUser.php",
-		  									success: function(response)
-		  									{
-		  										$(".selector-user select").html(response).fadeIn();
-		  									}
-		  								});
-		  							});
-
-		  						</script>
+		  						<select id="user_tablas" name="user_tablas" class="form-control" required></select>
 				  				
 		  					</div>
 		  				</div>
@@ -37,27 +24,7 @@
 		  						<label for="tablas"><?php echo trad('Tablas usadas',$lang) ?></label>	
 		  					</div>
 		  					<div class="panel-footer selector-tabla" >
-		  						<select multiple="" type="text" id="tablas" name="tablas[]" class="form-control" required></select>
-		  						<script type="text/javascript">
-					                $(document).ready(function() {
-					                    $(".selector-user select").change(function() {
-					                        var form_data = {
-					                                is_ajax: 1,
-					                                dueno: $(".selector-user select option:checked").val()
-					                        };
-					                        $.ajax({
-					                                type: "POST",
-					                                url: "adm_profesor/getTablas.php",
-					                                data: form_data,
-					                                success: function(response)
-					                                {	
-					                                    $('.selector-tabla select').html(response).fadeIn();
-					                                }
-					                        });
-					                    });
-
-					                });
-					            </script>				  				
+		  						<select multiple="" type="text" id="tablas" name="tablas[]" size="3" class="form-control"></select>				  				
 		  					</div>
 		  				</div>
 		  			</div>
@@ -67,27 +34,7 @@
 		  						<label for="tablas"><?php echo trad('Columnas tabla',$lang) ?></label>	
 		  					</div>
 		  					<div class="panel-footer columnas-tabla" >
-		  						<table id="columnas" class="form-control" ><tbody></tbody></table>
-		  						<script type="text/javascript">
-					                $(document).ready(function() {
-					                    $(".selector-tabla select").change(function() {
-					                        var form_data = {
-					                                is_ajax: 1,
-					                                tabla: $(".selector-tabla select option:checked").val()
-					                        };
-					                        $.ajax({
-					                                type: "POST",
-					                                url: "adm_profesor/getColumns.php",
-					                                data: form_data,
-					                                success: function(response)
-					                                {	
-					                                    $('.columnas-tabla #columnas tbody').html(response).fadeIn();
-					                                }
-					                        });
-					                    });
-
-					                });
-					            </script>				  				
+		  						<table id="columnas" class="form-control" ><tbody></tbody></table>			  				
 		  					</div>
 		  				</div>
 		  			</div>
@@ -96,7 +43,7 @@
 		  			<div class="form-group col-md-4">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
-								<label for="categoria"><?php echo trad('Categoría',$lang) ?></label>
+								<label for="categoria"><?php echo trad('Categoría',$lang) ?><span class="red"> *</span></label>
 							</div>	
 							<div class="panel-footer" >
 				  				<select type="text" id="categoria" name="categoria" class="form-control" required>
@@ -117,7 +64,7 @@
 					<div class="form-group col-md-4">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
-								<label for="nivel"><?php echo trad('Nivel',$lang) ?></label>
+								<label for="nivel"><?php echo trad('Nivel',$lang) ?><span class="red"> *</span></label>
 							</div>	
 							<div class="panel-footer" >
 				  				<select type="text" id="nivel" name="nivel" class="form-control" required>
@@ -131,7 +78,7 @@
 					<div class="form-group col-md-4">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
-								<label for="deshabilitar"><?php echo trad('Ejercicio',$lang) ?></label>
+								<label for="deshabilitar"><?php echo trad('Ejercicio',$lang) ?><span class="red"> *</span></label>
 							</div>	
 							<div class="panel-footer" >
 				  				<select type="text" id="deshabilitar" name="deshabilitar" class="form-control" required>
@@ -146,10 +93,10 @@
 					<div class="form-group col-md-12">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
-								<label for="descripcion"><?php echo trad('Descripcion',$lang) ?></label>
+								<label for="descripcion"><?php echo trad('Descripcion',$lang) ?><span class="red"> *</span></label>
 							</div>	
 							<div class="panel-footer" >
-								<input type="text" id="descripcion" name="descripcion" class="form-control" placeholder=<?php echo trad('Descripcion breve aquí...',$lang) ?>  maxlength="50" required />
+								<input type="text" id="descripcion" name="descripcion" class="form-control" maxlength="50" required />
 		  					</div>
 		  				</div>
 					</div>
@@ -158,20 +105,20 @@
 					<div class="form-group col-md-6">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
-								<label for="enunciado"><?php echo trad('Enunciado',$lang) ?></label>
+								<label for="enunciado"><?php echo trad('Enunciado',$lang) ?><span class="red"> *</span></label>
 							</div>	
 							<div class="panel-footer" >
-		  						<textarea  id="enunciado" name="enunciado" class="form-control" rows="5" placeholder=<?php echo trad('Escribe el enunciado aquí...',$lang) ?> required></textarea>
+		  						<textarea  id="enunciado" name="enunciado" class="form-control" rows="5" required></textarea>
 		  					</div>
 		  				</div>
 					</div>
 					<div class="form-group col-md-6">
 						<div class="panel panel-primary">
 	                        <div class="panel-heading">
-								<label for="solucion"><?php echo trad('Solución',$lang) ?></label>
+								<label for="solucion"><?php echo trad('Solución',$lang) ?><span class="red"> *</span></label>
 							</div>	
 							<div class="panel-footer" >
-		  						<textarea  id="solucion" name="solucion" class="form-control" rows="5" placeholder=<?php echo trad('Escribe la solución aquí...',$lang) ?> required></textarea>
+		  						<textarea  id="solucion" name="solucion" class="form-control" rows="5" required></textarea>
 		  					</div>
 		  				</div>
 					</div>
@@ -194,20 +141,20 @@
 	
 
 
-		<div class="col-md-12 editar-ejercicio" id="editarEjercicio" >
+		<div class="col-md-11 editar-ejercicio" id="editarEjercicio" >
 			
 				<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/editar_ejercicio.php">
 					<h3><?php echo trad( "Editar Ejercicio", $lang) ?></h3>
 					<p class="pl-5"><?php echo trad( "Podrás editar algunos campos del ejercicio", $lang) ?>.</p>
 					<div class="hrr"></div>
 											
-							<div class="pt-4"><p>Datos permanentes del ejercicio: Nombre, propietario de las tablas y tablas usadas. </p></div>
+							<!-- <div class="pt-4"><p>Datos permanentes del ejercicio: Nombre, propietario de las tablas y tablas usadas. </p></div> -->
 							<div class="form-row pt-4 ">
 								<input type="text" name="e_id" id="editaId" style="display: none">
 								<div class="form-group col-md-4">
 					  				<div class="panel panel-primary">
 				                        <div class="panel-heading">
-					  						<label for="duenoOld"><?php echo trad('Propietario tablas',$lang) ?></label>	
+					  						<label for="duenoOld"><?php echo trad('Origen tablas',$lang) ?></label>	
 					  					</div>
 					  					<div class="panel-footer user_tablas" >	
 					  						<input type="text" class="form-control" name="dueno" id="editaDueno" value="" readonly="readonly">
@@ -227,12 +174,12 @@
 					  				</div>
 					  			</div>
 							</div>
-					  		<div class="pt-4"><p>Datos que se pueden modificar: Categoría, nivel, estado, descripcion y solución. </p></div>
+					  		<!-- <div class="pt-4"><p>Datos que se pueden modificar: Categoría, nivel, estado, descripcion y solución. </p></div> -->
 					  		<div class="form-row pt-2 ">
 					  			<div class="form-group col-md-4">
 					  				<div class="panel panel-primary">
 				                        <div class="panel-heading">
-											<label for="categoria"><?php echo trad('Categoría',$lang) ?></label>
+											<label for="categoria"><?php echo trad('Categoría',$lang) ?><span class="red"> *</span></label>
 										</div>	
 										<div class="panel-footer" >
 							  				<select type="text" id="editaCategoria" name="categoria" class="form-control" required>
@@ -244,7 +191,7 @@
 								<div class="form-group col-md-4">
 					  				<div class="panel panel-primary">
 				                        <div class="panel-heading">
-											<label for="nivel"><?php echo trad('Nivel',$lang) ?></label>
+											<label for="nivel"><?php echo trad('Nivel',$lang) ?><span class="red"> *</span></label>
 										</div>	
 										<div class="panel-footer" >
 							  				<select type="text" id="editaNivel" name="nivel" class="form-control" required>
@@ -256,7 +203,7 @@
 								<div class="form-group col-md-4">
 					  				<div class="panel panel-primary">
 				                        <div class="panel-heading">
-											<label for="deshabilitar"><?php echo trad(' Estado del ejercicio',$lang) ?></label>
+											<label for="deshabilitar"><?php echo trad(' Estado del ejercicio',$lang) ?><span class="red"> *</span></label>
 										</div>	
 										<div class="panel-footer" >
 							  				<select type="text" id="editaDeshabilitar" name="deshabilitar" class="form-control" required>
@@ -270,7 +217,7 @@
 								<div class="form-group col-md-12">
 									<div class="panel panel-primary">
 				                        <div class="panel-heading">
-											<label for="descripcion"><?php echo trad('Descripcion',$lang) ?></label>
+											<label for="descripcion"><?php echo trad('Descripcion',$lang) ?><span class="red"> *</span></label>
 										</div>	
 										<div class="panel-footer" >
 											<input type="text" id="editaDescripcion" name="descripcion" class="form-control" placeholder=<?php echo trad('Descripcion breve aquí...',$lang) ?>  maxlength="50"  value="" required />
@@ -282,7 +229,7 @@
 								<div class="form-group col-md-6">
 									<div class="panel panel-primary">
 				                        <div class="panel-heading">
-											<label for="enunciado"><?php echo trad( "Enunciado", $lang) ?></label>
+											<label for="enunciado"><?php echo trad( "Enunciado", $lang) ?><span class="red"> *</span></label>
 										</div>	
 										<div class="panel-footer" >
 					  						<textarea  id="editaEnunciado" name="enunciado" class="form-control" rows="4" placeholder=<?php echo trad( "Escribe el enunciado aquí...", $lang) ?> required></textarea>
@@ -292,7 +239,7 @@
 								<div class="form-group col-md-6">
 									<div class="panel panel-primary">
 				                        <div class="panel-heading">
-											<label for="solucion"><?php echo trad( "Solución", $lang) ?></label>
+											<label for="solucion"><?php echo trad( "Solución", $lang) ?><span class="red"> *</span></label>
 										</div>	
 										<div class="panel-footer" >
 					  						<textarea  id="editaSolucion" name="solucion" class="form-control" rows="4" placeholder=<?php echo trad( "Escribe la solución aquí...", $lang) ?> required></textarea>

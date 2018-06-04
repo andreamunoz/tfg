@@ -40,20 +40,19 @@
 	$solucion = str_replace($arrayComillas, '"', $solucion);
 
 	function quitarPalabrasFinales($frase){
+
 		$palabrasBuscar = array(" WHERE "," ORDER "," HAVING "," GROUP "," LIMIT "," ON ", ";");
-		$palabras = array("WHERE","ORDER ","HAVING ","GROUP","LIMIT","ON", ";");
+		$palabras = array("WHERE","ORDER","HAVING ","GROUP","LIMIT","ON", ";");
 		$quitarFinal[0] = $frase;
 		$nuevafrase = $frase;
 		for($i=0; $i<count($palabras); $i++){
-			// var_dump($quitarFinal);
 			if(stripos($nuevafrase, $palabrasBuscar[$i])!== false){
-				
 				$quitarFinal = preg_split("/".$palabras[$i]."/i", $quitarFinal[0],2);
 				$nuevafrase = $quitarFinal[0];
 				$quitarFinal = trim($quitarFinal[0]);
-				
 			}
 		}
+
 		return $quitarFinal;
 	}
 
@@ -73,7 +72,7 @@
 				$quitarMedio = preg_split("/".$palabras[$i]."/i", $quitarMedio);
 				$i = count($palabras)+1;
 			}
-		}		
+		}
 		return $quitarMedio;
 	}
 
@@ -113,8 +112,8 @@
 
 	function validarTablas($tSolucion, $tDisponibles){
 		$ok = true;
-		for($i = 0; $i < count($tSolucion); $i++){
 
+		for($i = 0; $i < count($tSolucion); $i++){
 			if(!(in_array($tSolucion[$i], $tDisponibles))){
 				$ok = false;
 			}
@@ -139,17 +138,16 @@
 		}
 		$total = array();
 		$count = 0; 
-		//var_dump($tablas);
+
 		juntarArrayRecursivo($total, $tablas, $count);
-		
+
 		$tablasSolucionSinDueno = array_unique($total);
 		$tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
-		//var_dump($tablasSolucion);
+
 		$ejer = new Ejercicio();
 		$tablasDisponibles = $ejer->getTodasTablas();
 
 		$ok = validarTablas($tablasSolucion, $tablasDisponibles);
-
 		$resultado = array();
 		if($ok){
 			$ejer = new Ejercicio();
@@ -303,7 +301,14 @@
 	}
 
 	function distinguirSentencia($solucionPropuesta, $user_tablas){
+		var_dump($solucionPropuesta); 
 		$solucionPropuesta = preg_replace("[\n|\r|\n\r|\t]", " ",$solucionPropuesta);
+		var_dump($solucionPropuesta); 
+		$solucionPropuesta = utf8_decode($solucionPropuesta);
+		var_dump($solucionPropuesta); 
+		$solucionPropuesta = str_replace('?', '', $solucionPropuesta);
+		var_dump($solucionPropuesta); 
+
 		$solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
 		$sentencia = explode(" ", $solucionPropuesta, 2);
 

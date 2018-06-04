@@ -13,24 +13,24 @@
 							<label for="enunciado"><?php echo trad( "Inserte el código aquí", $lang) ?></label>
 						</div>	
 						<div class="panel-footer" >
-	  						<textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="5" placeholder=<?php echo trad( "CREATE TABLE coches...", $lang) ?> ></textarea>
+	  						<textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="5" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required></textarea>
 	  					</div>
 	  					
 	  				</div>	
 		  			<div class="form-group col-md-3 offset-9 pr-4">
-						<button class="btn btn-log btn-tertiary btn-block" type="submit"><?php echo trad( "Guardar", $lang) ?></button>
+						<button class="btn btn-log btn-tertiary btn-block" type="submit"><?php echo trad( "Ejecutar", $lang) ?></button>
 					</div>
 				</form>
 				<!-- <div class="hrr mb-4"></div> -->
 				<!-- <form class="jumbotron-propio" method="post" action="../handler/crear_tablas_fichero.php" enctype="multipart/form-data">
 					<div class="panel panel-primary">
-                        <p><?php echo trad( "Seleccione un fichero con el código para crear las tablas e introducir en ellas los datos. ", $lang) ?></p>	
+                        <p><?php // echo trad( "Seleccione un fichero con el código para crear las tablas e introducir en ellas los datos. ", $lang) ?></p>	
 						<div class="input-group">
 					  		<div class="custom-file">
-					    		<input type="file" name="fileToUpload" id="fileToUpload" value=<?php echo trad( "Examinar...", $lang) ?>>
+					    		<input type="file" name="fileToUpload" id="fileToUpload" value=<?php // echo trad( "Examinar...", $lang) ?>>
 					  		</div>
 					  		<div class="input-group-append">
-					    		<input type="submit" class="btn btn-outline-secondary" name="submit" value=<?php echo trad( "Adjuntar", $lang) ?>>
+					    		<input type="submit" class="btn btn-outline-secondary" name="submit" value=<?php // echo trad( "Adjuntar", $lang) ?>>
 					  		</div>	
 						</div>
 	  				</div>

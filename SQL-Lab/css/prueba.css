@@ -318,9 +318,45 @@ a {
 
 
 
+.index_fix{
+  height: calc(100vh - 70px);
+  width: 100vw;
+  background: #EEEEEE;
+  position: relative;
+}
+
+.index_fix .my_form{
+  height: 50vh;
+  width: 50vw;
+  background-color: #102b47;
+  position: absolute;
+  top:15%;
+  left: 25%;
+  border-radius: 80px;
+  border: 10px solid #1d566e;
+}
+
+.index_fix .my_form .my_boton{
+  margin-top: 13%;
+  margin-left: 33%;
+  width: 200px;
+  background-color: #102b47;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 15px;
+  border: 4px solid white;
+}
 
 
+.index_fix .my_form .my_boton:hover{
+  background-color: #1d566e;
+}
 
+.index_fix .my_form .my_boton a{
+  color: white !important;
+}
 
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
@@ -777,7 +813,7 @@ select option:focus{
   color: #fff !important;
 }
 #longSelect select.form-control:not([size]):not([multiple]) {
-  height: 30px !important;
+  height: 40px !important;
   width: 100% !important;
   padding-top: 1px;
 }
@@ -817,13 +853,17 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 }
 
 .active a {
-  background-color: #24609d;
+  background-color: inherit;
+  /*background-color: #24609d;*/
   color: #fff !important;
-  border-color: #24609d;
+  border-color: inherit;
+  /*border-color: #24609d;*/
 }
 .active a:hover{
-  background-color: #fff;
-  color: #24609d !important;
+  /*background-color: #fff;
+  color: #24609d !important;*/
+  background-color: inherit;
+  color: #ffffff !important;
 }
 .paginate_button .active{
   background-color: #24609d;
@@ -856,4 +896,16 @@ table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td
 .message{
   margin-top: 50px;
   margin-left: 70px;
+}
+
+.tablaListarEjercicios{
+  overflow-y: auto;
+}
+
+form input:invalid{
+  border: 1px solid red;
+}
+
+span.red{
+  color: red;
 }

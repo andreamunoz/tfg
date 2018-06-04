@@ -1,33 +1,305 @@
 $(document).ready(function(){
 
-    var dondeEstoyPadre = "";
-    var dondeEstoyHijo = "";
-    console.log("PADRE GLOBAL: "+ dondeEstoyPadre);
-    console.log("HIJO GLOBAL: "+ dondeEstoyHijo);
 
-    if(dondeEstoyPadre === ""){
-        $('.principal').show();
-        $('.adm-hojas').hide();
-        $('.adm-ejercicios').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-tablas').hide();
-        $('.configuracion').hide();
-    }else{
-        $('.principal').hide();
-        $('.adm-hojas').hide();
-        $('.adm-ejercicios').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-tablas').hide();
-        $('.configuracion').hide();
-        $("'."+dondeEstoyPadre+"'").show();
-        if(dondeEstoyHijo !== ""){
-            $("'."+dondeEstoyHijo+"'").show();
-        }
+    username = $(this).find("#userPrincipal").attr("data-name");
+
+    var dondeEstoy = sessionStorage.getItem("dondeEstoy");
+
+    if(dondeEstoy === null){
+        dondeEstoy = "";
     }
+
+
+    switch(dondeEstoy){
+        case "principal":
+
+            $('.principal').show();
+            $('.adm-hojas').hide();
+            $('.adm-ejercicios').hide();
+            $('.adm-estadisticas').hide();
+            $('.adm-tablas').hide();
+            $('.configuracion').hide();
+
+            var that = $(this);
+            that.find('#liprin').addClass('active');
+            that.find('#litabl').removeClass('active');
+            that.find('#liejer').removeClass('active');
+            that.find('#licrej').removeClass('active');
+            that.find('#liliej').removeClass('active');
+            that.find('#lihoja').removeClass('active');
+            that.find('#licrho').removeClass('active');
+            that.find('#liliho').removeClass('active');
+            that.find('#liesta').removeClass('active');
+            that.find('#liconf').removeClass('active');
+            that.find('#liperf').removeClass('active');
+            that.find('#lihoja').attr("aria-expanded", "false");
+            that.find('#liejer').attr("aria-expanded", "false");
+            that.find('#liconf').attr("aria-expanded", "false");
+            that.find('ul#hojas').removeClass("show");
+            that.find('ul#ejercicios').removeClass("show");
+            that.find('ul#configurar').removeClass("show");
+            
+            break;
+
+        case "adm-hojas-crear-hoja":
+            
+            sessionStorage.setItem("dondeEstoy", "adm-hojas-crear-hoja");
+            $('.principal').hide();
+            $('.adm-hojas').show();
+            $('.configuracion').hide();
+            $('.adm-ejercicios').hide();
+            $('.adm-estadisticas').hide();
+            $('.adm-tablas').hide();
+           
+            $('.crear-hoja').show();
+            $('.editar-hoja').hide();
+            $('.lista-hoja').hide();
+            
+            var that = $(this);
+            that.find('#liprin').removeClass('active');
+            that.find('#litabl').removeClass('active');
+            that.find('#liejer').removeClass('active');
+            that.find('#licrej').removeClass('active');
+            that.find('#liliej').removeClass('active');
+            that.find('#lihoja').addClass('active');
+            that.find('#licrho').addClass('active');
+            that.find('#liliho').removeClass('active');
+            that.find('#liesta').removeClass('active');
+            that.find('#liconf').removeClass('active');
+            that.find('#liperf').removeClass('active');
+            that.find('#lihoja').attr("aria-expanded", "true");
+            that.find('#liejer').attr("aria-expanded", "false");
+            that.find('#liconf').attr("aria-expanded", "false");
+            that.find('ul#hojas').addClass("show");
+            that.find('ul#ejercicios').removeClass("show");
+            that.find('ul#configurar').removeClass("show");
+            break;
+
+        case "adm-hojas-lista-hojas":
+            sessionStorage.setItem("dondeEstoy", "adm-hojas-lista-hojas");
+            $('.principal').hide();
+            $('.adm-hojas').show();
+            $('.configuracion').hide();
+            $('.adm-ejercicios').hide();
+            $('.adm-estadisticas').hide();
+            $('.adm-tablas').hide();
+            
+            $('.crear-hoja').hide();
+            $('.editar-hoja').hide();
+            $('.lista-hoja').show();
+
+            var that = $(this);
+            that.find('#liprin').removeClass('active');
+            that.find('#litabl').removeClass('active');
+            that.find('#liejer').removeClass('active');
+            that.find('#licrej').removeClass('active');
+            that.find('#liliej').removeClass('active');
+            that.find('#lihoja').addClass('active');
+            that.find('#licrho').removeClass('active');
+            that.find('#liliho').addClass('active');
+            that.find('#liesta').removeClass('active');
+            that.find('#liconf').removeClass('active');
+            that.find('#liperf').removeClass('active');
+            that.find('#lihoja').attr("aria-expanded", "true");
+            that.find('#liejer').attr("aria-expanded", "false");
+            that.find('#liconf').attr("aria-expanded", "false");
+            that.find('ul#hojas').addClass("show");
+            that.find('ul#ejercicios').removeClass("show");
+            that.find('ul#configurar').removeClass("show");
+            break;
+ 
+        case "adm-ejercicios-crear-ejercicio":
+            sessionStorage.setItem("dondeEstoy", "adm-ejercicios-crear-ejercicio");
+            $('.principal').hide();
+            $('.adm-hojas').hide();
+            $('.configuracion').hide();
+            $('.adm-estadisticas').hide();
+            $('.adm-ejercicios').show();
+            $('.adm-tablas').hide();
+            
+            $('.crear-ejercicio').show();
+            $('.editar-ejercicio').hide();
+            $('.lista-ejercicio').hide();
+            
+            var that = $(this);
+            that.find('#liprin').removeClass('active');
+            that.find('#litabl').removeClass('active');
+            that.find('#liejer').addClass('active');
+            that.find('#licrej').addClass('active');
+            that.find('#liliej').removeClass('active');
+            that.find('#lihoja').removeClass('active');
+            that.find('#licrho').removeClass('active');
+            that.find('#liliho').removeClass('active');
+            that.find('#liesta').removeClass('active');
+            that.find('#liconf').removeClass('active');
+            that.find('#liperf').removeClass('active');
+            that.find('#lihoja').attr("aria-expanded", "false");
+            that.find('#liejer').attr("aria-expanded", "true");
+            that.find('#liconf').attr("aria-expanded", "false");
+            that.find('ul#hojas').removeClass("show");
+            that.find('ul#ejercicios').addClass("show");
+            that.find('ul#configurar').removeClass("show");
+           
+            break;
+
+        case "adm-ejercicios-lista-ejercicios":
+            sessionStorage.setItem("dondeEstoy", "adm-ejercicios-lista-ejercicios");
+            $('.principal').hide();
+            $('.adm-hojas').hide();
+            $('.configuracion').hide();
+            $('.adm-estadisticas').hide();
+            $('.adm-tablas').hide();
+            $('.adm-ejercicios').show();
+           
+            $('.crear-ejercicio').hide();
+            $('.editar-ejercicio').hide();
+            $('.lista-ejercicio').show();
+
+            var that = $(this);
+            that.find('#liprin').removeClass('active');
+            that.find('#litabl').removeClass('active');
+            that.find('#liejer').addClass('active');
+            that.find('#licrej').removeClass('active');
+            that.find('#liliej').addClass('active');
+            that.find('#lihoja').removeClass('active');
+            that.find('#licrho').removeClass('active');
+            that.find('#liliho').removeClass('active');
+            that.find('#liesta').removeClass('active');
+            that.find('#liconf').removeClass('active');
+            that.find('#liperf').removeClass('active');
+            that.find('#lihoja').attr("aria-expanded", "false");
+            that.find('#liejer').attr("aria-expanded", "true");
+            that.find('#liconf').attr("aria-expanded", "false");
+            that.find('ul#hojas').removeClass("show");
+            that.find('ul#ejercicios').addClass("show");
+            that.find('ul#configurar').removeClass("show");
+            break;
+                
+        case "configuracion":
+            sessionStorage.setItem("dondeEstoy", "configuracion");
+            $('.principal').hide();
+            $('.configuracion').show();
+            $('.adm-hojas').hide();
+            $('.adm-ejercicios').hide();
+            $('.adm-estadisticas').hide();
+            $('.adm-tablas').hide();
+
+            var that = $(this);
+            that.find('#liprin').removeClass('active');
+            that.find('#litabl').removeClass('active');
+            that.find('#liejer').removeClass('active');
+            that.find('#licrej').removeClass('active');
+            that.find('#liliej').removeClass('active');
+            that.find('#lihoja').removeClass('active');
+            that.find('#licrho').removeClass('active');
+            that.find('#liliho').removeClass('active');
+            that.find('#liesta').removeClass('active');
+            that.find('#liconf').addClass('active');
+            that.find('#liperf').addClass('active');
+            that.find('#lihoja').attr("aria-expanded", "false");
+            that.find('#liejer').attr("aria-expanded", "false");
+            that.find('#liconf').attr("aria-expanded", "true");
+            that.find('ul#hojas').removeClass("show");
+            that.find('ul#ejercicios').removeClass("show");
+            that.find('ul#configurar').addClass("show");
+            break;
+
+        case "adm-estadisticas":
+            sessionStorage.setItem("dondeEstoy", "adm-estadisticas");
+
+            $('.principal').hide();
+            $('.adm-hojas').hide();
+            $('.configuracion').hide();
+            $('.adm-ejercicios').hide();
+            $('.adm-tablas').hide();
+            $('.adm-estadisticas').show();
+
+            var that = $(this);
+            that.find('#liprin').removeClass('active');
+            that.find('#litabl').removeClass('active');
+            that.find('#liejer').removeClass('active');
+            that.find('#licrej').removeClass('active');
+            that.find('#liliej').removeClass('active');
+            that.find('#lihoja').removeClass('active');
+            that.find('#licrho').removeClass('active');
+            that.find('#liliho').removeClass('active');
+            that.find('#liesta').addClass('active');
+            that.find('#liconf').removeClass('active');
+            that.find('#liperf').removeClass('active');
+            that.find('#lihoja').attr("aria-expanded", "false");
+            that.find('#liejer').attr("aria-expanded", "false");
+            that.find('#liconf').attr("aria-expanded", "false");
+            that.find('ul#hojas').removeClass("show");
+            that.find('ul#ejercicios').removeClass("show");
+            that.find('ul#configurar').removeClass("show");
+            break;
+
+        case "adm-tablas-adjuntar-tablas":
+            sessionStorage.setItem("dondeEstoy", "adm-tablas-adjuntar-tablas");
+            $('.principal').hide();
+            $('.adm-hojas').hide();
+            $('.configuracion').hide();
+            $('.adm-ejercicios').hide();
+            $('.adm-estadisticas').hide();
+            $('.adm-tablas').show(); 
+
+            $('.adjuntar-tablas').show();
+
+            var that = $(this);
+            that.find('#liprin').removeClass('active');
+            that.find('#litabl').addClass('active');
+            that.find('#liejer').removeClass('active');
+            that.find('#licrej').removeClass('active');
+            that.find('#liliej').removeClass('active');
+            that.find('#lihoja').removeClass('active');
+            that.find('#licrho').removeClass('active');
+            that.find('#liliho').removeClass('active');
+            that.find('#liesta').removeClass('active');
+            that.find('#liconf').removeClass('active');
+            that.find('#liperf').removeClass('active');
+            that.find('#lihoja').attr("aria-expanded", "false");
+            that.find('#liejer').attr("aria-expanded", "false");
+            that.find('#liconf').attr("aria-expanded", "false");
+            that.find('ul#hojas').removeClass("show");
+            that.find('ul#ejercicios').removeClass("show");
+            that.find('ul#configurar').removeClass("show");
+            break;
+
+        default:  
+            $('.principal').show();
+            $('.adm-hojas').hide();
+            $('.adm-ejercicios').hide();
+            $('.adm-estadisticas').hide();
+            $('.adm-tablas').hide();
+            $('.configuracion').hide();
+
+            var that = $(this);
+            that.find('#liprin').addClass('active');
+            that.find('#litabl').removeClass('active');
+            that.find('#liejer').removeClass('active');
+            that.find('#licrej').removeClass('active');
+            that.find('#liliej').removeClass('active');
+            that.find('#lihoja').removeClass('active');
+            that.find('#licrho').removeClass('active');
+            that.find('#liliho').removeClass('active');
+            that.find('#liesta').removeClass('active');
+            that.find('#liconf').removeClass('active');
+            that.find('#liperf').removeClass('active');
+            that.find('#lihoja').attr("aria-expanded", "false");
+            that.find('#liejer').attr("aria-expanded", "false");
+            that.find('#liconf').attr("aria-expanded", "false");
+            that.find('ul#hojas').removeClass("show");
+            that.find('ul#ejercicios').removeClass("show");
+            that.find('ul#configurar').removeClass("show");
+            break;
+    }
+
     
 
     $("#principal").click(function(){
         
+        sessionStorage.setItem("dondeEstoy", "principal");
+
         $('.adm-hojas').hide();
         $('.configuracion').hide();
         $('.adm-ejercicios').hide();
@@ -44,8 +316,7 @@ $(document).ready(function(){
 
     $("#crear_hoja").click(function(){
         
-        dondeEstoyPadre = "adm-hojas";
-        dondeEstoyHijo = "crear-hoja";
+        sessionStorage.setItem("dondeEstoy", "adm-hojas-crear-hoja");
         $('.principal').hide();
         $('.adm-hojas').show();
         $('.configuracion').hide();
@@ -58,14 +329,14 @@ $(document).ready(function(){
         $('.lista-hoja').hide();
         
         var that = $(this);
+        console.log(that);
         that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
 
     $("#lista_hoja").click(function(){
-        dondeEstoyPadre = "adm-hojas";
-        dondeEstoyHijo = "lista-hoja";
+        sessionStorage.setItem("dondeEstoy", "adm-hojas-lista-hojas");
         $('.principal').hide();
         $('.adm-hojas').show();
         $('.configuracion').hide();
@@ -87,6 +358,7 @@ $(document).ready(function(){
 
     $("#crear_ejercicio").click(function(){
         
+        sessionStorage.setItem("dondeEstoy", "adm-ejercicios-crear-ejercicio");
         $('.principal').hide();
         $('.adm-hojas').hide();
         $('.configuracion').hide();
@@ -94,19 +366,20 @@ $(document).ready(function(){
         $('.adm-ejercicios').show();
         $('.adm-tablas').hide();
         
-        $('.crear-ejercicio').show("slow");
+        $('.crear-ejercicio').show();
         $('.editar-ejercicio').hide();
         $('.lista-ejercicio').hide();
         
         var that = $(this);
-        console.log(that);
         that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
     });
     
     $("#lista_ejercicio").click(function(){
-        
+
+        sessionStorage.setItem("dondeEstoy", "adm-ejercicios-lista-ejercicios");
+
         $('.principal').hide();
         $('.adm-hojas').hide();
         $('.configuracion').hide();
@@ -114,9 +387,9 @@ $(document).ready(function(){
         $('.adm-tablas').hide();
         $('.adm-ejercicios').show();
        
-        $('.crear-ejercicio').hide("linear");
+        $('.crear-ejercicio').hide();
         $('.editar-ejercicio').hide();
-        $('.lista-ejercicio').show("swing");
+        $('.lista-ejercicio').show();
         
         var that = $(this);
         that.closest('#menu-content').find('li.active').removeClass('active');
@@ -127,6 +400,8 @@ $(document).ready(function(){
   
     $("#perfil").click(function(){
         
+        sessionStorage.setItem("dondeEstoy", "configuracion");
+
         $('.principal').hide();
         $('.configuracion').show();
         $('.adm-hojas').hide();
@@ -142,7 +417,8 @@ $(document).ready(function(){
 
     /*---------------Estadisticas-------------------*/
     $("#estadistic").click(function(){
-        
+        sessionStorage.setItem("dondeEstoy", "adm-estadisticas");
+
         $('.principal').hide();
         $('.adm-hojas').hide();
         $('.configuracion').hide();
@@ -154,14 +430,15 @@ $(document).ready(function(){
         that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
+        that.find('ul#hojas').removeClass("show");
+        that.find('ul#ejercicios').removeClass("show");
+        that.find('ul#configurar').removeClass("show");
     });
 
     /*---------------Tablas-------------------*/
     $("#adjuntar_tabla").click(function(){
-        
-        dondeEstoyPadre= "adm-tablas";
-        dondeEstoyHijo="";
-        
+        sessionStorage.setItem("dondeEstoy", "adm-tablas-adjuntar-tablas");
+
         $('.principal').hide();
         $('.adm-hojas').hide();
         $('.configuracion').hide();
@@ -254,6 +531,64 @@ $(document).ready(function(){
     //     });     
     // });
 
+
+
+    $.ajax({
+        type: "POST",
+        url: "../templates/adm_profesor/getUser.php",
+        success: function(response)
+        {
+            $(".selector-user select").html(response).fadeIn();
+        }
+    });
+    
+    var form_data = {
+        is_ajax: 1,
+        dueno: username
+    };
+    $.ajax({
+        type: "POST",
+        url: "../templates/adm_profesor/getTablas.php",
+        data: form_data,
+        success: function(response)
+        {   
+            $('.selector-tabla select').html(response).fadeIn();
+        }
+    });
+
+
+    $(".selector-user select").change(function() {
+        var form_data = {
+                is_ajax: 1,
+                dueno: $(".selector-user select option:checked").val()
+        };
+        $.ajax({
+                type: "POST",
+                url: "../templates/adm_profesor/getTablas.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    $('.selector-tabla select').html(response).fadeIn();
+                }
+        });
+    });
+
+    $(".selector-tabla select").change(function() {
+        var form_data = {
+                is_ajax: 1,
+                tabla: $(".selector-tabla select option:checked").val()
+        };
+        $.ajax({
+                type: "POST",
+                url: "adm_profesor/getColumns.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    $('.columnas-tabla #columnas tbody').html(response).fadeIn();
+                }
+        });
+    });
+
     $('.boton_borrar_ejercicio').click(function(){      
         var mi_id = $(this).attr("data-number");
 
@@ -265,7 +600,9 @@ $(document).ready(function(){
                 data: { id: mi_id },
                 success: function(response)
                 {
+                    // *********************
                     location.reload();
+                    // *********************
                 }
             });
         }        
@@ -308,7 +645,7 @@ $(document).ready(function(){
        }
     });
 
-    $('.boton_editar_hojaejercicio').click(function(){      
+    $('.boton_editar_hojaejercicio').click(function(){ /**NOOOO**/     
         var mi_id = $(this).attr("data-number");
         
         $.ajax({
@@ -412,4 +749,28 @@ $(document).ready(function(){
         })
     });
 
+
+    /**** validar formularios ***/
+    function validarFormulario(){
+        console.log("HA ENTRADO EN LA FUNCION");
+        var txtDescripcion = document.getElementById('descripcion').value;
+        var txtEnunciado = document.getElementById('enunciado').value;
+        var txtSolucion = document.getElementById('solucion').value;
+
+        if(txtDescripcion == null || txtDescripcion.length == 0 || /^\s+$/.test(txtDescripcion)){
+            alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
+            return false;
+        }
+        if(txtEnunciado == null || txtEnunciado.length == 0 || /^\s+$/.test(txtEnunciado)){
+            alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
+            return false;
+        }
+
+        if(txtSolucion == null || txtSolucion.length == 0 || /^\s+$/.test(txtSolucion)){
+            alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
+            return false;
+        }
+ 
+        return true;
+    }
 });

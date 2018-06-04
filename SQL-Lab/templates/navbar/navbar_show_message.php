@@ -7,55 +7,58 @@
         <div class="col-sm-9 col-xs-12">
         <div class="message">
           <?php
-            $success = array();
-            $warning = array();
-            $info = "";
+
+            $mensaje = "";
             if(is_array($_SESSION['message'])){
               foreach ($_SESSION['message'] as $key => $value) {
-                if( $value == 1){
-                  $success[$key] = $key+1;
-                }else if($value != ""){
-                  $warning[$key] = $value;
+                // if( $value == 1){
+                //   $success[$key] = $key+1;
+                // }else 
+                if($value != ""){
+                  $mensaje = $mensaje.$value." \\n";
                 }else{
-                  $warning[$key] = "Ha habido un error al ejecutar la sentencia ".$key+1; 
+                  $mensaje = $mensaje."Ha habido un error al ejecutar la sentencia ".$key+1 .". \\n"; 
                 }
               }
             }else{
-              $info = $_SESSION['message'];
+              $mensaje = $_SESSION['message'];
             }
-            
+            ?>
+            <div>
+              <script type='text/javascript'>alert("<?php echo $mensaje ?>");</script>
+            </div>
 
-            if(count($success) !== 0){ ?>
+            <!-- <?php //if(count($success) !== 0){ ?>
                 <div class="alert alert-success alert-dismissible">
                   <a href="#" class="close equis_alert_success" data-dismiss="alert" aria-label="close">&times;</a>
                   <strong>Success!</strong> 
-                  <?php echo trad("Las sentencias ",$lang);
-                    foreach ($success as $key => $value) {
-                      echo $value." ";
-                    }
-                    echo trad(" se han ejecutado correctamente.", $lang);
+                  <?php //echo trad("Las sentencias ",$lang);
+                   // foreach ($success as $key => $value) {
+                     // echo $value." ";
+                    //}
+                    //echo trad(" se han ejecutado correctamente.", $lang);
                    ?>
 
                 </div>
-            <?php  }
-            if(count($warning) !== 0){  ?>
+            <?php // } ?>
+            <?php //if(count($warning) !== 0){  ?>
                 <div class="alert alert-warning  alert-dismissible">
                   <a href="#" class="close equis_alert_warning" data-dismiss="alert" aria-label="close">&times;</a>
                   <strong>Warning!</strong> 
-                  <?php foreach ($warning as $value) {
-                      echo $value."<br>";
-                    }
-                    echo trad("Revise el código e inténtelo de nuevo.", $lang);
+                  <?php //foreach ($warning as $value) {
+                      //echo $value."<br>";
+                   // }
+                    //echo trad("Revise el código e inténtelo de nuevo.", $lang);
                    ?>
                 </div>
-            <?php  } 
-            if($info !== ""){ ?>
+            <?php // } 
+            //if($info !== ""){ ?>
               <div class="alert alert-info  alert-dismissible">
                 <a href="#" class="close equis_alert_info" data-dismiss="alert" aria-label="close">&times;</a>
                 <strong>Info! </strong> 
-                <?php echo $info ?>
+                <?php //echo $info ?>
               </div>
-            <?php } ?>
+            <?php // } ?> -->
         </div> 
         </div>
       </div>

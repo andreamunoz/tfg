@@ -79,12 +79,21 @@
 	}
 
 	function quitarAlias($tablas){
+		
+		if (is_string($tablas)){
+			$value = trim($tablas);
+			$nombre = explode(" ", $tablas, 2);
 
-		foreach ($tablas as $key => $value) {
-			$value = trim($value);
-			$nombre = explode(" ", $value, 2);
+			$tablas = $nombre[0];
 
-			$tablas[$key] = $nombre[0];
+		}else{
+
+			foreach ($tablas as $key => $value) {
+				$value = trim($value);
+				$nombre = explode(" ", $value, 2);
+
+				$tablas[$key] = $nombre[0];
+			}
 		}
 		return $tablas;
 	}
@@ -115,7 +124,7 @@
 		$ok = true;
 		for($i = 0; $i < count($tSolucion); $i++){
 
-			if(!(in_array($tSolucion[$i], $tDisponibles))){
+			if(!(in_array(strtolower($tSolucion[$i]), $tDisponibles))){
 				$ok = false;
 			}
 		}
@@ -305,7 +314,6 @@
 	function distinguirSentencia($solucionPropuesta, $user_tablas){
 		$solucionPropuesta = preg_replace("[\n|\r|\n\r|\t]", " ",$solucionPropuesta);
 		$solucionPropuesta = utf8_decode($solucionPropuesta);
-		var_dump($solucionPropuesta); 
 		$solucionPropuesta = str_replace('?', '', $solucionPropuesta);
 		$solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
 		$sentencia = explode(" ", $solucionPropuesta, 2);
@@ -334,13 +342,13 @@
 			$resultadoEditar = "";
 
 			$resultadoEditar = $ejer->update($id,$nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$solucion,$user);
-			var_dump($resultadoEditar);
+			//var_dump($resultadoEditar);
 			if($resultadoEditar){
 				$_SESSION['message'] = "El ejercicio se ha modificado correctamente.";
 			}else{
 				$_SESSION['message'] = "Error al modificar el ejercicio.";
 			}
-			var_dump($_SESSION['message']);
+			//var_dump($_SESSION['message']);
 	}else{
 		$_SESSION['message'] = "Error. Por favor repase la solución y asegurese de que sea válida.";
 	}

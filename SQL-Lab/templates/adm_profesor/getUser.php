@@ -12,12 +12,14 @@ $nombres[0] = "";
 while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {
 
 	if((string)$fila["schema_prof"] !== (string)$_SESSION['user']){
-		$nombres[$i] = $fila["schema_prof"]; 
+		$nombres[$i] = $fila["schema_prof"];
+		$i++;
 	}else{
 		$nombres[0] = $fila["schema_prof"];
 	}
-	$i++;
+	
 }
+var_dump($nombres);
 
 if ($nombres[0] === "") {
 	echo '<option value="0" selected="selected">Seleccionar</option>';
@@ -25,7 +27,7 @@ if ($nombres[0] === "") {
 	echo '<option value="'.$nombres[0].'" selected="selected">'.$nombres[0].'</option>';
 }
 
-for($j=1; $j<count($nombres); $j++){
+for($j=1; $j<(count($nombres)); $j++){
 
 	echo '<option value="'.$nombres[$j].'">'.$nombres[$j].'</option>';
 }

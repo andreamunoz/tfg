@@ -79,11 +79,20 @@
 
 	function quitarAlias($tablas){
 
-		foreach ($tablas as $key => $value) {
-			$value = trim($value);
-			$nombre = explode(" ", $value, 2);
+		if (is_string($tablas)){
+			$value = trim($tablas);
+			$nombre = explode(" ", $tablas, 2);
 
-			$tablas[$key] = $nombre[0];
+			$tablas = $nombre[0];
+
+		}else{
+
+			foreach ($tablas as $key => $value) {
+				$value = trim($value);
+				$nombre = explode(" ", $value, 2);
+
+				$tablas[$key] = $nombre[0];
+			}
 		}
 		return $tablas;
 	}
@@ -114,7 +123,7 @@
 		$ok = true;
 
 		for($i = 0; $i < count($tSolucion); $i++){
-			if(!(in_array($tSolucion[$i], $tDisponibles))){
+			if(!(in_array(strtolower($tSolucion[$i]), $tDisponibles))){
 				$ok = false;
 			}
 		}

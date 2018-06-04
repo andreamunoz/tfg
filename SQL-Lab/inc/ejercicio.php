@@ -185,7 +185,7 @@ class Ejercicio{
         $consulta = mysqli_query($conexion,$sql);
         $tablasDisponibles = array();
         while ($fila = $consulta->fetch_assoc()) {
-            array_push($tablasDisponibles, $fila["nombre"]);
+            array_push($tablasDisponibles, strtolower($fila["nombre"]));
         }
         $connect->disconnectDB($conexion);
         return $tablasDisponibles;

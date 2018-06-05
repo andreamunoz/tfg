@@ -532,7 +532,7 @@ $(document).ready(function(){
     // });
 
 
-
+    /*Mostrar los nombres de los profesores que tengan creadas tablas*/
     $.ajax({
         type: "POST",
         url: "../templates/adm_profesor/getUser.php",
@@ -542,6 +542,7 @@ $(document).ready(function(){
         }
     });
     
+    /*Mostrar las tablas del profesor seleccionado*/
     var form_data = {
         is_ajax: 1,
         dueno: username
@@ -638,14 +639,14 @@ $(document).ready(function(){
     });
 
     $('input[id=checkbox-crear-hoja] ').change(function(e){
-       if ($('input[type=checkbox]:checked').length > 2) {
+       if ($('input[type=checkbox]:checked').length > 10) {
             $(this).prop('checked', false);
             console.log($(this));
             alert("Máximo 10 ejercicios");
        }
     });
 
-    $('.boton_editar_hojaejercicio').click(function(){ /**NOOOO**/     
+    $('.boton_editar_hojaejercicio').click(function(){ /**NOOOOOOOOOO**/     
         var mi_id = $(this).attr("data-number");
         
         $.ajax({
@@ -749,28 +750,62 @@ $(document).ready(function(){
         })
     });
 
+    $('.marcarLeidos').click(function(){      
+        var mi_user = $(this).attr("data-name");
 
-    /**** validar formularios ***/
-    function validarFormulario(){
-        console.log("HA ENTRADO EN LA FUNCION");
-        var txtDescripcion = document.getElementById('descripcion').value;
-        var txtEnunciado = document.getElementById('enunciado').value;
-        var txtSolucion = document.getElementById('solucion').value;
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getMarcarAvisosLeidos.php",
+            data: { user: mi_user },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+              
+    });
 
-        if(txtDescripcion == null || txtDescripcion.length == 0 || /^\s+$/.test(txtDescripcion)){
-            alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
-            return false;
-        }
-        if(txtEnunciado == null || txtEnunciado.length == 0 || /^\s+$/.test(txtEnunciado)){
-            alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
-            return false;
-        }
+    $('.mostrarTodos').click(function(){      
+        var mi_user = $(this).attr("data-name");
 
-        if(txtSolucion == null || txtSolucion.length == 0 || /^\s+$/.test(txtSolucion)){
-            alert('ERROR: El campo nombre no debe ir vacío o lleno de solamente espacios en blanco');
-            return false;
-        }
- 
-        return true;
-    }
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getMostrarTodosAvisos.php",
+            data: { user: mi_user },
+            success: function(response)
+            {
+                var resultado = response.substring(23);
+                var res = JSON.parse(resultado);
+                $('#avisos').empty();
+                $('#avisos').append('<h5>AVISOS</h5>');
+                for(i=0; i<res.length; i++){
+                    $('#avisos').append('<div class="aviso">'+res[i]+'</div>');
+                }
+                $('#avisos').append('<div class="row"><div class="col-md-6 marcarTodosLeidos" data-name="'+mi_user+'">Marcar todos los avisos como leídos</div><div class="col-md-6 mostrarNuevos" data-name="'+mi_user+'">Mostrar solo los avisos nuevos</div></div>');
+
+            }
+        });    
+    });
+
+    $('#avisos').on("click", ".marcarTodosLeidos", function(){      
+        var mi_user = $(this).attr("data-name");
+        console.log("ESTOY EN MARCAR TODOS LEIDOS");
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getMarcarAvisosLeidos.php",
+            data: { user: mi_user },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+              
+    });
+
+    $('#avisos').on("click", ".mostrarNuevos", function(){ 
+
+        location.reload();
+              
+    });
+
 });

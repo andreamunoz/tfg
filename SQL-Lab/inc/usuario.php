@@ -108,4 +108,43 @@ class Usuario{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+
+    function getAvisosNoLeidos($user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $consulta = "SELECT mensaje FROM sqlab_avisos WHERE leido = 0 AND nombre = '$user'";
+        $resultado = mysqli_query($conexion,$consulta);
+        $resul = array();
+        $i=0;
+        while ($fila = $resultado->fetch_assoc()) {
+            $resul[$i] = $fila["mensaje"];
+            $i++;
+        }
+        $connect->disconnectDB($conexion);
+        return $resul;
+    }
+
+    function getAvisos($user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $consulta = "SELECT mensaje FROM sqlab_avisos WHERE nombre = '$user'";
+        $resultado = mysqli_query($conexion,$consulta);
+        $resul = array();
+        $i=0;
+        while ($fila = $resultado->fetch_assoc()) {
+            $resul[$i] = $fila["mensaje"];
+            $i++;
+        }
+        $connect->disconnectDB($conexion);
+        return $resul;
+    }
+
+    function setAvisosLeidos($user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $consulta = "UPDATE sqlab_avisos SET leido=1 WHERE nombre = '$user';";
+        $resultado = mysqli_query($conexion,$consulta); 
+        $connect->disconnectDB($conexion);
+        return $resultado;
+    }
 }

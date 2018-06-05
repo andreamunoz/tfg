@@ -69,24 +69,24 @@ class Administrar_schema{
         $sentencia = preg_replace('/\s+/', ' ', $sentencia);
         $miarray = explode(" ", $sentencia);
         $tabla = false;
-    
-        if(in_array("CREATE",$miarray) && in_array("TABLE",$miarray) ){
-            $agujas = array("TEMPORARY ", "IF ", "NOT ", "EXISTS ");
+        
+        if(in_array("create",$miarray) && in_array("table",$miarray) ){
+            $agujas = array("temporary ", "if ", "not ", "exists ");
             foreach ($agujas as $value) {
                 $sentencia = str_replace($value, "", $sentencia);
             }
-        }else if(in_array("INSERT",$miarray) && in_array("INTO",$miarray)){
-            $agujas = array("LOW_PRIORITY ", "DELAYED ", "HIGH_PRIORITY ", "IGNORE ");
+        }else if(in_array("insert",$miarray) && in_array("into",$miarray)){
+            $agujas = array("low_priority ", "delayed ", "high_priority ", "ignore ");
             foreach ($agujas as $value) {
                 $sentencia = str_replace($value, "", $sentencia);
             }
-        }else if(in_array("DROP",$miarray) && in_array("TABLE",$miarray)){
-            $agujas = array("TEMPORARY ", "IF ", "EXISTS ");
+        }else if(in_array("drop",$miarray) && in_array("table",$miarray)){
+            $agujas = array("temporary ", "if ", "exists ");
             foreach ($agujas as $value) {
                 $sentencia = str_replace($value, "", $sentencia);
             }
-        }else if(in_array("ALTER",$miarray) && in_array("TABLE",$miarray)){
-            $agujas = array("ONLINE ", "OFFLINE ", "IGNORE ");
+        }else if(in_array("alter",$miarray) && in_array("table",$miarray)){
+            $agujas = array("online ", "offline ", "ignore ");
             foreach ($agujas as $value) {
                 $sentencia = str_replace($value, "", $sentencia);
             }
@@ -141,19 +141,20 @@ class Administrar_schema{
                 
                 //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
                 $nuevoNombre = $profe."_".$nombre_tabla;
+                
                 $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla, $nuevoNombre, $miSentenciaEntera);
 
                 //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
                 $miSentenciaEntera = str_replace("'", '"', $miSentenciaEntera);
 
-                if((stripos($sentencias[$i], "CREATE"))!==FALSE){
+                if((stripos($sentencias[$i], "create"))!==FALSE){
 
                     //SI ES UN CREATE TABLE, BUSCAMOS SI TIENE REFERENCIAS PARA AÑADIR EL PREFIJO AL NOMBRE DE LA TABLA
-                    $miSentenciaEntera = $admin->reemplazar_referencias("REFERENCES ", "REFERENCES ".$profe."_", $miSentenciaEntera);
+                    $miSentenciaEntera = $admin->reemplazar_referencias("references ", "references ".$profe."_", $miSentenciaEntera);
                     //EJECUTAMOS LA SENTENCIA
                     $respuesta = $admin->executeCode($miSentenciaEntera.";");
 
-                } elseif(((stripos($sentencias[$i], "DROP"))!==FALSE) || ((stripos($sentencias[$i], "ALTER"))!==FALSE) ){
+                } elseif(((stripos($sentencias[$i], "drop"))!==FALSE) || ((stripos($sentencias[$i], "alter"))!==FALSE) ){
                     include_once 'ejercicio.php';
                     $ejer = new Ejercicio();
                     $resultado = $ejer->comprobarSiEstaUsada($nuevoNombre);
@@ -163,11 +164,10 @@ class Administrar_schema{
                     } else{
                         $respuesta = "No se puede ejecutar porque las tablas están siendo usadas.";
                     }
-                }elseif((stripos($sentencias[$i], "INSERT"))!==FALSE){
+                }elseif((stripos($sentencias[$i], "insert"))!==FALSE){
                     //EJECUTAMOS LA SENTENCIA
                     $respuesta = $admin->executeCode($miSentenciaEntera.";");
-                }
-                    
+                }   
                 if($respuesta !== true){
                     $arrayResultado[$i] = "La sentencia número ".($i+1)." falló. Mensaje: ".$respuesta;
                 }else{

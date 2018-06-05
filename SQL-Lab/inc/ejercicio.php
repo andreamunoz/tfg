@@ -118,7 +118,7 @@ class Ejercicio{
         return $consulta;
     }
 
-     function getAllEjerciciosHabilitados(){
+    function getAllEjerciciosHabilitados(){
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
@@ -158,7 +158,7 @@ class Ejercicio{
         return $consulta;
     }
 
-     function getNCNEjercicio(){
+    function getNCNEjercicio(){
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
@@ -305,5 +305,20 @@ class Ejercicio{
         }
         $connect->disconnectDB($conexion);
         return $resultado;
+    }
+
+    function enviarAviso($id){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $consulta = "SELECT he.nombre_hoja, he.creador_hoja, ec.orden FROM sqlab_esta_contenido ec, sqlab_hoja_ejercicios he WHERE ec.id_hoja = he.id_hoja AND ec.id_ejercicio = $id";
+        $resultado = mysqli_query($conexion,$consulta);
+        while ($fila = $resultado->fetch_assoc()) {
+           $user = $fila["creador_hoja"];
+           $frase = "Comprueba la hoja '".$fila["nombre_hoja"]."' porque se ha modificado el ejercicio ".$fila["orden"].".";
+           $consulta2 = 'INSERT INTO sqlab_avisos (nombre, mensaje, leido) VALUES ("'.$user.'", "'.$frase.'", 0);';
+           $resultado2 = mysqli_query($conexion,$consulta2);
+        }
+        $connect->disconnectDB($conexion);
+
     }
 }

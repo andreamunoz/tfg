@@ -7,7 +7,7 @@
         <div class="hrr"></div>
         <div class="modal-body">  
               <div class="form-row pt-4 ">
-                <div class="form-group col-md-4">
+                <!-- <div class="form-group col-md-4">
                   <div class="panel panel-primary">
                       <div class="panel-heading">
                         <label for="name">Nombre</label>  
@@ -16,11 +16,11 @@
                         <p id="verNombre"></p>
                       </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="form-group col-md-4">
                     <div class="panel panel-primary">
                                 <div class="panel-heading">
-                        <label for="dueno"><?php echo trad('Propietario tablas',$lang) ?></label> 
+                        <label for="dueno"><?php echo trad('Origen tablas',$lang) ?></label> 
                       </div>
                       <div class="panel-footer user_tablas" >
                         <p id="verDueno"></p>             

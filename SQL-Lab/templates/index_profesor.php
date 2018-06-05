@@ -14,6 +14,10 @@
         $_SESSION['lang'] = null;
       }
     }
+    if(!isset($_SESSION['user'])){
+    	header("Location: index.php");
+    	exit;
+    }
 
 ?>
 <!DOCTYPE html>

@@ -1,7 +1,7 @@
 <div class="adm-ejercicios">
 	<div class="row ">
 		<div class="col-md-11 crear-ejercicio">	
-			<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/crear_ejercicio.php" onsubmit="return validarFormulario()">
+			<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/crear_ejercicio.php">
 				<h3><?php echo trad('Crear Ejercicio',$lang) ?></h3>
 				<p class="pl-5"><?php echo trad('Indicar el propietario de las tablas que se desean utilizar así como la categoría y nivel del ejercicio, una descripción que sirva de ayuda al alumno, elenunciado y una solución.',$lang) ?></p>
 				<div class="hrr"></div>
@@ -53,10 +53,16 @@
 								        $resultado = $ejer->getCategorias();
 									    foreach ($resultado as $key => $value) { 
 									    	$newKey = "c".($key+1);
-									?>
-								        <option value=<?php echo $newKey?> > <?php echo $value ?> </option>
-
-								    <?php  } ?> 
+									    	if (isset($_SESSION['guardarDatos'])) {
+											    if($newKey === $_SESSION['guardarDatos'][1]){ ?>
+											    	<option value=<?php echo $newKey ?> selected="selected"> <?php echo $value ?> </option>
+											    <?php } else{ ?>
+													<option value=<?php echo $newKey ?> > <?php echo $value ?> </option>
+											    <?php } 
+											} else { ?>
+												<option value=<?php echo $newKey ?> > <?php echo $value ?> </option>
+											<?php }	
+									 	} ?> 
 				  				</select>
 				  			</div>
 				  		</div>
@@ -68,9 +74,25 @@
 							</div>	
 							<div class="panel-footer" >
 				  				<select type="text" id="nivel" name="nivel" class="form-control" required>
-				  					<option value="facil"><?php echo trad('Principiante',$lang) ?></option>
-				  					<option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
-				  					<option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>			  	
+				  					<?php if (isset($_SESSION['guardarDatos'])) { 
+				  						if( $_SESSION['guardarDatos'][2] === "facil"){ ?>
+				  							<option value="facil" selected="selected"><?php echo trad('Principiante',$lang) ?></option>
+					  						<option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
+					  						<option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>
+									<?php } else if( $_SESSION['guardarDatos'][2] === "medio"){ ?>
+											<option value="facil"><?php echo trad('Principiante',$lang) ?></option>
+					  						<option value="medio" selected="selected"><?php echo trad('Intermedio',$lang) ?></option>
+					  						<option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>
+									<?php } else if( $_SESSION['guardarDatos'][2] === "dificil"){ ?>
+											<option value="facil"><?php echo trad('Principiante',$lang) ?></option>
+						  					<option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
+						  					<option value="dificil" selected="selected"><?php echo trad('Avanzado',$lang) ?></option>
+				  					<?php } 
+				  					}else { ?>
+					  					<option value="facil"><?php echo trad('Principiante',$lang) ?></option>
+					  					<option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
+					  					<option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>
+				  					<?php 	} ?>			  	
 				  				</select>
 				  			</div>
 				  		</div>
@@ -82,8 +104,19 @@
 							</div>	
 							<div class="panel-footer" >
 				  				<select type="text" id="deshabilitar" name="deshabilitar" class="form-control" required>
-				  					<option value="0"><?php echo trad('Habilitado',$lang) ?></option>
-				  					<option value="1"><?php echo trad('Deshabilitado',$lang) ?></option>
+				  					<?php if (isset($_SESSION['guardarDatos'])) { 
+				  						if( intval($_SESSION['guardarDatos'][3]) === 0){ ?>
+											<option value="0" selected="selected"><?php echo trad('Habilitado',$lang) ?></option>
+				  							<option value="1"><?php echo trad('Deshabilitado',$lang) ?></option>
+									<?php } else { ?>
+											<option value="0"><?php echo trad('Habilitado',$lang) ?></option>
+				  							<option value="1" selected="selected"><?php echo trad('Deshabilitado',$lang) ?></option>
+				  					<?php }
+				  					} else { ?>
+					  					<option value="0"><?php echo trad('Habilitado',$lang) ?></option>
+				  						<option value="1"><?php echo trad('Deshabilitado',$lang) ?></option>
+				  					<?php } ?>
+				  					
 				  				</select>
 				  			</div>
 				  		</div>
@@ -96,7 +129,11 @@
 								<label for="descripcion"><?php echo trad('Descripcion',$lang) ?><span class="red"> *</span></label>
 							</div>	
 							<div class="panel-footer" >
-								<input type="text" id="descripcion" name="descripcion" class="form-control" maxlength="50" required />
+								<?php if (isset($_SESSION['guardarDatos'])) { ?>
+									<input type="text" id="descripcion" name="descripcion" class="form-control" maxlength="50" required value="<?php echo $_SESSION['guardarDatos'][4] ?>" />
+								<?php } else {?>
+									<input type="text" id="descripcion" name="descripcion" class="form-control" maxlength="50" required />
+								<?php } ?>
 		  					</div>
 		  				</div>
 					</div>
@@ -108,7 +145,11 @@
 								<label for="enunciado"><?php echo trad('Enunciado',$lang) ?><span class="red"> *</span></label>
 							</div>	
 							<div class="panel-footer" >
-		  						<textarea  id="enunciado" name="enunciado" class="form-control" rows="5" required></textarea>
+								<?php if (isset($_SESSION['guardarDatos'])) { ?>
+		  							<textarea  id="enunciado" name="enunciado" class="form-control" rows="5" required><?php echo $_SESSION['guardarDatos'][5] ?></textarea>
+		  						<?php } else { ?>
+		  							<textarea  id="enunciado" name="enunciado" class="form-control" rows="5" required></textarea>
+		  						<?php } ?>
 		  					</div>
 		  				</div>
 					</div>
@@ -118,16 +159,20 @@
 								<label for="solucion"><?php echo trad('Solución',$lang) ?><span class="red"> *</span></label>
 							</div>	
 							<div class="panel-footer" >
-		  						<textarea  id="solucion" name="solucion" class="form-control" rows="5" required></textarea>
+								<?php if (isset($_SESSION['guardarDatos'])) { ?>
+		  							<textarea  id="solucion" name="solucion" class="form-control" rows="5" required><?php echo $_SESSION['guardarDatos'][6] ?></textarea>
+								<?php }else { ?>
+		  							<textarea  id="solucion" name="solucion" class="form-control" rows="5" required></textarea>
+		  						<?php } ?>
 		  					</div>
 		  				</div>
 					</div>
 				</div>
 		  		<div class="form-row">	
-		  			<div class="form-group col-md-3">
+		  			<!-- <div class="form-group col-md-3">
 						<button class="btn btn-log btn-tertiary-border btn-block" type="reset"><?php echo trad('Cancelar',$lang) ?></button>
-					</div>
-					<div class="form-group col-md-3 offset-6 pr-4">
+					</div> -->
+					<div class="form-group col-md-3 offset-9 pr-4">
 						<button class="btn btn-log btn-tertiary btn-block" name="crear" type="submit"><?php echo trad('Crear ejercicio',$lang) ?></button>
 					</div>
 		  		</div>
@@ -271,8 +316,8 @@
 
 	  	
 		<div class="col-md-11 jumbotron-propio lista-ejercicio" id="listarEjercicios">
-			<h3><?php echo trad( "Listar Ejercicios", $lang) ?></h3>
-			<p class="pl-5"><?php echo trad( "Aquí se muestran todos los ejercicios almacenados.", $lang); unset($_SESSION['editar']); ?>.</p>
+			<h3><?php echo trad( "Gestión de Ejercicios", $lang) ?></h3>
+			<p class="pl-5"><?php echo trad( "Aquí se muestran todos los ejercicios almacenados.", $lang); unset($_SESSION['editar']); ?></p>
 			<div class="hrr"></div><br>
 			<div id="accordion ">
               <div class="card">  

@@ -42,8 +42,8 @@
 	$solucion = str_replace($arrayComillas, '"', $solucion);
 
 	function quitarPalabrasFinales($frase){
-		$palabrasBuscar = array(" WHERE "," ORDER "," HAVING "," GROUP "," LIMIT "," ON ", ";");
-		$palabras = array("WHERE","ORDER","HAVING ","GROUP","LIMIT","ON", ";");
+		$palabrasBuscar = array(" where "," order "," having "," group "," limit "," on ", ";");
+		$palabras = array("where","order","having","grpup","limit","on", ";");
 		$quitarFinal[0] = $frase;
 		$nuevafrase = $frase;
 		for($i=0; $i<count($palabras); $i++){
@@ -58,7 +58,7 @@
 	}
 
 	function quitarPalabrasIntermadias($frase){
-		$palabras = array(',','NATURAL RIGHT OUTER JOIN','NATURAL LEFT OUTER JOIN','NATURAL LEFT JOIN','NATURAL RIGHT JOIN','LEFT OUTER JOIN','RIGHT OUTER JOIN','INNER JOIN','CROSS JOIN','LEFT JOIN','RIGHT JOIN','NATURAL JOIN','JOIN');
+		$palabras = array(',','natural right outer join','natural left outer join','natural left join','natural right join','left outer join','right outer join','inner join','cross join','left join','right join','natural join','join');
 		$frasebuena = "";
 		if(is_array($frase)){
 			$quitarMedio = $frase[0];
@@ -67,14 +67,13 @@
 			$quitarMedio = $frase;
 			$frasebuena = $frase;
 		}
-		//var_dump($frase);
 		for($i=0; $i<count($palabras); $i++){
 			if(stripos($frasebuena, $palabras[$i])!== false){
 				$quitarMedio = preg_split("/".$palabras[$i]."/i", $quitarMedio);
 				$i = count($palabras)+1;
 			}
 		}
-		//var_dump($quitarMedio);		
+		
 		return $quitarMedio;
 	}
 
@@ -124,7 +123,7 @@
 		$ok = true;
 		for($i = 0; $i < count($tSolucion); $i++){
 
-			if(!(in_array(strtolower($tSolucion[$i]), $tDisponibles))){
+			if(!(in_array($tSolucion[$i], $tDisponibles))){
 				$ok = false;
 			}
 		}
@@ -132,8 +131,8 @@
 	}
 
 	function validarSelect($solucion, $dueno){
-		//$quitarFrom = explode(" FROM ", $solucion);
-		$quitarFrom = preg_split("/ FROM /i", $solucion);
+		
+		$quitarFrom = preg_split("/ from /i", $solucion);
 
 		$i=1;
 		$tablas= array();
@@ -188,7 +187,7 @@
 		$sentencia = explode(" ", $solucion);
 
 		$i=0;
-		$palabras = array("LOW_PRIORITY","DELAYED","HIGH_PRIORITY","IGNORE","INTO",";");
+		$palabras = array("low_priority","delayed","high_priority","ignore","into",";");
 		while ($i < count($palabras)){
 			if(in_array($palabras[$i], $sentencia)){
 				$pos = array_search($palabras[$i], $sentencia);
@@ -234,13 +233,13 @@
 	}
 
 	function validarUpdate($solucion, $dueno){
-		$solucionCopia = strtoupper($solucion);
+		// $solucionCopia = strtoupper($solucion);
 		$sentencia = explode(" ", $solucion);
-		$sentenciaCopia = explode(" ", $solucionCopia);
+		// $sentenciaCopia = explode(" ", $solucionCopia);
 
-		if(in_array("SET", $sentenciaCopia)){
+		if(in_array("set", $sentencia)){
 			
-			$pos = array_search("SET", $sentenciaCopia);
+			$pos = array_search("set", $sentencia);
 			$tabla[0] = $sentencia[$pos - 1];
 			$tablasSolucion = anadirDueno($tabla, $dueno);
 		
@@ -273,13 +272,13 @@
 	}
 
 	function validarDelete($solucion, $dueno){
-		$solucionCopia = strtoupper($solucion);
+		// $solucionCopia = strtoupper($solucion);
 		$sentencia = explode(" ", $solucion);
-		$sentenciaCopia = explode(" ", $solucionCopia);
+		// $sentenciaCopia = explode(" ", $solucionCopia);
 		// var_dump($sentenciaCopia);
-		if(in_array("FROM", $sentenciaCopia)){
+		if(in_array("from", $sentencia)){
 			
-			$pos = array_search("FROM", $sentenciaCopia);
+			$pos = array_search("from", $sentencia);
 			$tabla[0] = $sentencia[$pos + 1];
 			$tablasSolucion = anadirDueno($tabla, $dueno);
 
@@ -345,10 +344,11 @@
 			//var_dump($resultadoEditar);
 			if($resultadoEditar){
 				$_SESSION['message'] = "El ejercicio se ha modificado correctamente.";
+				$ejer->enviarAviso($id);
 			}else{
 				$_SESSION['message'] = "Error al modificar el ejercicio.";
 			}
-			//var_dump($_SESSION['message']);
+		
 	}else{
 		$_SESSION['message'] = "Error. Por favor repase la solución y asegurese de que sea válida.";
 	}

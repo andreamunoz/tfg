@@ -907,3 +907,19 @@ form input:invalid{
 span.red{
   color: red;
 }
+
+.aviso{
+  border:1px solid #24609d;
+  border-radius: 5px;
+  background-color: #E4E4EB;
+  padding: 12px 22px;
+  margin: 10px 0;
+}
+
+.marcarLeidos, .mostrarTodos, .marcarTodosLeidos, .mostrarNuevos{
+  text-align: center;
+}
+.marcarLeidos:hover, .mostrarTodos:hover, .marcarTodosLeidos:hover, .mostrarNuevos:hover{
+  color: #24609d ;
+  cursor:pointer;
+}

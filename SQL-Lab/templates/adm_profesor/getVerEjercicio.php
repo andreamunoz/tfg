@@ -14,7 +14,8 @@
     $tablasUsa = $ejer->getTablasUsa($id);
     $tablas = "";
     foreach ($tablasUsa as $key => $value) {
-    	$tablas = $tablas.$value[0]." ";
+        $separado = explode("_", $value[0], 2);
+    	$tablas = $tablas.$separado[1]." ";
     }
     if($resul){
     	$datos = array();

@@ -32,7 +32,9 @@
 	}
 	$nivel = $_POST['nivel'];
 	$enunciado = $_POST['enunciado'];
+	// var_dump($_POST['solucion']);
 	$solucion = $_POST['solucion'];
+
 	$deshabilitar = $_POST['deshabilitar'];
 	$user = $_SESSION['user'];
 
@@ -41,7 +43,8 @@
 
 	$arrayComillas = array("`", "'");
 	$solucion = str_replace($arrayComillas, '"', $solucion);
-	$solucion = strtolower($solucion);
+
+	$solucion = mb_strtolower($solucion);
 
 	function quitarPalabrasFinales($frase){
 
@@ -159,7 +162,7 @@
 
 		$ejer = new Ejercicio();
 		$tablasDisponibles = $ejer->getTodasTablas();
-
+		
 		$ok = validarTablas($tablasSolucion, $tablasDisponibles);
 
 		$resultado = array();
@@ -167,7 +170,7 @@
 			$ejer = new Ejercicio();
 			for ($i =0; $i<count($tablasSolucion); $i++) {
 				$nombreAntiguo = " ".$tablasSolucionSinDueno[$i];
-				$solucion = str_replace($nombreAntiguo, " ".strtolower($tablasSolucion[$i]), $solucion );
+				$solucion = str_replace($nombreAntiguo, " ".mb_strtolower($tablasSolucion[$i]), $solucion );
 			}
 
 			$resultadoSolucion = $ejer->executeSolucion($solucion);
@@ -277,9 +280,8 @@
 	}
 
 	function validarDelete($solucion, $dueno){
-		//$solucionCopia = strtoupper($solucion);
+
 		$sentencia = explode(" ", $solucion);
-		//$sentenciaCopia = explode(" ", $solucionCopia);
 
 		if(in_array("from", $sentencia)){
 			
@@ -318,8 +320,12 @@
 	function distinguirSentencia($solucionPropuesta, $user_tablas){
 
 		$solucionPropuesta = preg_replace("[\n|\r|\n\r|\t]", " ",$solucionPropuesta);
+		// var_dump($solucionPropuesta);
 		$solucionPropuesta = utf8_decode($solucionPropuesta);
+		// var_dump($solucionPropuesta);
 		$solucionPropuesta = str_replace('?', '', $solucionPropuesta);
+		// var_dump($solucionPropuesta);
+		$solucionPropuesta = utf8_encode($solucionPropuesta);
 
 
 		$solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
@@ -343,6 +349,7 @@
 	}
 
 	$resultado = distinguirSentencia($solucion, $user_tablas); 
+
 	if($resultado[0]){
 		
 			$ejer = new Ejercicio();

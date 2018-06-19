@@ -1268,29 +1268,67 @@ $(document).ready(function(){
 
 
 /*** ESTADISTICAS ***/
-    //Toggle de los apartados
-    $("#ap1").click(function () {
-        $(this).html($(this).html() === '<span>Por alumno<i class="fa fa-angle-up"></i></span>' ? '<span>Por alumno<i class="fa fa-angle-down"></i></span>' : '<span>Por alumno<i class="fa fa-angle-up"></i></span>');
-        $(this).parent().find(".ap1-i").slideToggle();
-    });
-    $("#ap2").click(function () {
-        $(this).html($(this).html() === '<span>Por hoja de ejercicios<i class="fa fa-angle-up"></i></span>' ? '<span>Por hoja de ejercicios<i class="fa fa-angle-down"></i></span>' : '<span>Por hoja de ejercicios<i class="fa fa-angle-up"></i></span>');
-        $(this).parent().find(".ap2-i").slideToggle();
-    });
-    $("#ap3").click(function () {
-        $(this).html($(this).html() === '<span>Por ejercicio<i class="fa fa-angle-up"></i></span>' ? '<span>Por ejercicio<i class="fa fa-angle-down"></i></span>' : '<span>Por ejercicio<i class="fa fa-angle-up"></i></span>');
-        $(this).parent().find(".ap3-i").slideToggle();
-    });
-    $("#ap4").click(function () {
-        $(this).html($(this).html() === '<span>Por tipo de ejercicio<i class="fa fa-angle-up"></i></span>' ? '<span>Por tipo de ejercicio<i class="fa fa-angle-down"></i></span>' : '<span>Por tipo de ejercicio<i class="fa fa-angle-up"></i></span>');
-        $(this).parent().find(".ap4-i").slideToggle();
-    });
-    $("#ap5").click(function () {
-        $(this).html($(this).html() === '<span>Por nivel de ejercicio<i class="fa fa-angle-up"></i></span>' ? '<span>Por nivel de ejercicio<i class="fa fa-angle-down"></i></span>' : '<span>Por nivel de ejercicio<i class="fa fa-angle-up"></i></span>');
-        $(this).parent().find(".ap5-i").slideToggle();
+    //Rellenar el select con sus valores
+
+    $("#headingOne").click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getSelectEstadisticas.php",
+            data: { caso: 1 },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+    }); 
+
+    $("#headingTwo").click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getSelectEstadisticas.php",
+            data: { caso: 2 },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
     });
 
-        
+    $("#headingThree").click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getSelectEstadisticas.php",
+            data: { caso: 3 },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+    });
+
+    $("#headingFour").click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getSelectEstadisticas.php",
+            data: { caso: 4 },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+    });
+
+    $("#headingFive").click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getSelectEstadisticas.php",
+            data: { caso: 5 },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+    });
 
 
 });

@@ -12,7 +12,7 @@ class Ejercicio{
         $dueno = explode("_", $tablas[0], 2);
 
         $sql = "insert into sqlab_ejercicio (nivel,enunciado,descripcion,deshabilitar,tipo,creador_ejercicio,solucion,dueño_tablas) 
-        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".strtolower($dueno[0])."');";
+        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".mb_strtolower($dueno[0])."');";
         $resul = mysqli_query($conexion,$sql);
         if(!($resul)){
             $resul = $conexion->error;
@@ -185,7 +185,7 @@ class Ejercicio{
         $consulta = mysqli_query($conexion,$sql);
         $tablasDisponibles = array();
         while ($fila = $consulta->fetch_assoc()) {
-            array_push($tablasDisponibles, strtolower($fila["nombre"]));
+            array_push($tablasDisponibles, mb_strtolower($fila["nombre"]));
         }
         $connect->disconnectDB($conexion);
         return $tablasDisponibles;

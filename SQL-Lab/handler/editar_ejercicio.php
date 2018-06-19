@@ -233,9 +233,8 @@
 	}
 
 	function validarUpdate($solucion, $dueno){
-		// $solucionCopia = strtoupper($solucion);
+
 		$sentencia = explode(" ", $solucion);
-		// $sentenciaCopia = explode(" ", $solucionCopia);
 
 		if(in_array("set", $sentencia)){
 			
@@ -272,9 +271,8 @@
 	}
 
 	function validarDelete($solucion, $dueno){
-		// $solucionCopia = strtoupper($solucion);
+
 		$sentencia = explode(" ", $solucion);
-		// $sentenciaCopia = explode(" ", $solucionCopia);
 		// var_dump($sentenciaCopia);
 		if(in_array("from", $sentencia)){
 			

@@ -2,6 +2,12 @@ $(document).ready(function(){
 
 
     username = $(this).find("#userPrincipal").attr("data-name");
+    var numEjerHoja = 0;
+    var ordenarCreadorHojaListar = 1;
+    var ordenarNivelAgregarEjerAHoja = 1;
+    var ordenarTipoAgregarEjerAHoja = 3;
+    var ordenarCreadorAgregarEjerAHoja = 5;
+    var editar_id_hoja = sessionStorage.getItem("editar_id_hoja");
 
     var dondeEstoy = sessionStorage.getItem("dondeEstoy");
 
@@ -12,7 +18,7 @@ $(document).ready(function(){
 
     switch(dondeEstoy){
         case "principal":
-
+            sessionStorage.removeItem("editar_id_hoja");
             $('.principal').show();
             $('.adm-hojas').hide();
             $('.adm-ejercicios').hide();
@@ -44,6 +50,7 @@ $(document).ready(function(){
         case "adm-hojas-crear-hoja":
             
             sessionStorage.setItem("dondeEstoy", "adm-hojas-crear-hoja");
+            sessionStorage.removeItem("editar_id_hoja");
             $('.principal').hide();
             $('.adm-hojas').show();
             $('.configuracion').hide();
@@ -75,8 +82,44 @@ $(document).ready(function(){
             that.find('ul#configurar').removeClass("show");
             break;
 
+        case "adm-hojas-editar-hoja":
+            
+            sessionStorage.setItem("dondeEstoy", "adm-hojas-editar-hoja");
+            $('.principal').hide();
+            $('.adm-hojas').show();
+            $('.configuracion').hide();
+            $('.adm-ejercicios').hide();
+            $('.adm-estadisticas').hide();
+            $('.adm-tablas').hide();
+           
+            $('.crear-hoja').hide();
+            $('.editar-hoja').show();
+            $('.lista-hoja').hide();
+            
+            var that = $(this);
+            that.find('#liprin').removeClass('active');
+            that.find('#litabl').removeClass('active');
+            that.find('#liejer').removeClass('active');
+            that.find('#licrej').removeClass('active');
+            that.find('#liliej').removeClass('active');
+            that.find('#lihoja').addClass('active');
+            that.find('#licrho').removeClass('active');
+            that.find('#liliho').addClass('active');
+            that.find('#liesta').removeClass('active');
+            that.find('#liconf').removeClass('active');
+            that.find('#liperf').removeClass('active');
+            that.find('#lihoja').attr("aria-expanded", "true");
+            that.find('#liejer').attr("aria-expanded", "false");
+            that.find('#liconf').attr("aria-expanded", "false");
+            that.find('ul#hojas').addClass("show");
+            that.find('ul#ejercicios').removeClass("show");
+            that.find('ul#configurar').removeClass("show");
+
+            break;
+
         case "adm-hojas-lista-hojas":
             sessionStorage.setItem("dondeEstoy", "adm-hojas-lista-hojas");
+            sessionStorage.removeItem("editar_id_hoja");
             $('.principal').hide();
             $('.adm-hojas').show();
             $('.configuracion').hide();
@@ -110,6 +153,7 @@ $(document).ready(function(){
  
         case "adm-ejercicios-crear-ejercicio":
             sessionStorage.setItem("dondeEstoy", "adm-ejercicios-crear-ejercicio");
+            sessionStorage.removeItem("editar_id_hoja");
             $('.principal').hide();
             $('.adm-hojas').hide();
             $('.configuracion').hide();
@@ -144,6 +188,7 @@ $(document).ready(function(){
 
         case "adm-ejercicios-lista-ejercicios":
             sessionStorage.setItem("dondeEstoy", "adm-ejercicios-lista-ejercicios");
+            sessionStorage.removeItem("editar_id_hoja");
             $('.principal').hide();
             $('.adm-hojas').hide();
             $('.configuracion').hide();
@@ -177,6 +222,7 @@ $(document).ready(function(){
                 
         case "configuracion":
             sessionStorage.setItem("dondeEstoy", "configuracion");
+            sessionStorage.removeItem("editar_id_hoja");
             $('.principal').hide();
             $('.configuracion').show();
             $('.adm-hojas').hide();
@@ -206,6 +252,7 @@ $(document).ready(function(){
 
         case "adm-estadisticas":
             sessionStorage.setItem("dondeEstoy", "adm-estadisticas");
+            sessionStorage.removeItem("editar_id_hoja");
 
             $('.principal').hide();
             $('.adm-hojas').hide();
@@ -236,6 +283,7 @@ $(document).ready(function(){
 
         case "adm-tablas-adjuntar-tablas":
             sessionStorage.setItem("dondeEstoy", "adm-tablas-adjuntar-tablas");
+            sessionStorage.removeItem("editar_id_hoja");
             $('.principal').hide();
             $('.adm-hojas').hide();
             $('.configuracion').hide();
@@ -266,6 +314,7 @@ $(document).ready(function(){
             break;
 
         default:  
+            sessionStorage.removeItem("editar_id_hoja");
             $('.principal').show();
             $('.adm-hojas').hide();
             $('.adm-ejercicios').hide();
@@ -299,7 +348,7 @@ $(document).ready(function(){
     $("#principal").click(function(){
         
         sessionStorage.setItem("dondeEstoy", "principal");
-
+        sessionStorage.removeItem("editar_id_hoja");
         $('.adm-hojas').hide();
         $('.configuracion').hide();
         $('.adm-ejercicios').hide();
@@ -317,6 +366,7 @@ $(document).ready(function(){
     $("#crear_hoja").click(function(){
         
         sessionStorage.setItem("dondeEstoy", "adm-hojas-crear-hoja");
+        sessionStorage.removeItem("editar_id_hoja");
         $('.principal').hide();
         $('.adm-hojas').show();
         $('.configuracion').hide();
@@ -337,6 +387,7 @@ $(document).ready(function(){
 
     $("#lista_hoja").click(function(){
         sessionStorage.setItem("dondeEstoy", "adm-hojas-lista-hojas");
+        sessionStorage.removeItem("editar_id_hoja");
         $('.principal').hide();
         $('.adm-hojas').show();
         $('.configuracion').hide();
@@ -359,6 +410,7 @@ $(document).ready(function(){
     $("#crear_ejercicio").click(function(){
         
         sessionStorage.setItem("dondeEstoy", "adm-ejercicios-crear-ejercicio");
+        sessionStorage.removeItem("editar_id_hoja");
         $('.principal').hide();
         $('.adm-hojas').hide();
         $('.configuracion').hide();
@@ -379,6 +431,7 @@ $(document).ready(function(){
     $("#lista_ejercicio").click(function(){
 
         sessionStorage.setItem("dondeEstoy", "adm-ejercicios-lista-ejercicios");
+        sessionStorage.removeItem("editar_id_hoja");
 
         $('.principal').hide();
         $('.adm-hojas').hide();
@@ -395,13 +448,14 @@ $(document).ready(function(){
         that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
         that.parent().addClass('active');
+        // $( "#agregarEjerAHoja" ).trigger( "click" );
     });
   
   
     $("#perfil").click(function(){
         
         sessionStorage.setItem("dondeEstoy", "configuracion");
-
+        sessionStorage.removeItem("editar_id_hoja");
         $('.principal').hide();
         $('.configuracion').show();
         $('.adm-hojas').hide();
@@ -418,6 +472,7 @@ $(document).ready(function(){
     /*---------------Estadisticas-------------------*/
     $("#estadistic").click(function(){
         sessionStorage.setItem("dondeEstoy", "adm-estadisticas");
+        sessionStorage.removeItem("editar_id_hoja");
 
         $('.principal').hide();
         $('.adm-hojas').hide();
@@ -438,7 +493,7 @@ $(document).ready(function(){
     /*---------------Tablas-------------------*/
     $("#adjuntar_tabla").click(function(){
         sessionStorage.setItem("dondeEstoy", "adm-tablas-adjuntar-tablas");
-
+        sessionStorage.removeItem("editar_id_hoja");
         $('.principal').hide();
         $('.adm-hojas').hide();
         $('.configuracion').hide();
@@ -512,25 +567,7 @@ $(document).ready(function(){
        
         $('.busqueda_avanzada').toggle("slow");
     });
-
  
-
-
-    // $('.boton_editar_ejercicio').click(function(){      
-    //     var mi_id = $(this).attr("data-number");
-        
-    //     $.ajax({
-            
-    //         method: "POST",
-    //         url: "../templates/adm_profesor/getEditarEjercicio.php",
-    //         data: { id: mi_id },
-    //         success: function(response)
-    //         {   
-    //             location.href = "../templates/adm_profesor/adm_editar_ejercicio.php";
-    //         }            
-    //     });     
-    // });
-
 
     /*Mostrar los nombres de los profesores que tengan creadas tablas*/
     $.ajax({
@@ -557,6 +594,63 @@ $(document).ready(function(){
         }
     });
 
+    var editar_id_hoja = sessionStorage.getItem("editar_id_hoja");
+    var lugar = sessionStorage.getItem("dondeEstoy");
+    if(lugar === "adm-hojas-editar-hoja" && editar_id_hoja !== null ){
+
+       $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getEditarHojaEjercicio.php",
+            data: { id: editar_id_hoja },
+            success: function(response){
+                var resultado = response.substring(23);
+                var res = JSON.parse(resultado);
+                numEjerHoja = res["numEjercicios"];
+                var id_hoja = res["id_hoja"];
+                var nombre_hoja = res["nombre_hoja"];
+                var hayEjercicios = res["hayEjercicios"];
+                
+                delete res["id_hoja"];
+                delete res["nombre_hoja"];
+                delete res["hayEjercicios"];
+                delete res["numEjercicios"];
+                
+                if(response !== null){
+                    if (hayEjercicios !== 0 ){
+                        $("#editarHojaEjercicio").show();
+                        $("#listarHojaEjercicios").hide();
+
+                        $("#editaHojaId").val(id_hoja);
+                        $("#editaHojaNombre").val(nombre_hoja);
+                        $("#tabla_editar_hoja_ejercicios > tbody").empty();
+                        var cont = 1;
+                        $.each(res,function(registro, value) {
+                            
+                            fila = '<tr><td class="primera"><input type="checkbox" class="form-check-input" id="checkbox-editar-hoja" name="seleccionadosEdHoja[]" value='+ value["id_ejercicio"] +'></td>';
+                            fila += '<td>'+value['descripcion']+'</td>';
+                            fila += '<td>'+value['nivel']+'</td>';
+                            fila += '<td>'+value['tipo']+'</td>';
+                            fila += '<td>'+value['creador_ejercicio']+'</td>';
+                            fila += '<td id="rowVer" class="boton_ver_ejercicio" data-number='+ value["id_ejercicio"] +'><a data-toggle="modal" href="#modalVerEejercicio"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'
+                            fila += '</tr>';
+                    
+                            $('#tabla_editar_hoja_ejercicios tbody').append(fila);
+
+                        });
+                        
+                    }else{
+                        $("#editarHojaEjercicio").show();
+                        $("#listarHojaEjercicios").hide();
+
+                        $("#editaHojaId").val(id_hoja);
+                        $("#editaHojaNombre").val(nombre_hoja);
+                        $("#tabla_editar_hoja_ejercicios > tbody").empty();
+                    }
+                }
+            }
+        });
+        // sessionStorage.removeItem("editar_id_hoja");
+    }
 
     $(".selector-user select").change(function() {
         var form_data = {
@@ -641,24 +735,16 @@ $(document).ready(function(){
     $('input[id=checkbox-crear-hoja] ').change(function(e){
        if ($('input[type=checkbox]:checked').length > 10) {
             $(this).prop('checked', false);
-            console.log($(this));
             alert("Máximo 10 ejercicios");
        }
     });
 
-    $('.boton_editar_hojaejercicio').click(function(){ /**NOOOOOOOOOO**/     
-        var mi_id = $(this).attr("data-number");
+    $('input[id=checkbox-editar-hoja] ').change(function(e){
         
-        $.ajax({
-            
-            method: "POST",
-            url: "../templates/adm_profesor/getEditarHojaEjercicio.php",
-            data: { id: mi_id },
-            success: function(response)
-            {   
-                location.href = "../templates/adm_profesor/adm_editar_hojaejercicio.php";
-            }            
-        });     
+       if (($('input[type=checkbox]:checked').length + numEjerHoja) > 10) {
+            $(this).prop('checked', false);
+            alert("Máximo 10 ejercicios");
+       }
     });
 
     $(this).on("click", "#rowVer", function(){
@@ -672,7 +758,7 @@ $(document).ready(function(){
                 var res = JSON.parse(resultado);
 
                 if(response !== null){
-                    $("#modalVerEejercicio").modal();
+                    $("#modalVerEejercicio").modal('show');
                     $("#verNombre").text("Ejercicio "+res.nombre);
                     $("#verDueno").text(res.dueno);
                     $("#verTablas").text(res.tablas);
@@ -688,9 +774,45 @@ $(document).ready(function(){
                     $("#verSolucion").text(res.solucion);
                 }
             }
-        })
+        });
     });
 
+    $(this).on("click", "#rowVerEjerAgregar", function(){
+        var mi_id = $(this).attr("data-number");
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getVerEjercicio.php",
+            data: { id: mi_id },
+            success: function(response){
+                var resultado = response.substring(23);
+                var res = JSON.parse(resultado);
+
+                if(response !== null){
+                    $("#modalAgregarEjerAHoja").modal('hide');
+                    $("#modalVerEejercicioAgregar").modal('show');
+                    //$("#verANombre").text("Ejercicio "+res.nombre);
+                    $("#verADueno").text(res.dueno);
+                    $("#verATablas").text(res.tablas);
+                    $("#verACategoria").text(res.categoria);
+                    $("#verANivel").text(res.nivel);
+                    if(res.deshabilitar === "0"){
+                        $("#verADeshabilitar").text("Habilitado");
+                    }else{
+                        $("#verADeshabilitar").text("Deshabilitado");
+                    }
+                    $("#verADescripcion").text(res.descripcion);
+                    $("#verAEnunciado").text(res.enunciado);
+                    $("#verASolucion").text(res.solucion);
+                }
+            }
+        });
+    });
+
+
+    $(this).on("click", "#volverAlModal", function(){
+         // $("#modalAgregarEjerAHoja").modal('show');
+         $( "#agregarEjerAHoja" ).trigger( "click" );
+     });
     
     $(this).on("click", "#rowEditarEjer", function(){
         var mi_id = $(this).attr("data-number");
@@ -750,6 +872,341 @@ $(document).ready(function(){
         })
     });
 
+    $(this).on("click", "#rowEditarHoja", function(){
+        sessionStorage.setItem("dondeEstoy", "adm-hojas-editar-hoja");
+        
+        var mi_id = $(this).attr("data-number");
+        sessionStorage.setItem("editar_id_hoja",mi_id);
+        
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getEditarHojaEjercicio.php",
+            data: { id: mi_id },
+            success: function(response){
+                var resultado = response.substring(23);
+                var res = JSON.parse(resultado);
+                numEjerHoja = res["numEjercicios"];
+                var id_hoja = res["id_hoja"];
+                var nombre_hoja = res["nombre_hoja"];
+                var hayEjercicios = res["hayEjercicios"];
+                
+                delete res["id_hoja"];
+                delete res["nombre_hoja"];
+                delete res["hayEjercicios"];
+                delete res["numEjercicios"];
+                
+                if(response !== null){
+                    if (hayEjercicios !== 0 ){
+                        $("#editarHojaEjercicio").show();
+                        $("#listarHojaEjercicios").hide();
+
+                        $("#editaHojaId").val(id_hoja);
+                        $("#editaHojaNombre").val(nombre_hoja);
+                        $("#tabla_editar_hoja_ejercicios > tbody").empty();
+                        var cont = 1;
+                        $.each(res,function(registro, value) {
+                            
+                            fila = '<tr><td class="primera"><input type="checkbox" class="form-check-input" id="checkbox-editar-hoja" name="seleccionadosEdHoja[]" value='+ value["id_ejercicio"] +'></td>';
+                            fila += '<td>'+value['descripcion']+'</td>';
+                            fila += '<td>'+value['nivel']+'</td>';
+                            fila += '<td>'+value['tipo']+'</td>';
+                            fila += '<td>'+value['creador_ejercicio']+'</td>';
+                            fila += '<td id="rowVer" class="boton_ver_ejercicio" data-number='+ value["id_ejercicio"] +'><a data-toggle="modal" href="#modalVerEejercicio"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'
+                            fila += '</tr>';
+                    
+                            $('#tabla_editar_hoja_ejercicios tbody').append(fila);
+
+                        });
+                    }else{
+                        $("#editarHojaEjercicio").show();
+                        $("#listarHojaEjercicios").hide();
+
+                        $("#editaHojaId").val(id_hoja);
+                        $("#editaHojaNombre").val(nombre_hoja);
+                        $("#tabla_editar_hoja_ejercicios > tbody").empty();
+                    }
+                }
+            }
+        });
+    });
+
+    $('#borrarEjerDeHoja').click(function(){
+        sessionStorage.setItem("dondeEstoy", "adm-hojas-editar-hoja");
+        var hoja = sessionStorage.getItem("editar_id_hoja");
+        var selected = [];
+        var i=0;
+        $('#tabla_editar_hoja_ejercicios input[type=checkbox]').each(function(){
+            if(this.checked){
+                selected[i] = $(this).val();
+                i++;
+            }
+        });
+                    console.log(selected.length);
+        if(selected.length != 0){
+            $.ajax({
+                method: "GET",
+                url: "../templates/adm_profesor/getBorrarEjerdeHojaEjercicio.php",
+                data: { seleccionado: selected, id_hoja: hoja },
+                success: function(response){
+
+                    var resultado = response.substring(23);
+                    var res = JSON.parse(resultado);
+                    console.log(response);
+                    if(response !== null){
+                        $("#editarHojaEjercicio").show();
+                        $("#listarHojaEjercicios").hide();
+
+                        $("#editaHojaId").val(res[0]["id_hoja"]);
+                        $("#editaHojaNombre").val(res[0]["nombre_hoja"]);
+                        var cont = 1;
+
+                        $.each(res,function(registro, value) {
+                            
+                            fila = '<tr><td class="primera"><input type="checkbox" class="form-check-input" id="checkbox-editar-hoja" name="seleccionadosEdHoja[]" value='+ value["id_ejercicio"] +'></td>';
+                            fila += '<td>'+value['descripcion']+'</td>';
+                            fila += '<td>'+value['nivel']+'</td>';
+                            fila += '<td>'+value['tipo']+'</td>';
+                            fila += '<td>'+value['creador_ejercicio']+'</td>';
+                            fila += '<td id="rowVer" class="boton_ver_ejercicio" data-number='+ value["id_ejercicio"] +'><a data-toggle="modal" href="#modalVerEejercicio"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'
+                            fila += '</tr>';
+                    
+                            $('#tabla_editar_hoja_ejercicios tbody').append(fila);
+
+                        });
+                        
+                    }
+                }
+            });
+        }
+    });
+
+    $('#agregarEjerAHoja').click(function(){
+        sessionStorage.setItem("dondeEstoy", "adm-hojas-editar-hoja");
+        $("input[id=checkbox-editar-hoja]").prop('checked', false);
+        $("#modalAgregarEjerAHoja").modal('show');
+    });
+
+    $('#cancelar-editar-hoja').click(function(){
+        sessionStorage.setItem("dondeEstoy", "adm-hojas-lista-hojas");
+        location.reload();
+    });
+
+    $(this).on("click", "#rowInfoHoja", function(){
+        var mi_id = $(this).attr("data-number");
+        console.log(mi_id);
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getEditarHojaEjercicio.php",
+            data: { id: mi_id },
+            success: function(response){
+                console.log(response);
+                var resultado = response.substring(23);
+                var res = JSON.parse(resultado);
+                numEjerHoja = res["numEjercicios"];
+                var id_hoja = res["id_hoja"];
+                var nombre_hoja = res["nombre_hoja"];
+                var hayEjercicios = res["hayEjercicios"];
+                
+                delete res["id_hoja"];
+                delete res["nombre_hoja"];
+                delete res["hayEjercicios"];
+                delete res["numEjercicios"];
+                
+                if(response !== null){
+                    if (hayEjercicios !== 0 ){
+                        $("#modalInfoHoja").modal('show');
+                        $("#infoHojaId").val(id_hoja);
+                        $("#infoHojaNombre").val(nombre_hoja);
+                        $("#tabla_info_hoja_ejercicios > tbody").empty();
+                        var cont = 1;
+                        $.each(res,function(registro, value) {
+                            
+                            fila = '<tr>';
+                            fila += '<td>'+value['descripcion']+'</td>';
+                            fila += '<td>'+value['nivel']+'</td>';
+                            fila += '<td>'+value['tipo']+'</td>';
+                            fila += '<td>'+value['creador_ejercicio']+'</td>';
+                            fila += '<td id="rowVerEjerInfo" class="boton_ver_ejercicio" data-number='+ value["id_ejercicio"] +'><a data-toggle="modal" href="#modalVerEjercicioInfo"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'
+                            fila += '</tr>';
+                    
+                            $('#tabla_info_hoja_ejercicios tbody').append(fila);
+
+                        });
+                    }else{
+                        $("#modalInfoHoja").modal('show');
+                        $("#infoHojaId").val(id_hoja);
+                        $("#infoHojaNombre").val(nombre_hoja);
+                        $("#tabla_info_hoja_ejercicios > tbody").empty();
+                    }
+                }
+            }
+        });
+    });
+
+    $(this).on("click", "#rowVerEjerInfo", function(){
+        var mi_id = $(this).attr("data-number");
+
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getVerEjercicio.php",
+            data: { id: mi_id },
+            success: function(response){
+                var resultado = response.substring(23);
+                var res = JSON.parse(resultado);
+                console.log(res);
+                if(response !== null){
+                    $("#modalInfoHoja").modal('hide');
+                    $("#modalVerEjercicioInfo").modal('show');
+
+                    $("#verIDueno").text(res.dueno);
+                    $("#verITablas").text(res.tablas);
+                    $("#verICategoria").text(res.categoria);
+                    $("#verINivel").text(res.nivel);
+                    if(res.deshabilitar === "0"){
+                        $("#verIDeshabilitar").text("Habilitado");
+                    }else{
+                        $("#verIDeshabilitar").text("Deshabilitado");
+                    }
+                    $("#verIDescripcion").text(res.descripcion);
+                    $("#verIEnunciado").text(res.enunciado);
+                    $("#verISolucion").text(res.solucion);
+                }
+            }
+        });
+    });
+
+    $(this).on("click", "#volverAlModalI", function(){
+        $("#modalInfoHoja").modal('show');
+        // $( "#rowInfoHoja" ).trigger( "click" );
+     });
+
+    $(this).on("click", "#rowBorrarHoja", function(){
+        var mi_id = $(this).attr("data-number");
+
+        var r = confirm("Vas a eliminar la hoja.¿Estás seguro?");
+        if (r == true){
+            $.ajax({
+                method: "POST",
+                url: "../templates/adm_profesor/getBorrarHoja.php",
+                data: { id: mi_id },
+                success: function(response)
+                {
+                    // *********************
+                    location.reload();
+                    // *********************
+                }
+            });
+        }
+    });
+
+   
+    $.ajax({
+        method: "GET",
+        url: "../templates/adm_profesor/getListarHojas.php",
+        data: { orden: 0 },
+        success: function(response){
+            
+            var resultado = response.substring(23);
+            
+            if(response !== null){
+                $("#table-listar-hojas > tbody").append(resultado);
+
+            }
+        }
+    });
+
+    $(".nombreProfListar").click(function(){
+        //console.log(ordenarCreadorHojaListar);
+        if (ordenarCreadorHojaListar === 1){
+            ordenarCreadorHojaListar = 2;
+        } else{
+            ordenarCreadorHojaListar = 1;
+        }
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getListarHojas.php",
+            data: { orden: ordenarCreadorHojaListar },
+            success: function(response){
+                var resultado = response.substring(23);
+                if(response !== null){
+
+                    $("#table-listar-hojas > tbody").empty();
+                    $("#table-listar-hojas > tbody").append(resultado);
+
+                }
+            }
+        });
+    });
+
+    $(".nivelAgregarEjer").click(function(){
+        if(ordenarNivelAgregarEjerAHoja === 1){
+            ordenarNivelAgregarEjerAHoja = 2;
+        }else{
+            ordenarNivelAgregarEjerAHoja = 1;
+        }
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getEjerciciosParaAgregar.php",
+            data: { orden: ordenarNivelAgregarEjerAHoja },
+            success: function(response){
+                
+                var resultado = response.substring(23);
+                if(response !== null){
+
+                    $("#tabla_agregar_ejer_hoja_ejercicios > tbody").empty();
+                    $("#tabla_agregar_ejer_hoja_ejercicios > tbody").append(resultado);
+
+                }
+            }
+        });
+    });
+
+    $(".tipoAgregarEjer").click(function(){
+        if(ordenarTipoAgregarEjerAHoja === 3){
+            ordenarTipoAgregarEjerAHoja = 4;
+        }else{
+            ordenarTipoAgregarEjerAHoja = 3;
+        }
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getEjerciciosParaAgregar.php",
+            data: { orden: ordenarTipoAgregarEjerAHoja },
+            success: function(response){
+                var resultado = response.substring(23);
+                console.log(resultado);
+                if(response !== null){
+
+                    $("#tabla_agregar_ejer_hoja_ejercicios > tbody").empty();
+                    $("#tabla_agregar_ejer_hoja_ejercicios > tbody").append(resultado);
+
+                }
+            }
+        });
+    });
+
+    $(".creadorAgregarEjer").click(function(){
+        if(ordenarCreadorAgregarEjerAHoja === 5){
+            ordenarCreadorAgregarEjerAHoja = 6;
+        }else{
+            ordenarCreadorAgregarEjerAHoja = 5;
+        }
+        $.ajax({
+            method: "GET",
+            url: "../templates/adm_profesor/getEjerciciosParaAgregar.php",
+            data: { orden: ordenarCreadorAgregarEjerAHoja },
+            success: function(response){
+                var resultado = response.substring(23);
+                if(response !== null){
+
+                    $("#tabla_agregar_ejer_hoja_ejercicios > tbody").empty();
+                    $("#tabla_agregar_ejer_hoja_ejercicios > tbody").append(resultado);
+
+                }
+            }
+        });
+    });
+    
+/*****Avisos al dueño de la hoja cuando se modifica algun ejercicio*****/
     $('.marcarLeidos').click(function(){      
         var mi_user = $(this).attr("data-name");
 
@@ -807,5 +1264,33 @@ $(document).ready(function(){
         location.reload();
               
     });
+/***** FIN AVISOS *****/
+
+
+/*** ESTADISTICAS ***/
+    //Toggle de los apartados
+    $("#ap1").click(function () {
+        $(this).html($(this).html() === '<span>Por alumno<i class="fa fa-angle-up"></i></span>' ? '<span>Por alumno<i class="fa fa-angle-down"></i></span>' : '<span>Por alumno<i class="fa fa-angle-up"></i></span>');
+        $(this).parent().find(".ap1-i").slideToggle();
+    });
+    $("#ap2").click(function () {
+        $(this).html($(this).html() === '<span>Por hoja de ejercicios<i class="fa fa-angle-up"></i></span>' ? '<span>Por hoja de ejercicios<i class="fa fa-angle-down"></i></span>' : '<span>Por hoja de ejercicios<i class="fa fa-angle-up"></i></span>');
+        $(this).parent().find(".ap2-i").slideToggle();
+    });
+    $("#ap3").click(function () {
+        $(this).html($(this).html() === '<span>Por ejercicio<i class="fa fa-angle-up"></i></span>' ? '<span>Por ejercicio<i class="fa fa-angle-down"></i></span>' : '<span>Por ejercicio<i class="fa fa-angle-up"></i></span>');
+        $(this).parent().find(".ap3-i").slideToggle();
+    });
+    $("#ap4").click(function () {
+        $(this).html($(this).html() === '<span>Por tipo de ejercicio<i class="fa fa-angle-up"></i></span>' ? '<span>Por tipo de ejercicio<i class="fa fa-angle-down"></i></span>' : '<span>Por tipo de ejercicio<i class="fa fa-angle-up"></i></span>');
+        $(this).parent().find(".ap4-i").slideToggle();
+    });
+    $("#ap5").click(function () {
+        $(this).html($(this).html() === '<span>Por nivel de ejercicio<i class="fa fa-angle-up"></i></span>' ? '<span>Por nivel de ejercicio<i class="fa fa-angle-down"></i></span>' : '<span>Por nivel de ejercicio<i class="fa fa-angle-up"></i></span>');
+        $(this).parent().find(".ap5-i").slideToggle();
+    });
+
+        
+
 
 });

@@ -18,9 +18,4 @@
 	
 	header("Location: ../templates/index_profesor.php");
 	exit();
-
-
-
-
-
 ?>

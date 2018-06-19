@@ -30,8 +30,8 @@
 	    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	 -->
 	    <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-	    <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script>
-  		<script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script>
+	    <!-- <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/all.js"></script> -->
+  		<!-- <script defer src="https://use.fontawesome.com/releases/[VERSION]/js/v4-shims.js"></script> -->
   		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.js" ></script>
@@ -41,6 +41,10 @@
 
 		<?php include("modals/modals_cerrar_sesion.php"); ?>
 		<?php include("modals/modals_ver_ejercicio.php"); ?>
+		<?php include("modals/modals_ver_ejercicio_Agregar.php"); ?>
+		<?php include("modals/modals_ver_ejercicio_info.php"); ?>
+		<?php include("modals/modals_agregar_ejer_a_hoja.php"); ?>
+		<?php include("modals/modals_info_hoja.php"); ?>
 		<?php include("navbar/navbar_menu_profesor.php"); ?>
 		<div class="contenedor">
 			

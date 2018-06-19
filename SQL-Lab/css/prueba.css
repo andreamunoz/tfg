@@ -873,7 +873,8 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
   color: #fff;
 }
 
-table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td {
+table.table-bordered.dataTable tbody th, 
+table.table-bordered.dataTable tbody td {
   border-bottom: 1px solid rgba(48,48,48,0.1) !important;
 }
 
@@ -883,10 +884,13 @@ table.table-bordered.dataTable tbody th, table.table-bordered.dataTable tbody td
   height: 170px;
 }
 
-#tabla_crear_hoja_ejercicios .primera{
+#tabla_crear_hoja_ejercicios .primera, 
+#tabla_editar_hoja_ejercicios .primera{
   padding-right: 20px;
 }
-#tabla_crear_hoja_ejercicios .form-check-input{
+#tabla_crear_hoja_ejercicios .form-check-input, 
+#tabla_agregar_ejer_hoja_ejercicios .form-check-input, 
+#tabla_editar_hoja_ejercicios .form-check-input{
   margin-left: 0px; 
   margin-top: 7px;
 }
@@ -922,4 +926,41 @@ span.red{
 .marcarLeidos:hover, .mostrarTodos:hover, .marcarTodosLeidos:hover, .mostrarNuevos:hover{
   color: #24609d ;
   cursor:pointer;
+}
+
+#agregarEjerAHoja a{
+  color: white !important;
+}
+
+.cursorChange{
+  cursor:pointer;
+}
+
+/*#modalVerEejercicio{
+  z-index: 10;
+}
+#modalAgregarEjerAHoja{
+  z-index: 5;
+}*/
+.apartado{
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  /*background-color: lightblue;*/
+  width: 100%;
+  margin: 8px 0; 
+  padding: 0 10px;
+  border-bottom: 1px solid #24609d;
+  cursor:pointer;
+  /*border-radius: 5px;*/
+}
+.apartado span i{
+  float: right;
+  line-height: 40px;
+}
+
+.apartado-info{
+  height: 200px;
+  background-color: lightblue;
+  margin-bottom: 15px;
 }

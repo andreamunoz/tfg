@@ -294,6 +294,54 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+    function getAllEjerciciosAutorizadosNivelASC(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM `sqlab_ejercicio` AS e, `sqlab_usuario` AS u WHERE e.creador_ejercicio = u.user AND u.autoriza = 1 ORDER BY e.nivel ASC;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    function getAllEjerciciosAutorizadosNivelDESC(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM `sqlab_ejercicio` AS e, `sqlab_usuario` AS u WHERE e.creador_ejercicio = u.user AND u.autoriza = 1 ORDER BY e.nivel DESC;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    function getAllEjerciciosAutorizadosTipoASC(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM `sqlab_ejercicio` AS e, `sqlab_usuario` AS u WHERE e.creador_ejercicio = u.user AND u.autoriza = 1 ORDER BY e.tipo ASC;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    function getAllEjerciciosAutorizadosTipoDESC(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM `sqlab_ejercicio` AS e, `sqlab_usuario` AS u WHERE e.creador_ejercicio = u.user AND u.autoriza = 1 ORDER BY e.tipo DESC;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    function getAllEjerciciosAutorizadosCreadorASC(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM `sqlab_ejercicio` AS e, `sqlab_usuario` AS u WHERE e.creador_ejercicio = u.user AND u.autoriza = 1 ORDER BY e.creador_ejercicio ASC;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    function getAllEjerciciosAutorizadosCreadorDESC(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM `sqlab_ejercicio` AS e, `sqlab_usuario` AS u WHERE e.creador_ejercicio = u.user AND u.autoriza = 1 ORDER BY e.creador_ejercicio DESC;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
 
     function comprobarSiEstaUsada($tabla){
         $connect = new Tools();

@@ -36,11 +36,21 @@ class HojaEjercicio{
         return $consulta;
     }
     
-    function getAllHojasDesc(){
+    function getAllHojasCreadorASC(){
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM sqlab_hoja_ejercicios ORDER BY nombre_hoja DESC;";
+        $sql = "SELECT * FROM sqlab_hoja_ejercicios ORDER BY creador_hoja ASC;";
+
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    function getAllHojasCreadorDESC(){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM sqlab_hoja_ejercicios ORDER BY creador_hoja DESC;";
 
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
@@ -101,5 +111,48 @@ class HojaEjercicio{
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
+    }
+
+    function deleteEjercicioDeHoja($id_hoja, $id_ejercicio){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "DELETE FROM sqlab_esta_contenido WHERE id_ejercicio = $id_ejercicio AND id_hoja = $id_hoja;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
+    function getTodosIdEjerDeHoja($id_hoja){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT id_ejercicio FROM sqlab_esta_contenido WHERE id_hoja = $id_hoja;";
+        $consulta = mysqli_query($conexion,$sql);
+        $seleccionados = array();
+        while($row = mysqli_fetch_row($consulta) ){
+            array_push($seleccionados, intval($row[0]));
+        }
+        $connect->disconnectDB($conexion);
+        return $seleccionados;
+    }
+    function setNuevosEjerciciosAHoja($id_hoja, $seleccionados){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $ok = true;;
+        $rs = mysqli_query($conexion,"SELECT MAX(orden) AS id FROM sqlab_esta_contenido WHERE id_hoja = $id_hoja");
+        var_dump($rs);
+        if( $row = mysqli_fetch_row($rs)){
+            $orden = intval($row[0]);
+            foreach ($seleccionados as $key => $value) {
+                var_dump($value);
+                $sql2 = "insert into sqlab_esta_contenido (id_ejercicio, id_hoja, orden) values ('".$value."','".$id_hoja."','".$orden."');";
+                $consulta2 = mysqli_query($conexion,$sql2);
+                if(!($consulta2)){ 
+                    $ok = false;
+                }
+                $orden++;
+            }
+        }
+        $connect->disconnectDB($conexion);
+        return $ok;
     }
 }

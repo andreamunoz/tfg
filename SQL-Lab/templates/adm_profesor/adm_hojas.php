@@ -167,7 +167,7 @@
 
 		<div class="col-md-11 lista-hoja" id="listarHojaEjercicios">
 			<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/listar_hojasejercicios.php">
-				<h3>Lista de Hojas</h3>
+				<h3>Gestión de Hojas</h3>
 				<p class="pl-5">Se podrán ver los ejercicios dentro de sus propias hojas.</p>
 				<div class="hrr"></div><br>
   				<div id="accordion ">

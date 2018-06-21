@@ -41,6 +41,8 @@
 	$arrayComillas = array("`", "'");
 	$solucion = str_replace($arrayComillas, '"', $solucion);
 
+	$solucion = strtolower($solucion);
+
 	function quitarPalabrasFinales($frase){
 		$palabrasBuscar = array(" where "," order "," having "," group "," limit "," on ", ";");
 		$palabras = array("where","order","having","grpup","limit","on", ";");
@@ -309,20 +311,21 @@
 	}
 
 	function distinguirSentencia($solucionPropuesta, $user_tablas){
-		$solucionPropuesta = preg_replace("[\n|\r|\n\r|\t]", " ",$solucionPropuesta);
+		$solucionPropuesta = mb_eregi_replace("[\n|\r|\n\r|\t]", " ",$solucionPropuesta);
 		$solucionPropuesta = utf8_decode($solucionPropuesta);
 		$solucionPropuesta = str_replace('?', '', $solucionPropuesta);
+		$solucionPropuesta = utf8_encode($solucionPropuesta);
 		$solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
 		$sentencia = explode(" ", $solucionPropuesta, 2);
 
 		$resultado = array();
-		if (strtoupper($sentencia[0]) === "SELECT"){
+		if (strtoupper($sentencia[0]) === "select"){
 			$resultado = validarSelect($solucionPropuesta, $user_tablas);
-		}elseif (strtoupper($sentencia[0]) === "INSERT"){
+		}elseif (strtoupper($sentencia[0]) === "insert"){
 			$resultado = validarInsert($solucionPropuesta, $user_tablas);
-		}elseif (strtoupper($sentencia[0]) === "UPDATE") {
+		}elseif (strtoupper($sentencia[0]) === "update") {
 			$resultado = validarUpdate($solucionPropuesta, $user_tablas);
-		}elseif (strtoupper($sentencia[0]) === "DELETE"){
+		}elseif (strtoupper($sentencia[0]) === "delete"){
 			$resultado = validarDelete($solucionPropuesta, $user_tablas);
 
 		}else{

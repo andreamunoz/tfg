@@ -44,7 +44,7 @@
 	$arrayComillas = array("`", "'");
 	$solucion = str_replace($arrayComillas, '"', $solucion);
 
-	$solucion = mb_strtolower($solucion);
+	$solucion = strtolower($solucion);
 
 	function quitarPalabrasFinales($frase){
 
@@ -162,7 +162,7 @@
 
 		$ejer = new Ejercicio();
 		$tablasDisponibles = $ejer->getTodasTablas();
-		
+
 		$ok = validarTablas($tablasSolucion, $tablasDisponibles);
 
 		$resultado = array();
@@ -170,9 +170,11 @@
 			$ejer = new Ejercicio();
 			for ($i =0; $i<count($tablasSolucion); $i++) {
 				$nombreAntiguo = " ".$tablasSolucionSinDueno[$i];
-				$solucion = str_replace($nombreAntiguo, " ".mb_strtolower($tablasSolucion[$i]), $solucion );
+				// var_dump($nombreAntiguo." -> ".$tablasSolucion[$i]);
+				$solucion = str_replace($nombreAntiguo, " ".strtolower($tablasSolucion[$i]), $solucion );
+			// var_dump($solucion);
 			}
-
+		
 			$resultadoSolucion = $ejer->executeSolucion($solucion);
 
 			if($resultadoSolucion[0] === false){
@@ -318,15 +320,16 @@
 	}
 
 	function distinguirSentencia($solucionPropuesta, $user_tablas){
-
-		$solucionPropuesta = preg_replace("[\n|\r|\n\r|\t]", " ",$solucionPropuesta);
-		// var_dump($solucionPropuesta);
+		//var_dump("AL ENTRAR".$solucionPropuesta);
+		//$solucionPropuesta = preg_replace("[\n|\r|\n\r|\t]", " ",$solucionPropuesta);
+		$solucionPropuesta = mb_eregi_replace("[\n|\r|\n\r|\t]"," ",$solucionPropuesta);
+		//var_dump("despues replace1".$solucionPropuesta);
 		$solucionPropuesta = utf8_decode($solucionPropuesta);
-		// var_dump($solucionPropuesta);
+		// var_dump("decode".$solucionPropuesta);
 		$solucionPropuesta = str_replace('?', '', $solucionPropuesta);
-		// var_dump($solucionPropuesta);
+		// var_dump("despues replace1".$solucionPropuesta);
 		$solucionPropuesta = utf8_encode($solucionPropuesta);
-
+		//var_dump("encode".$solucionPropuesta);
 
 		$solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
 		$sentencia = explode(" ", $solucionPropuesta, 2);
@@ -349,7 +352,7 @@
 	}
 
 	$resultado = distinguirSentencia($solucion, $user_tablas); 
-
+	// var_dump($resultado);
 	if($resultado[0]){
 		
 			$ejer = new Ejercicio();

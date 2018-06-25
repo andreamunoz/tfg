@@ -319,13 +319,13 @@
 		$sentencia = explode(" ", $solucionPropuesta, 2);
 
 		$resultado = array();
-		if (strtoupper($sentencia[0]) === "select"){
+		if ($sentencia[0]) === "select"){
 			$resultado = validarSelect($solucionPropuesta, $user_tablas);
-		}elseif (strtoupper($sentencia[0]) === "insert"){
+		}elseif ($sentencia[0] === "insert"){
 			$resultado = validarInsert($solucionPropuesta, $user_tablas);
-		}elseif (strtoupper($sentencia[0]) === "update") {
+		}elseif ($sentencia[0] === "update") {
 			$resultado = validarUpdate($solucionPropuesta, $user_tablas);
-		}elseif (strtoupper($sentencia[0]) === "delete"){
+		}elseif ($sentencia[0] === "delete"){
 			$resultado = validarDelete($solucionPropuesta, $user_tablas);
 
 		}else{

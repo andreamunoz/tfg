@@ -13,6 +13,7 @@
 	$arrayResultado = $admin_schema->obtenerSentencias($code, $user_name);
 	// var_dump($arrayResultado);
 	$_SESSION['message'] = $arrayResultado; 
+	//var_dump($arrayResultado);
 	header("Location: ../templates/index_profesor.php");
 	exit();
 ?>

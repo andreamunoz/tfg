@@ -142,7 +142,7 @@ class Administrar_schema{
                 //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
                 $nuevoNombre = $profe."_".$nombre_tabla;
                 
-                $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla, $nuevoNombre, $miSentenciaEntera);
+                $miSentenciaEntera = $admin->reemplazar_primero(" ".$nombre_tabla." ", $nuevoNombre, $miSentenciaEntera);
 
                 //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
                 $miSentenciaEntera = str_replace("'", '"', $miSentenciaEntera);

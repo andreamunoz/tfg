@@ -20,7 +20,7 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="es">
 	<head>
 		<meta http-equiv="Content-Type" content="text/php; charset=utf-8"/>
 		<link href="../css/prueba.css" rel="stylesheet" type="text/css">

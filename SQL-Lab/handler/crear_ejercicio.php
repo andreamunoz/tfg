@@ -47,9 +47,9 @@
 	$solucion = strtolower($solucion);
 
 	function quitarPalabrasFinales($frase){
-
-		$palabrasBuscar = array(" where "," order "," having "," group "," limit "," on ", ";");
-		$palabras = array("where","order","having ","group","limit","on", ";");
+		
+		$palabrasBuscar = array(" where "," group "," having "," order "," limit "," on ", ";");
+		$palabras = array("where","group","having","order","limit","on", ";");
 		$quitarFinal[0] = $frase;
 		$nuevafrase = $frase;
 		for($i=0; $i<count($palabras); $i++){
@@ -59,7 +59,6 @@
 				$quitarFinal = trim($quitarFinal[0]);
 			}
 		}
-
 		return $quitarFinal;
 	}
 
@@ -140,12 +139,12 @@
 	function validarSelect($solucion, $dueno){
 
 		$quitarFrom = preg_split("/ from /i", $solucion);
-
+		var_dump($quitarFrom);
 		$i=1;
 		$tablas= array();
 		while ($i < count($quitarFrom)){
 			$tablas[$i - 1] = quitarPalabrasFinales($quitarFrom[$i]);
-			// var_dump($tablas[$i - 1]);
+			var_dump($tablas);
 			$tablas[$i - 1] = quitarPalabrasIntermadias($tablas[$i - 1]);
 			// var_dump($tablas[$i - 1]);
 			$tablas[$i - 1] = quitarAlias($tablas[$i - 1]);
@@ -370,6 +369,7 @@
 	}else{
 		$_SESSION['message'] = "Error. Por favor repase las tablas de la solución y asegurese de que sean válidas.";
 	}
+	//var_dump($resultado);
 	header("Location: ../templates/index_profesor.php");
 	exit();
 ?>

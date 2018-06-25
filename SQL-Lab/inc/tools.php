@@ -15,6 +15,7 @@ class Tools{
         }
         mysqli_query ($conexion,"SET NAMES 'utf8'");
         mysqli_set_charset($conexion, "utf8");
+        mysqli_query($conexion, "SET collation_connection = utf8_spanish_ci");
         return $conexion;
     }
 

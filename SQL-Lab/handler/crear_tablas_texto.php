@@ -5,7 +5,7 @@
 	session_start();
 
 	$user_name = $_SESSION['user'];
-	$code = mb_strtolower($code);
+	$code = strtolower($code);
 	// print_r($_SESSION);
 	
 	$admin_schema = new Administrar_schema();

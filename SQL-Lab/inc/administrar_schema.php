@@ -103,9 +103,9 @@ class Administrar_schema{
     }
 
     function reemplazar_primero($buscar, $remplazar, $texto){
-        $pos = strpos($texto, $buscar);
+        $pos = strpos($texto, " ".$buscar);
         if($pos !== false){
-            $texto = substr_replace($texto, $remplazar, $pos, strlen($buscar));
+            $texto = substr_replace($texto, $remplazar, $pos+1, strlen($buscar));
         }
         return $texto;
     }
@@ -142,7 +142,7 @@ class Administrar_schema{
                 //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
                 $nuevoNombre = $profe."_".$nombre_tabla;
                 
-                $miSentenciaEntera = $admin->reemplazar_primero(" ".$nombre_tabla." ", " ".$nuevoNombre." ", $miSentenciaEntera);
+                $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla, $nuevoNombre, $miSentenciaEntera);
 
                 //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
                 $miSentenciaEntera = str_replace("'", '"', $miSentenciaEntera);

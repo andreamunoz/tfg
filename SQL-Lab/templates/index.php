@@ -16,7 +16,7 @@
 
     //print( "lang:".$lang);
     //print(" sesionlang:".$_SESSION['lang']);
-
+    header("Content-Type: text/html;charset=utf-8");
 ?>
 
 <!DOCTYPE html>

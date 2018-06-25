@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	$orden = $_GET["orden"];
-	var_dump($orden);
+	//var_dump($orden);
     include_once '../../inc/hoja_ejercicio.php';
     include_once '../../inc/esta_contenido.php';
     $contenido = "";
@@ -39,6 +39,8 @@
 	    		$contenido = $contenido.'</tr>';
 	    
 	    	}                                   
+	    }else{
+	    	$contenido = "";
 	    }
     
     echo $contenido;

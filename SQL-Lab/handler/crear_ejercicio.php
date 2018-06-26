@@ -123,8 +123,10 @@
 		$total = array();
 		$contadorReal = 0;
 		foreach ($aux as $key => $value) {
-			
-			$total[$contadorReal] = $value;
+			$auxValue = str_replace(")","", $value);
+			$auxValue = str_replace(",","", $auxValue);
+
+			$total[$contadorReal] = $auxValue;
 			$contadorReal++;
 		}
 		return $total;

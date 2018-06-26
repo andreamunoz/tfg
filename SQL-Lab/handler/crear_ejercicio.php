@@ -120,15 +120,14 @@
 	function eliminarRepetidos($array){
 
 		$aux = array_unique($array);
+		$total = array();
 		$contadorReal = 0;
 		foreach ($aux as $key => $value) {
 			
-			if($key != $contadorReal){
-				$aux[$contadorReal] = $value;
-			}
+			$total[$contadorReal] = $value;
 			$contadorReal++;
 		}
-		return $aux;
+		return $total;
 	}
 
 	function anadirDueno($tablas, $dueno){

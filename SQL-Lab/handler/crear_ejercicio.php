@@ -116,6 +116,20 @@
 			}
 		}
 	}
+	
+	function eliminarRepetidos($array){
+
+		$aux = array_unique($array);
+		$contadorReal = 0;
+		foreach ($aux as $key => $value) {
+			
+			if($key != $contadorReal){
+				$aux[$contadorReal] = $value;
+			}
+			$contadorReal++;
+		}
+		return $aux;
+	}
 
 	function anadirDueno($tablas, $dueno){
 		$solucion = array();
@@ -136,10 +150,11 @@
 		return $ok;
 	}
 
+
 	function validarSelect($solucion, $dueno){
 
 		$quitarFrom = preg_split("/ from /i", $solucion);
-		var_dump($quitarFrom);
+	
 		$i=1;
 		$tablas= array();
 		while ($i < count($quitarFrom)){
@@ -155,8 +170,10 @@
 		$count = 0; 
 
 		juntarArrayRecursivo($total, $tablas, $count);
-
-		$tablasSolucionSinDueno = array_unique($total);
+		var_dump($total);
+		$tablasSolucionSinDueno = eliminarRepetidos($total);
+		var_dump($tablasSolucionSinDueno);
+		// $tablasSolucionSinDueno = array_unique($total);
 		$tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
 
 		$ejer = new Ejercicio();
@@ -171,7 +188,7 @@
 				$nombreAntiguo = " ".$tablasSolucionSinDueno[$i];
 				// var_dump($nombreAntiguo." -> ".$tablasSolucion[$i]);
 				$solucion = str_replace($nombreAntiguo, " ".strtolower($tablasSolucion[$i]), $solucion );
-			// var_dump($solucion);
+				//var_dump($solucion);
 			}
 		
 			$resultadoSolucion = $ejer->executeSolucion($solucion);
@@ -370,6 +387,6 @@
 		$_SESSION['message'] = "Error. Por favor repase las tablas de la solución y asegurese de que sean válidas.";
 	}
 	//var_dump($resultado);
-	header("Location: ../templates/index_profesor.php");
-	exit();
+	//header("Location: ../templates/index_profesor.php");
+	//exit();
 ?>

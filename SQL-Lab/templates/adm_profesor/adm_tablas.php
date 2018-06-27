@@ -13,7 +13,7 @@
 							<label for="enunciado"><?php echo trad( "Inserte el código aquí", $lang) ?></label>
 						</div>	
 						<div class="panel-footer" >
-	  						<textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="5" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required></textarea>
+	  						<textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="10" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required></textarea>
 	  					</div>
 	  					
 	  				</div>	
@@ -35,7 +35,7 @@
 						</div>
 	  				</div>
 	  			</form> -->
-				
+				<br><br><br>
 				</div>				
 			</div>
 		</div>

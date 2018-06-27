@@ -150,6 +150,14 @@
 		}
 		return $ok;
 	}
+	function sustituirNuevoNombreTabla($tablasSolucionSinDueño, $solucion){
+		foreach ($tablasSolucionSinDueño as $key => $value) {
+			if (!stripos($solucion, $value.".")){
+				var_dump($value);
+			}
+		}
+		return $solucion;
+	}
 
 
 	function validarSelect($solucion, $dueno){
@@ -160,7 +168,7 @@
 		$tablas= array();
 		while ($i < count($quitarFrom)){
 			$tablas[$i - 1] = quitarPalabrasFinales($quitarFrom[$i]);
-			var_dump($tablas);
+			//var_dump($tablas);
 			$tablas[$i - 1] = quitarPalabrasIntermadias($tablas[$i - 1]);
 			// var_dump($tablas[$i - 1]);
 			$tablas[$i - 1] = quitarAlias($tablas[$i - 1]);
@@ -171,10 +179,9 @@
 		$count = 0; 
 
 		juntarArrayRecursivo($total, $tablas, $count);
-		var_dump($total);
+		
 		$tablasSolucionSinDueno = eliminarRepetidos($total);
-		var_dump($tablasSolucionSinDueno);
-		// $tablasSolucionSinDueno = array_unique($total);
+		
 		$tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
 
 		$ejer = new Ejercicio();
@@ -191,6 +198,7 @@
 				$solucion = str_replace($nombreAntiguo, " ".strtolower($tablasSolucion[$i]), $solucion );
 				//var_dump($solucion);
 			}
+			$solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion);
 		
 			$resultadoSolucion = $ejer->executeSolucion($solucion);
 
@@ -387,7 +395,7 @@
 	}else{
 		$_SESSION['message'] = "Error. Por favor repase las tablas de la solución y asegurese de que sean válidas.";
 	}
-	//var_dump($resultado);
+	var_dump($resultado);
 	//header("Location: ../templates/index_profesor.php");
 	//exit();
 ?>

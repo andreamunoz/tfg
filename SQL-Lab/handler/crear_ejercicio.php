@@ -48,8 +48,8 @@
 
 	function quitarPalabrasFinales($frase){
 		
-		$palabrasBuscar = array(" where "," group "," having "," order "," limit "," on ", ";");
-		$palabras = array("where","group","having","order","limit","on", ";");
+		$palabrasBuscar = array(" where "," group "," having "," order "," limit ", ";");
+		$palabras = array("where","group","having","order","limit", ";");
 		$quitarFinal[0] = $frase;
 		$nuevafrase = $frase;
 		for($i=0; $i<count($palabras); $i++){
@@ -100,6 +100,7 @@
 				$tablas[$key] = $nombre[0];
 			}
 		}
+
 		return $tablas;
 	}
 
@@ -165,7 +166,14 @@
 		}
 		return $solucion;*/
 		$cambios = array('!='=>' ', ','=>' ','('=>' ',')'=>' ','='=>' ','>'=>' ','<'=>' ','>='=>' ','<='=>' ','<>'=>'','&&'=>' ','||'=>' ');
-		$aux = strtr($cambios, $solucion);
+		$aux = strtr($solucion,$cambios);
+		// $cuantosFrom = substr_count($aux,"from");
+		if(preg_match('/from/',$aux, $coincidencias)){
+			var_dump($coincidencias);
+		}
+		// for($i=0; $i<count($coincidencias); $i++){
+
+		// }
 		var_dump($aux);
 		var_dump($solucion);
 	}

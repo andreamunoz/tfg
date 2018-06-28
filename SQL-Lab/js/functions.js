@@ -687,7 +687,7 @@ $(document).ready(function(){
     $('.boton_borrar_ejercicio').click(function(){      
         var mi_id = $(this).attr("data-number");
 
-        var r = confirm("Vas a eliminar el ejercicio "+mi_id+".¿Estás seguro?");
+        var r = confirm("¿Estás seguro de querer borrar el ejercicio?");
         if (r == true){
             $.ajax({
                 method: "POST",

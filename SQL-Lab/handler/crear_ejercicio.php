@@ -150,13 +150,24 @@
 		}
 		return $ok;
 	}
-	function sustituirNuevoNombreTabla($tablasSolucionSinDueño, $solucion){
+	function sustituirNuevoNombreTabla($tablasSolucionSinDueño, $solucion, $dueno){
+		/*$solucionPartida = explode(" ", $solucion);
 		foreach ($tablasSolucionSinDueño as $key => $value) {
-			if (!stripos($solucion, $value.".")){
-				var_dump($value);
+			// var_dump($key." -> ".$value);
+			for($i=0; $i< count($solucionPartida); $i++ ){
+
+				if (stripos($solucionPartida, " ".$value.".") !== false){
+					var_dump($value);
+					
+					str_replace($value, " ".strtolower($tablasSolucion[$i]), $solucion );
+				}
 			}
 		}
-		return $solucion;
+		return $solucion;*/
+		$cambios = array('!='=>' ', ','=>' ','('=>' ',')'=>' ','='=>' ','>'=>' ','<'=>' ','>='=>' ','<='=>' ','<>'=>'','&&'=>' ','||'=>' ');
+		$aux = strtr($cambios, $solucion);
+		var_dump($aux);
+		var_dump($solucion);
 	}
 
 
@@ -192,13 +203,13 @@
 		$resultado = array();
 		if($ok){
 			$ejer = new Ejercicio();
-			for ($i =0; $i<count($tablasSolucion); $i++) {
-				$nombreAntiguo = " ".$tablasSolucionSinDueno[$i];
-				// var_dump($nombreAntiguo." -> ".$tablasSolucion[$i]);
-				$solucion = str_replace($nombreAntiguo, " ".strtolower($tablasSolucion[$i]), $solucion );
-				//var_dump($solucion);
-			}
-			$solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion);
+			// for ($i =0; $i<count($tablasSolucion); $i++) {
+			// 	$nombreAntiguo = " ".$tablasSolucionSinDueno[$i];
+			// 	// var_dump($nombreAntiguo." -> ".$tablasSolucion[$i]);
+			// 	$solucion = str_replace($nombreAntiguo, " ".strtolower($tablasSolucion[$i]), $solucion );
+			// 	//var_dump($solucion);
+			// }
+			$solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
 		
 			$resultadoSolucion = $ejer->executeSolucion($solucion);
 

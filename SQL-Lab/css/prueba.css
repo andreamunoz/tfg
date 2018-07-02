@@ -791,7 +791,7 @@ div.dataTables_wrapper div.dataTables_length label {
   color: rgba(48,48,48,0.5);
 }
 select.form-control:not([size]):not([multiple]) {
-  height: 28px !important;
+  height: 30px !important;
   width: 110px;
   padding-top: 0px;
 }
@@ -934,6 +934,11 @@ span.red{
 
 .cursorChange{
   cursor:pointer;
+}
+
+.selector-user-gestion select{
+  height: 35px !important;
+  width: 140px !important;
 }
 
 /*#modalVerEejercicio{

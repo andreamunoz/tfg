@@ -655,7 +655,8 @@ $(document).ready(function(){
     $(".selector-user select").change(function() {
         var form_data = {
                 is_ajax: 1,
-                dueno: $(".selector-user select option:checked").val()
+                dueno: $(".selector-user select option:checked").val(),
+                cambio: true
         };
         $.ajax({
                 type: "POST",
@@ -1205,6 +1206,36 @@ $(document).ready(function(){
             }
         });
     });
+    
+    /** SELECT USER DE GESTION DE EJERCICIOS **/
+    $.ajax({
+        type: "POST",
+        url: "../templates/adm_profesor/getUser.php",
+        success: function(response)
+        {
+            $(".selector-user-gestion select").html(response).fadeIn();
+        }
+    });
+
+    $(".selector-user-gestion select").change(function() {
+        var form_data = {
+                is_ajax: 1,
+                dueno: $(".selector-user-gestion select option:checked").val(),
+                cambio: true
+        };
+        $.ajax({
+                type: "POST",
+                url: "../templates/adm_profesor/getGestionarEjerciciosProfesor.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    //$('.selector-tabla select').html(response).fadeIn();
+                }
+        });
+    });
+    /** FIN SELECT USER DE GESTION DE EJERCICIOS **/
+
+
     
 /*****Avisos al dueño de la hoja cuando se modifica algun ejercicio*****/
     $('.marcarLeidos').click(function(){      

@@ -12,19 +12,19 @@
 		  						<label for="user_tablas"><?php echo trad('Origen tablas',$lang) ?><span class="red"> *</span></label>	
 		  					</div>
 		  					<div class="panel-footer selector-user" >
-
+								
 		  						<select id="user_tablas" name="user_tablas" class="form-control" required></select>
 				  				
 		  					</div>
 		  				</div>
 		  			</div>
-		  			<div class="form-group col-md-4">
+		  			<div class="form-group col-md-4" style="margin-bottom: 0 !important">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
-		  						<label for="tablas"><?php echo trad('Tablas usadas',$lang) ?></label>	
+		  						<label for="tablas"><?php echo trad('Tablas',$lang) ?></label>	
 		  					</div>
 		  					<div class="panel-footer selector-tabla" >
-		  						<select multiple="" type="text" id="tablas" name="tablas[]" size="3" class="form-control"></select>				  				
+		  						<select multiple="" type="text" id="tablas" name="tablas[]" size="4" class="form-control"></select>				  				
 		  					</div>
 		  				</div>
 		  			</div>
@@ -39,7 +39,7 @@
 		  				</div>
 		  			</div>
 		  		</div>
-		  		<div class="form-row pt-4 ">
+		  		<div class="form-row pt-2 ">
 		  			<div class="form-group col-md-4">
 		  				<div class="panel panel-primary">
 	                        <div class="panel-heading">
@@ -319,6 +319,17 @@
 			<h3><?php echo trad( "Gestión de Ejercicios", $lang) ?></h3>
 			<p class="pl-5"><?php echo trad( "Aquí se muestran todos los ejercicios almacenados.", $lang); unset($_SESSION['editar']); ?></p>
 			<div class="hrr"></div><br>
+			<div class="selector-user-gestion">
+				<div class="row">
+					<div class="col-md-4">
+						<p> Consultar ejercicios de: </p>
+					</div>
+					<div class="col-md-8">
+						<select class="user-tablas-gestion form-control"></select>
+					</div>
+					<div style="color: red; font-weight: bold">TODAVIA NO FUNCIONA EL FILTRADO. SE VEN LOS EJERCICIOS CREADOS POR EL USUARIO LOGUEADO</div>
+				</div>
+			</div>
 			<div id="accordion ">
               <div class="card">  
                 <div class="table-responsive">  
@@ -338,7 +349,7 @@
                             <?php 
                             include_once '../inc/ejercicio.php';
                             $ejer = new Ejercicio();
-                            $result = $ejer->getAllEjercicios();    
+                            $result = $ejer->getAllMisEjercicios($_SESSION['user']);    
                             include_once '../inc/solucion.php';
                             $sol = new Solucion();
                             while($fila = mysqli_fetch_array($result)){

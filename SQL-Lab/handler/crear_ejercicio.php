@@ -184,8 +184,8 @@
 
 				}						
 			}
-			var_dump($aux); 
-			$palabras = array("where","group","having","order","limit", ";");
+			//var_dump($aux); 
+			$palabras = array("where ","group ","having ","order ","limit ", ";");
 			$posPalabraFinParteDosArray = array();
 			foreach($palabras as $key => $value){
 				$posAux = strpos($aux,$value,$avance);

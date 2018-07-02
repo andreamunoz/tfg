@@ -10,12 +10,20 @@ $i=1;
 $nombres = array();
 $nombres[0] = "";
 while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {
-
-	if((string)$fila["schema_prof"] !== (string)$_SESSION['user']){
-		$nombres[$i] = $fila["schema_prof"];
-		$i++;
+	if(isset($_SESSION['guardarDatos'])){
+		if((string)$fila["schema_prof"] !== (string)$_SESSION['guardarDatos'][0]){
+			$nombres[$i] = $fila["schema_prof"];
+			$i++;
+		}else{
+			$nombres[0] = $fila["schema_prof"];
+		}
 	}else{
-		$nombres[0] = $fila["schema_prof"];
+		if((string)$fila["schema_prof"] !== (string)$_SESSION['user']){
+			$nombres[$i] = $fila["schema_prof"];
+			$i++;
+		}else{
+			$nombres[0] = $fila["schema_prof"];
+		}
 	}
 	
 }

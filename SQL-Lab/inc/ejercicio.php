@@ -112,7 +112,17 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM sqlab_ejercicio;";
+        $sql = "SELECT * FROM sqlab_ejercicio ORDER BY descripcion;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
+    function getAllMisEjercicios($user){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM sqlab_ejercicio WHERE creador_ejercicio = '$user' ORDER BY descripcion;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

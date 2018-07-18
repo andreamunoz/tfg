@@ -10,12 +10,14 @@
 
             $mensaje = "";
             if(is_array($_SESSION['message'])){
+              
               foreach ($_SESSION['message'] as $key => $value) {
                 // if( $value == 1){
                 //   $success[$key] = $key+1;
                 // }else 
+                //var_dump($mensaje);
                 if($value != ""){
-                  $mensaje = $mensaje.$value." \\n";
+                  $mensaje = $mensaje.addslashes($value)." \\n";
                 }else{
                   $mensaje = $mensaje."Ha habido un error al ejecutar la sentencia ".$key+1 .". \\n"; 
                 }
@@ -25,6 +27,8 @@
             }
             ?>
             <div>
+
+              <!-- <script type="text/javascript">swal("<?php echo $mensaje ?>");</script> -->
               <script type='text/javascript'>alert("<?php echo $mensaje ?>");</script>
             </div>
 

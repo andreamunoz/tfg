@@ -10,9 +10,9 @@ class Administrar_schema{
         $conexion = $connect->connectDB();
             
         if (!($resultado = mysqli_query($conexion, "CALL sp_ejecutar_script('".$code."');"))) {
-            echo "Falló la llamada para ejecutar el codigo: " . $conexion->error;
+            //echo "Falló la llamada para ejecutar el codigo: " . $conexion->error;
             $resultado = $conexion->error;
-            echo $resultado;
+            //echo $resultado;
         }else{
             $resultado = true;
         }
@@ -90,6 +90,8 @@ class Administrar_schema{
             foreach ($agujas as $value) {
                 $sentencia = str_replace($value, "", $sentencia);
             }
+        }else{
+            return false;
         }
 
         $sentencia = preg_replace('/\s+/', ' ', $sentencia);
@@ -153,7 +155,7 @@ class Administrar_schema{
                     $miSentenciaEntera = $admin->reemplazar_referencias("references ", "references ".$profe."_", $miSentenciaEntera);
                     //EJECUTAMOS LA SENTENCIA
                     $respuesta = $admin->executeCode($miSentenciaEntera.";");
-
+                    //var_dump($respuesta);
                 } elseif(((stripos($sentencias[$i], "drop"))!==FALSE) || ((stripos($sentencias[$i], "alter"))!==FALSE) ){
                     include_once 'ejercicio.php';
                     $ejer = new Ejercicio();
@@ -184,6 +186,13 @@ class Administrar_schema{
         $admin->updateTablasDisponibles($profe);
         if($bienEjecutadas === $contador){
             $arrayResultado = "Sentencias ejecutadas correctamente.";
+        }else{
+            foreach ($arrayResultado as $key => $value) {
+                //var_dump($value);
+                $recorte = explode(";", $value); //recortamos el error que devuelve phpmyadmin
+                $arrayResultado[$key] = $recorte[0];
+                
+            }
         }
         return $arrayResultado;
     }

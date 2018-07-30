@@ -4,7 +4,7 @@
 	$id = $_REQUEST["id"];
 
 	include_once "../../inc/ejercicio.php";
-
+	
 
 	
 	$ejer = new Ejercicio();

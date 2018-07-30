@@ -14,6 +14,7 @@
 	}
 
 	
-	header("Location: ../templates/index_profesor.php");
+	header("Location: ../templates/prf_editar_hojas.php?id=".$_SESSION['editar_hoja']);
 	exit();
 ?>
+

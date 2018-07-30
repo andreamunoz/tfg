@@ -97,7 +97,7 @@
                 </div>
               </div>
         </div>  
-        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" id="volverAlModal">Volver</button></div>  
+        <div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal" id="volverAlModal">Volver</button><a data-toggle="modal" href="../templates/prf_editar_ejercicio.php?id=" + <?php echo $_SESSION["editar_hoja"]  ?> ></div>  
       </div>
     </div>
 </div>

@@ -35,6 +35,7 @@
   		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.js" ></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<title>SQLab</title>
 	</head>	
 	<body>
@@ -48,49 +49,51 @@
 			
 			
 			<!--CONTENEDOR -->
-			<div class="container-center "> 
-				<!-- <?php //include("adm_profesor/adm_principal.php"); ?> -->
-				<div class="principal"> 
-	
+			<div class="container-center ">
+
+				<div class="adm-tablas">
 					<div class="row ">
-						<div class="col-md-11 jumbotron-propio ">
-							<h3 id="userPrincipal" data-name="<?php echo $_SESSION['user']; ?>">
-								Bienvenid@ <?php echo $_SESSION['user']; ?> 
-							</h3>
+						<div class="col-md-11 adjuntar-tablas">	
+
+							<h3><?php echo trad( "Añadir Datos", $lang) ?></h3>
+							<p class="pl-5"><?php echo trad( "Introduzca el código para crear las tablas e introducir los datos. Sólo se permiten las sentencias CREATE TABLE, INSERT INTO, DROP TABLE y ALTER TABLE.", $lang) ?></p>
 							<div class="hrr"></div>
-							<h4 class="pt-4">
-								En el menú lateral le mostramos todas las opciones que puede realizar.
-							</h4>
-							<div class="pt-5" id="avisos">
-								<?php 
-								include_once '../inc/usuario.php';
-								$user =  $_SESSION['user'];
-								$us = new Usuario();
-								$mensajes = $us->getAvisosNoLeidos($user); 
-								if(count($mensajes) != 0){ ?>
-									<h5>AVISOS</h5>
-									<?php
-									for($i=0; $i<count($mensajes); $i++){
-									?>
-
-									<div class="aviso"><?php echo $mensajes[$i];?></div>
-									<?php } ?>
-									<div class="row">
-										<div class="col-md-6 marcarLeidos" data-name="<?php echo $_SESSION['user']; ?>">Marcar estos avisos como leídos</div>
-										<div class="col-md-6 mostrarTodos" data-name="<?php echo $_SESSION['user']; ?>">Mostrar todos los avisos</div>
+							<div class="form-row pt-4 ">
+								<div class="form-group col-md-12 pl-4">
+								<form class="jumbotron-propio" method="post" action="../handler/crear_tablas_texto.php">
+									<div class="panel panel-primary">
+				                        <div class="panel-heading">
+											<label for="enunciado"><?php echo trad( "Inserte el código aquí", $lang) ?></label>
+										</div>	
+										<div class="panel-footer" >
+					  						<textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="10" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required></textarea>
+					  					</div>
+					  					
+					  				</div>	
+						  			<div class="form-group col-md-3 offset-9 pr-4">
+										<button class="btn btn-log btn-tertiary btn-block" type="submit"><?php echo trad( "Ejecutar", $lang) ?></button>
 									</div>
-
-								<?php } ?>
-
+								</form>
+								<!-- <div class="hrr mb-4"></div> -->
+								<!-- <form class="jumbotron-propio" method="post" action="../handler/crear_tablas_fichero.php" enctype="multipart/form-data">
+									<div class="panel panel-primary">
+				                        <p><?php // echo trad( "Seleccione un fichero con el código para crear las tablas e introducir en ellas los datos. ", $lang) ?></p>	
+										<div class="input-group">
+									  		<div class="custom-file">
+									    		<input type="file" name="fileToUpload" id="fileToUpload" value=<?php // echo trad( "Examinar...", $lang) ?>>
+									  		</div>
+									  		<div class="input-group-append">
+									    		<input type="submit" class="btn btn-outline-secondary" name="submit" value=<?php // echo trad( "Adjuntar", $lang) ?>>
+									  		</div>	
+										</div>
+					  				</div>
+					  			</form> -->
+								<br><br><br>
+								</div>				
 							</div>
 						</div>
 					</div>
 				</div>
-				<!-- <?php //include("adm_profesor/adm_tablas.php"); ?>
-				<?php //include("adm_profesor/adm_ejercicios.php"); ?>
-				<?php //include("adm_profesor/adm_hojas.php"); ?>
-				<?php //include("adm_profesor/adm_estadisticas.php"); ?>
-				<?php //include("adm_profesor/adm_configuracion.php"); ?> -->
 			</div> 
 		</div>
 	<script type="text/javascript" src="../js/functions.js"></script>

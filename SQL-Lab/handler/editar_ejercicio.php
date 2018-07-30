@@ -2,8 +2,7 @@
 	
 	include_once '../inc/ejercicio.php';
 	session_start();
-	$id = intval($_POST['e_id']);
-
+	$id = intval($_POST['ed_id']);
 	$descripcion = $_POST['descripcion'];
 	$tipo = $_POST['categoria'];
 	switch ($tipo) {
@@ -317,9 +316,9 @@
 		$solucionPropuesta = utf8_encode($solucionPropuesta);
 		$solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
 		$sentencia = explode(" ", $solucionPropuesta, 2);
-
+		
 		$resultado = array();
-		if ($sentencia[0]) === "select"){
+		if ($sentencia[0] === "select"){
 			$resultado = validarSelect($solucionPropuesta, $user_tablas);
 		}elseif ($sentencia[0] === "insert"){
 			$resultado = validarInsert($solucionPropuesta, $user_tablas);
@@ -342,7 +341,7 @@
 			$resultadoEditar = "";
 
 			$resultadoEditar = $ejer->update($id,$nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$solucion,$user);
-			//var_dump($resultadoEditar);
+			// var_dump($resultadoEditar);
 			if($resultadoEditar){
 				$_SESSION['message'] = "El ejercicio se ha modificado correctamente.";
 				$ejer->enviarAviso($id);
@@ -353,7 +352,7 @@
 	}else{
 		$_SESSION['message'] = "Error. Por favor repase la solución y asegurese de que sea válida.";
 	}
-	header("Location: ../templates/index_profesor.php");
+	header("Location: ../templates/prf_listar_ejercicios.php");
 	exit();
 
 ?>

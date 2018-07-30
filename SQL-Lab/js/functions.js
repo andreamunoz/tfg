@@ -7,354 +7,11 @@ $(document).ready(function(){
     var ordenarNivelAgregarEjerAHoja = 1;
     var ordenarTipoAgregarEjerAHoja = 3;
     var ordenarCreadorAgregarEjerAHoja = 5;
-    var editar_id_hoja = sessionStorage.getItem("editar_id_hoja");
+//    var editar_id_hoja = sessionStorage.getItem("editar_id_hoja");
 
-    var dondeEstoy = sessionStorage.getItem("dondeEstoy");
-
-    if(dondeEstoy === null){
-        dondeEstoy = "";
-    }
-
-
-    switch(dondeEstoy){
-        case "principal":
-            sessionStorage.removeItem("editar_id_hoja");
-            $('.principal').show();
-            $('.adm-hojas').hide();
-            $('.adm-ejercicios').hide();
-            $('.adm-estadisticas').hide();
-            $('.adm-tablas').hide();
-            $('.configuracion').hide();
-
-            var that = $(this);
-            that.find('#liprin').addClass('active');
-            that.find('#litabl').removeClass('active');
-            that.find('#liejer').removeClass('active');
-            that.find('#licrej').removeClass('active');
-            that.find('#liliej').removeClass('active');
-            that.find('#lihoja').removeClass('active');
-            that.find('#licrho').removeClass('active');
-            that.find('#liliho').removeClass('active');
-            that.find('#liesta').removeClass('active');
-            that.find('#liconf').removeClass('active');
-            that.find('#liperf').removeClass('active');
-            that.find('#lihoja').attr("aria-expanded", "false");
-            that.find('#liejer').attr("aria-expanded", "false");
-            that.find('#liconf').attr("aria-expanded", "false");
-            that.find('ul#hojas').removeClass("show");
-            that.find('ul#ejercicios').removeClass("show");
-            that.find('ul#configurar').removeClass("show");
-            
-            break;
-
-        case "adm-hojas-crear-hoja":
-            
-            sessionStorage.setItem("dondeEstoy", "adm-hojas-crear-hoja");
-            sessionStorage.removeItem("editar_id_hoja");
-            $('.principal').hide();
-            $('.adm-hojas').show();
-            $('.configuracion').hide();
-            $('.adm-ejercicios').hide();
-            $('.adm-estadisticas').hide();
-            $('.adm-tablas').hide();
-           
-            $('.crear-hoja').show();
-            $('.editar-hoja').hide();
-            $('.lista-hoja').hide();
-            
-            var that = $(this);
-            that.find('#liprin').removeClass('active');
-            that.find('#litabl').removeClass('active');
-            that.find('#liejer').removeClass('active');
-            that.find('#licrej').removeClass('active');
-            that.find('#liliej').removeClass('active');
-            that.find('#lihoja').addClass('active');
-            that.find('#licrho').addClass('active');
-            that.find('#liliho').removeClass('active');
-            that.find('#liesta').removeClass('active');
-            that.find('#liconf').removeClass('active');
-            that.find('#liperf').removeClass('active');
-            that.find('#lihoja').attr("aria-expanded", "true");
-            that.find('#liejer').attr("aria-expanded", "false");
-            that.find('#liconf').attr("aria-expanded", "false");
-            that.find('ul#hojas').addClass("show");
-            that.find('ul#ejercicios').removeClass("show");
-            that.find('ul#configurar').removeClass("show");
-            break;
-
-        case "adm-hojas-editar-hoja":
-            
-            sessionStorage.setItem("dondeEstoy", "adm-hojas-editar-hoja");
-            $('.principal').hide();
-            $('.adm-hojas').show();
-            $('.configuracion').hide();
-            $('.adm-ejercicios').hide();
-            $('.adm-estadisticas').hide();
-            $('.adm-tablas').hide();
-           
-            $('.crear-hoja').hide();
-            $('.editar-hoja').show();
-            $('.lista-hoja').hide();
-            
-            var that = $(this);
-            that.find('#liprin').removeClass('active');
-            that.find('#litabl').removeClass('active');
-            that.find('#liejer').removeClass('active');
-            that.find('#licrej').removeClass('active');
-            that.find('#liliej').removeClass('active');
-            that.find('#lihoja').addClass('active');
-            that.find('#licrho').removeClass('active');
-            that.find('#liliho').addClass('active');
-            that.find('#liesta').removeClass('active');
-            that.find('#liconf').removeClass('active');
-            that.find('#liperf').removeClass('active');
-            that.find('#lihoja').attr("aria-expanded", "true");
-            that.find('#liejer').attr("aria-expanded", "false");
-            that.find('#liconf').attr("aria-expanded", "false");
-            that.find('ul#hojas').addClass("show");
-            that.find('ul#ejercicios').removeClass("show");
-            that.find('ul#configurar').removeClass("show");
-
-            break;
-
-        case "adm-hojas-lista-hojas":
-            sessionStorage.setItem("dondeEstoy", "adm-hojas-lista-hojas");
-            sessionStorage.removeItem("editar_id_hoja");
-            $('.principal').hide();
-            $('.adm-hojas').show();
-            $('.configuracion').hide();
-            $('.adm-ejercicios').hide();
-            $('.adm-estadisticas').hide();
-            $('.adm-tablas').hide();
-            
-            $('.crear-hoja').hide();
-            $('.editar-hoja').hide();
-            $('.lista-hoja').show();
-
-            var that = $(this);
-            that.find('#liprin').removeClass('active');
-            that.find('#litabl').removeClass('active');
-            that.find('#liejer').removeClass('active');
-            that.find('#licrej').removeClass('active');
-            that.find('#liliej').removeClass('active');
-            that.find('#lihoja').addClass('active');
-            that.find('#licrho').removeClass('active');
-            that.find('#liliho').addClass('active');
-            that.find('#liesta').removeClass('active');
-            that.find('#liconf').removeClass('active');
-            that.find('#liperf').removeClass('active');
-            that.find('#lihoja').attr("aria-expanded", "true");
-            that.find('#liejer').attr("aria-expanded", "false");
-            that.find('#liconf').attr("aria-expanded", "false");
-            that.find('ul#hojas').addClass("show");
-            that.find('ul#ejercicios').removeClass("show");
-            that.find('ul#configurar').removeClass("show");
-            break;
- 
-        case "adm-ejercicios-crear-ejercicio":
-            sessionStorage.setItem("dondeEstoy", "adm-ejercicios-crear-ejercicio");
-            sessionStorage.removeItem("editar_id_hoja");
-            $('.principal').hide();
-            $('.adm-hojas').hide();
-            $('.configuracion').hide();
-            $('.adm-estadisticas').hide();
-            $('.adm-ejercicios').show();
-            $('.adm-tablas').hide();
-            
-            $('.crear-ejercicio').show();
-            $('.editar-ejercicio').hide();
-            $('.lista-ejercicio').hide();
-            
-            var that = $(this);
-            that.find('#liprin').removeClass('active');
-            that.find('#litabl').removeClass('active');
-            that.find('#liejer').addClass('active');
-            that.find('#licrej').addClass('active');
-            that.find('#liliej').removeClass('active');
-            that.find('#lihoja').removeClass('active');
-            that.find('#licrho').removeClass('active');
-            that.find('#liliho').removeClass('active');
-            that.find('#liesta').removeClass('active');
-            that.find('#liconf').removeClass('active');
-            that.find('#liperf').removeClass('active');
-            that.find('#lihoja').attr("aria-expanded", "false");
-            that.find('#liejer').attr("aria-expanded", "true");
-            that.find('#liconf').attr("aria-expanded", "false");
-            that.find('ul#hojas').removeClass("show");
-            that.find('ul#ejercicios').addClass("show");
-            that.find('ul#configurar').removeClass("show");
-           
-            break;
-
-        case "adm-ejercicios-lista-ejercicios":
-            sessionStorage.setItem("dondeEstoy", "adm-ejercicios-lista-ejercicios");
-            sessionStorage.removeItem("editar_id_hoja");
-            $('.principal').hide();
-            $('.adm-hojas').hide();
-            $('.configuracion').hide();
-            $('.adm-estadisticas').hide();
-            $('.adm-tablas').hide();
-            $('.adm-ejercicios').show();
-           
-            $('.crear-ejercicio').hide();
-            $('.editar-ejercicio').hide();
-            $('.lista-ejercicio').show();
-
-            var that = $(this);
-            that.find('#liprin').removeClass('active');
-            that.find('#litabl').removeClass('active');
-            that.find('#liejer').addClass('active');
-            that.find('#licrej').removeClass('active');
-            that.find('#liliej').addClass('active');
-            that.find('#lihoja').removeClass('active');
-            that.find('#licrho').removeClass('active');
-            that.find('#liliho').removeClass('active');
-            that.find('#liesta').removeClass('active');
-            that.find('#liconf').removeClass('active');
-            that.find('#liperf').removeClass('active');
-            that.find('#lihoja').attr("aria-expanded", "false");
-            that.find('#liejer').attr("aria-expanded", "true");
-            that.find('#liconf').attr("aria-expanded", "false");
-            that.find('ul#hojas').removeClass("show");
-            that.find('ul#ejercicios').addClass("show");
-            that.find('ul#configurar').removeClass("show");
-            break;
-                
-        case "configuracion":
-            sessionStorage.setItem("dondeEstoy", "configuracion");
-            sessionStorage.removeItem("editar_id_hoja");
-            $('.principal').hide();
-            $('.configuracion').show();
-            $('.adm-hojas').hide();
-            $('.adm-ejercicios').hide();
-            $('.adm-estadisticas').hide();
-            $('.adm-tablas').hide();
-
-            var that = $(this);
-            that.find('#liprin').removeClass('active');
-            that.find('#litabl').removeClass('active');
-            that.find('#liejer').removeClass('active');
-            that.find('#licrej').removeClass('active');
-            that.find('#liliej').removeClass('active');
-            that.find('#lihoja').removeClass('active');
-            that.find('#licrho').removeClass('active');
-            that.find('#liliho').removeClass('active');
-            that.find('#liesta').removeClass('active');
-            that.find('#liconf').addClass('active');
-            that.find('#liperf').addClass('active');
-            that.find('#lihoja').attr("aria-expanded", "false");
-            that.find('#liejer').attr("aria-expanded", "false");
-            that.find('#liconf').attr("aria-expanded", "true");
-            that.find('ul#hojas').removeClass("show");
-            that.find('ul#ejercicios').removeClass("show");
-            that.find('ul#configurar').addClass("show");
-            break;
-
-        case "adm-estadisticas":
-            sessionStorage.setItem("dondeEstoy", "adm-estadisticas");
-            sessionStorage.removeItem("editar_id_hoja");
-
-            $('.principal').hide();
-            $('.adm-hojas').hide();
-            $('.configuracion').hide();
-            $('.adm-ejercicios').hide();
-            $('.adm-tablas').hide();
-            $('.adm-estadisticas').show();
-
-            var that = $(this);
-            that.find('#liprin').removeClass('active');
-            that.find('#litabl').removeClass('active');
-            that.find('#liejer').removeClass('active');
-            that.find('#licrej').removeClass('active');
-            that.find('#liliej').removeClass('active');
-            that.find('#lihoja').removeClass('active');
-            that.find('#licrho').removeClass('active');
-            that.find('#liliho').removeClass('active');
-            that.find('#liesta').addClass('active');
-            that.find('#liconf').removeClass('active');
-            that.find('#liperf').removeClass('active');
-            that.find('#lihoja').attr("aria-expanded", "false");
-            that.find('#liejer').attr("aria-expanded", "false");
-            that.find('#liconf').attr("aria-expanded", "false");
-            that.find('ul#hojas').removeClass("show");
-            that.find('ul#ejercicios').removeClass("show");
-            that.find('ul#configurar').removeClass("show");
-            break;
-
-        case "adm-tablas-adjuntar-tablas":
-            sessionStorage.setItem("dondeEstoy", "adm-tablas-adjuntar-tablas");
-            sessionStorage.removeItem("editar_id_hoja");
-            $('.principal').hide();
-            $('.adm-hojas').hide();
-            $('.configuracion').hide();
-            $('.adm-ejercicios').hide();
-            $('.adm-estadisticas').hide();
-            $('.adm-tablas').show(); 
-
-            $('.adjuntar-tablas').show();
-
-            var that = $(this);
-            that.find('#liprin').removeClass('active');
-            that.find('#litabl').addClass('active');
-            that.find('#liejer').removeClass('active');
-            that.find('#licrej').removeClass('active');
-            that.find('#liliej').removeClass('active');
-            that.find('#lihoja').removeClass('active');
-            that.find('#licrho').removeClass('active');
-            that.find('#liliho').removeClass('active');
-            that.find('#liesta').removeClass('active');
-            that.find('#liconf').removeClass('active');
-            that.find('#liperf').removeClass('active');
-            that.find('#lihoja').attr("aria-expanded", "false");
-            that.find('#liejer').attr("aria-expanded", "false");
-            that.find('#liconf').attr("aria-expanded", "false");
-            that.find('ul#hojas').removeClass("show");
-            that.find('ul#ejercicios').removeClass("show");
-            that.find('ul#configurar').removeClass("show");
-            break;
-
-        default:  
-            sessionStorage.removeItem("editar_id_hoja");
-            $('.principal').show();
-            $('.adm-hojas').hide();
-            $('.adm-ejercicios').hide();
-            $('.adm-estadisticas').hide();
-            $('.adm-tablas').hide();
-            $('.configuracion').hide();
-
-            var that = $(this);
-            that.find('#liprin').addClass('active');
-            that.find('#litabl').removeClass('active');
-            that.find('#liejer').removeClass('active');
-            that.find('#licrej').removeClass('active');
-            that.find('#liliej').removeClass('active');
-            that.find('#lihoja').removeClass('active');
-            that.find('#licrho').removeClass('active');
-            that.find('#liliho').removeClass('active');
-            that.find('#liesta').removeClass('active');
-            that.find('#liconf').removeClass('active');
-            that.find('#liperf').removeClass('active');
-            that.find('#lihoja').attr("aria-expanded", "false");
-            that.find('#liejer').attr("aria-expanded", "false");
-            that.find('#liconf').attr("aria-expanded", "false");
-            that.find('ul#hojas').removeClass("show");
-            that.find('ul#ejercicios').removeClass("show");
-            that.find('ul#configurar').removeClass("show");
-            break;
-    }
-
-    
+   
 
     $("#principal").click(function(){
-        
-        sessionStorage.setItem("dondeEstoy", "principal");
-        sessionStorage.removeItem("editar_id_hoja");
-        $('.adm-hojas').hide();
-        $('.configuracion').hide();
-        $('.adm-ejercicios').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-tablas').hide();
-        $('.principal').show();
         
         var that = $(this);
         that.closest('#menu-content').find('li.active').removeClass('active');
@@ -365,19 +22,6 @@ $(document).ready(function(){
 
     $("#crear_hoja").click(function(){
         
-        sessionStorage.setItem("dondeEstoy", "adm-hojas-crear-hoja");
-        sessionStorage.removeItem("editar_id_hoja");
-        $('.principal').hide();
-        $('.adm-hojas').show();
-        $('.configuracion').hide();
-        $('.adm-ejercicios').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-tablas').hide();
-       
-        $('.crear-hoja').show();
-        $('.editar-hoja').hide();
-        $('.lista-hoja').hide();
-        
         var that = $(this);
         console.log(that);
         that.closest('#menu-content').find('li.active').removeClass('active');
@@ -386,18 +30,6 @@ $(document).ready(function(){
     });
 
     $("#lista_hoja").click(function(){
-        sessionStorage.setItem("dondeEstoy", "adm-hojas-lista-hojas");
-        sessionStorage.removeItem("editar_id_hoja");
-        $('.principal').hide();
-        $('.adm-hojas').show();
-        $('.configuracion').hide();
-        $('.adm-ejercicios').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-tablas').hide();
-        
-        $('.crear-hoja').hide();
-        $('.editar-hoja').hide();
-        $('.lista-hoja').show();
         
         var that = $(this);
         that.closest('#menu-content').find('li.active').removeClass('active');
@@ -409,19 +41,6 @@ $(document).ready(function(){
 
     $("#crear_ejercicio").click(function(){
         
-        sessionStorage.setItem("dondeEstoy", "adm-ejercicios-crear-ejercicio");
-        sessionStorage.removeItem("editar_id_hoja");
-        $('.principal').hide();
-        $('.adm-hojas').hide();
-        $('.configuracion').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-ejercicios').show();
-        $('.adm-tablas').hide();
-        
-        $('.crear-ejercicio').show();
-        $('.editar-ejercicio').hide();
-        $('.lista-ejercicio').hide();
-        
         var that = $(this);
         that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
@@ -429,20 +48,6 @@ $(document).ready(function(){
     });
     
     $("#lista_ejercicio").click(function(){
-
-        sessionStorage.setItem("dondeEstoy", "adm-ejercicios-lista-ejercicios");
-        sessionStorage.removeItem("editar_id_hoja");
-
-        $('.principal').hide();
-        $('.adm-hojas').hide();
-        $('.configuracion').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-tablas').hide();
-        $('.adm-ejercicios').show();
-       
-        $('.crear-ejercicio').hide();
-        $('.editar-ejercicio').hide();
-        $('.lista-ejercicio').show();
         
         var that = $(this);
         that.closest('#menu-content').find('li.active').removeClass('active');
@@ -454,15 +59,6 @@ $(document).ready(function(){
   
     $("#perfil").click(function(){
         
-        sessionStorage.setItem("dondeEstoy", "configuracion");
-        sessionStorage.removeItem("editar_id_hoja");
-        $('.principal').hide();
-        $('.configuracion').show();
-        $('.adm-hojas').hide();
-        $('.adm-ejercicios').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-tablas').hide();
-        
         var that = $(this);
         that.closest('#menu-content').find('li.active').removeClass('active');
         that.closest('.sub-menu').find('li.active').removeClass('active');
@@ -471,15 +67,6 @@ $(document).ready(function(){
 
     /*---------------Estadisticas-------------------*/
     $("#estadistic").click(function(){
-        sessionStorage.setItem("dondeEstoy", "adm-estadisticas");
-        sessionStorage.removeItem("editar_id_hoja");
-
-        $('.principal').hide();
-        $('.adm-hojas').hide();
-        $('.configuracion').hide();
-        $('.adm-ejercicios').hide();
-        $('.adm-tablas').hide();
-        $('.adm-estadisticas').show();
 
         var that = $(this);
         that.closest('#menu-content').find('li.active').removeClass('active');
@@ -492,16 +79,6 @@ $(document).ready(function(){
 
     /*---------------Tablas-------------------*/
     $("#adjuntar_tabla").click(function(){
-        sessionStorage.setItem("dondeEstoy", "adm-tablas-adjuntar-tablas");
-        sessionStorage.removeItem("editar_id_hoja");
-        $('.principal').hide();
-        $('.adm-hojas').hide();
-        $('.configuracion').hide();
-        $('.adm-ejercicios').hide();
-        $('.adm-estadisticas').hide();
-        $('.adm-tablas').show(); 
-
-        $('.adjuntar-tablas').show();
 
         var that = $(this);
         that.closest('#menu-content').find('li.active').removeClass('active');
@@ -594,63 +171,6 @@ $(document).ready(function(){
         }
     });
 
-    var editar_id_hoja = sessionStorage.getItem("editar_id_hoja");
-    var lugar = sessionStorage.getItem("dondeEstoy");
-    if(lugar === "adm-hojas-editar-hoja" && editar_id_hoja !== null ){
-
-       $.ajax({
-            method: "GET",
-            url: "../templates/adm_profesor/getEditarHojaEjercicio.php",
-            data: { id: editar_id_hoja },
-            success: function(response){
-                var resultado = response.substring(23);
-                var res = JSON.parse(resultado);
-                numEjerHoja = res["numEjercicios"];
-                var id_hoja = res["id_hoja"];
-                var nombre_hoja = res["nombre_hoja"];
-                var hayEjercicios = res["hayEjercicios"];
-                
-                delete res["id_hoja"];
-                delete res["nombre_hoja"];
-                delete res["hayEjercicios"];
-                delete res["numEjercicios"];
-                
-                if(response !== null){
-                    if (hayEjercicios !== 0 ){
-                        $("#editarHojaEjercicio").show();
-                        $("#listarHojaEjercicios").hide();
-
-                        $("#editaHojaId").val(id_hoja);
-                        $("#editaHojaNombre").val(nombre_hoja);
-                        $("#tabla_editar_hoja_ejercicios > tbody").empty();
-                        var cont = 1;
-                        $.each(res,function(registro, value) {
-                            
-                            fila = '<tr><td class="primera"><input type="checkbox" class="form-check-input" id="checkbox-editar-hoja" name="seleccionadosEdHoja[]" value='+ value["id_ejercicio"] +'></td>';
-                            fila += '<td>'+value['descripcion']+'</td>';
-                            fila += '<td>'+value['nivel']+'</td>';
-                            fila += '<td>'+value['tipo']+'</td>';
-                            fila += '<td>'+value['creador_ejercicio']+'</td>';
-                            fila += '<td id="rowVer" class="boton_ver_ejercicio" data-number='+ value["id_ejercicio"] +'><a data-toggle="modal" href="#modalVerEejercicio"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'
-                            fila += '</tr>';
-                    
-                            $('#tabla_editar_hoja_ejercicios tbody').append(fila);
-
-                        });
-                        
-                    }else{
-                        $("#editarHojaEjercicio").show();
-                        $("#listarHojaEjercicios").hide();
-
-                        $("#editaHojaId").val(id_hoja);
-                        $("#editaHojaNombre").val(nombre_hoja);
-                        $("#tabla_editar_hoja_ejercicios > tbody").empty();
-                    }
-                }
-            }
-        });
-        // sessionStorage.removeItem("editar_id_hoja");
-    }
 
     $(".selector-user select").change(function() {
         var form_data = {
@@ -687,7 +207,6 @@ $(document).ready(function(){
 
     $('.boton_borrar_ejercicio').click(function(){      
         var mi_id = $(this).attr("data-number");
-
         var r = confirm("¿Estás seguro de querer borrar el ejercicio?");
         if (r == true){
             $.ajax({
@@ -789,9 +308,8 @@ $(document).ready(function(){
                 var res = JSON.parse(resultado);
 
                 if(response !== null){
-                    $("#modalAgregarEjerAHoja").modal('hide');
+
                     $("#modalVerEejercicioAgregar").modal('show');
-                    //$("#verANombre").text("Ejercicio "+res.nombre);
                     $("#verADueno").text(res.dueno);
                     $("#verATablas").text(res.tablas);
                     $("#verACategoria").text(res.categoria);
@@ -809,131 +327,9 @@ $(document).ready(function(){
         });
     });
 
-
-    $(this).on("click", "#volverAlModal", function(){
-         // $("#modalAgregarEjerAHoja").modal('show');
-         $( "#agregarEjerAHoja" ).trigger( "click" );
-     });
-    
-    $(this).on("click", "#rowEditarEjer", function(){
-        var mi_id = $(this).attr("data-number");
-        // console.log(mi_id);
-        $.ajax({
-            method: "GET",
-            url: "../templates/adm_profesor/getEditarEjercicio.php",
-            data: { id: mi_id },
-            success: function(response){
-                var resultado = response.substring(23);
-                var res = JSON.parse(resultado);
-
-                if(response !== null){
-                    $("#editarEjercicio").show();
-                    $("#listarEjercicios").hide();
-                    
-                    $("#editaId").val(res.nombre);
-                    $("#editaDueno").val(res.dueno);
-                    $("#editaTablas").val(res.tablas);
-                    var cont = 1;
-                    $.each(res.todasCategorias,function(registro, value) {
-                        if(res.categoria === value){
-                            $("#editaCategoria").append('<option value=c'+cont+' selected>'+value+'</option>');
-                        }else{
-                            $("#editaCategoria").append('<option value=c'+cont+'>'+value+'</option>');
-
-                        }
-                        cont++;
-                    });
-                    
-                    if("facil" === res.nivel){
-                        $("#editaNivel").append('<option value="facil" selected>Principiante</option>');
-                        $("#editaNivel").append('<option value="medio">Intermedio</option>');
-                        $("#editaNivel").append('<option value="dificil">Avanzado</option>');
-                    }else if("medio" === res.nivel){
-                        $("#editaNivel").append('<option value="facil">Principiante</option>');
-                        $("#editaNivel").append('<option value="medio" selected>Intermedio</option>');
-                        $("#editaNivel").append('<option value="dificil">Avanzado</option>');
-                    }else if("dificil" === res.nivel){
-                        $("#editaNivel").append('<option value="facil">Principiante</option>');
-                        $("#editaNivel").append('<option value="medio">Intermedio</option>');
-                        $("#editaNivel").append('<option value="dificil" selected>Avanzado</option>');
-                    }
-
-                    if(res.deshabilitar === "0"){
-                        $("#editaDeshabilitar").append('<option value="0" selected>Habilitado</option>');
-                        $("#editaDeshabilitar").append('<option value="1" >Deshabilitado</option>');
-                    }else{
-                        $("#editaDeshabilitar").append('<option value="0" >Habilitado</option>');
-                        $("#editaDeshabilitar").append('<option value="1" selected>Deshabilitado</option>');
-                    }
-                    $("#editaDescripcion").val(res.descripcion);
-                    $("#editaEnunciado").val(res.enunciado);
-                    $("#editaSolucion").val(res.solucion);
-                }
-            }
-        })
-    });
-
-    $(this).on("click", "#rowEditarHoja", function(){
-        sessionStorage.setItem("dondeEstoy", "adm-hojas-editar-hoja");
-        
-        var mi_id = $(this).attr("data-number");
-        sessionStorage.setItem("editar_id_hoja",mi_id);
-        
-        $.ajax({
-            method: "GET",
-            url: "../templates/adm_profesor/getEditarHojaEjercicio.php",
-            data: { id: mi_id },
-            success: function(response){
-                var resultado = response.substring(23);
-                var res = JSON.parse(resultado);
-                numEjerHoja = res["numEjercicios"];
-                var id_hoja = res["id_hoja"];
-                var nombre_hoja = res["nombre_hoja"];
-                var hayEjercicios = res["hayEjercicios"];
-                
-                delete res["id_hoja"];
-                delete res["nombre_hoja"];
-                delete res["hayEjercicios"];
-                delete res["numEjercicios"];
-                
-                if(response !== null){
-                    if (hayEjercicios !== 0 ){
-                        $("#editarHojaEjercicio").show();
-                        $("#listarHojaEjercicios").hide();
-
-                        $("#editaHojaId").val(id_hoja);
-                        $("#editaHojaNombre").val(nombre_hoja);
-                        $("#tabla_editar_hoja_ejercicios > tbody").empty();
-                        var cont = 1;
-                        $.each(res,function(registro, value) {
-                            
-                            fila = '<tr><td class="primera"><input type="checkbox" class="form-check-input" id="checkbox-editar-hoja" name="seleccionadosEdHoja[]" value='+ value["id_ejercicio"] +'></td>';
-                            fila += '<td>'+value['descripcion']+'</td>';
-                            fila += '<td>'+value['nivel']+'</td>';
-                            fila += '<td>'+value['tipo']+'</td>';
-                            fila += '<td>'+value['creador_ejercicio']+'</td>';
-                            fila += '<td id="rowVer" class="boton_ver_ejercicio" data-number='+ value["id_ejercicio"] +'><a data-toggle="modal" href="#modalVerEejercicio"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'
-                            fila += '</tr>';
-                    
-                            $('#tabla_editar_hoja_ejercicios tbody').append(fila);
-
-                        });
-                    }else{
-                        $("#editarHojaEjercicio").show();
-                        $("#listarHojaEjercicios").hide();
-
-                        $("#editaHojaId").val(id_hoja);
-                        $("#editaHojaNombre").val(nombre_hoja);
-                        $("#tabla_editar_hoja_ejercicios > tbody").empty();
-                    }
-                }
-            }
-        });
-    });
-
     $('#borrarEjerDeHoja').click(function(){
-        sessionStorage.setItem("dondeEstoy", "adm-hojas-editar-hoja");
-        var hoja = sessionStorage.getItem("editar_id_hoja");
+
+        var hoja = $(this).attr("data-number");
         var selected = [];
         var i=0;
         $('#tabla_editar_hoja_ejercicios input[type=checkbox]').each(function(){
@@ -942,7 +338,7 @@ $(document).ready(function(){
                 i++;
             }
         });
-                    console.log(selected.length);
+                    //console.log(selected.length);
         if(selected.length != 0){
             $.ajax({
                 method: "GET",
@@ -982,66 +378,9 @@ $(document).ready(function(){
     });
 
     $('#agregarEjerAHoja').click(function(){
-        sessionStorage.setItem("dondeEstoy", "adm-hojas-editar-hoja");
+        // sessionStorage.setItem("dondeEstoy", "adm-hojas-editar-hoja");
         $("input[id=checkbox-editar-hoja]").prop('checked', false);
-        $("#modalAgregarEjerAHoja").modal('show');
-    });
-
-    $('#cancelar-editar-hoja').click(function(){
-        sessionStorage.setItem("dondeEstoy", "adm-hojas-lista-hojas");
-        location.reload();
-    });
-
-    $(this).on("click", "#rowInfoHoja", function(){
-        var mi_id = $(this).attr("data-number");
-        console.log(mi_id);
-        $.ajax({
-            method: "GET",
-            url: "../templates/adm_profesor/getEditarHojaEjercicio.php",
-            data: { id: mi_id },
-            success: function(response){
-                console.log(response);
-                var resultado = response.substring(23);
-                var res = JSON.parse(resultado);
-                numEjerHoja = res["numEjercicios"];
-                var id_hoja = res["id_hoja"];
-                var nombre_hoja = res["nombre_hoja"];
-                var hayEjercicios = res["hayEjercicios"];
-                
-                delete res["id_hoja"];
-                delete res["nombre_hoja"];
-                delete res["hayEjercicios"];
-                delete res["numEjercicios"];
-                
-                if(response !== null){
-                    if (hayEjercicios !== 0 ){
-                        $("#modalInfoHoja").modal('show');
-                        $("#infoHojaId").val(id_hoja);
-                        $("#infoHojaNombre").val(nombre_hoja);
-                        $("#tabla_info_hoja_ejercicios > tbody").empty();
-                        var cont = 1;
-                        $.each(res,function(registro, value) {
-                            
-                            fila = '<tr>';
-                            fila += '<td>'+value['descripcion']+'</td>';
-                            fila += '<td>'+value['nivel']+'</td>';
-                            fila += '<td>'+value['tipo']+'</td>';
-                            fila += '<td>'+value['creador_ejercicio']+'</td>';
-                            fila += '<td id="rowVerEjerInfo" class="boton_ver_ejercicio" data-number='+ value["id_ejercicio"] +'><a data-toggle="modal" href="#modalVerEjercicioInfo"><i id="icon_ver" class="fa fa-eye" title="ver" aria-hidden="true"></i></a></td>'
-                            fila += '</tr>';
-                    
-                            $('#tabla_info_hoja_ejercicios tbody').append(fila);
-
-                        });
-                    }else{
-                        $("#modalInfoHoja").modal('show');
-                        $("#infoHojaId").val(id_hoja);
-                        $("#infoHojaNombre").val(nombre_hoja);
-                        $("#tabla_info_hoja_ejercicios > tbody").empty();
-                    }
-                }
-            }
-        });
+        //$("#modalAgregarEjerAHoja").modal('show');
     });
 
     $(this).on("click", "#rowVerEjerInfo", function(){
@@ -1056,7 +395,7 @@ $(document).ready(function(){
                 var res = JSON.parse(resultado);
                 console.log(res);
                 if(response !== null){
-                    $("#modalInfoHoja").modal('hide');
+
                     $("#modalVerEjercicioInfo").modal('show');
 
                     $("#verIDueno").text(res.dueno);
@@ -1075,11 +414,6 @@ $(document).ready(function(){
             }
         });
     });
-
-    $(this).on("click", "#volverAlModalI", function(){
-        $("#modalInfoHoja").modal('show');
-        // $( "#rowInfoHoja" ).trigger( "click" );
-     });
 
     $(this).on("click", "#rowBorrarHoja", function(){
         var mi_id = $(this).attr("data-number");
@@ -1100,21 +434,7 @@ $(document).ready(function(){
         }
     });
 
-   
-    $.ajax({
-        method: "GET",
-        url: "../templates/adm_profesor/getListarHojas.php",
-        data: { orden: 0 },
-        success: function(response){
-            
-            var resultado = response.substring(23);
-            
-            if(response !== null){
-                $("#table-listar-hojas > tbody").append(resultado);
 
-            }
-        }
-    });
 
     $(".nombreProfListar").click(function(){
         //console.log(ordenarCreadorHojaListar);
@@ -1277,7 +597,7 @@ $(document).ready(function(){
 
     $('#avisos').on("click", ".marcarTodosLeidos", function(){      
         var mi_user = $(this).attr("data-name");
-        console.log("ESTOY EN MARCAR TODOS LEIDOS");
+        // console.log("ESTOY EN MARCAR TODOS LEIDOS");
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/getMarcarAvisosLeidos.php",
@@ -1296,70 +616,6 @@ $(document).ready(function(){
               
     });
 /***** FIN AVISOS *****/
-
-
-/*** ESTADISTICAS ***/
-    //Rellenar el select con sus valores
-
-    $("#headingOne").click(function(){
-        $.ajax({
-            method: "POST",
-            url: "../templates/adm_profesor/getSelectEstadisticas.php",
-            data: { caso: 1 },
-            success: function(response)
-            {
-                location.reload();
-            }
-        });
-    }); 
-
-    $("#headingTwo").click(function(){
-        $.ajax({
-            method: "POST",
-            url: "../templates/adm_profesor/getSelectEstadisticas.php",
-            data: { caso: 2 },
-            success: function(response)
-            {
-                location.reload();
-            }
-        });
-    });
-
-    $("#headingThree").click(function(){
-        $.ajax({
-            method: "POST",
-            url: "../templates/adm_profesor/getSelectEstadisticas.php",
-            data: { caso: 3 },
-            success: function(response)
-            {
-                location.reload();
-            }
-        });
-    });
-
-    $("#headingFour").click(function(){
-        $.ajax({
-            method: "POST",
-            url: "../templates/adm_profesor/getSelectEstadisticas.php",
-            data: { caso: 4 },
-            success: function(response)
-            {
-                location.reload();
-            }
-        });
-    });
-
-    $("#headingFive").click(function(){
-        $.ajax({
-            method: "POST",
-            url: "../templates/adm_profesor/getSelectEstadisticas.php",
-            data: { caso: 5 },
-            success: function(response)
-            {
-                location.reload();
-            }
-        });
-    });
 
 
 });

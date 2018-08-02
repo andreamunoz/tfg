@@ -3,7 +3,7 @@
 	include_once '../inc/administrar_schema.php';
 	$code = $_POST['crea_tabla'];
 	session_start();
-
+	$_SESSION['guardarDatosTablas'] = $_POST['crea_tabla'];
 	$user_name = $_SESSION['user'];
 	$code = strtolower($code);
 	// print_r($_SESSION);

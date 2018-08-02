@@ -16,6 +16,6 @@
 	}
 
 	
-	header("Location: ../templates/index_profesor.php");
+	header("Location: ../templates/prf_crear_hoja.php");
 	exit();
 ?>

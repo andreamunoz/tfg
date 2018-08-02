@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once 'functions.php';
 
 class Administrar_schema{
@@ -186,6 +187,7 @@ class Administrar_schema{
         $admin->updateTablasDisponibles($profe);
         if($bienEjecutadas === $contador){
             $arrayResultado = "Sentencias ejecutadas correctamente.";
+            unset($_SESSION['guardarDatosTablas']);
         }else{
             foreach ($arrayResultado as $key => $value) {
                 //var_dump($value);

@@ -506,6 +506,6 @@
                 $_SESSION['message'] = "Error. Por favor repase las tablas de la solución y asegurese de que sean válidas.";
         }
         var_dump($resultado);
-        header("Location: ../templates/index_profesor.php");
+        header("Location: ../templates/prf_crear_ejercicio.php");
         exit();
 ?>

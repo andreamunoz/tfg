@@ -66,7 +66,12 @@
 											<label for="enunciado"><?php echo trad( "Inserte el código aquí", $lang) ?></label>
 										</div>	
 										<div class="panel-footer" >
-					  						<textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="10" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required></textarea>
+					  						<?php
+					  							if (isset($_SESSION['guardarDatosTablas'])){ ?>
+												<textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="10" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required><?php echo $_SESSION['guardarDatosTablas']; ?></textarea>
+					  						<?php } else { ?> 
+												<textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="10" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required></textarea>
+					  						<?php } ?>
 					  					</div>
 					  					
 					  				</div>	

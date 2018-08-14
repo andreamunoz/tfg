@@ -114,9 +114,9 @@
 					  		<div class="form-row pr-2">	
 								<div class="form-group col-md-3 pl-4">
 									<!-- <button class="btn btn-log btn-tertiary-border btn-block" type="reset"><?php //echo trad('Cancelar',$lang) ?></button> -->
-									<button type="button" class="btn btn-log btn-tertiary-border btn-block" data-dismiss="modal">Volver</button>
+									<button type="button" class="btn btn-log btn-tertiary-border btn-block" type="reset" onclick="location.href = '../templates/prf_listar_hojas.php'">Volver</button>
 								</div>
-								<div class="form-group col-md-4 offset-5 pr-4">
+								<div class="form-group col-md-5 offset-4 pr-3">
 									<button class="btn btn-log btn-tertiary btn-block" name="agregar" type="submit"><?php echo trad('Agregar seleccionados',$lang) ?></button>
 								</div>
 

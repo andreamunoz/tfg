@@ -54,7 +54,7 @@
 					<div class="row ">
 						<div class="col-md-11 crear-ejercicio">	
 							<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/crear_ejercicio.php">
-								<h3><?php echo trad('Crear Ejercicio',$lang) ?></h3>
+								<h3 id="userPrincipal" data-name="<?php echo $_SESSION['user']; ?>"><?php echo trad('Crear Ejercicio',$lang) ?></h3>
 								<p class="pl-5"><?php echo trad('Indicar el propietario de las tablas que se desean utilizar así como la categoría y nivel del ejercicio, una descripción que sirva de ayuda al alumno, elenunciado y una solución.',$lang) ?></p>
 								<div class="hrr"></div>
 								<div class="form-row pt-4 ">
@@ -238,6 +238,7 @@
 			</div> 
 		</div>
 	<script type="text/javascript" src="../js/functions.js"></script>
+	<script type="text/javascript" src="../js/update_select.js"></script>
 	</body>
 	<footer class="footer py-3 text-center">
 		<span>© 2018</span> <a id="pie" href="index_profesor.php">SQLab</a> 

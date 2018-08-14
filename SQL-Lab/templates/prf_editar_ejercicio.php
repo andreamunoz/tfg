@@ -54,7 +54,7 @@
 						<div class="col-md-11 editar-ejercicio" id="editarEjercicio" >
 							
 								<form class="jumbotron-propio" id="longSelect" method="post" action="../handler/editar_ejercicio.php">
-									<h3><?php echo trad( "Editar Ejercicio", $lang) ?></h3>
+									<h3 id="userPrincipal" data-name="<?php echo $_SESSION['user']; ?>"><?php echo trad( "Editar Ejercicio", $lang) ?></h3>
 									<p class="pl-5"><?php echo trad( "Podrás editar algunos campos del ejercicio", $lang) ?>.</p>
 									<div class="hrr"></div>
 														

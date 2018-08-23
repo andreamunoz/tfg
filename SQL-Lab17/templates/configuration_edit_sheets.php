@@ -11,7 +11,7 @@ session_start();
     $descripcion = $hoja->getHojaById($id_hoja);
     
     ?>
-    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_sheets.php" > Hoja de Ejercicios</a> > <a class="enlace" href="configuration_edit_sheets.php" > Editar Hoja</a></label>
+    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_sheets.php" > Hoja de Ejercicios</a> > Editar Hoja</label>
     <h2><strong>Editar Hoja | <?php echo $descripcion ?></strong> </h2>
     <div class="row mb-5">
         <div class="col-md-12">

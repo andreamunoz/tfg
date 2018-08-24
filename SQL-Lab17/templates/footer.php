@@ -20,6 +20,9 @@
     $(document).ready(function () {
         $('#employee_data').DataTable();
     });
+    $(document).ready(function () {
+        $('#employee_table').DataTable();
+    });
     </script>
 </html>
 

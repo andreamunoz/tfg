@@ -27,19 +27,15 @@ session_start();
                                 <span aria-hidden="true"> <img class="img_icon_cerrar cerrar" src="../img/icon_cerrarPanel_blanco.svg"/></span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            
+                        <div class="modal-body">                           
                             <p class="pl-5">+ <strong><i>Crear hoja:</i></strong> Ponle el nombre a la hoja y seleccione los ejercicios que quiere añadir. </p>
-                            <p class="pl-5">+ <strong><i>Editar:</i></strong> Cambie el nombre a la hoja o bien cambie los ejercicios seleccionados por otros.</p>
-                            
+                            <p class="pl-5">+ <strong><i>Editar:</i></strong> Cambie el nombre a la hoja o bien cambie los ejercicios seleccionados por otros.</p>                           
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
     <div id="accordion">
         <div class="card" >  
             <div class="table-responsive">  

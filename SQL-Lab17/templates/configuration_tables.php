@@ -11,7 +11,6 @@ session_start();
         <div class="col-md-9">
             <p>Añade, edita y elimina las tablas que tengan los ejercicios...</p>
         </div>
-
         <div class="col-md-3 p-0">
             <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_tables.php" >Crear Tabla</a>
             <!-- Button trigger modal -->
@@ -31,15 +30,13 @@ session_start();
                         <div class="modal-body">
                             <p class="pl-5">+ <strong><i>Crear tabla:</i></strong> Añade la consulta para Crear/Update/Drop a la tabla. </p>
                             <p class="pl-5">+ <strong><i>Ver:</i></strong> Puede ver el contenido (nombre, creador, campos...) que tiene la tabla seleccionada.</p>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
-
     <div id="accordion">
         <div class="card" >  
             <div class="table-responsive">  
@@ -50,7 +47,6 @@ session_start();
                             <th style="width:30%;">Creador Tabla</th>
                             <th style="width:40%;">Nº de columnas</th>
                             <th style="width:20%;"></th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody >
@@ -59,22 +55,22 @@ session_start();
                         $connect = new Tools();
                         $conexion = $connect->connectDB();
                         $sql = "SELECT td.nombre, td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.autoriza = 1";
-                        $consulta =  mysqli_query($conexion,$sql);
-                        while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {
+                        $consulta = mysqli_query($conexion, $sql);
+                        while (($fila = mysqli_fetch_array($consulta))) {
 
-                            $sql2 = "SELECT COUNT(*) As NumeroCampos FROM Information_Schema.Columns WHERE Table_Name = '".$fila["nombre"]."' GROUP BY Table_Name;";
-                            $consulta2 = mysqli_query($conexion,$sql2);
-                            while (($fila2 = $consulta2->fetch_array(MYSQLI_ASSOC))) {
+                            $sql2 = "SELECT COUNT(*) As NumeroCampos FROM Information_Schema.Columns WHERE Table_Name = '" . $fila["nombre"] . "' GROUP BY Table_Name;";
+                            $consulta2 = mysqli_query($conexion, $sql2);
+                            while (($fila2 = mysqli_fetch_array($consulta2))) {
                                 $campos = $fila2["NumeroCampos"];
                             }
-                            $quitar = $fila["schema_prof"]."_";
+                            $quitar = $fila["schema_prof"] . "_";
                             $onlyName = explode($quitar, $fila["nombre"]);
                             echo '<tr>
-                                    <td>'.$onlyName[1].'</td>
-                                    <td>'.$fila["schema_prof"].'</td>
-                                    <td>'. $campos .'</td>
+                                    <td>' . $onlyName[1] . '</td>
+                                    <td>' . $fila["schema_prof"] . '</td>
+                                    <td>' . $campos . '</td>
                                     <td>
-                                        <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_info_tables.php?name=' . $fila["nombre"] . '&num='.$campos.'"> Ver Detalles </a>
+                                        <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_info_tables.php?name=' . $fila["nombre"] . '&num=' . $campos . '"> Ver Detalles </a>
                                     </td>
                                 </tr>';
                         }
@@ -83,10 +79,10 @@ session_start();
                     </tbody>
                 </table>
                 <?php
-                    if(isset($_SESSION['message_tables'])){
-                        echo $_SESSION['message_tables'];
-                        unset($_SESSION['message_tables']);
-                    }
+                if (isset($_SESSION['message_tables'])) {
+                    echo $_SESSION['message_tables'];
+                    unset($_SESSION['message_tables']);
+                }
                 ?>
             </div>  
         </div> 

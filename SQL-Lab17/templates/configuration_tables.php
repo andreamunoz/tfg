@@ -48,36 +48,35 @@ session_start();
                         <tr>
                             <th style="width:30%;">Nombre Tabla</th>
                             <th style="width:30%;">Creador Tabla</th>
-                            <th style="width: 60%">Campos</th>
+                            <th style="width:40%;">Nº de columnas</th>
+                            <th style="width:20%;"></th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody >
-                        <!-- REALIZAR LISTA DE TABLAS -->
                         <?php
-                        include_once '../inc/hoja_ejercicio.php';
-                        include_once '../inc/esta_contenido.php';
-                        $hojaejer = new HojaEjercicio();
-                        $result = $hojaejer->getAllHojas();
-                        if (isset($result)) {
+                        include_once '../inc/functions.php';
+                        $connect = new Tools();
+                        $conexion = $connect->connectDB();
+                        $sql = "SELECT td.nombre, td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.autoriza = 1";
+                        $consulta =  mysqli_query($conexion,$sql);
+                        while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {
 
-                            while ($fila_hoja = mysqli_fetch_array($result)) {
-                                ?>
-
-                                <tr class="accordion-toggle" id="show-accordion" >
-                                    <?php echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $fila_hoja['nombre_hoja'] . '</td>'; ?>
-
-                                    <?php echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $fila_hoja['creador_hoja'] . '</td>'; ?>
-                                    <?php
-                                    $number = new EstaContenido();
-                                    $id_hoja = $fila_hoja['id_hoja'];
-                                    $row_number = $number->getNumberEjerciciosByHoja($id_hoja);
-                                    echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $row_number["COUNT(id_ejercicio)"] . '</td>';
-                                    ?>
-                                    <?php echo '<td><a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_edit_sheets.php?hoja=' . $fila_hoja['id_hoja'] . '">Editar</a></td>'; ?>
-                                </tr>
-                                <?php
+                            $sql2 = "SELECT COUNT(*) As NumeroCampos FROM Information_Schema.Columns WHERE Table_Name = '".$fila["nombre"]."' GROUP BY Table_Name;";
+                            $consulta2 = mysqli_query($conexion,$sql2);
+                            while (($fila2 = $consulta2->fetch_array(MYSQLI_ASSOC))) {
+                                $campos = $fila2["NumeroCampos"];
                             }
+                            $quitar = $fila["schema_prof"]."_";
+                            $onlyName = explode($quitar, $fila["nombre"]);
+                            echo '<tr>
+                                    <td>'.$onlyName[1].'</td>
+                                    <td>'.$fila["schema_prof"].'</td>
+                                    <td>'. $campos .'</td>
+                                    <td>
+                                        <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_info_tables.php?name=' . $fila["nombre"] . '&num='.$campos.'"> Ver Detalles </a>
+                                    </td>
+                                </tr>';
                         }
                         ?>
 

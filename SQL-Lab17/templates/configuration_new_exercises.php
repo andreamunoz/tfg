@@ -58,17 +58,17 @@ session_start();
                                         <input type="text" id="new_name_sheet" name="new_name_exercise" placeholder="Nombre Ejercicio" class="form-control form-control-sm" required/>
                                     </div>
                                     <div class="col-md-2">
-                                        <select class="custom-select form-control-sm " title="Selecciona" id="select_nivel">
+                                        <select name='nivel' class="custom-select form-control-sm " title="Selecciona" id="select_nivel">
                                             <?php
                                             $niveles = $ejer->getAllNiveles();
                                             while ($nivel = mysqli_fetch_array($niveles)) {
-                                                echo "<option value=" . $nivel['nivel'] . " selected=''>" . $nivel['nivel'] . " </option>";
+                                                echo "<option  value=" . $nivel['nivel'] . " selected=''>" . $nivel['nivel'] . " </option>";
                                             }
                                             ?>              
                                         </select>                                        
                                     </div>
                                     <div class="col-md-3">
-                                        <select class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
+                                        <select name='categoria' class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
                                             <?php
                                             $categorias = $ejer->getAllCategorias();
                                             while ($categoria = mysqli_fetch_array($categorias)) {
@@ -78,7 +78,7 @@ session_start();
                                         </select> 
                                     </div>
                                     <div class="col-md-2">
-                                        <select class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
+                                        <select name='habdes' class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
                                             <option value="1" selected=''>Habilitar</option>"
                                             <option value="0" selected=''>Deshabilitar</option>"
                                         </select>
@@ -112,14 +112,14 @@ session_start();
                                     <div class="col-md-3">
                                         <label><strong>Creador Tablas</strong></label>
                                         <div class=" selector-user" >
-                                            <select class=" custom-select form-control-sm" id="user_tablas" name="user_tablas" title="Selecciona" required>                                    
+                                            <select name="user_tabla" class=" custom-select form-control-sm" id="user_tablas" name="user_tablas" title="Selecciona" required>                                    
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <label><strong>Tablas</strong></label>
                                         <div class=" selector-tabla" >
-                                            <select multiple="" type="text" id="tablas" name="tablas" size="15" class="form-control">                                               
+                                            <select type="text" id="tablas" name="tablas" class="form-control">                                               
                                             </select>				  				 
                                         </div>
                                     </div>

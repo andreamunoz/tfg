@@ -5,7 +5,7 @@ class Ejercicio{
 
     public $msg;
     
-    function createEjercicio($nivel,$enun,$descrip,$deshab,$tipo,$user,$sol, $tablas){
+    function createEjercicio($descrip,$nivel,$tipo,$deshab,$user,$tablas,$enun,$sol){
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
@@ -108,6 +108,16 @@ class Ejercicio{
         $tool = new Tools();
         $array = $tool->getArraySQL($sql);
         return $array;
+    }
+    
+    function getExistEjercicio($nombre){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "select count(descripcion) as num from sqlab_ejercicio where descripcion='$nombre'";
+        $consulta = mysqli_query($conexion,$sql); 
+        $count = mysqli_fetch_array($consulta);
+        $connect->disconnectDB($conexion);
+        return $count;
     }
     
     function getAllNiveles(){

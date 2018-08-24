@@ -24,6 +24,8 @@ class HojaEjercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+    
+    
 
     function getAllHojas(){
     	
@@ -105,11 +107,33 @@ class HojaEjercicio{
         return $consulta;
     }
     
+    function updateHojaAnadirEjercicios($id, $user, $nombre, $ejercicios){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        
+        $sql = "update sqlab_hoja_ejercicios set nombre_hoja = '$nombre' , creador_hoja = '$user' where id_hoja='$id'" ;
+        $consulta = mysqli_query($conexion,$sql);
+       
+        $rs = mysqli_query($conexion,"SELECT MAX(id_hoja) AS id FROM sqlab_hoja_ejercicios");
+        if( $row = mysqli_fetch_row($rs)){
+            $id_e = trim($row[0]);
+            foreach ($ejercicios as $key => $value) {
+                $sql2 = "insert into sqlab_esta_contenido (id_ejercicio, id_hoja, orden) values ('".$value."','".$id."','".($key + 1)."');";
+                $consulta2 = mysqli_query($conexion,$sql2);
+                if(!($consulta2)){ 
+                    echo $conexion->error;
+                }
+            }
+        }
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    
     function getExistHoja($nombre){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "select count(nombre_hoja) as num from sqlab_hoja_ejercicios where nombre_hoja='.$nombre.'";
-        $consulta = mysqli_query($conexion,$sql);       
+        $sql = "select count(nombre_hoja) as num from sqlab_hoja_ejercicios where nombre_hoja='$nombre'";
+        $consulta = mysqli_query($conexion,$sql); 
         $count = mysqli_fetch_array($consulta);
         $connect->disconnectDB($conexion);
         return $count;
@@ -134,6 +158,15 @@ class HojaEjercicio{
         return $consulta;
     }
 
+    function deleteEjerciciosDeHoja($id_hoja){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "DELETE FROM sqlab_esta_contenido WHERE id_hoja = $id_hoja;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    
     function getTodosIdEjerDeHoja($id_hoja){
         $connect = new Tools();
         $conexion = $connect->connectDB();

@@ -7,7 +7,7 @@
 
 	$hoja = new HojaEjercicio();
         $exist = $hoja->getExistHoja($nombre_hoja);
- 
+        
         if($exist['num'] == 0){
             $hoja_ejer = new HojaEjercicio();
             $resultado = $hoja_ejer->createHojaAnadirEjercicios($user, $nombre_hoja, $seleccionados);

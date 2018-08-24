@@ -11,7 +11,7 @@ session_start();
     $descripcion = $hoja->getHojaById($id_hoja);
     
     ?>
-    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_sheets.php" > Hoja de Ejercicios</a> > <a class="enlace" href="configuration_edit_sheets.php" > Editar Hoja</a></label>
+    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_sheets.php" > Hoja de Ejercicios</a> > <a class="enlace" href="configuration_edit_sheets.php?hoja=<?php echo $id_hoja ?> " > Editar Hoja</a></label>
     <h2><strong>Editar Hoja | <?php echo $descripcion ?></strong> </h2>
     <div class="row mb-5">
         <div class="col-md-12">
@@ -24,7 +24,7 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ">
-                    <form id="new_sheets" method="post" action="../handler/validate_new_sheets.php">
+                    <form id="edit_sheets" method="post" action="../handler/validate_edit_sheets.php?hoja=<?php echo $id_hoja ?>">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-sheets-tab" data-toggle="tab" href="#nav-new-sheets" role="tab" aria-controls="nav-home" aria-selected="true">Nueva Hoja</a>
@@ -47,7 +47,7 @@ session_start();
                                 <!--<hr class="hrr">-->
                                 <div class="row">
                                     <div class="col-md-3">                                    
-                                        <input type="text" id="new_name_sheet" name="new_name_sheet" value="<?php echo $descripcion ?>" class="form-control form-control-sm" required/>
+                                        <input type="text" id="edit_name_sheet" name="edit_name_sheet" value="<?php echo $descripcion ?>" class="form-control form-control-sm" required/>
                                     </div>
                                     <div class="col-md-3">
                                         <input type="text" id="user_sheet" name="user_sheet" placeholder="<?php echo $_SESSION['user'] ?>" class="form-control form-control-sm" readonly/>

@@ -64,5 +64,15 @@ class EstaContenido{
         $connect->disconnectDB($conexion);
         return $count;
     }
+    
+    function getDeleteAllEjerciciosHoja($id_hoja){
+
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "DELETE FROM sqlab_esta_contenido WHERE id_hoja=$id_hoja;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
 
 }

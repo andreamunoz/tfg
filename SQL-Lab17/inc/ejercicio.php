@@ -9,11 +9,10 @@ class Ejercicio{
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $resul = "";
-        $dueno = explode("_", $tablas[0], 2);
-
+        //$resul = "";
+        //$dueno = explode("_", $tablas[0], 2); .mb_strtolower($dueno[0]).
         $sql = "insert into sqlab_ejercicio (nivel,enunciado,descripcion,deshabilitar,tipo,creador_ejercicio,solucion,dueño_tablas) 
-        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".mb_strtolower($dueno[0])."');";
+        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".$tablas."');";
         $resul = mysqli_query($conexion,$sql);
         if(!($resul)){
             $resul = $conexion->error;
@@ -39,11 +38,11 @@ class Ejercicio{
         return $resul;
     }
  
-    function update($id,$nivel,$enun,$descrip,$deshab,$tipo,$sol,$user){
+    function update($id,$descrip,$nivel,$tipo,$deshab,$user,$tabla,$enun,$sol){
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "UPDATE sqlab_ejercicio SET nivel = '$nivel', enunciado = '$enun', descripcion = '$descrip', deshabilitar = '$deshab', tipo = '$tipo', solucion = '$sol' WHERE id_ejercicio = $id;";
+        $sql = "UPDATE sqlab_ejercicio SET nivel = '$nivel', enunciado = '$enun', descripcion = '$descrip', deshabilitar = '$deshab', tipo = '$tipo', solucion = '$sol', dueño_tablas='$tabla' WHERE id_ejercicio = $id;";
         $consulta = mysqli_query($conexion,$sql);
         if(!$consulta){
                echo "No se ha podido modificar la base de datos<br><br>".mysqli_error($conexion);

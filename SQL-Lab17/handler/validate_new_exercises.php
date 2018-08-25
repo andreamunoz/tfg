@@ -3,19 +3,16 @@
 	session_start();
 	$user = $_SESSION['user'];
 	$nombre_ejerc= $_POST['new_name_exercise'];
-        $nivel = $_POST['nivel'];
-        $categoria = $_POST['categoria'];
-        $habdes = $nivel = $_POST['habdes'];
+        $ejer = new Ejercicio();
+        $exist = $ejer->getExistEjercicio($nombre_ejerc);
         $user_tabla = $_POST['user_tabla'];
         $enunciado = $_POST['enunciado'];
         $solucion = $_POST['solucion'];
-        
-	$ejer = new Ejercicio();
-        $exist = $ejer->getExistEjercicio($nombre_ejerc);
-        
+        if($_POST['categoria']=="Operaciones")
+            $categ = "Operaciones Manipulacion de Datos";
         if($exist['num'] == 0){
             $ejerA = new Ejercicio();
-            $resultado = $ejerA->createEjercicio($nombre_hoja, $nivel, $categoria, $habdes, $user, $user_tabla, $enunciado, $solucion);
+            $resultado = $ejerA->createEjercicio($nombre_ejerc, $_POST['niveles'], $categ, $_POST['habdes'], $user, $user_tabla, $enunciado, $solucion);
             if($resultado){
                     $_SESSION['message_sheets'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>

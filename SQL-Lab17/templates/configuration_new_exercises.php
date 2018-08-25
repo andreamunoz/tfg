@@ -58,7 +58,7 @@ session_start();
                                         <input type="text" id="new_name_sheet" name="new_name_exercise" placeholder="Nombre Ejercicio" class="form-control form-control-sm" required/>
                                     </div>
                                     <div class="col-md-2">
-                                        <select name='nivel' class="custom-select form-control-sm " title="Selecciona" id="select_nivel">
+                                        <select name='niveles' class="custom-select form-control-sm " title="Selecciona" id="select_nivel">
                                             <?php
                                             $niveles = $ejer->getAllNiveles();
                                             while ($nivel = mysqli_fetch_array($niveles)) {
@@ -79,8 +79,8 @@ session_start();
                                     </div>
                                     <div class="col-md-2">
                                         <select name='habdes' class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
-                                            <option value="1" selected=''>Habilitar</option>"
-                                            <option value="0" selected=''>Deshabilitar</option>"
+                                            <option value="0" selected=''>Habilitar</option>"
+                                            <option value="1" selected=''>Deshabilitar</option>"
                                         </select>
                                     </div>
                                     <div class="col-md-2">
@@ -119,13 +119,13 @@ session_start();
                                     <div class="col-md-3">
                                         <label><strong>Tablas</strong></label>
                                         <div class=" selector-tabla" >
-                                            <select type="text" id="tablas" name="tablas" class="form-control">                                               
+                                            <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm">                                               
                                             </select>				  				 
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <label><strong>Campos</strong></label>
-                                        <table id="columnas" class="form-control" ></table>
+                                        <table id="columnas" class="form-control" size="2" ></table>
                                     </div>
                                 </div>
                             </div>
@@ -136,6 +136,7 @@ session_start();
                             echo $_SESSION['message_sheets'];
                             unset($_SESSION['message_sheets']);
                         }
+                        
                         ?>
                     </form>
                 </div>

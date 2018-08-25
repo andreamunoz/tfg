@@ -5,7 +5,6 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_exercises.php" > Ejercicios</a> > <a class="enlace" href="configuration_new_exercises.php" > Editar Ejercicio</a></label>
     <?php 
     include_once '../inc/ejercicio.php';
     include_once '../inc/tablas.php';
@@ -13,6 +12,7 @@ session_start();
     $id_ejer = $_GET['exercise'];
     $des = $ejer->getDescripcionEjercicio($id_ejer);
     ?>
+    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_exercises.php" > Ejercicios</a> > <a class="enlace" href="configuration_edit_exercises.php?exercise=<?php echo $id_ejer ?>" > Editar Ejercicio</a></label>
     <h2><strong>Editar Ejercicio | <?php echo $des ?></strong></h2>
     <div class="row mb-5">
         <div class="col-md-12">
@@ -23,7 +23,7 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ">
-                    <form id="new_sheets" method="post" action="../handler/validate_new_exercises.php">
+                    <form id="new_sheets" method="post" action="../handler/validate_edit_exercises.php?exercise=<?php echo $id_ejer ?>">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                                 <a class="nav-item nav-link active" id="nav-exercisesD-tab" data-toggle="tab" href="#nav-new-exercises" role="tab" aria-controls="nav-new-exercises" aria-selected="true">Editar Ejercicio</a>
@@ -59,10 +59,10 @@ session_start();
                                 ?>
                                 <div class="row">
                                     <div class="col-md-2">                                    
-                                        <input type="text" id="new_name_sheet" name="new_name_exercise" placeholder="<?php echo $ejercicioId['descripcion'] ?>" class="form-control form-control-sm" required/>
+                                        <input type="text" id="new_name_sheet" name="edit_name_exercise" value="<?php echo $ejercicioId['descripcion'] ?>" class="form-control form-control-sm" required>
                                     </div>
                                     <div class="col-md-2">
-                                        <select class="custom-select form-control-sm " title="Selecciona" id="select_nivel">
+                                        <select name="niveles" class="custom-select form-control-sm " title="Selecciona" id="select_nivel">
                                             <?php
                                             $niveles = $ejer->getAllNiveles();
                                             while ($nivel = mysqli_fetch_array($niveles)) {                                              
@@ -75,7 +75,7 @@ session_start();
                                         </select>                                        
                                     </div>
                                     <div class="col-md-3">
-                                        <select class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
+                                        <select name="categoria" class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
                                             <?php
                                             $categorias = $ejer->getAllCategorias();
                                             while ($categoria = mysqli_fetch_array($categorias)) {
@@ -88,7 +88,7 @@ session_start();
                                         </select> 
                                     </div>
                                     <div class="col-md-2">
-                                        <select class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
+                                        <select name="habdes" class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
                                             <?php if($ejercicioId['deshabilitar'] == 1){?>
                                                     <option value="1" selected=''>Habilitar</option>
                                                     <option value="0" >Deshabilitar</option>
@@ -110,15 +110,15 @@ session_start();
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label><strong>Enunciado</strong></label>
-                                        <textarea id="enunciado" name="enunciado" class="form-control" rows="10" placeholder="<?php echo $ejercicioId['enunciado'] ?>" required="" ></textarea>
+                                        <textarea id="enunciado" name="enunciado" class="form-control" rows="10" required="" ><?php echo $ejercicioId['enunciado'] ?></textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <label><strong>Solución</strong></label>
-                                        <textarea id="solucion" name="solucion" class="form-control" rows="10" placeholder="<?php echo $ejercicioId['solucion'] ?>" required=""></textarea>
+                                        <textarea id="solucion" name="solucion" class="form-control" rows="10" required=""><?php echo $ejercicioId['solucion'] ?></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-2 offset-10">
-                                    <button class="btn btn-primary pl-4 pr-4 mt-4" name="new_exercise" type="submit">Crear Ejercicio</button>
+                                    <button class="btn btn-primary pl-4 pr-4 mt-4" name="new_exercise" type="submit">Actualizar Ejercicio</button>
                                 </div>
                             </div>
                             <div class="tab-pane fade mt-3 pl-4" id="nav-exercisesT" role="tabpanel" aria-labelledby="nav-exercisesT-tab">
@@ -127,14 +127,14 @@ session_start();
                                     <div class="col-md-3">
                                         <label><strong>Creador Tablas</strong></label>
                                         <div class=" selector-user" >
-                                            <select class=" custom-select form-control-sm" id="user_tablas" name="user_tablas" title="Selecciona" required>
+                                            <select name="user_tabla" class=" custom-select form-control-sm" id="user_tablas" name="user_tablas" title="Selecciona" required>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <label><strong>Tablas</strong></label>
                                         <div class=" selector-tabla" >
-                                            <select multiple="" type="text" id="tablas" name="tablas[]" size="15" class="form-control"></select>				  				 
+                                            <select type="text" id="tablas" name="tablas[]" class="custom-select form-control-sm"></select>				  				 
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -149,6 +149,10 @@ session_start();
                         if (isset($_SESSION['message_sheets'])) {
                             echo $_SESSION['message_sheets'];
                             unset($_SESSION['message_sheets']);
+                        }
+                        if (isset($_SESSION['message_edit_sheets'])) {
+                            echo $_SESSION['message_edit_sheets'];
+                            unset($_SESSION['message_edit_sheets']);
                         }
                         ?>
                     </form>

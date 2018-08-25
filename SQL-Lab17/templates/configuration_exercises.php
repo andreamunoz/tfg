@@ -119,6 +119,14 @@ session_start();
                     echo $_SESSION['msg_habilitar'];
                     unset($_SESSION['msg_habilitar']);
                 }
+                if(isset($_SESSION['message_sheets'])){
+                    echo $_SESSION['message_sheets'];
+                    unset($_SESSION['message_sheets']);
+                }
+                if(isset($_SESSION['message_edit_sheets'])){
+                    echo $_SESSION['message_edit_sheets'];
+                    unset($_SESSION['message_edit_sheets']);
+                }
                 ?>
             </div>  
         </div> 

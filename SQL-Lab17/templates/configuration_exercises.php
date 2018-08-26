@@ -77,7 +77,7 @@ session_start();
                                     <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php if($_SESSION['user']== $fila['creador_ejercicio']){ ?>
                                     <?php echo '<td>'
-                                            . '<a type="button" class="btn btn-primary pl-5 pr-5 mr-4" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Editar</a>'
+                                            . '<a type="button" class="btn btn-primary btn-edit mr-4" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Editar</a>'
                                             . '<a type="button" class="btn btn-secundary pl-5 pr-5" href="../handler/validate_deshabilitar.php?deshabilitar=' . $fila['id_ejercicio'] . '">Deshabilitar</a>'
                                             . '</td>';
                                     } else {
@@ -97,8 +97,8 @@ session_start();
                                     <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php if($_SESSION['user']== $fila['creador_ejercicio']){ ?>
                                     <?php echo '<td>'
-                                            . '<a type="button" class="btn btn-primary pl-5 pr-5 mr-4" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Editar</a>'
-                                            . '<a method="post" type="button" class="btn btn-secundary pl-5 pr-5" href="../handler/validate_habilitar.php?habilitar=' . $fila['id_ejercicio'] . '">Habilitar</a>'
+                                            . '<a type="button" class="btn btn-primary btn-edit mr-4" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Editar</a>'
+                                            . '<a method="post" type="button" class="btn btn-secundary btn-habilitar" href="../handler/validate_habilitar.php?habilitar=' . $fila['id_ejercicio'] . '">Habilitar</a>'
                                             . '</td>';
                                     } else {
                                         echo '<td>'

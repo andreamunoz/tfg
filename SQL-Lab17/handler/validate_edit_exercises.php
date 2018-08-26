@@ -9,12 +9,15 @@
         $user_tabla = $_POST['user_tabla'];
         $enunciado = $_POST['enunciado'];
         $solucion = $_POST['solucion'];
-        if($_POST['categoria']=="Operaciones")
-            $categ = "Operaciones Manipulacion de Datos";
+        
+        if($_POST['tipo'] == "Operaciones")
+            $catego = "Operaciones Manipulacion de Datos";
+        else 
+            $catego = $_POST['tipo'];
         
         if($exist['num'] == 1){
             $ejerA = new Ejercicio();
-            $resultado = $ejerA->update($id_ejerc,$nombre_ejerc, $_POST['niveles'], $categ, $_POST['habdes'], $user, $user_tabla, $enunciado, $solucion);
+            $resultado = $ejerA->update($id_ejerc,$nombre_ejerc, $_POST['niveles'], $catego, $_POST['habdes'], $user, $user_tabla, $enunciado, $solucion);
             if($resultado){
                     $_SESSION['message_edit_sheets'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -42,7 +45,7 @@
             }    
         }else {
             $ejerA = new Ejercicio();
-            $resultado = $ejerA->update($id_ejerc,$nombre_ejerc, $_POST['niveles'], $categ, $_POST['habdes'], $user, $user_tabla, $enunciado, $solucion);
+            $resultado = $ejerA->update($id_ejerc,$nombre_ejerc, $_POST['niveles'], $catego, $_POST['habdes'], $user, $user_tabla, $enunciado, $solucion);
             if($resultado){
             $_SESSION['message_edit_sheets'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>

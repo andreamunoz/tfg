@@ -29,8 +29,9 @@ session_start();
                         </div>
                         <div class="modal-body">
                             <p class="pl-5">+ <strong><i>Crear tabla:</i></strong> Añade la consulta para Crear/Update/Drop a la tabla. </p>
-                            <p class="pl-5">+ <strong><i>Ver:</i></strong> Puede ver el contenido (nombre, creador, campos...) que tiene la tabla seleccionada.</p>
-
+                            <p class="pl-5">+ <strong><i>Ver detalles:</i></strong></p>
+                            <p class="pl-5"><strong>Estructura </strong>(Puede ver las columnas que tiene la tabla y el tipo al que corresponde dicho campo)</p>
+                            <p class="pl-5"><strong>Datos </strong>(Puede ver el contenido que tienen los campos de esa tabla)</p>
                         </div>
                     </div>
                 </div>

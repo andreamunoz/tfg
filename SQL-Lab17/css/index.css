@@ -434,3 +434,12 @@ section .section-title {
     top: 100px;
 }
 
+.btn-edit {
+    padding-left: 55px;
+    padding-right: 55px;
+}
+
+.btn-habilitar {
+    padding-left: 62px;
+    padding-right: 62px;
+}

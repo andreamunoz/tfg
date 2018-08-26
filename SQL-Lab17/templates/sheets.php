@@ -42,7 +42,7 @@ session_start();
                                     $row_number = $number->getNumberEjerciciosByHoja($id_hoja);
                                     echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $row_number["COUNT(id_ejercicio)"] . '</td>';
                                     ?>
-                                    <?php echo '<td><a class="text-tabla" href="sheet_exercise.php?hoja=' . $fila_hoja['id_hoja'] . '">+Info</a></td>'; ?>
+                                    <?php echo '<td><a class="btn btn-primary pl-5 pr-5" href="sheet_exercise.php?hoja=' . $fila_hoja['id_hoja'] . '">Ver Hoja</a></td>'; ?>
                                 </tr>
                             <?php
                             }

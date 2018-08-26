@@ -25,8 +25,6 @@ session_start();
                             <th style="width:10%;">Nivel</th>
                             <th style="width:20%;">Tipo</th>
                             <th style="width:15%;">Profesor</th>
-                            <th style="width:20%;">Ultima Modificación</th>
-                            <th style="width:10%;">Intentos</th>
                             <th></th>
 
                         </tr>
@@ -52,20 +50,12 @@ session_start();
                                 <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
 
-                                <?php
-                                if ($fila_sol['fecha'])
-                                    echo '<td>' . $fila_sol['fecha'] . '</td>';
-                                else
-                                    echo '<td>No tiene última modificación</td>';
+                                <?php echo '<td><a class="btn btn-primary pl-5 pr-5" href="perform_exercise.php?exercise=' . $fila['id_ejercicio'] . '">Ver ejercicio</a>';
+                                ?> 
+                                <?php if ($fila_sol['intentos'] > 0)
+                                        echo '<a class="btn btn-secundary pl-5 pr-5" href="configuration_show_intent_exercise.php?hoja='.$hojaparameter.'&exercise=' . $fila['id_ejercicio'] . '">Ver Intentos Alumnos</a>';
                                 ?>
-                                <?php
-                                if ($fila_sol['intentos'])
-                                    echo '<td>' . $fila_sol['intentos'] . '</td>';
-                                else
-                                    echo '<td>0</td>';
-                                ?>
-
-                                <?php echo '<td><a class="text-tabla" href="perform_exercise.php?exercise=' . $fila['id_ejercicio'] . '">Ver</a></td>'; ?>
+                                <?php echo '</td>'; ?>
 
                             </tr>
                         <?php } ?>

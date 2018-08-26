@@ -75,7 +75,7 @@ session_start();
                                         </select>                                        
                                     </div>
                                     <div class="col-md-3">
-                                        <select name="categoria" class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
+                                        <select name="tipo" class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
                                             <?php
                                             $categorias = $ejer->getAllCategorias();
                                             while ($categoria = mysqli_fetch_array($categorias)) {
@@ -139,7 +139,10 @@ session_start();
                                     </div>
                                     <div class="col-md-3">
                                         <label><strong>Campos</strong></label>
-                                        <table id="columnas" class="form-control" ></table>
+                                        <div class=" selector-campos" >
+                                            <select type="text" id="campos" name="campos" class="custom-select form-control-sm">                                               
+                                            </select>				  				 
+                                        </div>
                                     </div>
                                 </div>
                             </div>

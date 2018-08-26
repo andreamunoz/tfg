@@ -44,6 +44,15 @@ class Solucion{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+    
+    function getSolEjerciciosByName($id,$user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM sqlab_solucion WHERE id_ejercicio=$id AND user='$user';";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
 
 	function getAllEjerciciosByHoja($id_hoja){
 

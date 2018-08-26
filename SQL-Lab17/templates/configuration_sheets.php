@@ -72,7 +72,7 @@ session_start();
                                     ?>
                                     <?php if($_SESSION['user'] == $fila_hoja['creador_hoja']){ ?>
                                     <?php echo '<td >'
-                                            . ' <a type="button" class="btn btn-primary pl-5 pr-5 mr-4" href="configuration_edit_sheets.php?hoja=' . $fila_hoja['id_hoja'] . '">Editar</a>'
+                                            . ' <a type="button" class="btn btn-primary btn-edit mr-4" href="configuration_edit_sheets.php?hoja=' . $fila_hoja['id_hoja'] . '">Editar</a>'
                                             . ' <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#modalEliminarHoja'.$cont.'"> Eliminar              
                                                 </button>
                                                 <!-- Modal -->

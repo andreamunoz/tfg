@@ -86,6 +86,17 @@ class HojaEjercicio{
         $connect->disconnectDB($conexion);
         return $res;
     }
+    
+    function getNameById($id){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT nombre_hoja FROM sqlab_hoja_ejercicios WHERE id_hoja=$id;";
+        $consulta = mysqli_query($conexion,$sql);
+        $res = mysqli_fetch_assoc($consulta);
+        $connect->disconnectDB($conexion);
+        return $res;
+    }
+    
     function createHojaAnadirEjercicios($user, $nombre, $ejercicios){
         $connect = new Tools();
         $conexion = $connect->connectDB();

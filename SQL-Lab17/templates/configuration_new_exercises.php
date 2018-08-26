@@ -117,15 +117,19 @@ session_start();
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <label><strong>Tablas</strong></label>
+                                        <label><strong>Información Tablas</strong></label>
                                         <div class=" selector-tabla" >
                                             <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm">                                               
                                             </select>				  				 
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <label><strong>Campos</strong></label>
-                                        <table id="columnas" class="form-control" size="2" ></table>
+                                        <label><strong>Información Campos</strong></label>
+                                        <!--<table id="columnas" class="form-control" size="2" ></table>-->
+                                        <div class=" selector-campos" >
+                                            <select type="text" id="campos" name="campos" class="custom-select form-control-sm">                                               
+                                            </select>				  				 
+                                        </div>
                                     </div>
                                 </div>
                             </div>

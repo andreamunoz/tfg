@@ -39,7 +39,7 @@ class Ejercicio{
     }
  
     function update($id,$descrip,$nivel,$tipo,$deshab,$user,$tabla,$enun,$sol){
-        
+
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $sql = "UPDATE sqlab_ejercicio SET nivel = '$nivel', enunciado = '$enun', descripcion = '$descrip', deshabilitar = '$deshab', tipo = '$tipo', solucion = '$sol', dueño_tablas='$tabla' WHERE id_ejercicio = $id;";
@@ -73,6 +73,16 @@ class Ejercicio{
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
+    }
+    
+    function getNameById($id){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT descripcion FROM sqlab_ejercicio WHERE id_ejercicio=$id;";
+        $consulta = mysqli_query($conexion,$sql);
+        $res = mysqli_fetch_assoc($consulta);
+        $connect->disconnectDB($conexion);
+        return $res;
     }
     
     function getEjercicioById($id){

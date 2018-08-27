@@ -82,7 +82,7 @@ session_start();
                                             . '</td>';
                                     } else {
                                         echo '<td>'
-                                            . '<a type="button" class="btn btn-primary pl-5 pr-5" href="perform_exercise.php?exercise=' . $fila['id_ejercicio'] . '">Mostrar</a>'
+                                            . '<a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_show_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Mostrar</a>'
                                             . '</td>';
                                     }
                                     ?>
@@ -102,7 +102,7 @@ session_start();
                                             . '</td>';
                                     } else {
                                         echo '<td>'
-                                            . '<a type="button" class="btn btn-primary pl-5 pr-5" href="perform_exercise.php?exercise=' . $fila['id_ejercicio'] . '">Mostrar</a>'
+                                            . '<a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_show_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Mostrar</a>'
                                             . '</td>';
                                     }
                                     ?>

@@ -30,4 +30,22 @@ class Tablas {
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+    
+    public function getTablasByProfesor($dueño){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT DISTINCT(td.nombre) from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = '$dueño' and u.autoriza = 1";
+        $consulta = mysqli_query($conexion, $sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    
+    public function getCamposTabla($dueño){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY FROM INFORMATION_SCHEMA.COLUMNS";
+        $consulta = mysqli_query($conexion, $sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
 }

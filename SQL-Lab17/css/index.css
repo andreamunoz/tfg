@@ -443,3 +443,22 @@ section .section-title {
     padding-left: 62px;
     padding-right: 62px;
 }
+
+.scroll {
+    overflow-y:scroll;
+    height:300px;
+}
+
+.color-white {
+    background: white !important;
+}
+
+.text-white{
+    color: black !important;
+}
+.modal-header {
+    border-bottom: 1px solid #e9ecef;
+}
+.border-bottom {
+    border-bottom: 2px solid black !important;
+}

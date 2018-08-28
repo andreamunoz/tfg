@@ -462,3 +462,7 @@ section .section-title {
 .border-bottom {
     border-bottom: 2px solid black !important;
 }
+
+span.red{
+  color: red;
+}

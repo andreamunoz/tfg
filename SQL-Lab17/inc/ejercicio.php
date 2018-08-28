@@ -5,19 +5,19 @@ class Ejercicio{
 
     public $msg;
     
-    function createEjercicio($descrip,$nivel,$tipo,$deshab,$user,$tablas,$enun,$sol){
+    function createEjercicio($nivel,$enun,$descrip,$deshab,$tipo,$user,$sol, $tablas){
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        //$resul = "";
-        //$dueno = explode("_", $tablas[0], 2); .mb_strtolower($dueno[0]).
+        $resul = "";
+        $dueno = explode("_", $tablas[0], 2);
+
         $sql = "insert into sqlab_ejercicio (nivel,enunciado,descripcion,deshabilitar,tipo,creador_ejercicio,solucion,dueño_tablas) 
-        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".$tablas."');";
+        values ('".$nivel."','".$enun."','".$descrip."','".$deshab."','".$tipo."','".$user."','".$sol."','".mb_strtolower($dueno[0])."');";
         $resul = mysqli_query($conexion,$sql);
         if(!($resul)){
             $resul = $conexion->error;
         }else{
-            // $rs = mysql_insert_id();
             $rs = mysqli_query($conexion,"SELECT MAX(id_ejercicio) AS id FROM sqlab_ejercicio");
             if( $row = mysqli_fetch_row($rs)){
                 $id = trim($row[0]);
@@ -31,8 +31,6 @@ class Ejercicio{
                     }
                 }
             }
-            
-            
         }
         $connect->disconnectDB($conexion);
         return $resul;

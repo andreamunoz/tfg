@@ -13,7 +13,7 @@ session_start();
     $des = $ejer->getDescripcionEjercicio($id_ejer);
     ?>
     <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_exercises.php" > Ejercicios</a> > <a class="enlace" href="configuration_edit_exercises.php?exercise=<?php echo $id_ejer ?>" > Editar Ejercicio</a></label>
-    <h2><strong>Editar Ejercicio | <?php echo $des ?></strong></h2>
+    <h2 id="userPrincipal" data-name="<?php echo $_SESSION['user']; ?>"><strong>Editar Ejercicio | <?php echo $des ?></strong></h2>
     <div class="row mb-5">
         <div class="col-md-12">
             <p>Edite el ejercicio...</p>
@@ -132,16 +132,19 @@ session_start();
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <label><strong>Tablas</strong></label>
+                                        <label><strong>Información Tablas</strong></label>
                                         <div class=" selector-tabla" >
-                                            <select type="text" id="tablas" name="tablas[]" class="custom-select form-control-sm"></select>				  				 
+                                            <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm">
+                                            </select>				  				 
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <label><strong>Campos</strong></label>
-                                        <div class=" selector-campos" >
-                                            <select type="text" id="campos" name="campos" class="custom-select form-control-sm">                                               
-                                            </select>				  				 
+                                        <label><strong>Información Campos</strong></label>
+                                        <div class=" columnas-tabla" >
+                                            <table id="columnas" class="form-control">
+                                                <tbody>
+                                                </tbody>
+                                            </table>                               				  				 
                                         </div>
                                     </div>
                                 </div>

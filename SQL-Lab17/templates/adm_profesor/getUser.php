@@ -27,7 +27,7 @@ while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {
 	}
 	
 }
-var_dump($nombres);
+// var_dump($nombres);
 
 if ($nombres[0] === "") {
 	echo '<option value="0" selected="selected">Seleccionar</option>';

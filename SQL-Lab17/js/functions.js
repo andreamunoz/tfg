@@ -40,45 +40,51 @@ $(document).ready(function () {
         }
     });
 
-    $(".selector-user select").change(function () {
+    $(".selector-user select").change(function() {
         var form_data = {
-            is_ajax: 1,
-            dueno: $(".selector-user select option:checked").val(),
-            tabla: $(".selector-tabla select option:checked").val(),
-            cambio: true
+                is_ajax: 1,
+                dueno: $(".selector-user select option:checked").val(),
+                cambio: true
         };
         $.ajax({
-            type: "POST",
-            url: "../templates/adm_profesor/getTablas.php",
-            data: form_data,
-            success: function (response)
-            {
-                $('.selector-tabla select').html(response).fadeIn();
-                $.ajax({
-                    type: "POST",
-                    url: "adm_profesor/getColumns.php",
-                    data: form_data,
-                    success: function (response)
-                    {
-                        $('.selector-campos select').html(response).fadeIn();
-                    }
-                });
-            }
+                type: "POST",
+                url: "../templates/adm_profesor/getTablas.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    $('.selector-tabla select').html(response).fadeIn();
+                }
         });
     });
 
-    $(".selector-tabla select").change(function () {
+    $(".selector-tabla select").change(function() {
         var form_data = {
             is_ajax: 1,
-            tabla: $(".selector-tabla select option:checked").val(),
+            tabla: $(".selector-tabla select option:checked").val()
         };
         $.ajax({
             type: "POST",
             url: "adm_profesor/getColumns.php",
             data: form_data,
-            success: function (response)
-            {
-                $('.selector-campos select').html(response).fadeIn();
+            success: function(response)
+            {   
+                $('.columnas-tabla #columnas tbody').html(response).fadeIn();
+            }
+        });
+    });
+
+    $(".selector-tabla select").click(function() {
+        var form_data = {
+            is_ajax: 1,
+            tabla: $(".selector-tabla select option:checked").val()
+        };
+        $.ajax({
+            type: "POST",
+            url: "adm_profesor/getColumns.php",
+            data: form_data,
+            success: function(response)
+            {   
+                $('.columnas-tabla #columnas tbody').html(response).fadeIn();
             }
         });
     });

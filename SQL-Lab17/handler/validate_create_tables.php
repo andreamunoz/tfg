@@ -18,20 +18,20 @@
 
       foreach ($arrayResultado as $key => $value) {
         if($value != ""){
-          $mensaje = $mensaje.addslashes($value)." \\n";
+          $mensaje = $mensaje.addslashes($value)." \n";
         }else{
-          $mensaje = $mensaje."Ha habido un error al ejecutar la sentencia ".$key+1 .". \\n";
+          $mensaje = $mensaje."Ha habido un error al ejecutar la sentencia ".$key+1 .". \n";
         }
       }
     }else{
       $mensaje = $arrayResultado;
     }
 
-	$_SESSION['message_table'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+	$_SESSION['message_new_tables'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>
                         <div class='modal-content'>
                             <div class='modal-body'>
-                                <p>"+ $mensaje +"</p>
+                                <p>". $mensaje ."</p>
                             </div>
                         </div>
                     </div>

@@ -79,13 +79,14 @@ session_start();
 
                     </tbody>
                 </table>
-                <?php
-                if (isset($_SESSION['message_tables'])) {
-                    echo $_SESSION['message_tables'];
-                    unset($_SESSION['message_tables']);
+            </div>
+            <?php
+                if(isset($_SESSION['message_new_tables'])){
+                    echo $_SESSION['message_new_tables'];
+                    //var_dump($_SESSION['message_new_tables']) ;
+                    unset($_SESSION['message_new_tables']);
                 }
-                ?>
-            </div>  
+            ?>  
         </div> 
     </div>
 </div>

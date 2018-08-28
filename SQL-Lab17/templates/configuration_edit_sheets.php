@@ -27,7 +27,7 @@ session_start();
                     <form id="edit_sheets" method="post" action="../handler/validate_edit_sheets.php?hoja=<?php echo $id_hoja ?>">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-sheets-tab" data-toggle="tab" href="#nav-new-sheets" role="tab" aria-controls="nav-home" aria-selected="true">Nueva Hoja</a>
+                                <a class="nav-item nav-link active" id="nav-sheets-tab" data-toggle="tab" href="#nav-new-sheets" role="tab" aria-controls="nav-home" aria-selected="true">Editar Hoja</a>
                                 <a class="nav-item nav-link" id="nav-exercises-tab" data-toggle="tab" href="#nav-exercises" role="tab" aria-controls="nav-profile" aria-selected="false">Añadir Ejercicios</a>
                             </div>
                         </nav>

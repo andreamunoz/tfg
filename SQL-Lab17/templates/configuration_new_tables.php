@@ -16,39 +16,22 @@ session_start();
         <div class="container">
             <div class="row">
                 <div class="col-md-12 ">
-                    <form id="new_tables" method="post" action="../handler/validate_new_tables.php">
-                        <nav>
-                            <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-tables-tab" data-toggle="tab" href="#nav-new-tables" role="tab" aria-controls="nav-home" aria-selected="true">Nueva Tabla</a>
-                                <!--<a class="nav-item nav-link" id="nav-exercises-tab" data-toggle="tab" href="#nav-exercises" role="tab" aria-controls="nav-profile" aria-selected="false">Añadir Ejercicios</a>-->
-                            </div>
-                        </nav>
-                        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
-                            <div class="tab-pane fade show active mt-3 pl-4" id="nav-new-tables" role="tabpanel" aria-labelledby="nav-tables-tab">
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <label for="name" ><strong>Código</strong></label>                                    
-                                    </div>
-          
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-3">                                    
-                                        <textarea rows="5" id="new_name_table" name="new_name_table" placeholder="Introduce el código aquí..." class="form-control form-control-sm" required style="width: 1000px"></textarea>
-                                    </div>
-                                   
-                                </div>
-                            </div>                          
-                            <div class="form-group col-md-2 offset-10">
-                                <button class="btn btn-primary pl-4 pr-4" name="new_sheet" type="submit">Crear Tabla</button>
-                            </div>                           
-                        </div>
+
+                    <form method="post" action="../handler/validate_create_tables.php">
+
                         <?php
-                        if(isset($_SESSION['message_new_tables'])){
-                            echo $_SESSION['message_new_table'];
-                            unset($_SESSION['message_new_tables']);
-                        }
-                        ?>
+                            if (isset($_SESSION['guardarDatosTablas'])){ ?>
+                            <textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="10" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required><?php echo $_SESSION['guardarDatosTablas']; ?></textarea>
+                        <?php } else { ?> 
+                            <textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="10" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required></textarea>
+                        <?php } ?>
+                        <div class="row">
+                            <div class="col-md-3 offset-md-9 mt-4">
+                                <button class="btn btn-primary pl-5 pr-5" type="submit"><?php echo trad( "Ejecutar", $lang) ?></button>
+                            </div>
+                        </div>
                     </form>
+                    
                 </div>
             </div>
         </div>

@@ -57,7 +57,7 @@
     position: absolute;
     top: 55px;
     //left:50px;
-    width: 1200px;
+    width: 1530px;
     margin-left: 150px;
 }
 .center {
@@ -360,7 +360,7 @@ table.dataTable .border-veredictoA{
 }
 
 .jumbotron-propio {
-    margin-left: 150px;
+    margin-left: 50px;
 }
 
 .modal-content {
@@ -461,4 +461,8 @@ section .section-title {
 }
 .border-bottom {
     border-bottom: 2px solid black !important;
+}
+
+.modal-xlg {
+    max-width: 1000px;
 }

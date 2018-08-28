@@ -8,9 +8,15 @@ session_start();
 <img class="img_perfil" src="../img/img_perfil.jpeg"> 
 <div class="container contenedor-perfil pt-4">
     <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="profile.php" > Perfil</a> > <a class="enlance" href="edit_profile.php" > Editar Perfil</a> </label>
-    <h2>Perfil</h2>
-    <p>Texto a añadir aquí...</p>
-    <div class="hrr mb-5"></div>
+    <h2>Editar Perfil</h2>
+    <div class="row mb-150">
+        <div class="col-md-8">
+            <p>Edita el perfil en los campos que se pueden rellenar y pincha en guardar pefil para que se guarden los resultados.</p>
+        </div>
+        <div class="col-md-4 p-0">
+            <button class="btn btn-primary pl-5 pr-5" name="editar" type="submit">Guardar Perfil</button>
+        </div>
+    </div>
     <form method="post" action="../handler/validate_edit_profile.php" class="jumbotron-propio" >
         <div class="row mb-2">
             <div class="col-md-3 pl-4">
@@ -49,7 +55,7 @@ session_start();
                 <label for="pass"><strong>Contraseña</strong></label>	
             </div>
             <div class="col-md-3 ">
-                <p><?php echo $_SESSION['password']; ?></p>
+                <p> **************** </p>
             </div>
         </div>
         <div class="row mb-2">
@@ -69,11 +75,6 @@ session_start();
                 </div>
             </div>
         </div>  
-        <div class="row">	
-            <div class="col-md-2 offset-9 ">
-                <button class="btn btn-primary pl-5 pr-5" name="editar" type="submit">Guardar Perfil</button>
-            </div>
-        </div>
         <?php
             if(isset($_SESSION['msg_update_register'])){
                 echo $_SESSION['msg_update_register'];

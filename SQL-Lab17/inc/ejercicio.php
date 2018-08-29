@@ -36,11 +36,11 @@ class Ejercicio{
         return $resul;
     }
  
-    function update($id,$descrip,$nivel,$tipo,$deshab,$user,$tabla,$enun,$sol){
+    function update($id,$nivel,$enun,$descrip,$deshab,$tipo,$sol,$user){
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "UPDATE sqlab_ejercicio SET nivel = '$nivel', enunciado = '$enun', descripcion = '$descrip', deshabilitar = '$deshab', tipo = '$tipo', solucion = '$sol', dueño_tablas='$tabla' WHERE id_ejercicio = $id;";
+        $sql = "UPDATE sqlab_ejercicio SET nivel = '$nivel', enunciado = '$enun', descripcion = '$descrip', deshabilitar = '$deshab', tipo = '$tipo', solucion = '$sol' WHERE id_ejercicio = $id;";
         $consulta = mysqli_query($conexion,$sql);
         if(!$consulta){
                echo "No se ha podido modificar la base de datos<br><br>".mysqli_error($conexion);

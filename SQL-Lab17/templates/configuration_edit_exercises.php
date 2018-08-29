@@ -35,34 +35,32 @@ session_start();
                         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                             <div class="tab-pane fade show active mt-3 pl-4" id="nav-new-exercises" role="tabpanel" aria-labelledby="nav-exercisesD-tab">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <label for="name" ><strong>Nombre </strong></label>                                    
+                                    <div class="col-md-4">
+                                        <label for="name" ><strong>Descripcion <span class="red"> *</span></strong></label>                                    
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="name" ><strong>Nivel </strong></label>                                    
+                                        <label for="name" ><strong>Nivel  <span class="red"> *</span></strong></label>                                    
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="name" ><strong>Categoría </strong></label>               
+                                        <label for="name" ><strong>Categoría  <span class="red"> *</span></strong></label>               
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="name" ><strong>Vista </strong></label>               
-                                    </div>
-                                    <div class="col-md-2">
-                                        <label for="name" ><strong>Profesor </strong></label>               
-                                    </div>                                   
+                                        <label for="name" ><strong>Vista <span class="red"> *</span></strong></label>               
+                                    </div>                                  
                                 </div>
                                 <!--<hr class="hrr">-->
                                 <?php
                                 
                                 $tabla = new Tablas();
                                 $ejercicioId = $ejer->getEjercicioById($id_ejer);
+                                $_SESSION['user_tablas'] = $ejercicioId['dueño_tablas'];
                                 ?>
                                 <div class="row">
-                                    <div class="col-md-2">                                    
-                                        <input type="text" id="new_name_sheet" name="edit_name_exercise" value="<?php echo $ejercicioId['descripcion'] ?>" class="form-control form-control-sm" required>
+                                    <div class="col-md-4">                                    
+                                        <input type="text" id="descripcion" name="descripcion" value="<?php echo $ejercicioId['descripcion'] ?>" class="form-control form-control-sm" required>
                                     </div>
                                     <div class="col-md-2">
-                                        <select name="niveles" class="custom-select form-control-sm " title="Selecciona" id="select_nivel">
+                                        <select name="nivel" class="custom-select form-control-sm " title="Selecciona" id="select_nivel">
                                             <?php
                                             $niveles = $ejer->getAllNiveles();
                                             while ($nivel = mysqli_fetch_array($niveles)) {                                              
@@ -75,7 +73,7 @@ session_start();
                                         </select>                                        
                                     </div>
                                     <div class="col-md-3">
-                                        <select name="tipo" class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
+                                        <select name="categoria" class="custom-select form-control-sm " title="Selecciona" id="categoria">
                                             <?php
                                             $categorias = $ejer->getAllCategorias();
                                             while ($categoria = mysqli_fetch_array($categorias)) {
@@ -88,7 +86,7 @@ session_start();
                                         </select> 
                                     </div>
                                     <div class="col-md-2">
-                                        <select name="habdes" class="custom-select form-control-sm " title="Selecciona" id="select_categoria">
+                                        <select name="habdes" class="custom-select form-control-sm " title="Selecciona" id="select_habilitar">
                                             <?php if($ejercicioId['deshabilitar'] == 1){?>
                                                     <option value="1" selected=''>Habilitar</option>
                                                     <option value="0" >Deshabilitar</option>
@@ -98,9 +96,6 @@ session_start();
                                             <?php } ?>
                                         </select>
                                     </div>
-                                    <div class="col-md-2">
-                                        <input type="text" id="user_sheet" name="user_sheet" placeholder="<?php echo $_SESSION['user'] ?>" class="form-control form-control-sm" readonly/>
-                                    </div>
 
                                 </div>
 
@@ -109,11 +104,11 @@ session_start();
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label><strong>Enunciado</strong></label>
+                                        <label><strong>Enunciado <span class="red"> *</span></strong></label>
                                         <textarea id="enunciado" name="enunciado" class="form-control" rows="10" required="" ><?php echo $ejercicioId['enunciado'] ?></textarea>
                                     </div>
                                     <div class="col-md-6">
-                                        <label><strong>Solución</strong></label>
+                                        <label><strong>Solución <span class="red"> *</span></strong></label>
                                         <textarea id="solucion" name="solucion" class="form-control" rows="10" required=""><?php echo $ejercicioId['solucion'] ?></textarea>
                                     </div>
                                 </div>
@@ -126,8 +121,11 @@ session_start();
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label><strong>Creador Tablas</strong></label>
-                                        <div class=" selector-user" >
-                                            <select name="user_tabla" class=" custom-select form-control-sm" id="user_tablas" name="user_tablas" title="Selecciona" required>
+                                        <div class=" selector-user-edit" >
+                                            <select class=" custom-select form-control-sm" id="user_tablas" name="user_tablas" title="Selecciona" disabled>
+                                                <option value="<?php echo $ejercicioId['dueño_tablas']?>" selected="selected">
+                                                    <?php echo $ejercicioId['dueño_tablas']?>    
+                                                </option>
                                             </select>
                                         </div>
                                     </div>

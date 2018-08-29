@@ -160,7 +160,7 @@ session_start();
                                     <div class="col-md-3">
                                         <label><strong>Creador Tablas <span class="red"> *</span></strong></label>
                                         <div class=" selector-user" >
-                                            <select name="user_tablas" class=" custom-select form-control-sm" id="user_tablas" name="user_tablas" title="Selecciona" required>                                    
+                                            <select name="user_tablas" class=" custom-select form-control-sm" id="user_tablas" title="Selecciona" required>                                    
                                             </select>
                                         </div>
                                     </div>

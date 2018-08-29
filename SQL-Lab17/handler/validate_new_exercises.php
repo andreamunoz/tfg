@@ -531,7 +531,6 @@
                     </div>
                 </div>   
             </div>";
-            // var_dump($resultado);
         header("Location: ../templates/configuration_new_exercises.php");
     }
     // var_dump($resultado);

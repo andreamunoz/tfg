@@ -10,7 +10,7 @@ session_start();
     $nombre_tabla = $_GET['name'];
     $num_campos = $_GET['num'];
     ?>
-    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_tables.php" > Tablas</a> > Información Tablas</label>
+    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_tables.php" > Tablas</a> > <a class="enlace" href="configuration_info_tables.php?name=<?php echo $nombre_tabla ?>&num=<?php echo $num_campos ?>" >Información Tablas </a></label>
     <h2><strong>Tablas</strong></h2>
     <div class="row mb-150">
         <div class="col-md-9">

@@ -521,3 +521,16 @@ span.red{
 .dropdown-item.active, .dropdown-item:active {
     background: none;
 }
+
+.dataTables_filter input {
+    padding-left: 10px;
+}
+
+.dataTables_length select{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.cursor {
+    cursor: pointer;
+}

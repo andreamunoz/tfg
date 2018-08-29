@@ -53,7 +53,7 @@ session_start();
                                 <?php echo '<td><a class="btn btn-primary pl-5 pr-5" href="perform_exercise.php?exercise=' . $fila['id_ejercicio'] . '">Ver ejercicio</a>';
                                 ?> 
                                 <?php if ($fila_sol['intentos'] > 0)
-                                        echo '<a class="btn btn-secundary pl-5 pr-5" href="configuration_show_intent_exercise.php?hoja='.$hojaparameter.'&exercise=' . $fila['id_ejercicio'] . '">Ver Intentos Alumnos</a>';
+                                        echo '<a class="btn btn-secundary pl-5 pr-5" href="configuration_show_intent_exercise.php?hoja='.$hojaparameter.'&exercise=' . $fila['id_ejercicio'] . '">Ver Intentos</a>';
                                 ?>
                                 <?php echo '</td>'; ?>
 

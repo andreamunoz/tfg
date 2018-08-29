@@ -61,6 +61,7 @@ class Estadisticas{
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
+        $sql = "SELECT count(nivel) as noIntentados FROM sqlab_ejercicio WHERE sqlab_ejercicio.nivel = '$nivel' AND deshabilitar='0'";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -70,6 +71,7 @@ class Estadisticas{
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
+        $sql = "SELECT count(sqlab_resuelve.id_ejercicio) as intentados FROM sqlab_ejercicio, sqlab_resuelve WHERE sqlab_ejercicio.nivel='$nivel' AND sqlab_ejercicio.id_ejercicio = sqlab_resuelve.id_ejercicio AND sqlab_resuelve.user='$user'";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -79,6 +81,7 @@ class Estadisticas{
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
+        $sql = "SELECT count(nivel) as noIntentados FROM sqlab_ejercicio WHERE sqlab_ejercicio.tipo = '$tipo' AND deshabilitar='0'";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -88,6 +91,7 @@ class Estadisticas{
           
         $connect = new Tools();
         $conexion = $connect->connectDB();
+        $sql = "SELECT count(sqlab_resuelve.id_ejercicio) as intentados FROM sqlab_ejercicio, sqlab_resuelve WHERE sqlab_ejercicio.tipo='$tipo' AND sqlab_ejercicio.id_ejercicio = sqlab_resuelve.id_ejercicio AND sqlab_resuelve.user='$user'";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

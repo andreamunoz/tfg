@@ -288,7 +288,7 @@ class Ejercicio{
             $endStr=strpos($name,")");
             $name=substr($name,$beginStr,$endStr-$beginStr);
             $name=str_replace("'","",$name);
-            $name=split(',',$name);
+            $name=explode(',',$name);
         }
         $connect->disconnectDB($conexion);
         return $name;

@@ -8,9 +8,8 @@ session_start();
     <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="exercises.php" > Ejercicios</a> </label>
     <h2><strong>Ejercicios</strong></h2>
     <p>Texto a añadir aquí...</p>
-    <div class="hrr mb-5"></div>
     <div id="accordion ">
-        <div class="card">  
+        <div class="card pt-4">  
             <div class="table-responsive">  
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>

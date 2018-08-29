@@ -8,10 +8,10 @@ session_start();
     <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_sheets.php" > Hoja de Ejercicios</a></label>
     <h2><strong>Hoja de Ejercicios</strong></h2>
     <div class="row mb-150">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <p>Añade, edita y elimina la hoja de ejercicios...</p>
         </div>
-        <div class="col-md-3 p-0">
+        <div class="text-right pl-5">
             <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_sheets.php" >Crear Hoja</a>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">

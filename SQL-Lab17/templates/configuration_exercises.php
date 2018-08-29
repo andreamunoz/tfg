@@ -8,11 +8,11 @@ session_start();
     <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_exercises.php" > Ejercicios</a></label>
     <h2><strong>Ejercicios</strong></h2>
     <div class="row mb-150">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <p>Añade, edita y elimina los ejercicios...</p>
         </div>
 
-        <div class="col-md-3 p-0">
+        <div class="text-right pl-5">
             <a type="button" class="btn btn-primary pl-4 pr-4" href="configuration_new_exercises.php" >Crear Ejercicio</a>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">

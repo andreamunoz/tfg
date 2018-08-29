@@ -3,6 +3,7 @@
     <div class="logo-principal">
         <!--<i class="fas fa-align-justify"></i>-->
         <i class="fas fa-angle-right"></i>
+        <p class="text-menu text-titulo">SQLab</p>
         <!--<img src="../../img/icon_desplegar.svg"/>-->
         <p class="text-menu text-b">Bienvenido,</p>
         <p class="text-menu"><?php echo $_SESSION['user'] ?></p>

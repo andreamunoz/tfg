@@ -117,8 +117,8 @@ session_start();
                                         <textarea id="solucion" name="solucion" class="form-control" rows="10" required=""><?php echo $ejercicioId['solucion'] ?></textarea>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2 offset-10">
-                                    <button class="btn btn-primary pl-4 pr-4 mt-4" name="new_exercise" type="submit">Actualizar Ejercicio</button>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary pl-4 pr-4 mt-5 mb-5" name="new_exercise" type="submit">Actualizar Ejercicio</button>
                                 </div>
                             </div>
                             <div class="tab-pane fade mt-3 pl-4" id="nav-exercisesT" role="tabpanel" aria-labelledby="nav-exercisesT-tab">

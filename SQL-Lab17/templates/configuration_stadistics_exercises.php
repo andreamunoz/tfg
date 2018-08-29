@@ -5,11 +5,39 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4">
-    <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="stadistics_exercises.php" > Estadísticas</a> </label>
-    <h2><strong>Estadísticas</strong></h2>
-    <p>Texto a añadir aquí...</p>
-    <div class="row pt-2">
-        <div class="offset-9 col-md-3 mb-3">
+    <label><a class="enlance" href="configuration.php" >Configuración </a> > <a class="enlance" href="configuration_stadistics_exercises.php" > Estadísticas</a> </label>
+    <h2><strong>Estadísticas</strong></h2>	
+    <div class="row mb-150">
+        <div class="col-md-10">
+            <p>Muestra las estadisticas por nivel y categoría referenciado a un alumno o a todos.</p>
+        </div>
+        <div class="col-md-2 p-0">
+            <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
+                Ayuda
+            </button>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-md-3 mb-3">
+            <?php 
+            include_once '../inc/user.php';
+            $usuarios = new User();
+            $users = $usuarios->getNombreAlumnos();
+            ?>
+            <select class="custom-select" title="Selecciona" id="mostraruser" >
+                <?php $_SESSION['alumnos'] ?>' = "<script> document.write(selectedOpcion) </script>";
+                <?php if (isset($_SESSION['alumnos'])) { ?>
+                    <option value="<?php echo $_SESSION['alumnos'] ?>" selected><?php echo $_SESSION['alumnos'] ?></option>
+                <?php } else { ?>
+                    <option value="<?php echo $_SESSION['user'] ?>" selected><?php echo $_SESSION['user'] ?></option>             
+                <?php } ?>
+                <?php while ($usuario = mysqli_fetch_array($users)) {
+                    echo '<option value='.$usuario['nombre'].' >'.$usuario['nombre'].'</option>';
+                }
+                ?>
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
             <select class="custom-select" title="Selecciona" id="mostrar" onclick="mostrarNC()">
                 <option value="nivel" selected>Nivel</option>
                 <option value="tipo">Categoría</option>
@@ -23,6 +51,8 @@ session_start();
             $user = $_SESSION['user'];
             $estadisticas = new Estadisticas();
             $resul = $estadisticas->getStadisticNivel();
+            if (isset($_SESSION['alumnos'])) { $user = $_SESSION['alumnos']; }
+            else { $user = $_SESSION['user']; }
             $j=1;
             
             while($col = mysqli_fetch_array($resul)){
@@ -149,6 +179,14 @@ session_start();
                     tipo.style.display = "inline-block";
             }
             }
+</script>
+<script>
+            var select = document.getElementById('mostraruser');
+            select.addEventListener('change', function(){
+               var selectedOption = this.options[select.selectedIndex]; 
+               //location.reload(true);
+               return selectedOpcion.value;
+            });
 </script>
 
 <?php include("footer.php"); ?>

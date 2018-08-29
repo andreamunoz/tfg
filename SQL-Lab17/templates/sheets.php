@@ -7,10 +7,9 @@ session_start();
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="sheets.php" > Hoja de Ejercicios</a></label>
     <h2><strong>Hoja de Ejercicios</strong></h2>
-    <p>Texto a añadir aquí...</p>
-    <div class="hrr mb-5"></div>     
+    <p>Texto a añadir aquí...</p>    
     <div id="accordion ">
-        <div class="card" >  
+        <div class="card pt-4" >  
             <div class="table-responsive">  
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>

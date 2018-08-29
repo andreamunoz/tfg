@@ -113,8 +113,8 @@ session_start();
                                         </div>  
                                     </div> 
                                 </div>
-                                <div class="form-group col-md-2 offset-10">
-                                    <button class="btn btn-primary pl-4 pr-4" name="new_sheet" type="submit">Actualizar Hoja</button>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary pl-5 pr-5 mt-5 mb-5" name="new_sheet" type="submit">Actualizar Hoja</button>
                                 </div>
                             </div>
                         </div>

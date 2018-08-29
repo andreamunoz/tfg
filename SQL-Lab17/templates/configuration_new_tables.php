@@ -25,11 +25,11 @@ session_start();
                         <?php } else { ?> 
                             <textarea  id="crea_tabla" name="crea_tabla" class="form-control" rows="10" placeholder="<?php echo trad( "CREATE TABLE coches...", $lang) ?>" required></textarea>
                         <?php } ?>
-                        <div class="row">
-                            <div class="col-md-3 offset-md-9 mt-4">
-                                <button class="btn btn-primary pl-5 pr-5" type="submit"><?php echo trad( "Ejecutar", $lang) ?></button>
+                        
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary pl-5 pr-5 mt-5 mb-5" type="submit"><?php echo trad( "Ejecutar", $lang) ?></button>
                             </div>
-                        </div>
+                       
                     </form>
                     
                 </div>

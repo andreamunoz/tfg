@@ -14,8 +14,7 @@ session_start();
     <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="sheets.php" > Hoja de Ejercicios</a>  > <a class="enlance" href="sheet_exercise.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?></strong></h2>
     <p>Textooooo aquí........</p>
-    <div class="hrr mt-3 mb-3"></div>
-    <div class="row pt-4 pb-4">
+    <div class="row pt-2 pb-4">
         <div class="col-md-3  offset-9">
             <div class="progress">
                 <?php

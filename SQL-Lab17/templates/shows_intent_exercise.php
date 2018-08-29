@@ -13,10 +13,9 @@ session_start();
       ?>
     <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="exercises.php" > Ejercicios</a>  > <a class="enlance" href="shows_intent_exercise.php?exercise=<?php echo $id_ejercicio  ?>" ><?php echo $descrip['descripcion']  ?></a></label>
     <h2><strong>Lista de Intentos | <?php echo $descrip['descripcion'] ?></strong></h2>
-    <p>Textooooo aquí........</p>
-    <div class="hrr mt-3 mb-5"></div>			
+    <p>Textooooo aquí........</p>			
     <div id="accordion">
-        <div class="card">
+        <div class="card pt-4">
             <div class="table-responsive">  
                 <table id="employee_data" class="table table-striped table-bordered">
                     <thead>

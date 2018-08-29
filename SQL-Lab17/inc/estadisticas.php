@@ -116,4 +116,40 @@ class Estadisticas{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+    
+    function getStadisticNivelPropuestos($nivel, $user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT count(id_ejercicio) as propuestos FROM sqlab_ejercicio WHERE nivel='$nivel' AND creador_ejercicio='$user'";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    
+    function getStadisticNivelDeshabilitados($nivel, $user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT count(id_ejercicio) as propuestos FROM sqlab_ejercicio WHERE nivel='$nivel' AND deshabilitar='1' AND creador_ejercicio='$user'";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    
+    function getStadisticTipoPropuestos($tipo, $user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT count(id_ejercicio) as propuestos FROM sqlab_ejercicio WHERE tipo='$tipo' AND creador_ejercicio='$user'";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    
+    function getStadisticTipoDeshabilitados($tipo, $user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT count(id_ejercicio) as propuestos FROM sqlab_ejercicio WHERE tipo='$tipo' AND deshabilitar='1' AND creador_ejercicio='$user'";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
 }

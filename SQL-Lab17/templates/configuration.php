@@ -43,7 +43,7 @@ session_start();
     </div>
     <div class="row mt-4">
         <div class="col-md-3 configuration">
-            <a href="profile.php" class="text-conf ">
+            <a href="configuration_profile.php" class="text-conf ">
                 <img class="img_icon mb-3" src="../img/icon_usuarios.svg">
                 <p><strong>Perfil</strong></p>
                 <label for="name" >Edita tu perfil, pulsa aquí...</label>

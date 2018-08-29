@@ -15,6 +15,22 @@ session_start();
             <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
                 Ayuda
             </button>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog " role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="mt-4 pl-5">Ayuda</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true"> <img class="img_icon_cerrar cerrar" src="../img/icon_cerrarPanel_blanco.svg"/></span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p class="pl-5">+ <strong><i>Primer Select:</i></strong> Muestra las estadísticas por profesor (conectado) y por alumnos en referencia al nivel o categoría. </p>
+                            <p class="pl-5">+ <strong><i>Segundo Select:</i></strong> Muestra las estadísticas en función del Nivel o Categoría de los ejercicios según el usuario seleccionado.</p>                          
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row ">

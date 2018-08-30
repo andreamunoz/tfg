@@ -2,9 +2,9 @@
 <?php
 require('languages.php');
 
-$lang = 'en';
+$lang = null;
 $_SESSION['lang'] = $lang;
-/*if (isset($_GET['lang'])) {
+if (isset($_GET['lang'])) {
     $lang = $_GET['lang'];
     $_SESSION['lang'] = $lang;
 } else {
@@ -17,7 +17,7 @@ $_SESSION['lang'] = $lang;
 if (!isset($_SESSION['user'])) {
     header("Location: index.php");
     exit;
-}*/
+}
 ?>
 <html lang="en">
     <head>

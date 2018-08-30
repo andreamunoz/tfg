@@ -10,8 +10,8 @@
                     <?php echo trad('Idioma',$lang) ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#"><img class="pr-3" src="../img/bandera/espana.png" /> <?php echo trad('Español',$lang) ?></a>
-                    <a class="dropdown-item" href="#"><img class="pr-3" src="../img/bandera/reino-unido.png" /> <?php echo trad('Inglés',$lang) ?></a>
+                    <a class="dropdown-item" href="index.php?lang=es"><img class="pr-3" src="../img/bandera/espana.png" /> <?php echo trad('Español',$lang) ?></a>
+                    <a class="dropdown-item" href="index.php?lang=en"><img class="pr-3" src="../img/bandera/reino-unido.png" /> <?php echo trad('Inglés',$lang) ?></a>
                 </div>
             </li>
             <li class="nav-item dropdown ">

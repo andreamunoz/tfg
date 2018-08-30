@@ -5,11 +5,11 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_exercises.php" > Ejercicios</a> > <a class="enlace" href="configuration_new_exercises.php" > Nuevo Ejercicio</a></label>
-    <h2 id="userPrincipal" data-name="<?php echo $_SESSION['user']; ?>"><strong>Nuevo Ejercicio</strong></h2>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_exercises.php" > <?php echo trad('Ejercicios',$lang) ?></a> > <a class="enlace" href="configuration_new_exercises.php" > <?php echo trad('Nuevo Ejercicio',$lang) ?></a></label>
+    <h2 id="userPrincipal" data-name="<?php echo $_SESSION['user']; ?>"><strong><?php echo trad('Nuevo Ejercicio',$lang) ?></strong></h2>
     <div class="row mb-5">
         <div class="col-md-12">
-            <p>Añade, un nuevo ejercicio a la lista...</p>
+            <p><?php echo trad('Añade un nuevo ejercicio a la lista.',$lang) ?></p>
         </div>
     </div>  
 
@@ -21,9 +21,9 @@ session_start();
                     <form id="new_sheets" method="post" action="../handler/validate_new_exercises.php">
                         <nav>
                             <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-exercisesD-tab" data-toggle="tab" href="#nav-new-exercises" role="tab" aria-controls="nav-new-exercises" aria-selected="true">Nuevo Ejercicio</a>
-                                <a class="nav-item nav-link" id="nav-exercisesT-tab" data-toggle="tab" href="#nav-exercisesT" role="tab" aria-controls="nav-new-table" aria-selected="false">Añadir Tablas</a>
-                                <a class="nav-item nav-link" id="nav-exercisesE-tab" data-toggle="tab" href="#nav-exercisesE" role="tab" aria-controls="nav-enun-sol" aria-selected="false">Enunciado/Solución</a>
+                                <a class="nav-item nav-link active" id="nav-exercisesD-tab" data-toggle="tab" href="#nav-new-exercises" role="tab" aria-controls="nav-new-exercises" aria-selected="true"><?php echo trad('Nuevo Ejercicio',$lang) ?></a>
+                                <a class="nav-item nav-link" id="nav-exercisesT-tab" data-toggle="tab" href="#nav-exercisesT" role="tab" aria-controls="nav-new-table" aria-selected="false"><?php echo trad('Añadir Tablas',$lang) ?></a>
+                                <a class="nav-item nav-link" id="nav-exercisesE-tab" data-toggle="tab" href="#nav-exercisesE" role="tab" aria-controls="nav-enun-sol" aria-selected="false"><?php echo trad('Enunciado',$lang) ?>/<?php echo trad('Solución',$lang) ?></a>
 
                             </div>
                         </nav>
@@ -31,16 +31,16 @@ session_start();
                             <div class="tab-pane fade show active mt-3 pl-4" id="nav-new-exercises" role="tabpanel" aria-labelledby="nav-exercisesD-tab">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="name" ><strong>Descripción <span class="red"> *</span></strong></label>                                    
+                                        <label for="name" ><strong><?php echo trad('Descripción',$lang) ?> <span class="red"> *</span></strong></label>                                    
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="name" ><strong>Nivel <span class="red"> *</span></strong></label>                                    
+                                        <label for="name" ><strong><?php echo trad('Nivel',$lang) ?> <span class="red"> *</span></strong></label>                                    
                                     </div>
                                     <div class="col-md-3">
-                                        <label for="name" ><strong>Categoría <span class="red"> *</span></strong></label>               
+                                        <label for="name" ><strong><?php echo trad('Categoría',$lang) ?> <span class="red"> *</span></strong></label>               
                                     </div>
                                     <div class="col-md-2">
-                                        <label for="name" ><strong>Vista <span class="red"> *</span></strong></label>               
+                                        <label for="name" ><strong><?php echo trad('Vista',$lang) ?> <span class="red"> *</span></strong></label>               
                                     </div>                                   
                                 </div>
                                 <!--<hr class="hrr">-->
@@ -133,7 +133,7 @@ session_start();
 
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <label><strong>Enunciado <span class="red"> *</span></strong></label>
+                                        <label><strong><?php echo trad('Enunciado',$lang) ?> <span class="red"> *</span></strong></label>
 
                                         <?php if (isset($_SESSION['guardarDatos'])) { ?>
                                             <textarea  id="enunciado" name="enunciado" class="form-control" rows="10" required><?php echo $_SESSION['guardarDatos'][5] ?></textarea>
@@ -142,7 +142,7 @@ session_start();
                                         <?php } ?>
                                     </div>
                                     <div class="col-md-6">
-                                        <label><strong>Solución <span class="red"> *</span></strong></label>
+                                        <label><strong><?php echo trad('Solución',$lang) ?> <span class="red"> *</span></strong></label>
                                         <?php if (isset($_SESSION['guardarDatos'])) { ?>
                                             <textarea  id="solucion" name="solucion" class="form-control" rows="10" required><?php echo $_SESSION['guardarDatos'][6] ?></textarea>
                                         <?php }else { ?>
@@ -150,29 +150,29 @@ session_start();
                                         <?php } ?>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-2 offset-10">
-                                    <button class="btn btn-primary pl-4 pr-4 mt-4" name="new_exercise" type="submit">Crear Ejercicio</button>
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary pl-5 pr-5 mt-5 mb-5" name="new_exercise" type="submit"><?php echo trad('Crear Ejercicio',$lang) ?></button>
                                 </div>
                             </div>
                             <div class="tab-pane fade mt-3 pl-4" id="nav-exercisesT" role="tabpanel" aria-labelledby="nav-exercisesT-tab">
                                 
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <label><strong>Creador Tablas <span class="red"> *</span></strong></label>
+                                        <label><strong><?php echo trad('Creador Tablas',$lang) ?> <span class="red"> *</span></strong></label>
                                         <div class=" selector-user" >
-                                            <select name="user_tablas" class=" custom-select form-control-sm" id="user_tablas" title="Selecciona" required>                                    
+                                            <select name="user_tablas" class=" custom-select form-control-sm" id="user_tablas" title="<?php echo trad('Seleccionar',$lang) ?>" required>                                    
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <label><strong>Información Tablas</strong></label>
+                                        <label><strong><?php echo trad('Información Tablas',$lang) ?></strong></label>
                                         <div class=" selector-tabla" >
                                             <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm">                                               
                                             </select>				  				 
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <label><strong>Información Campos</strong></label>
+                                        <label><strong><?php echo trad('Información Campos',$lang) ?></strong></label>
                                         <!--<table id="columnas" class="form-control" size="2" ></table>-->
                                         <div class=" columnas-tabla" >
                                             <table id="columnas" class="form-control" ><tbody></tbody></table>				  				 
@@ -193,7 +193,8 @@ session_start();
                 </div>
             </div>
         </div>
+    </section>
 </div>
-</section>
+
    
 <?php include("footer.php"); ?> 

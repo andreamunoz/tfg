@@ -47,32 +47,63 @@ session_start();
                                             <nav>
                                                 <div class="nav nav-tabs nav-fill" id="nav-tablas" role="tablist">
                                                     <a class="nav-item nav-link active" id="nav-t" data-toggle="tab" href="#nav-tab" role="tab" aria-controls="nav-tab" aria-selected="true">Tablas</a>
+                                                    <a class="nav-item nav-link" id="nav-tab-estruct" data-toggle="tab" href="#nav-tab-estruct" role="tab" aria-controls="nav-tab-estruct" aria-selected="false">Estructura</a>
                                                     <a class="nav-item nav-link" id="nav-tab-camp" data-toggle="tab" href="#nav-tab-campos" role="tab" aria-controls="nav-tab-campos" aria-selected="false">Campos</a>
                                                 </div>
                                             </nav>
                                             <div class="tab-content py-3 px-3 px-sm-0" id="nav-ta">
-                                                <div class="tab-pane fade show active mt-3 pl-4" id="nav-tab" role="tabpanel" aria-labelledby="nav-ta">
+                                                <div class="tab-pane fade show active mt-3 pl-4" id="nav-tab" role="tabpanel" aria-labelledby="nav-tab-tables">
+                                                    <div id="accordion ">
+                                                        <div class="card">  
+                                                            <div class=" selector-tabla-sol" >
+                                                                <select name="tablas_sol" class=" custom-select form-control-sm" id="tablas_sol" title="Selecciona" required>
+                                                                <?php
+                                                                $quitar = $ejercicioId['dueño_tablas'] . "_";
+                                                                
+                                                                while ($fila = mysqli_fetch_array($tab)) {
+                                                                    $_SESSION['table_name_show'] = $fila["nombre"];
+                                                                    $onlyName = explode($quitar, $fila["nombre"]);
+                                                                    ?>
+                                                                    <option value="<?php echo $fila["nombre"] ?>">
+                                                                        <?php echo $onlyName[1]; ?> 
+                                                                    </option> 
+                                                                <?php } ?>                                  
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade mt-3 pl-4" id="nav-tab-estruct" role="tabpanel" aria-labelledby="nav-tab-estruct">
                                                     <div id="accordion ">
                                                         <div class="card">  
                                                             <div class="table-responsive scroll">                
-                                                                <table id="employee" class="table table-striped table-bordered"> 
+                                                                <table id="employee_data" class="table table-striped table-bordered">  
                                                                     <thead>
-                                                                        <tr>
-                                                                            <th style="width:20%; text-align: center;">Nombre Tablas</th>
+                                                                        <tr>                                         
+                                                                            <th style="width:30%;">Nombre Columna</th>
+                                                                            <th style="width:30%;">Tipo Columna</th>
+                                                                            <th style="width:30%;">Acepta NULL</th>
+                                                                            <th style="width:20%;">Clave</th>                                           
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody >
-                                                                        <?php
-                                                                        $quitar = $ejercicioId['dueño_tablas'] . "_";
-                                                                        while ($fila = mysqli_fetch_array($tab)) {
-                                                                            $onlyName = explode($quitar, $fila["nombre"]);
-                                                                            ?>
-                                                                            <tr>
-                                                                                <td style="text-align: center;">                          
-                                                                                    <?php echo $onlyName[1]; ?> 
-                                                                                </td> 
-                                                                            </tr>
-                                                                        <?php } ?>
+                                                                    <tbody>
+                                                                        <?php                                             
+                                                                        include_once '../inc/functions.php';
+                                                                        $connect = new Tools();
+                                                                        $conexion = $connect->connectDB();
+                                                                        $sql = "SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" .$_SESSION['table_name_show'] . "';";
+                                                                        $consulta = mysqli_query($conexion, $sql);
+                                                                        $_SESSION["columnas"] = "";
+                                                                        while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {
+                                                                            echo '<tr>
+                                                                                    <td>' . $fila["COLUMN_NAME"] . '</td>
+                                                                                    <td>' . $fila["COLUMN_TYPE"] . '</td>
+                                                                                    <td>' . $fila["IS_NULLABLE"] . '</td>
+                                                                                    <td>' . $fila["COLUMN_KEY"] . '</td>
+                                                                                </tr>';
+                                                                            $_SESSION["columnas"] = $_SESSION["columnas"] . "*" . $fila["COLUMN_NAME"];
+                                                                        }
+                                                                        ?>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -82,26 +113,7 @@ session_start();
                                                 <div class="tab-pane fade mt-3 pl-4" id="nav-tab-campos" role="tabpanel" aria-labelledby="nav-tab-camp">
                                                     <div id="accordion ">
                                                         <div class="card">  
-                                                            <div class="table-responsive scroll">                
-                                                                <table id="employee-data" class="table table-striped table-bordered"> 
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th style="width:5px; text-align: center;">Campo</th> 
-                                                                        </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                        <?php
-                                                                        $tab_col = $tabla->getCamposTabla($dueño);
-                                                                        $_SESSION["columnas"] = "";
-                                                                        while ($fila = mysqli_fetch_array($tab_col)) {
-                                                                            echo '<tr>
-                                                                                    <td style="text-align: center;">' . $fila["COLUMN_NAME"] . '</td>
-                                                                                </tr>';
-                                                                            $_SESSION["columnas"] = $_SESSION["columnas"] . "*" . $fila["COLUMN_NAME"];
-                                                                        }
-                                                                        ?>
-                                                                    </tbody>
-                                                                </table>
+                                                            <div class="table-responsive scroll">
                                                             </div>
                                                         </div>
                                                     </div>

@@ -5,31 +5,31 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_sheets.php" > Hoja de Ejercicios</a></label>
-    <h2><strong>Hoja de Ejercicios</strong></h2>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
+    <h2><strong><?php echo trad('Hoja de Ejercicios',$lang) ?></strong></h2>
     <div class="row mb-150">
-        <div class="col-md-9">
-            <p>Añade, edita y elimina la hoja de ejercicios...</p>
+        <div class="col-md-8">
+            <p><?php echo trad('Añade, edita y elimina la hoja de ejercicios.',$lang) ?></p>
         </div>
-        <div class="col-md-3 p-0">
-            <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_sheets.php" >Crear Hoja</a>
+        <div class="text-right pl-5">
+            <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_sheets.php" ><?php echo trad('Crear Hoja',$lang) ?></a>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
-                Ayuda
+                <?php echo trad('Ayuda',$lang) ?>
             </button>
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="mt-4 pl-5">Ayuda</h2>
+                            <h2 class="mt-4 pl-5"><?php echo trad('Ayuda',$lang) ?></h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true"> <img class="img_icon_cerrar cerrar" src="../img/icon_cerrarPanel_blanco.svg"/></span>
                             </button>
                         </div>
                         <div class="modal-body">                           
-                            <p class="pl-5">+ <strong><i>Crear hoja:</i></strong> Ponle el nombre a la hoja y seleccione los ejercicios que quiere añadir. </p>
-                            <p class="pl-5">+ <strong><i>Editar:</i></strong> Cambie el nombre a la hoja o bien cambie los ejercicios seleccionados por otros.</p>                           
+                            <p class="pl-5">+ <strong><i><?php echo trad('Crear Hoja',$lang) ?>:</i></strong> <?php echo trad('Ponle el nombre a la hoja y seleccione los ejercicios que quiere añadir.',$lang) ?> </p>
+                            <p class="pl-5">+ <strong><i><?php echo trad('Editar',$lang) ?>:</i></strong> <?php echo trad('Cambie el nombre a la hoja o bien cambie los ejercicios seleccionados por otros.',$lang) ?></p>                           
                         </div>
                     </div>
                 </div>
@@ -42,9 +42,9 @@ session_start();
                 <table id="employee_data" class="table table-striped-conf table-bordered">  
                     <thead>
                         <tr>
-                            <th style="width:30%">Nombre Hoja</th>
-                            <th style="width:20%">Nombre Profesor</th>
-                            <th style="width: 20%">N. Ejercicios</th>
+                            <th style="width:30%"><?php echo trad('Nombre Hoja',$lang) ?></th>
+                            <th style="width:20%"><?php echo trad('Nombre Profesor',$lang) ?></th>
+                            <th style="width: 20%"><?php echo trad('N. Ejercicios',$lang) ?></th>
                             <th></th>
                         </tr>
                     </thead>

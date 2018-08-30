@@ -4,6 +4,25 @@
     font-family: 'Work Sans', sans-serif;
     
 }
+h1 {
+    font-size: 40px;
+}
+h2 {
+    font-size: 20px;
+}
+
+p {
+    font-size: 13px;
+}
+
+label {
+    font-size: 12px;
+}
+
+a {
+    font-size: 13px;
+}
+
 .img_login {
     background-image: url("../img/img_login.jpg"); 
     background-repeat: no-repeat; /* Do not repeat the image */
@@ -27,7 +46,7 @@
 }
 
 .img_icon {
-    width: 80px;
+    width: 60px;
 }
 
 .img_icon_cerrar {
@@ -99,7 +118,7 @@
 
 .contenedor-item {
     width: 250px;
-    height: 40px;
+    height: 30px;
     margin-top: 10px;
 }
 
@@ -108,7 +127,7 @@
 }
 
 .contenedor-item:hover {
-    border-left: 5px solid white;
+    border-left: 3px solid white;
     -webkit-transition: border 0.3s;
 }
 
@@ -123,8 +142,9 @@
     margin-top: 10px;
 }
 .logo-principal i {
-    font-size: 35px;
-    margin-left: 10px;
+    font-size: 30px;
+    margin-left: 20px;
+    margin-top: 3px;
 }
 .logo-interior{
     width: 40px;
@@ -133,8 +153,8 @@
 }
 
 .logo-interior i {
-    font-size: 30px;
-    margin-left: 10px;
+    font-size: 25px;
+    margin-left: 15px;
 }
 
 #contenedor-general-espacio {
@@ -147,6 +167,7 @@
     margin-left: 54px;
     background-color: black;
     opacity: 0.9;
+    z-index: 1;
 }
 
 .navbar-light .navbar-brand {
@@ -190,9 +211,6 @@ a.enlance:hover {
     text-decoration: #9b9a9a !important;
     color: #9b9a9a !important;
 }
-h1 {
-    font-size: 55px;
-}
 .hrr {
     margin-top: 10px;
     margin-bottom: 15px;
@@ -201,17 +219,22 @@ h1 {
 }
 
 .mb-150 {
-    margin-bottom: 75px;
+    margin-bottom: 40px;
 }
 
 .text-menu {
-    margin-left: 60px;
+    margin-left: 68px;
     line-height: 20px;
 }
 
 .text-b {
-    font-size: 17px;
-    margin-top: -25px;
+    font-size: 15px;
+    margin-top: 10px;
+}
+.text-titulo {
+    font-size: 20px;
+    margin-top: -28px;
+    margin-left: 68px;
 }
 .text-tabla {
     color: black;
@@ -234,6 +257,7 @@ h1 {
     opacity: 0.9;
     border-radius: 30px;
     padding: 12px;
+    font-size: 12px;
 }
 
 .btn-secundary {
@@ -243,6 +267,7 @@ h1 {
     padding: 12px;
     color: black;
     opacity: 0.9;
+    font-size: 12px;
 }
 
 btn-primary.focus, .btn-primary:focus {
@@ -257,7 +282,7 @@ btn-primary.focus, .btn-primary:focus {
 }
 
 div.dataTables_wrapper div.dataTables_length label {
-  font-size: 15px;
+  font-size: 12px;
   color: rgba(48,48,48,0.5);
 }
 
@@ -265,8 +290,9 @@ div.dataTables_wrapper div.dataTables_length label {
     background: white !important;
 }
 .table-striped-conf thead tr {
-    
-    color: #9b9a9a;
+    background: black;
+    color: white;
+    opacity: 0.9
 }
 .table-striped-conf thead tr th {
     width: 2000px;
@@ -279,9 +305,11 @@ div.dataTables_wrapper div.dataTables_length label {
     background: black;
     opacity: 0.9;
     color: white;
+    font-size: 12px;
 }
 .table-striped thead tr th {
     width: 200px;
+    font-size: 12px;
 }
 table.dataTable.no-footer {
     border-bottom: none !important;
@@ -292,25 +320,35 @@ table.dataTable.no-footer {
     border-bottom: 1px solid #9b9a9a;
     border-left: none;
     border-right: none;
+    font-size: 13px;
 }
-
+.table.dataTable thead th, table.dataTable thead td {
+    font-size: 12px;
+}
 table.dataTable tbody tr {
     border-bottom: 1px solid #9b9a9a !important;
 }
 
 table.dataTable thead .sorting_asc {
-    background-image: url("../img/icon_desplegar.svg") !important;
+    background-image: url("../img/flecha-ampliar.svg") !important;
+   
     
+}
+.table.dataTable tbody th, table.dataTable tbody td {
+    font-size: 13px;
 }
 
 table.dataTable thead .sorting {
-    background-image: url("../img/icon_desplegar.svg") !important;
+    //background-image: url("../img/flecha-ampliar.svg") !important;
 }
 
 table.dataTable thead .sorting_desc {
-    background-image: url("../images/sort_desc.png");
+    background-image: url("../img/flecha-hacia-abajo.svg") !important;
 }
 
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    font-size: 12px;
+}
 .container-tabla {
     width: 85%;
     margin-left: 150px;
@@ -325,11 +363,11 @@ table.dataTable tbody th, table.dataTable tbody td {
     vertical-align: middle;
 }
 
-
 table.dataTable .border-veredictoV{
     border-left: 8px solid green !important;
     //border-bottom: 1px solid rgba(48,48,48,0.1);
 }
+
 .border-veredictoR{
     border-left: 8px solid red !important;
     //border-bottom: 1px solid rgba(48,48,48,0.1);
@@ -411,12 +449,12 @@ section .section-title {
     border-top-right-radius: .25rem;
     color: black;
     opacity: 0.8;
-    font-size: 16px;
+    font-size: 12px;
     max-width: 190px;
 }
 
 .container {
-    max-width: 1535px;
+    max-width: 1195px;
 }
 
 .form-group {
@@ -435,16 +473,18 @@ section .section-title {
 .btn-edit {
     padding-left: 55px;
     padding-right: 55px;
+    font-size: 12px;
 }
 
 .btn-habilitar {
     padding-left: 62px;
     padding-right: 62px;
+    font-size: 12px;
 }
 
 .scroll {
     overflow-y:scroll;
-    height:300px;
+    height:250px;
 }
 
 .color-white {
@@ -461,10 +501,37 @@ section .section-title {
     border-bottom: 2px solid black !important;
 }
 
-
 span.red{
   color: red;
 }
 .modal-xlg {
     max-width: 1000px;
+}
+
+.form-control {
+    font-size: 13px;
+}
+
+.custom-select {
+    padding-left: 13px;
+    height: 30px;
+    font-size: 12px;
+    background-size: 8px 8px;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+    background: none;
+}
+
+.dataTables_filter input {
+    padding-left: 10px;
+}
+
+.dataTables_length select{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.cursor {
+    cursor: pointer;
 }

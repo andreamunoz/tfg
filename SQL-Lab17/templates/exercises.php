@@ -5,21 +5,20 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="exercises.php" > Ejercicios</a> </label>
-    <h2><strong>Ejercicios</strong></h2>
-    <p>Texto a añadir aquí...</p>
-    <div class="hrr mb-5"></div>
+    <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="exercises.php" > <?php echo trad('Ejercicios',$lang) ?></a> </label>
+    <h2><strong><?php echo trad('Ejercicios',$lang) ?></strong></h2>
+    <p><?php echo trad('Texto a añadir aquí...',$lang) ?></p>
     <div id="accordion ">
-        <div class="card">  
+        <div class="card pt-4">  
             <div class="table-responsive">  
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>
                         <tr>
                             <th style="width:5%;"></th>
-                            <th style="width:20%;">Nombre Ejercicio</th>
-                            <th style="width:10%;">Nivel</th>
-                            <th style="width:20%;">Tipo</th>
-                            <th style="width:15%;">Profesor</th>                      
+                            <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
+                            <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>                      
                             <th></th>
                         </tr>
                     </thead>

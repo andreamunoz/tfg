@@ -192,5 +192,14 @@ class User {
         $connect->disconnectDB($conexion);
         return $resultado;
     }
+    
+    function getNombreAlumnos(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $consulta = "SELECT nombre FROM sqlab_usuario WHERE rol = '1';";
+        $resultado = mysqli_query($conexion, $consulta);
+        $connect->disconnectDB($conexion);
+        return $resultado;
+    }
 
 }

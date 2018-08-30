@@ -10,11 +10,11 @@ session_start();
     $nombre_tabla = $_GET['name'];
     $num_campos = $_GET['num'];
     ?>
-    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_tables.php" > Tablas</a> > Información Tablas</label>
-    <h2><strong>Tablas</strong></h2>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_tables.php" > <?php echo trad('Tablas',$lang) ?></a> > <a class="enlace" href="configuration_info_tables.php?name=<?php echo $nombre_tabla ?>&num=<?php echo $num_campos ?>" ><?php echo trad('Información Tablas',$lang) ?> </a></label>
+    <h2><strong><?php echo trad('Tablas',$lang) ?></strong></h2>
     <div class="row mb-150">
         <div class="col-md-9">
-            <p>Añade, edita y elimina las tablas que tengan los ejercicios...</p>
+            <p><?php echo trad('Muestra la estructura de las tablas y los datos de los campos correspondientes a esa tabla.',$lang) ?></p>
         </div>
 
     </div> 
@@ -24,8 +24,8 @@ session_start();
                 <div class="col-md-12 ">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-                            <a class="nav-item nav-link active" id="nav-tablesE-tab" data-toggle="tab" href="#nav-table-structure" role="tab" aria-controls="nav-table-struct" aria-selected="true">Estructura</a>
-                            <a class="nav-item nav-link" id="nav-tablesD-tab" data-toggle="tab" href="#nav-table-datos" role="tab" aria-controls="nav-table-dat" aria-selected="false">Datos</a>
+                            <a class="nav-item nav-link active" id="nav-tablesE-tab" data-toggle="tab" href="#nav-table-structure" role="tab" aria-controls="nav-table-struct" aria-selected="true"><?php echo trad('Estructura',$lang) ?></a>
+                            <a class="nav-item nav-link" id="nav-tablesD-tab" data-toggle="tab" href="#nav-table-datos" role="tab" aria-controls="nav-table-dat" aria-selected="false"><?php echo trad('Datos',$lang) ?></a>
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
@@ -36,10 +36,10 @@ session_start();
                                         <table id="employee_data" class="table table-striped table-bordered">  
                                             <thead>
                                                 <tr>                                                      
-                                                    <th style="width:30%;">Nombre Columna</th>
-                                                    <th style="width:30%;">Tipo Columna</th>
-                                                    <th style="width:30%;">Acepta NULL</th>
-                                                    <th style="width:20%;">Clave</th>                                                  
+                                                    <th style="width:30%;"><?php echo trad('Nombre Columna',$lang) ?></th>
+                                                    <th style="width:30%;"><?php echo trad('Tipo Columna',$lang) ?></th>
+                                                    <th style="width:30%;"><?php echo trad('Acepta',$lang) ?> NULL</th>
+                                                    <th style="width:20%;"><?php echo trad('Clave',$lang) ?></th>                                                  
                                                 </tr>
                                             </thead>
                                             <tbody>

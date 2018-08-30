@@ -5,35 +5,35 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_exercises.php" > Ejercicios</a></label>
-    <h2><strong>Ejercicios</strong></h2>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_exercises.php" > <?php echo trad('Ejercicios',$lang) ?></a></label>
+    <h2><strong><?php echo trad('Ejercicios',$lang) ?></strong></h2>
     <div class="row mb-150">
-        <div class="col-md-9">
-            <p>Añade, edita y elimina los ejercicios...</p>
+        <div class="col-md-8">
+            <p><?php echo trad('Añade, edita y habilita o deshabilita los ejercicios.',$lang) ?></p>
         </div>
 
-        <div class="col-md-3 p-0">
-            <a type="button" class="btn btn-primary pl-4 pr-4" href="configuration_new_exercises.php" >Crear Ejercicio</a>
+        <div class="text-right pl-5">
+            <a type="button" class="btn btn-primary pl-4 pr-4" href="configuration_new_exercises.php" ><?php echo trad('Crear Ejercicio',$lang) ?></a>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
-                Ayuda
+                <?php echo trad('Ayuda',$lang) ?>
             </button>
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="mt-4 pl-5">Ayuda</h2>
+                            <h2 class="mt-4 pl-5"><?php echo trad('Ayuda',$lang) ?></h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true"> <img class="img_icon_cerrar cerrar" src="../img/icon_cerrarPanel_blanco.svg"/></span>
                             </button>
                         </div>
                         <div class="modal-body">
 
-                            <p class="pl-5">+ <strong><i>Crear ejercicio:</i></strong> Rellene el nombre y selecciona el nivel, categoría y la vista, después añade las tablas que se usarán en el ejercicio y añade su enunciado y solución. </p>
-                            <p class="pl-5">+ <strong><i>Mostrar:</i></strong> Muestra el ejercicio, solo podrá visualizarlo no realizarlo.</p>
-                            <p class="pl-5">+ <strong><i>Editar:</i></strong> Cambie el nombre y selecciona el nivel, categoría y la vista, puede cambiar tambien las tablas que se usarán en el ejercicio y cambie su enunciado y solución.</p>
-                            <p class="pl-5">+ <strong><i>Habilitar/Deshabilitar:</i></strong> Habilite un ejercicio para poder solucionarlo / Deshabilite un ejercicio para que no se pueda solucionar. </p>
+                            <p class="pl-5">+ <strong><i><?php echo trad('Crear ejercicio',$lang) ?>:</i></strong> <?php echo trad('Rellene el nombre y selecciona el nivel, categoría y la vista, después añade las tablas que se usarán en el ejercicio y añade su enunciado y solución.',$lang) ?> </p>
+                            <p class="pl-5">+ <strong><i><?php echo trad('Mostrar',$lang) ?>:</i></strong> <?php echo trad('Muestra el ejercicio, solo podrá visualizarlo no realizarlo.',$lang) ?></p>
+                            <p class="pl-5">+ <strong><i><?php echo trad('Editar',$lang) ?>:</i></strong> <?php echo trad('Cambie el nombre y selecciona el nivel, categoría y la vista, puede cambiar tambien las tablas que se usarán en el ejercicio y cambie su enunciado y solución.',$lang) ?></p>
+                            <p class="pl-5">+ <strong><i><?php echo trad('Habilitar',$lang) ?>/<?php echo trad('Deshabilitar',$lang) ?>:</i></strong> <?php echo trad('Habilite un ejercicio para poder solucionarlo / Deshabilite un ejercicio para que no se pueda solucionar.',$lang) ?> </p>
                         </div>
                     </div>
                 </div>
@@ -47,10 +47,10 @@ session_start();
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>
                         <tr>
-                            <th style="width:20%;">Nombre Ejercicio</th>
-                            <th style="width:10%;">Nivel</th>
-                            <th style="width:20%;">Tipo</th>
-                            <th style="width:15%;">Profesor</th>                         
+                            <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
+                            <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>                         
                             <th></th>
                         </tr>
                     </thead>

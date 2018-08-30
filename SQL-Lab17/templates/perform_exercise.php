@@ -90,7 +90,10 @@ session_start();
 
                                                                         <tr>
                                                                             <th style="width:5px; text-align: center;"><?php echo trad('Campo',$lang) ?></th> 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 241b5bc3f38bd52d71bdacbade148ae7fc273472
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>

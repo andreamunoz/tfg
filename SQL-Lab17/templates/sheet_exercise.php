@@ -11,9 +11,9 @@ session_start();
      $hojaejer = new HojaEjercicio();
      $nombreHoja = $hojaejer->getHojaById($hojaparameter);
       ?>
-    <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="sheets.php" > Hoja de Ejercicios</a>  > <a class="enlance" href="sheet_exercise.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
+    <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="sheet_exercise.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?></strong></h2>
-    <p>Textooooo aquí........</p>
+    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
     <div class="row pt-2 pb-4">
         <div class="col-md-3  offset-9">
             <div class="progress">
@@ -50,10 +50,10 @@ session_start();
                     <thead>
                         <tr>
                             <th style="width:5%;"></th>
-                            <th style="width:20%;">Nombre Ejercicio</th>
-                            <th style="width:10%;">Nivel</th>
-                            <th style="width:20%;">Tipo</th>
-                            <th style="width:15%;">Profesor</th>
+                            <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
+                            <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
                             <th></th>
 
                         </tr>
@@ -83,7 +83,7 @@ session_start();
 
                                 <td><i class="fas fa-question"></i></td>  
                                 <?php } ?>  	
-                                <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
+                                <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>

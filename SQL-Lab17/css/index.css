@@ -167,6 +167,7 @@ a {
     margin-left: 54px;
     background-color: black;
     opacity: 0.9;
+    z-index: 1;
 }
 
 .navbar-light .navbar-brand {

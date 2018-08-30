@@ -5,28 +5,28 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4">
-    <label><a class="enlance" href="configuration.php" >Configuración </a> > <a class="enlance" href="configuration_stadistics_exercises.php" > Estadísticas</a> </label>
-    <h2><strong>Estadísticas</strong></h2>	
+    <label><a class="enlance" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlance" href="configuration_stadistics_exercises.php" > <?php echo trad('Estadísticas',$lang) ?></a> </label>
+    <h2><strong><?php echo trad('Estadísticas',$lang) ?></strong></h2>	
     <div class="row mb-150">
         <div class="col-md-10">
-            <p>Muestra las estadisticas por nivel y categoría referenciado a un alumno o a todos.</p>
+            <p><?php echo trad('Muestra las estadisticas por nivel y categoría referenciado a un alumno o a todos.',$lang) ?></p>
         </div>
         <div class="col-md-2 p-0">
             <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
-                Ayuda
+                <?php echo trad('Ayuda',$lang) ?>
             </button>
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="mt-4 pl-5">Ayuda</h2>
+                            <h2 class="mt-4 pl-5"><?php echo trad('Ayuda',$lang) ?></h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true"> <img class="img_icon_cerrar cerrar" src="../img/icon_cerrarPanel_blanco.svg"/></span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p class="pl-5">+ <strong><i>Primer Select:</i></strong> Muestra las estadísticas por profesor (conectado) y por alumnos en referencia al nivel o categoría. </p>
-                            <p class="pl-5">+ <strong><i>Segundo Select:</i></strong> Muestra las estadísticas en función del Nivel o Categoría de los ejercicios según el usuario seleccionado.</p>                          
+                            <p class="pl-5">+ <strong><i><?php echo trad('Primer Select',$lang) ?>:</i></strong> <?php echo trad('Muestra las estadísticas por profesor (conectado) y por alumnos en referencia al nivel o categoría.',$lang) ?> </p>
+                            <p class="pl-5">+ <strong><i><?php echo trad('Segundo Select',$lang) ?>:</i></strong> <?php echo trad('Muestra las estadísticas en función del Nivel o Categoría de los ejercicios según el usuario seleccionado.',$lang) ?></p>                          
                         </div>
                     </div>
                 </div>

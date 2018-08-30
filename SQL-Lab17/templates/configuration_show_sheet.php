@@ -11,9 +11,9 @@ session_start();
      $hojaejer = new HojaEjercicio();
      $nombreHoja = $hojaejer->getHojaById($hojaparameter);
       ?>
-    <label><a class="enlance" href="configuration.php" >Configuración </a> > <a class="enlance" href="configuration_sheets.php" > Hoja de Ejercicios</a>  > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
+    <label><a class="enlance" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlance" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?></strong></h2>
-    <p>Textooooo aquí........</p>
+    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
     <div class="hrr mt-3 mb-5"></div>			
     <div id="accordion">
         <div class="card">
@@ -21,10 +21,10 @@ session_start();
                 <table id="employee_data" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th style="width:20%;">Nombre Ejercicio</th>
-                            <th style="width:10%;">Nivel</th>
-                            <th style="width:20%;">Tipo</th>
-                            <th style="width:15%;">Profesor</th>
+                            <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
+                            <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
                             <th></th>
 
                         </tr>

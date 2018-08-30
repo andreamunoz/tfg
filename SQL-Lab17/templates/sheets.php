@@ -5,18 +5,18 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="sheets.php" > Hoja de Ejercicios</a></label>
-    <h2><strong>Hoja de Ejercicios</strong></h2>
-    <p>Texto a añadir aquí...</p>    
+    <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
+    <h2><strong><?php echo trad('Hoja de Ejercicios',$lang) ?></strong></h2>
+    <p><?php echo trad('Texto a añadir aquí...',$lang) ?></p>    
     <div id="accordion ">
         <div class="card pt-4" >  
             <div class="table-responsive">  
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>
                         <tr>
-                            <th style="width:30%;">Nombre Hoja</th>
-                            <th style="width:30%;">Nombre Profesor</th>
-                            <th style="width: 60%">N. Ejercicios</th>
+                            <th style="width:30%;"><?php echo trad('Nombre Hoja',$lang) ?></th>
+                            <th style="width:30%;"><?php echo trad('Nombre Profesor',$lang) ?></th>
+                            <th style="width: 60%"><?php echo trad('N. Ejercicios',$lang) ?></th>
                             <th></th>
                         </tr>
                     </thead>

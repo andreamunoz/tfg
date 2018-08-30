@@ -7,8 +7,8 @@ session_start();
 
 <img class="img_index" src="../img/img_index.png"/>
 <div class='contenedor'>
-    <h1>Bienvenido <?php echo $_SESSION['user']; ?>!</h1>
-    <p>caf af g dsgsd gs gsd gsdgsd gs gsd gs s g gsdgsd</p>
+    <h1><?php echo trad('Bienvenido',$lang) ?> <?php echo $_SESSION['user']; ?>!</h1>
+    <p><?php echo trad('caf af g dsgsd gs gsd gsdgsd gs gsd gs s g gsdgsd',$lang) ?></p>
 </div>
 <?php
 

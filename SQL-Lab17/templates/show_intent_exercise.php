@@ -15,9 +15,9 @@ session_start();
      $ejer = new Ejercicio();
      $descrip = $ejer->getNameById($id_ejercicio);
       ?>
-    <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="sheets.php" > Hoja de Ejercicios</a>  > <a class="enlance" href="sheet_exercise.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nomHoja['nombre_hoja'] ?></a> > <a class="enlance" href="show_intent_exercise.php?hoja=<?php echo $hojaparameter  ?>&exercise=<?php echo $id_ejercicio  ?>" ><?php echo $descrip['descripcion']  ?></a></label>
-    <h2><strong>Lista de Intentos | <?php echo $descrip['descripcion'] ?></strong></h2>
-    <p>Textooooo aquí........</p>			
+    <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="sheet_exercise.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nomHoja['nombre_hoja'] ?></a> > <a class="enlance" href="show_intent_exercise.php?hoja=<?php echo $hojaparameter  ?>&exercise=<?php echo $id_ejercicio  ?>" ><?php echo $descrip['descripcion']  ?></a></label>
+    <h2><strong><?php echo trad('',$lang) ?>Lista de Intentos | <?php echo $descrip['descripcion'] ?></strong></h2>
+    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>			
     <div id="accordion">
         <div class="card pt-4">
             <div class="table-responsive">  
@@ -25,10 +25,10 @@ session_start();
                     <thead>
                         <tr>
                             <th style="width:5%;"></th>
-                            <th style="width:20%;">Nombre Ejercicio</th>
-                            <th style="width:20%;">Ultima Modificación</th>
-                            <th style="width:10%;">Intentos</th>
-                            <th style="width:10%;">Solución</th>
+                            <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:20%;"><?php echo trad('Última Modificación',$lang) ?></th>
+                            <th style="width:10%;"><?php echo trad('Intentos',$lang) ?></th>
+                            <th style="width:10%;"><?php echo trad('Solución',$lang) ?></th>
                         </tr>
                     </thead>
                     <tbody>

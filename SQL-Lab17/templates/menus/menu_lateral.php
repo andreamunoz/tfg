@@ -5,7 +5,7 @@
         <i class="fas fa-angle-right"></i>
         <p class="text-menu text-titulo">SQLab</p>
         <!--<img src="../../img/icon_desplegar.svg"/>-->
-        <p class="text-menu text-b">Bienvenido,</p>
+        <p class="text-menu text-b"><?php echo trad('Bienvenido',$lang) ?>,</p>
         <p class="text-menu"><?php echo $_SESSION['user'] ?></p>
 
     </div>
@@ -14,35 +14,35 @@
         <div class="logo-interior">
             <i class="fas fa-home"></i>
         </div>
-        <p class="text-menu">Inicio</p>
+        <p class="text-menu"><?php echo trad('Inicio',$lang) ?></p>
         </div></a>
     <hr class="hrr">
     <a class="menu-item" href="sheets.php"><div class="contenedor-item">   
             <div class="logo-interior">
                 <i class="fas fa-copy"></i>
             </div>
-            <p class="text-menu">Hoja de Ejercicios</p>
+            <p class="text-menu"><?php echo trad('Hoja de Ejercicios',$lang) ?></p>
         </div></a>
     <hr class="hrr">
     <a class="menu-item" href="exercises.php"><div class="contenedor-item">  
         <div class="logo-interior">
             <i class="fas fa-file-code"></i>
         </div>
-        <p class="text-menu">Ejercicios</p>
+        <p class="text-menu"><?php echo trad('Ejercicios',$lang) ?></p>
         </div></a>
     <hr class="hrr">
     <a class="menu-item" href="stadistics_exercises.php"><div class="contenedor-item">  
         <div class="logo-interior">
             <i class="far fa-chart-bar"></i>
         </div>
-        <p class="text-menu">Estadísticas</p>
+        <p class="text-menu"><?php echo trad('Estadísticas',$lang) ?></p>
         </div></a>
     <hr class="hrr">
     <a class="menu-item" href="profile.php"> <div class="contenedor-item">  
             <div class="logo-interior">
                 <i class="fas fa-user"></i>
             </div>
-            <p class="text-menu">Perfil</p>
+            <p class="text-menu"><?php echo trad('Perfil',$lang) ?></p>
         </div></a>
     <hr class="hrr">
     <?php if ($_SESSION['rol'] == false) { ?>
@@ -50,7 +50,7 @@
             <div class="logo-interior">
                 <i class="fas fa-cogs"></i>
             </div>
-            <p class="text-menu">Configuración</p>
+            <p class="text-menu"><?php echo trad('Configuración',$lang) ?></p>
             </div></a>
             <hr class="hrr">
     <?php } ?>

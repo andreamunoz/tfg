@@ -5,33 +5,33 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlace" href="configuration.php" >Configuración </a> > <a class="enlace" href="configuration_tables.php" > Tablas</a></label>
-    <h2><strong>Tablas</strong></h2>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_tables.php" > <?php echo trad('Tablas',$lang) ?></a></label>
+    <h2><strong><?php echo trad('Tablas',$lang) ?></strong></h2>
     <div class="row mb-150">
         <div class="col-md-8">
-            <p>Añade, edita y elimina las tablas que tengan los ejercicios...</p>
+            <p><?php echo trad('Añade, edita y elimina las tablas que tengan los ejercicios.',$lang) ?></p>
         </div>
         <div class="text-right pl-5">
-            <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_tables.php" >Crear Tabla</a>
+            <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_tables.php" ><?php echo trad('Crear Tabla',$lang) ?></a>
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
-                Ayuda
+                <?php echo trad('Ayuda',$lang) ?>
             </button>
             <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h2 class="mt-4 pl-5">Ayuda</h2>
+                            <h2 class="mt-4 pl-5"><?php echo trad('Ayuda',$lang) ?></h2>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true"> <img class="img_icon_cerrar cerrar" src="../img/icon_cerrarPanel_blanco.svg"/></span>
                             </button>
                         </div>
                         <div class="modal-body">
-                            <p class="pl-5">+ <strong><i>Crear tabla:</i></strong> Añade la consulta para Crear/Update/Drop a la tabla. </p>
-                            <p class="pl-5">+ <strong><i>Ver detalles:</i></strong></p>
-                            <p class="pl-5"><strong>Estructura </strong>(Puede ver las columnas que tiene la tabla y el tipo al que corresponde dicho campo)</p>
-                            <p class="pl-5"><strong>Datos </strong>(Puede ver el contenido que tienen los campos de esa tabla)</p>
+                            <p class="pl-5">+ <strong><i><?php echo trad('Crear Tabla',$lang) ?>:</i></strong> <?php echo trad('Añade la consulta para Crear/Update/Drop a la tabla.',$lang) ?> </p>
+                            <p class="pl-5">+ <strong><i><?php echo trad('Ver detalles',$lang) ?>:</i></strong></p>
+                            <p class="pl-5"><strong><?php echo trad('Estructura',$lang) ?> </strong><?php echo trad('(Puede ver las columnas que tiene la tabla y el tipo al que corresponde dicho campo)',$lang) ?></p>
+                            <p class="pl-5"><strong><?php echo trad('Datos',$lang) ?> </strong><?php echo trad('(Puede ver el contenido que tienen los campos de esa tabla)',$lang) ?></p>
                         </div>
                     </div>
                 </div>
@@ -44,9 +44,9 @@ session_start();
                 <table id="employee_data" class="table table-striped-conf table-bordered">  
                     <thead>
                         <tr>
-                            <th style="width:30%;">Nombre Tabla</th>
-                            <th style="width:30%;">Creador Tabla</th>
-                            <th style="width:40%;">Nº de columnas</th>
+                            <th style="width:30%;"><?php echo trad('Nombre Tabla',$lang) ?></th>
+                            <th style="width:30%;"><?php echo trad('Creador Tabla',$lang) ?></th>
+                            <th style="width:40%;"><?php echo trad('Nº de columnas',$lang) ?></th>
                             <th style="width:20%;"></th>
                         </tr>
                     </thead>
@@ -83,7 +83,6 @@ session_start();
             <?php
                 if(isset($_SESSION['message_new_tables'])){
                     echo $_SESSION['message_new_tables'];
-                    //var_dump($_SESSION['message_new_tables']) ;
                     unset($_SESSION['message_new_tables']);
                 }
             ?>  

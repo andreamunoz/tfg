@@ -5,14 +5,14 @@ session_start();
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4">
-    <label><a class="enlance" href="index.php" >Inicio </a> > <a class="enlance" href="stadistics_exercises.php" > Estadísticas</a> </label>
-    <h2><strong>Estadísticas</strong></h2>
-    <p>Texto a añadir aquí...</p>
+    <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="stadistics_exercises.php" > <?php echo trad('Estadísticas',$lang) ?></a> </label>
+    <h2><strong><?php echo trad('Estadísticas',$lang) ?></strong></h2>
+    <p><?php echo trad('Texto a añadir aquí...',$lang) ?></p>
     <div class="row pt-2">
         <div class="offset-9 col-md-3 mb-3">
             <select class="custom-select" title="Selecciona" id="mostrar" onclick="mostrarNC()">
-                <option value="nivel" selected>Nivel</option>
-                <option value="tipo">Categoría</option>
+                <option value="nivel" selected><?php echo trad('Nivel',$lang) ?></option>
+                <option value="tipo"><?php echo trad('Categoría',$lang) ?></option>
             </select>
         </div>
     </div>	
@@ -49,7 +49,7 @@ session_start();
                     new Chart(document.getElementById("bar-chart-horizontal<?php echo $j ?>"), {
                             type: 'horizontalBar',
                             data: {
-                            labels: ["Aciertos", "Fallos", "No intentados"],
+                            labels: ["<?php echo trad('Aciertos',$lang) ?>", "<?php echo trad('Fallos',$lang) ?>", "<?php echo trad('No intentados',$lang) ?>"],
                                     datasets: [
                                     {
                                     backgroundColor: ["rgba(48,48,48,0.8)", "rgba(48,48,48,0.5)", "rgba(48,48,48,0.2)"],
@@ -111,7 +111,7 @@ session_start();
                     new Chart(document.getElementById("bar-chart-horizontal<?php echo $i ?>"), {
                             type: 'horizontalBar',
                             data: {
-                            labels: ["Aciertos", "Fallos", "No intentados"],
+                            labels: ["<?php echo trad('Aciertos',$lang) ?>", "<?php echo trad('Fallos',$lang) ?>", "<?php echo trad('No intentados',$lang) ?>"],
                                     datasets: [
                                     {
                                     backgroundColor: ["rgba(48,48,48,0.8)", "rgba(48,48,48,0.5)", "rgba(48,48,48,0.2)"],

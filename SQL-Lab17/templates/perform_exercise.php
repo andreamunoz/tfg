@@ -47,7 +47,7 @@ session_start();
                                             <nav>
                                                 <div class="nav nav-tabs nav-fill" id="nav-tablas" role="tablist">
                                                     <a class="nav-item nav-link active" id="nav-t" data-toggle="tab" href="#nav-tab" role="tab" aria-controls="nav-tab" aria-selected="true"><?php echo trad('Tablas',$lang) ?></a>
-                                                    <a class="nav-item nav-link" id="nav-tab-structure" data-toggle="tab" href="#nav-tab-structure" role="tab" aria-controls="nav-tab-campos" aria-selected="false"><?php echo trad('Estructura',$lang) ?></a>
+                                                    <a class="nav-item nav-link" id="nav-tab-struct" data-toggle="tab" href="#nav-tab-structure" role="tab" aria-controls="nav-tab-stru" aria-selected="false"><?php echo trad('Estructura',$lang) ?></a>
                                                     <a class="nav-item nav-link" id="nav-tab-camp" data-toggle="tab" href="#nav-tab-campos" role="tab" aria-controls="nav-tab-campos" aria-selected="false"><?php echo trad('Datos',$lang) ?></a>
                                                 </div>
                                             </nav>
@@ -75,7 +75,7 @@ session_start();
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane fade mt-3 pl-4" id="nav-tab-structure" role="tabpanel" aria-labelledby="nav-tab-structure">
+                                                <div class="tab-pane fade mt-3 pl-4" id="nav-tab-structure" role="tabpanel" aria-labelledby="nav-tab-st">
                                                     <div id="accordion ">
                                                         <div class="card">  
                                                             <div class="table-responsive scroll">                

@@ -47,32 +47,47 @@ session_start();
                                             <nav>
                                                 <div class="nav nav-tabs nav-fill" id="nav-tablas" role="tablist">
                                                     <a class="nav-item nav-link active" id="nav-t" data-toggle="tab" href="#nav-tab" role="tab" aria-controls="nav-tab" aria-selected="true"><?php echo trad('Tablas',$lang) ?></a>
-                                                    <a class="nav-item nav-link" id="nav-tab-camp" data-toggle="tab" href="#nav-tab-campos" role="tab" aria-controls="nav-tab-campos" aria-selected="false"><?php echo trad('Campos',$lang) ?></a>
+                                                    <a class="nav-item nav-link" id="nav-tab-structure" data-toggle="tab" href="#nav-tab-structure" role="tab" aria-controls="nav-tab-campos" aria-selected="false"><?php echo trad('Estructura',$lang) ?></a>
+                                                    <a class="nav-item nav-link" id="nav-tab-camp" data-toggle="tab" href="#nav-tab-campos" role="tab" aria-controls="nav-tab-campos" aria-selected="false"><?php echo trad('Datos',$lang) ?></a>
                                                 </div>
                                             </nav>
                                             <div class="tab-content py-3 px-3 px-sm-0" id="nav-ta">
                                                 <div class="tab-pane fade show active mt-3 pl-4" id="nav-tab" role="tabpanel" aria-labelledby="nav-ta">
                                                     <div id="accordion ">
                                                         <div class="card">  
+                                                            <div class="selector-tabla-sol" >
+                                                                <select name="tablas_sol" class=" custom-select form-control-sm" id="tablas_sol" title="Selecciona" required>
+                                                                <option value=""> Selecciona tabla</option>
+                                                                <?php
+                                                                $quitar = $ejercicioId['dueño_tablas'] . "_";
+                                                                
+                                                                while ($fila = mysqli_fetch_array($tab)) {
+                                                                    // $_SESSION['table_name_show'] = $fila["nombre"];
+                                                                    $onlyName = explode($quitar, $fila["nombre"]);
+                                                                    ?>
+                                                                    <option value="<?php echo $fila["nombre"] ?>">
+                                                                        <?php echo $onlyName[1]; ?> 
+                                                                    </option> 
+                                                                <?php } ?>                                  
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-pane fade mt-3 pl-4" id="nav-tab-structure" role="tabpanel" aria-labelledby="nav-tab-structure">
+                                                    <div id="accordion ">
+                                                        <div class="card">  
                                                             <div class="table-responsive scroll">                
-                                                                <table id="employee" class="table table-striped table-bordered"> 
+                                                                <table id="employee_data" class="table table-striped table-bordered structure">  
                                                                     <thead>
-                                                                        <tr>
-                                                                            <th style="width:20%; text-align: center;"><?php echo trad('Nombre Tablas',$lang) ?></th>
+                                                                        <tr>                                         
+                                                                            <th style="width:30%;"><?php echo trad('Nombre Columna',$lang) ?></th>
+                                                                            <th style="width:30%;"><?php echo trad('Tipo Columna',$lang) ?></th>
+                                                                            <th style="width:20%;"><?php echo trad('Acepta NULL',$lang) ?></th>
+                                                                            <th style="width:20%;"><?php echo trad('Clave',$lang) ?></th>                                           
                                                                         </tr>
                                                                     </thead>
-                                                                    <tbody >
-                                                                        <?php
-                                                                        $quitar = $ejercicioId['dueño_tablas'] . "_";
-                                                                        while ($fila = mysqli_fetch_array($tab)) {
-                                                                            $onlyName = explode($quitar, $fila["nombre"]);
-                                                                            ?>
-                                                                            <tr>
-                                                                                <td style="text-align: center;">                          
-                                                                                    <?php echo $onlyName[1]; ?> 
-                                                                                </td> 
-                                                                            </tr>
-                                                                        <?php } ?>
+                                                                    <tbody>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -83,23 +98,8 @@ session_start();
                                                     <div id="accordion ">
                                                         <div class="card">  
                                                             <div class="table-responsive scroll">                
-                                                                <table id="employee-data" class="table table-striped table-bordered"> 
-                                                                    <thead>
-                                                                        <tr>
-                                                                            <th style="width:5px; text-align: center;"><?php echo trad('Campo',$lang) ?></th> 
-                                                                        </tr>
-                                                                    </thead>
+                                                                <table id="employee-data" class="table table-striped table-bordered data">
                                                                     <tbody>
-                                                                        <?php
-                                                                        $tab_col = $tabla->getCamposTabla($dueño);
-                                                                        $_SESSION["columnas"] = "";
-                                                                        while ($fila = mysqli_fetch_array($tab_col)) {
-                                                                            echo '<tr>
-                                                                                    <td style="text-align: center;">' . $fila["COLUMN_NAME"] . '</td>
-                                                                                </tr>';
-                                                                            $_SESSION["columnas"] = $_SESSION["columnas"] . "*" . $fila["COLUMN_NAME"];
-                                                                        }
-                                                                        ?>
                                                                     </tbody>
                                                                 </table>
                                                             </div>

@@ -1,8 +1,9 @@
 <?php
-    include_once '../inc/functions.php';
+    session_start();
+    include_once '../../inc/tools.php';
     $connect = new Tools();
     $conexion = $connect->connectDB();
-    $sql = "SELECT * from " . $_SESSION['table_name_show'] . ";";
+    $sql = "SELECT * from " .$_REQUEST["tabla"]. ";";
     $consulta = mysqli_query($conexion, $sql);
 
     $respuesta = "";
@@ -14,6 +15,7 @@
         $respuesta = $respuesta . '</tr>';
     }
     $connect->disconnectDB($conexion);
+
     echo $respuesta;
 
 ?>

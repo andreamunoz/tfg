@@ -128,9 +128,10 @@ $texts = array(
     'Información Tablas' => 'Information Tables',
     'Información Campos' => 'Information Fields',
     'Muestra la estructura de las tablas y los datos de los campos correspondientes a esa tabla.' => 'It shows the structure of the tables and the data of the fields corresponding to that table.',
+    'Datos' => 'Data',
     'Nombre Columna' => 'Column Name',
     'Tipo Columna' => 'Column Type',
-    'Acepta' => 'Accept',
+    'Acepta NULL' => 'Accept NULL',
     'Clave' => 'Key',
     //Configuración Hoja Ejercicios
     'Añade, edita y elimina la hoja de ejercicios.' => 'Add, edit and delete the worksheet.',

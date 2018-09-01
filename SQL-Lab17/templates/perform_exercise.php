@@ -57,11 +57,12 @@ session_start();
                                                         <div class="card">  
                                                             <div class="selector-tabla-sol" >
                                                                 <select name="tablas_sol" class=" custom-select form-control-sm" id="tablas_sol" title="Selecciona" required>
+                                                                <option value=""> Selecciona tabla</option>
                                                                 <?php
                                                                 $quitar = $ejercicioId['dueño_tablas'] . "_";
                                                                 
                                                                 while ($fila = mysqli_fetch_array($tab)) {
-                                                                    $_SESSION['table_name_show'] = $fila["nombre"];
+                                                                    // $_SESSION['table_name_show'] = $fila["nombre"];
                                                                     $onlyName = explode($quitar, $fila["nombre"]);
                                                                     ?>
                                                                     <option value="<?php echo $fila["nombre"] ?>">
@@ -81,10 +82,12 @@ session_start();
                                                                 <table id="employee_data" class="table table-striped table-bordered structure">  
                                                                     <thead>
                                                                         <tr>                                         
-                                                                            <th style="width:30%;">Nombre Columna</th>
-                                                                            <th style="width:30%;">Tipo Columna</th>
-                                                                            <th style="width:30%;">Acepta NULL</th>
-                                                                            <th style="width:20%;">Clave</th>                                           
+                                                                            <tr>                                         
+                                                                            <th style="width:30%;"><?php echo trad('Nombre Columna',$lang) ?></th>
+                                                                            <th style="width:30%;"><?php echo trad('Tipo Columna',$lang) ?></th>
+                                                                            <th style="width:20%;"><?php echo trad('Acepta NULL',$lang) ?></th>
+                                                                            <th style="width:20%;"><?php echo trad('Clave',$lang) ?></th>                                           
+                                                                        </tr>                                           
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -100,14 +103,6 @@ session_start();
                                                             <div class="table-responsive scroll">
 
                                                                 <table id="employee_data" class="table table-striped table-bordered data">  
-                                                                    <thead>
-                                                                        <tr>                                         
-                                                                            <th style="width:30%;">Nombre Columna</th>
-                                                                            <th style="width:30%;">Tipo Columna</th>
-                                                                            <th style="width:30%;">Acepta NULL</th>
-                                                                            <th style="width:20%;">Clave</th>                                           
-                                                                        </tr>
-                                                                    </thead>
                                                                     <tbody>
                                                                     </tbody>
                                                                 </table>
@@ -173,8 +168,8 @@ session_start();
     }
     ?>
 </div>
-<script>
-        $('#modalSolucion').removeClass('show');
+    <script type="text/javascript">
+        //$("#modalSolucion").removeClass('show'); /*****************************/
         /*$(document).ready(function () {
             setTimeout("$('div').removeClass('show');", 5000);
         });*/

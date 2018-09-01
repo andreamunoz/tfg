@@ -89,32 +89,37 @@ $(document).ready(function () {
         });
     });
 
-    $.(".selector-tabla-sol select #tablas_sol").change(function(){
-        console.log("Entramos");
+    $(".selector-tabla-sol select ").change(function(){
+        
         var form_data = {
             is_ajax: 1,
-            tabla: $(".selector-tabla-sol select option:checked").val();
+            tabla: $(".selector-tabla-sol select option:checked").val()
         };
-        // $.ajax({
-        //     type: "POST",
-        //     url: "adm_profesor/getStructure.php",
-        //     data: form_data,
-        //     success: function(response)
-        //     {   
-        //         $('.structure tbody').html(response).fadeIn();
-        //     }
-        // });
-        console.log (form_data.tabla);
-        $.ajax({
-            type: "POST",
-            url: "adm_profesor/getData.php",
-            data: form_data,
-            success: function(response)
-            {   
-                $('.data tbody').html(response).fadeIn();
-            }
-        });
+        console.log(form_data.tabla);
+        if (form_data.tabla !== ""){
 
+            $.ajax({
+                type: "POST",
+                url: "adm_profesor/getStructure.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    $('.structure tbody').html(response).fadeIn();
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "adm_profesor/getData.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    $('.data tbody').html(response).fadeIn();
+                }
+            });
+        }else{
+            $('.structure tbody').html("").fadeIn();
+            $('.data tbody').html("").fadeIn();
+        }
     });
 
 

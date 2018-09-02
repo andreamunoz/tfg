@@ -3,9 +3,9 @@
 
 	$user = $_REQUEST["user"];
 
-	include_once "../../inc/usuario.php";
+	include_once "../../inc/user.php";
 	
-	$usu = new Usuario();
+	$usu = new User();
 	$resul = $usu->getAvisos($user);
 	
 	echo json_encode($resul);

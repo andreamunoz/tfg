@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>

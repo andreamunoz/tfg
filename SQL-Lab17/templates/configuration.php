@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
@@ -8,7 +5,7 @@ session_start();
 <div class="container-tabla pt-4">
     <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="configuration.php" > <?php echo trad('Configuración',$lang) ?></a> </label>
     <h2><strong><?php echo trad('Configuración',$lang) ?></strong></h2>
-    <p><?php echo trad('Texto a añadir aquí...',$lang) ?></p>
+    <p><?php echo trad('En esta página encontrarás los enlaces para realizar la funcionalidad propia del profesor.<br>Podrás acceder a la gestión de las tablas, a la gestión de las hojas de ejercicios, a la gestión de los ejercicios, a unas estadísticas específicas y a su perfil.',$lang) ?></p>
     <div class="row pt-4">   
         <a href="configuration_tables.php" class="col-md-3 configuration text-conf ">
             <img class="img_icon mb-3" src="../img/icon_tiposDocumentos.svg">
@@ -38,7 +35,16 @@ session_start();
             <label class="cursor" for="name" ><?php echo trad('Muestra y edita tu perfil, también puedes ver los resultados obtenidos, pulsa aquí.',$lang) ?></label>
         </a>       
     </div>
-
+    <div class='modal fade show' id='modalsolucion' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <div class='modal-content'>
+                        <div class='modal-body'>
+                            <h2><strong>¡Error!</strong></h2>
+                            <p>El ejercicio es INCORRECTO.</p>
+                        </div>
+                    </div>
+                </div>   
+            </div>;
 </div>
 
 <?php include("footer.php"); ?>

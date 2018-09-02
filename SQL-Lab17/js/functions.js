@@ -123,5 +123,66 @@ $(document).ready(function () {
     });
 
 
+/*****Avisos al dueño de la hoja cuando se modifica algun ejercicio*****/
+    $('.marcarLeidos').click(function(){      
+        var mi_user = $(this).attr("data-name");
+
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getMarcarAvisosLeidos.php",
+            data: { user: mi_user },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+              
+    });
+
+    $('.mostrarTodos').click(function(){      
+        var mi_user = $(this).attr("data-name");
+
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getMostrarTodosAvisos.php",
+            data: { user: mi_user },
+            success: function(response)
+            {
+                var resultado = response.substring(23);
+                var res = JSON.parse(resultado);
+                $('#avisos').empty();
+                $('#avisos').append('<h5>AVISOS</h5>');
+                for(i=0; i<res.length; i++){
+                    $('#avisos').append('<div class="aviso">'+res[i]+'</div>');
+                }
+                $('#avisos').append('<div class="row"><div class="col-md-6 marcarTodosLeidos" data-name="'+mi_user+'">Marcar todos los avisos como leídos</div><div class="col-md-6 mostrarNuevos" data-name="'+mi_user+'">Mostrar solo los avisos nuevos</div></div>');
+
+            }
+        });    
+    });
+
+    $('#avisos').on("click", ".marcarTodosLeidos", function(){      
+        var mi_user = $(this).attr("data-name");
+        // console.log("ESTOY EN MARCAR TODOS LEIDOS");
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getMarcarAvisosLeidos.php",
+            data: { user: mi_user },
+            success: function(response)
+            {
+                location.reload();
+            }
+        });
+              
+    });
+
+    $('#avisos').on("click", ".mostrarNuevos", function(){ 
+
+        location.reload();
+              
+    });
+/***** FIN AVISOS *****/
+
+
 });
 

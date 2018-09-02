@@ -4,7 +4,7 @@ session_start();
 <!DOCTYPE html>
 <?php
 require('../languages.php');
-$lang = 'en';
+$lang = 'es';
 
 ?>
 <html lang="en">
@@ -24,7 +24,7 @@ $lang = 'en';
             <img class="img_login">
             <div class="col-md-6 contenedor-login">
                 <h1>SQLab</h1>
-                <p><?php echo trad('Siéntate y comienza a pensar',$lang) ?></p>
+                <p><?php echo trad('Siéntate y comienza a pensar',$lang)."." ?></p>
             </div>
             <div class="col-md-6 center">
                 <form method="post" action="../../handler/validate_login.php">

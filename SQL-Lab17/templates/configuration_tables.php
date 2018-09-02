@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
@@ -9,7 +6,7 @@ session_start();
     <h2><strong><?php echo trad('Tablas',$lang) ?></strong></h2>
     <div class="row mb-150">
         <div class="col-md-8">
-            <p><?php echo trad('Añade, edita y elimina las tablas que tengan los ejercicios.',$lang) ?></p>
+            <p><?php echo trad('Esta pagina muestra las tablas disponibles en la base de datos. Puedes consultar la información de cada una de ellas y si quieres realizar alguna modificación o crear una nueva puedes acceder a la página pulsando el botón "Crear tabla" de la parte superior derecha.',$lang) ?></p>
         </div>
         <div class="text-right pl-5">
             <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_tables.php" ><?php echo trad('Crear Tabla',$lang) ?></a>

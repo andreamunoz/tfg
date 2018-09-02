@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
@@ -9,7 +6,7 @@ session_start();
     <h2><strong><?php echo trad('Nueva Tabla',$lang) ?></strong></h2>
     <div class="row mb-5">
         <div class="col-md-12">
-            <p><?php echo trad('Introduzca el código para crear las tablas e introducir los datos. Sólo se permiten las sentencias CREATE TABLE, INSERT INTO, DROP TABLE y ALTER TABLE.',$lang) ?></p>
+            <p><?php echo trad('En esta página puedes ejecutar las sentencias para crear nuevas tablas (CREATE TABLE), modificar la estructura de la tabla si no ha sido ya utilizada (ALTER TABLE), borrar alguna tabla si tampoco ha sido usada todavía (DROP TABLE) y añadir nuevos datos a la tabla (INSERT INTO). Recuerda que solo puedes modificar las tablas que hayas creado tú.',$lang) ?></p>
         </div>
     </div>  
     <section id="tabs">

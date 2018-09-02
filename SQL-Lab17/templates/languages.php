@@ -9,8 +9,7 @@ function trad($str, $lang = null){
 				$str = $texts[$str];                               
 			}
 		}
-                
-                       
+                              
 	}
 	return $str;
 }

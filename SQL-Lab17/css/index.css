@@ -62,7 +62,7 @@ a {
 }
 
 .contenedor {
-    z-index: 1;
+    z-index: 0.9;
     position: absolute;
     top: 150px;
     right:50px;
@@ -534,4 +534,33 @@ span.red{
 
 .cursor {
     cursor: pointer;
+}
+
+/* Avisos */
+.marcarLeidos, .mostrarTodos, .marcarTodosLeidos, .mostrarNuevos{
+  padding-top: 15px;
+  text-align: center;
+}
+.marcarLeidos:hover, .mostrarTodos:hover, .marcarTodosLeidos:hover, .mostrarNuevos:hover{
+  color: #24609d ;
+  cursor:pointer;
+  padding-top: 15px;
+}
+/*Fin avisos*/
+
+.left_title{
+    margin-left: 40%;
+    width: 50%;
+    text-align: right;
+}
+
+.margin-ok{
+    margin-top: 5%;
+    margin-left: 40%;
+    text-align: justify;
+    width: 50%;
+}
+
+.margin-ok p{
+    font-size: 16px;
 }

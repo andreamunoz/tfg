@@ -3,11 +3,11 @@
 
 	$user = $_REQUEST["user"];
 
-	include_once "../../inc/usuario.php";
+	include_once "../../inc/user.php";
 	
-	$usu = new Usuario();
+	$usu = new User();
 	$resul = $usu->setAvisosLeidos($user);
-	var_dump($resul);
+	// var_dump($resul);
 	if($resul === true){
 		$_SESSION['message'] = "Los mensajes se han marcado como leídos";
 	}else{

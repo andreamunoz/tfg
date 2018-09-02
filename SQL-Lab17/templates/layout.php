@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <?php
+
 require('languages.php');
+session_start();
 
 $lang = null;
-$_SESSION['lang'] = $lang;
+// $_SESSION['lang'] = $lang;
 if (isset($_GET['lang'])) {
     $lang = $_GET['lang'];
     $_SESSION['lang'] = $lang;
@@ -19,7 +21,7 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 ?>
-<html lang="en">
+<html lang="es">
     <head>
         <meta content="text/php" charset="UTF-8">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B" crossorigin="anonymous">

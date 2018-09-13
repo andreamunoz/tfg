@@ -9,7 +9,7 @@
     include_once '../inc/tablas.php';
     $ejer = new Ejercicio();
     ?>
-    <label><a class="enlance" href="configuration.php" >Configuración </a> > <a class="enlance" href="configuration_profile.php" > Perfil</a> </label>
+    <label><a class="enlance" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlance" href="configuration_profile.php" > Perfil</a> </label>
     <h2><strong>Perfil</strong></h2>
     <div class="row mb-150">
         <div class="col-md-8">

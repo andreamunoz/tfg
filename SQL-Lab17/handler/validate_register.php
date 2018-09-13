@@ -6,16 +6,27 @@ $pass = $_POST["password"];
 $name = $_POST["nombre"];
 $apellidos = $_POST["apellidos"];
 $name_user = $_POST["nombre_usuario"];
+$autoriza = $_POST["checkAutoriza"];
 $rol = $_POST['profe_alumno'];
-
 $user = new User($email, $pass);
 $result = $user->existUserEmail($email);
 
 if ($result == 0) {
-    if($rol == "alumno")
-        $rol = 0;
-    else if($rol == "profesor")
+    if($rol == "alumno"){
         $rol = 1;
+        $modo = 2;
+        $user->setModo($modo);
+    }else if($rol == "profe"){
+        $rol = 0;
+        $modo = 1;
+        $user->setModo($modo);
+    }
+    if($autoriza == 1){
+        $autoriza = 1;
+    }
+    else {
+        $autoriza = 0;
+    }
     $user->createUser($name, $apellidos, $name_user, $rol, $email, $pass, $autoriza);
     $_SESSION['email'] = $user->getEmail();
     $_SESSION['password'] = $user->getPassword();
@@ -24,8 +35,8 @@ if ($result == 0) {
     $_SESSION['autoriza'] = $user->getAutoriza();
     $_SESSION['name'] = $user->getName();
     $_SESSION['apellidos'] = $user->getApellidos();
-    
-    if ($user->getRol() == true){
+    $_SESSION['modo'] = $user->getModo();
+    if ($user->getRol() == false){
         $_SESSION['msg_congratulations'] = 
            "<div class='modal fade show' id='modalwindow' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                 <div class='modal-dialog modal-dialog-centered' role='document'>

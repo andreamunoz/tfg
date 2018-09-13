@@ -9,6 +9,7 @@ class User {
     public $password;
     public $username;
     public $rol;
+    public $modo;
     public $autoriza;
     public $name;
     public $apellidos;
@@ -19,7 +20,7 @@ class User {
         $this->pass = $pass;
     }
 
-    public function __construct2($email, $pass, $name, $apellidos, $username, $rol, $autoriza) {
+    public function __construct2($email, $pass, $name, $apellidos, $username, $rol, $modo, $autoriza) {
 
         $this->email = $email;
         $this->pass = $pass;
@@ -27,6 +28,7 @@ class User {
         $this->apellidos = $apellidos;
         $this->username = $username;
         $this->rol = $rol;
+        $this->modo = $modo;
         $this->autoriza = $autoriza;
     }
 
@@ -138,6 +140,16 @@ class User {
     function setRol($rol) {
 
         $this->rol = $rol;
+    }
+    
+    function getModo() {
+
+        return $this->modo;
+    }
+    
+    function setModo($modo) {
+
+        $this->modo = $modo;
     }
 
     function getAutoriza() {

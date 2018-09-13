@@ -5,7 +5,7 @@ $(document).ready(function () {
 
     setTimeout(function () {
         $('#modalwindow').hide();
-    }, 10000);
+    }, 6000);
 
     setTimeout(function () {
         $('#modalsolucion').hide();
@@ -182,7 +182,6 @@ $(document).ready(function () {
               
     });
 /***** FIN AVISOS *****/
-
-
+    
 });
 

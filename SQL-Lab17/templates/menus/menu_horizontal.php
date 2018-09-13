@@ -20,7 +20,12 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
                     <a class="dropdown-item" href="profile.php"><i class="fas fa-user-edit pr-3"></i> <?php echo trad('Perfil',$lang) ?></a>
-                    <a class="dropdown-item" href="login/login.php"><i class="fas fa-power-off pr-3"></i> <?php echo trad('Salir',$lang) ?></a>
+                    <?php if ($_SESSION['modo'] == 1) { ?>
+                    <a class="dropdown-item " href="../templates/adm_profesor/getModo.php"><i class="fas fa-user-edit pr-3"></i> <?php echo trad('Ver Modo Alumno',$lang) ?></a>
+                    <?php } else if ($_SESSION['modo'] == 0){?>
+                    <a class="dropdown-item "href="../templates/adm_profesor/getModo.php" ><i class="fas fa-user-edit pr-3"></i> <?php echo trad('Volver a Modo Profesor',$lang) ?></a>
+                    <?php } ?>
+                    <a class="dropdown-item" href="login/login.php"><i class="fas fa-power-off pr-3"></i> <?php echo trad('Salir',$lang) ?></a>                   
                 </div>
             </li>
         </ul>

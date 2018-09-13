@@ -2,7 +2,7 @@
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a> > <a class="enlace" href="configuration_new_sheets.php" > <?php echo trad('Nueva Hoja',$lang) ?></a></label>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a> > <a class="enlace" href="configuration_new_sheets.php" > <?php echo trad('Nueva Hoja',$lang) ?></a></label>
     <h2><strong><?php echo trad('Nueva Hoja',$lang) ?></strong></h2>
     <div class="row mb-5">
         <div class="col-md-12">

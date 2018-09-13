@@ -19,9 +19,11 @@ if (!empty($result)) {
     $_SESSION['autoriza'] = $user->getAutoriza();
     $_SESSION['msg_congratulations']="";
     
-    if ($user->getRol() == true)
+    if ($user->getRol() == true){
+        $_SESSION['modo'] = 2;
         header("Location: ../templates/index.php");
-    else {
+    }else {
+        $_SESSION['modo'] = 1;
         header("Location: ../templates/index.php");
     }
 } else {

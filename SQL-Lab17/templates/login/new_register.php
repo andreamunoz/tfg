@@ -46,8 +46,8 @@ $lang = 'en';
                             <input type="text" id="nom_usuario" name="nombre_usuario" class="form-control form-control-sm" required />
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="profe_alumno" required><?php echo trad('Rol',$lang) ?></label> 
-                            <select type="text" id="profe_alumno" name="profe_alumno" class="form-control form-control-sm" > <!--onclick="cambiaRol()"-->
+                            <label for="prof_alumn" required><?php echo trad('Rol',$lang) ?></label> 
+                            <select type="text" id="profe_alumno" name="profe_alumno" class="form-control form-control-sm" onclick="cambiaRol()">
                                 <option value="alumno"><?php echo trad('Alumno',$lang) ?></option>
                                 <option value="profe"><?php echo trad('Profesor',$lang) ?></option>
                             </select> 
@@ -56,7 +56,7 @@ $lang = 'en';
                     <div class="form-row">
                         <div class="form-group offset-md-2 col-md-8">
                             <input type="checkbox" id="myCheck" name="checkAutoriza" style="display: none;" value="1">
-                            <span id="myCheckText" style="display: none"><?php echo trad('Permito a otros profesores usar las tablas creadas por mí',$lang) ?></span>
+                            <p id="myCheckText" class="pl-2" style="display: none"><?php echo trad('Permito a otros profesores usar las tablas creadas por mí',$lang) ?></p>
                         </div>
                     </div>
                     <div class="form-row">
@@ -73,8 +73,8 @@ $lang = 'en';
                         <div class="form-group offset-md-2 col-md-5">
                             <label><?php echo trad('Ya tengo una cuenta ir a',$lang) ?> <a class="enlace-login" href="login.php">Login</a></label>
                         </div>
-                        <div class="form-group offset-md-2 col-md-3">
-                            <button class="btn btn-primary" type="submit"><?php echo trad('Crear Cuenta',$lang) ?></button>
+                        <div class="form-group col-md-4">
+                            <button class="btn btn-primary ml-4 pl-5 pr-5" type="submit"><?php echo trad('Crear Cuenta',$lang) ?></button>
                         </div>
                     </div>
                     <?php
@@ -86,6 +86,19 @@ $lang = 'en';
                 </form>
             </div>
         </div>
+        <script>
+            function cambiaRol() {
+                var rol = document.getElementById("profe_alumno");
+                var myCheck = document.getElementById("myCheck");
+                if (rol.value == "profe"){
+                    myCheck.style.display = "inline-block";
+                    myCheckText.style.display = "inline-block";
+                } else {
+                   myCheck.style.display = "none";
+                   myCheckText.style.display = "none";
+                }
+            }
+        </script>   
     </body>
 </html>
 

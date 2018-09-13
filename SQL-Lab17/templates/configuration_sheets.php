@@ -2,7 +2,7 @@
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
     <h2><strong><?php echo trad('Hoja de Ejercicios',$lang) ?></strong></h2>
     <div class="row mb-150">
         <div class="col-md-8">
@@ -10,27 +10,6 @@
         </div>
         <div class="text-right pl-5">
             <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_sheets.php" ><?php echo trad('Crear Hoja',$lang) ?></a>
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
-                <?php echo trad('Ayuda',$lang) ?>
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog " role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="mt-4 pl-5"><?php echo trad('Ayuda',$lang) ?></h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"> <img class="img_icon_cerrar cerrar" src="../img/icon_cerrarPanel_blanco.svg"/></span>
-                            </button>
-                        </div>
-                        <div class="modal-body">                           
-                            <p class="pl-5">+ <strong><i><?php echo trad('Crear Hoja',$lang) ?>:</i></strong> <?php echo trad('Ponle el nombre a la hoja y seleccione los ejercicios que quiere añadir.',$lang) ?> </p>
-                            <p class="pl-5">+ <strong><i><?php echo trad('Editar',$lang) ?>:</i></strong> <?php echo trad('Cambie el nombre a la hoja o bien cambie los ejercicios seleccionados por otros.',$lang) ?></p>                           
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div id="accordion">

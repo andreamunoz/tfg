@@ -8,7 +8,7 @@
     $descripcion = $hoja->getHojaById($id_hoja);
     
     ?>
-    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a> > <a class="enlace" href="configuration_edit_sheets.php?hoja=<?php echo $id_hoja ?> " > <?php echo trad('Editar Hoja',$lang) ?></a></label>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a> > <a class="enlace" href="configuration_edit_sheets.php?hoja=<?php echo $id_hoja ?> " > <?php echo trad('Editar Hoja',$lang) ?></a></label>
     <h2><strong><?php echo trad('Editar Hoja',$lang) ?> | <?php echo $descripcion ?></strong> </h2>
     <div class="row mb-5">
         <div class="col-md-12">

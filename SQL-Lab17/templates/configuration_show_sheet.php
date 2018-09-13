@@ -8,7 +8,7 @@
      $hojaejer = new HojaEjercicio();
      $nombreHoja = $hojaejer->getHojaById($hojaparameter);
       ?>
-    <label><a class="enlance" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlance" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
+    <label><a class="enlance" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlance" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?></strong></h2>
     <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
     <div class="hrr mt-3 mb-5"></div>			

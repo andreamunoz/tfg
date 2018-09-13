@@ -7,7 +7,7 @@
     $nombre_tabla = $_GET['name'];
     $num_campos = $_GET['num'];
     ?>
-    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_tables.php" > <?php echo trad('Tablas',$lang) ?></a> > <a class="enlace" href="configuration_info_tables.php?name=<?php echo $nombre_tabla ?>&num=<?php echo $num_campos ?>" ><?php echo trad('Información Tablas',$lang) ?> </a></label>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_tables.php" > <?php echo trad('Tablas',$lang) ?></a> > <a class="enlace" href="configuration_info_tables.php?name=<?php echo $nombre_tabla ?>&num=<?php echo $num_campos ?>" ><?php echo trad('Información Tablas',$lang) ?> </a></label>
     <h2><strong><?php echo trad('Tablas',$lang) ?></strong></h2>
     <div class="row mb-150">
         <div class="col-md-9">

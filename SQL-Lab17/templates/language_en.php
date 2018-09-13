@@ -236,10 +236,12 @@ $texts = array(
     'Adjuntar' => 'Send',
     'Guardar' => 'Save',
     'Revise el código e inténtelo de nuevo.' => 'Check the code and try it again.',
-    '' => '',
-    '' => '',
-    '' => '',
-    '' => '',
+    
+    //Nuevas traducciones 
+    'Volver a Modo Profesor' => 'Back to Teacher Mode',
+    'Ver Modo Alumno' => 'See Student Mode',
+    'Comenzar Ahora' => 'Start now',
+    'Si' => 'Yes',
     '' => '',
     '' => '',
     '' => '',

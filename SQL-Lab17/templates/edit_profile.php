@@ -5,16 +5,14 @@
 <img class="img_perfil" src="../img/img_perfil.jpeg"> 
 <div class="container contenedor-perfil pt-4">
     <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="profile.php" > <?php echo trad('Perfil',$lang) ?></a> > <a class="enlance" href="edit_profile.php" > <?php echo trad('Editar Perfil',$lang) ?></a> </label>
-    <h2><?php echo trad('Editar Perfil',$lang) ?></h2>
-    <div class="row mb-150">
+    <h2><strong><?php echo trad('Editar Perfil',$lang) ?></strong></h2>
+    
+    <form method="post" action="../handler/validate_edit_profile.php" class="jumbotron-propio" >
+        <div class="row mb-150">
         <div class="col-md-8">
             <p><?php echo trad('Edita el perfil en los campos que se pueden rellenar y pincha en guardar pefil para que se guarden los resultados.',$lang) ?></p>
         </div>
-        <div class="col-md-4 p-0">
-            <button class="btn btn-primary pl-5 pr-5" name="editar" type="submit"><?php echo trad('Guardar Perfil',$lang) ?></button>
-        </div>
     </div>
-    <form method="post" action="../handler/validate_edit_profile.php" class="jumbotron-propio" >
         <div class="row mb-2">
             <div class="col-md-3 pl-4">
                 <label for="name" ><strong><?php echo trad('Nombre',$lang) ?> </strong></label>		
@@ -55,6 +53,7 @@
                 <p> **************** </p>
             </div>
         </div>
+         <?php if($_SESSION['rol'] == 0 && $_SESSION['modo'] == 1) { ?>
         <div class="row mb-2">
             <div class="col-md-3 pl-4">
                 <label for="name"><strong><?php echo trad('Autorizo',$lang) ?> </strong></label>		
@@ -63,15 +62,19 @@
                 <div class="form-check">
                     <input type="radio" class="form-check-input" id="materialChecked" name="check" value="1" <?php if($_SESSION['autoriza']==1){ 
                     ?> checked <?php } ?> >
-                    <label class="form-check-label" for="materialChecked">Si</label>
+                    <label class="form-check-label" for="materialChecked"><?php echo trad('Si',$lang) ?></label>
                 </div>
                 <div class="form-check">
                     <input type="radio" class="form-check-input" id="materialChecked" name="check" value="0" <?php if($_SESSION['autoriza']==0){
                         ?> checked <?php } ?> >
-                    <label class="form-check-label" for="materialChecked">No</label>
+                    <label class="form-check-label" for="materialChecked"><?php echo trad('No',$lang) ?></label>
                 </div>
             </div>
-        </div>  
+        </div> 
+        <?php } ?>
+        <div class="row mt-5 mb-2">
+            <button class="btn btn-primary pl-5 pr-5" name="editar" type="submit"><?php echo trad('Guardar Perfil',$lang) ?></button>
+        </div>
         <?php
             if(isset($_SESSION['msg_update_register'])){
                 echo $_SESSION['msg_update_register'];

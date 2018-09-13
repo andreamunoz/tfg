@@ -2,7 +2,7 @@
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlace" href="configuration.php" ><?php echo trad('Configuración',$lang) ?> </a> > <a class="enlace" href="configuration_tables.php" > <?php echo trad('Tablas',$lang) ?></a></label>
+    <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_tables.php" > <?php echo trad('Tablas',$lang) ?></a></label>
     <h2><strong><?php echo trad('Tablas',$lang) ?></strong></h2>
     <div class="row mb-150">
         <div class="col-md-8">
@@ -11,10 +11,8 @@
         <div class="text-right pl-5">
             <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_tables.php" ><?php echo trad('Crear Tabla',$lang) ?></a>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
-                <?php echo trad('Ayuda',$lang) ?>
+            <!--<button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
             </button>
-            <!-- Modal -->
             <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog " role="document">
                     <div class="modal-content">
@@ -32,7 +30,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
     <div id="accordion">

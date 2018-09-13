@@ -555,12 +555,29 @@ span.red{
 }
 
 .margin-ok{
-    margin-top: 5%;
+    margin-top: 3%;
     margin-left: 40%;
     text-align: justify;
     width: 50%;
 }
 
 .margin-ok p{
-    font-size: 16px;
+    font-size: 14px;
+}
+
+.btn-link{
+    width: 100%;
+    text-align: left;
+}
+
+.card-header {
+    background: white;
+}
+.collapse {
+    background: rgba(0,0,0,0.1);
+}
+.fa-plus{
+    text-align: right;
+    position: absolute;
+    top: 25px;
 }

@@ -31,7 +31,6 @@ class HojaEjercicio{
     	
         $connect = new Tools();
         $conexion = $connect->connectDB();
-
     	$sql = "SELECT * FROM sqlab_hoja_ejercicios;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
@@ -43,7 +42,6 @@ class HojaEjercicio{
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $sql = "SELECT * FROM sqlab_hoja_ejercicios ORDER BY creador_hoja ASC;";
-
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -69,7 +67,7 @@ class HojaEjercicio{
         return $res['nombre_hoja'];
     }
 
-	function getHojasByUser($user){
+    function getHojasByUser($user){
 
     	$sql = "SELECT * FROM sqlab_hoja_ejercicios WHERE user=$user;";
         $tool = new Tools();
@@ -211,4 +209,15 @@ class HojaEjercicio{
         $connect->disconnectDB($conexion);
         return $ok;
     }
+    
+    function getCreadorHojas(){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+    	$sql = "SELECT DISTINCT(creador_hoja) FROM sqlab_hoja_ejercicios;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+  
 }

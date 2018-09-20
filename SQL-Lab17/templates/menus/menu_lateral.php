@@ -78,21 +78,21 @@
             <div class="logo-interior">
                 <i class="fas fa-table"></i>
             </div>
-            <p class="text-menu"><?php echo trad('Gestión de Tablas',$lang) ?></p>
+            <p class="text-menu"><?php echo trad('Gestión de Datos',$lang) ?></p>
         </div></a>
     <hr class="hrr">
     <a class="menu-item" href="configuration_exercises.php"><div class="contenedor-item">  
         <div class="logo-interior">
             <i class="fas fa-file-code"></i>
         </div>
-        <p class="text-menu"><?php echo trad('Gestion de Ejercicios',$lang) ?></p>
+        <p class="text-menu"><?php echo trad('Gestión de Ejercicios',$lang) ?></p>
         </div></a>
     <hr class="hrr">
     <a class="menu-item" href="configuration_sheets.php"><div class="contenedor-item">  
         <div class="logo-interior">
             <i class="fas fa-copy"></i>
         </div>
-        <p class="text-menu"><?php echo trad('Gestion de Hojas',$lang) ?></p>
+        <p class="text-menu"><?php echo trad('Gestión de Hojas',$lang) ?></p>
         </div></a>
     <hr class="hrr">
     <a class="menu-item" href="configuration_stadistics_exercises.php"><div class="contenedor-item">  

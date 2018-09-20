@@ -50,15 +50,6 @@
                 <p> <?php echo $_SESSION['email']; ?> </p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-3 pl-4">
-                <label for="name"><strong> <?php echo trad('Contraseña',$lang) ?></strong></label>	
-
-            </div>
-            <div class="col-md-3 ">
-                <p> **************** </p>
-            </div>
-        </div>
         <?php if($_SESSION['rol'] == 0 && $_SESSION['modo'] == 1) { ?>
         <div class="row">
             <div class="col-md-3 pl-4">

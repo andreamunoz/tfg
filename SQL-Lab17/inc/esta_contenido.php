@@ -74,5 +74,27 @@ class EstaContenido{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+    
+    function getNumberEjerciciosResueltosBien($id_hoja, $user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT COUNT(DISTINCT(ec.id_ejercicio)) FROM sqlab_esta_contenido as ec, sqlab_solucion as sol "
+                . "WHERE ec.id_hoja = '$id_hoja' and ec.id_ejercicio = sol.id_ejercicio and veredicto='1' and user='$user'";
+        $consulta = mysqli_query($conexion,$sql);
+        $count = mysqli_fetch_assoc($consulta);
+        $connect->disconnectDB($conexion);
+        return $count;
+    }
+    
+    function getNumberEjerciciosIntentados($id_hoja, $user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT COUNT(DISTINCT(ec.id_ejercicio)) FROM sqlab_esta_contenido as ec, sqlab_solucion as sol "
+                . "WHERE ec.id_hoja = '$id_hoja' and ec.id_ejercicio = sol.id_ejercicio and user='$user'";
+        $consulta = mysqli_query($conexion,$sql);
+        $count = mysqli_fetch_assoc($consulta);
+        $connect->disconnectDB($conexion);
+        return $count;
+    }
 
 }

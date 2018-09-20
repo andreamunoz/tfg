@@ -349,6 +349,27 @@ table.dataTable thead .sorting_desc {
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     font-size: 12px;
 }
+.dataTables_wrapper .dataTables_length {
+    float: right !important;
+    margin-left: 15px !important;
+}
+.dataTables_filter label{
+    color: rgba(48,48,48,0.5);
+}
+table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTable thead .sorting_desc, table.dataTable thead .sorting_asc_disabled, table.dataTable thead .sorting_desc_disable {
+    background-position: center left !important;
+}
+table.dataTable tbody tr:hover {
+    cursor: pointer;
+    background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%) !important;
+}
+.no-buscar .dataTables_wrapper .dataTables_filter input {
+    display: none;
+}
+.no-buscar .dataTables_wrapper .dataTables_filter label {
+    display: none;
+}
+
 .container-tabla {
     width: 85%;
     margin-left: 150px;
@@ -530,6 +551,7 @@ span.red{
 .dataTables_length select{
     padding-left: 10px;
     padding-right: 10px;
+    font-size: 15px !important;
 }
 
 .cursor {
@@ -580,4 +602,12 @@ span.red{
     text-align: right;
     position: absolute;
     top: 25px;
+}
+
+#select_hoja {
+    width: 25%;
+    float: left;
+    position: relative;
+    font-size: 15px;
+    padding-left: 9px;
 }

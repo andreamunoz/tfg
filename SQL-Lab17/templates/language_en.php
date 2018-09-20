@@ -242,9 +242,9 @@ $texts = array(
     'Ver Modo Alumno' => 'See Student Mode',
     'Comenzar Ahora' => 'Start now',
     'Si' => 'Yes',
-    '' => '',
-    '' => '',
-    '' => '',
+    'Gestión de Datos' => 'Data Management',
+    'Gestión de Hojas' => 'Sheets Management',
+    'Gestión de Ejercicios' => 'Exercise Management',
     '' => '',
 );
 ?>

@@ -298,9 +298,9 @@ div.dataTables_wrapper div.dataTables_length label {
     width: 2000px;
 }
 
-.table-striped tbody tr:nth-of-type(2n+1) {
+/*.table-striped tbody tr:nth-of-type(2n+1) {
     background: white !important;
-}
+}*/
 .table-striped thead tr {
     background: black;
     opacity: 0.9;
@@ -362,6 +362,15 @@ table.dataTable thead .sorting, table.dataTable thead .sorting_asc, table.dataTa
 table.dataTable tbody tr:hover {
     cursor: pointer;
     background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%) !important;
+}
+.ejercicio_acierto {
+    background: linear-gradient(to bottom, #8ab66b 0%, #c9de96 100%) !important;
+}
+.ejercicio_fallo {
+    background: linear-gradient(to bottom, #e55b2b 0%, #f2825b 100%) !important;
+}
+.fondo_blanco{
+    background: linear-gradient(to bottom, #ffff 0%, #ffff 100%) !important;
 }
 .no-buscar .dataTables_wrapper .dataTables_filter input {
     display: none;

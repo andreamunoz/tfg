@@ -10,7 +10,7 @@
     $des = $ejer->getDescripcionEjercicio($id_ejer);
     ?>
     <label><a class="enlace" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlace" href="exercises.php" ><?php echo trad('Ejercicios',$lang) ?> </a> > <a class="enlace" href="perform_exercise.php?exercise=<?php echo $id_ejer ?>" > <?php echo trad('Realizar Ejercicio',$lang) ?></a></label>
-    <h2><strong><?php echo trad('Realizar Ejercicio',$lang) ?> | <?php echo $des ?></strong></h2>
+    <h2><strong><?php echo $des ?></strong></h2>
     <div class="row mb-5">
         <?php
         $tabla = new Tablas();
@@ -138,7 +138,7 @@
                     <?php echo '</form>'; ?>
                     </tbody>
                 </table>
-                <button type="submit" id="alert-sol" class="btn btn-primary mt-5 mb-5 pl-5 pr-5 float-right"><?php echo trad('Solucionar',$lang) ?></button>
+                <button type="submit" id="alert-sol" class="btn btn-primary mt-5 mb-5 pl-5 pr-5 float-right"><?php echo trad('Ejecutar',$lang) ?></button>
             </div>
         </div>
     </div>

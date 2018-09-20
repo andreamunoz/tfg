@@ -15,8 +15,7 @@
                             <th style="width:20%;"><?php echo trad('Nombre Profesor',$lang) ?></th>
                             <th style="width: 15%"><?php echo trad('N. Ejercicios',$lang) ?></th>
                             <th style="width: 20%"><?php echo trad('N. Ejercicios Resueltos Bien',$lang) ?></th>
-                            <th style="width: 20%"><?php echo trad('N. Ejercicios Intentados',$lang) ?></th>
-                           
+                            <th style="width: 20%"><?php echo trad('N. Ejercicios Intentados',$lang) ?></th>                          
                         </tr>
                     </thead>
                     <tbody >
@@ -35,7 +34,7 @@
                             while ($fila_hoja = mysqli_fetch_array($result)) {
                                 ?>
 
-                                <tr class="accordion-toggle" id="show-accordion" onclick="location='sheet_exercise.php?hoja=<?php echo $fila_hoja['id_hoja']; ?>'" >
+                                <tr class="accordion-toggle fondo_blanco" id="show-accordion" onclick="location='sheet_exercise.php?hoja=<?php echo $fila_hoja['id_hoja']; ?>'" >
                                     <?php echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $fila_hoja['nombre_hoja'] . '</td>'; ?>
 
                                     <?php echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $fila_hoja['creador_hoja'] . '</td>'; ?>

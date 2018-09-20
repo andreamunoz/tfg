@@ -219,5 +219,16 @@ class HojaEjercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+    
+    function getCreadorHojaById($id){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+    	$sql = "SELECT u.nombre, u.apellidos FROM sqlab_hoja_ejercicios as he, sqlab_usuario as u WHERE he.id_hoja=$id and u.user=he.creador_hoja;";
+        $consulta = mysqli_query($conexion,$sql);
+        $res = mysqli_fetch_assoc($consulta);
+        $connect->disconnectDB($conexion);
+        return $res;
+    }
   
 }

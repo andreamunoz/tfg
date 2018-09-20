@@ -7,16 +7,14 @@
     <p><?php echo trad('Texto a añadir aquí...',$lang) ?></p>
     <div id="accordion ">
         <div class="card pt-4">  
-            <div class="table-responsive">  
+            <div class="table-responsive no-buscar">  
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>
                         <tr>
-                            <th style="width:5%;"></th>
                             <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
                             <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
-                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>                      
-                            <th></th>
+                            <th style="width:15%;"><?php echo trad('N. Intentos',$lang) ?></th>                      
                         </tr>
                     </thead>
                     <tbody>
@@ -27,41 +25,28 @@
                         $sol = new Solucion();
                         $result = $ejer->getAllEjerciciosHabilitados();
                         while ($fila = mysqli_fetch_array($result)) {
-                            ?>
-
-                            <?php
                             $id = $fila['id_ejercicio'];
                             $user = $_SESSION['user'];
                             $solucion = $sol->getSolEjerciciosByName($id,$user);
-
+                            $numIntentos = $sol->getNumIntentosEjercicio($id,$user);
                             $fila_sol = mysqli_fetch_array($solucion);
                             
-                            if ($fila_sol['veredicto'] == '1') {
-                                ?>
-                            <tr>
-                                <td><i class="fas fa-check"></i></td>
-                                <?php } else if ($fila_sol['veredicto'] == '0') { ?>
-                                <td><i class="fas fa-times"></i></td>
-                                <?php } else { ?>
-
-                                <td><i class="fas fa-question"></i></td>  
-                                <?php } ?>  
+                            if ($fila_sol['veredicto'] == '1') { ?>
+                                <tr class="ejercicio_acierto" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
+                            <?php } else if ($fila_sol['veredicto'] == '0') { ?> 
+                                <tr class="ejercicio_fallo" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
+                            <?php } else { ?>
+                                <tr class="fondo_blanco" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
+                            <?php } ?>
                                 <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
-
-                                <?php echo '<td><a class="btn btn-primary pl-5 pr-5" href="perform_exercise.php?exercise=' . $fila['id_ejercicio'] . '">Realizar</a>';
-                                ?> 
-                                <?php if ($fila_sol['intentos'] > 0)
-                                        echo '<a class="btn btn-secundary pl-5 pr-5" href="shows_intent_exercise.php?exercise=' . $fila['id_ejercicio'] . '">Ver Intentos</a>';
-                                ?>
-                                <?php echo '</td>'; ?>
-                            </tr>
-    <?php
-}
-?>
-
+                                <?php if($numIntentos['intentos'] != '') { ?>
+                                    <?php echo '<td>' . $numIntentos['intentos'] . '</td>'; ?>     
+                                <?php } else { ?>
+                                    <?php echo '<td>0</td>'; }?>
+                                </tr>  
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>  

@@ -91,5 +91,15 @@ class Solucion{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+    
+    function getNumIntentosEjercicio($id,$user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT MAX(intentos) AS intentos FROM sqlab_solucion WHERE id_ejercicio=$id and user='$user';";
+        $consulta = mysqli_query($conexion,$sql);
+        $intentos = mysqli_fetch_array($consulta);
+        $connect->disconnectDB($conexion);
+        return $intentos;
+    }
 
 }

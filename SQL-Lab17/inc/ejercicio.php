@@ -491,5 +491,18 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
 
     }
+    
+    function getFieldsProfesor($id_ejer){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT solucion from sqlab_ejercicio where id_ejercicio='$id_ejer'";
+        $consulta = mysqli_query($conexion,$sql);
+        while($sql2 = $consulta->fetch_assoc()){
+            $res = $sql2['solucion'];
+        }
+        $consulta2 = mysqli_query($conexion,$res);
+        $connect->disconnectDB($conexion);
+        return $consulta2;
+    }
    
 }

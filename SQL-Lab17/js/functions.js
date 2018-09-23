@@ -183,6 +183,34 @@ $(document).ready(function () {
     });
     
 /***** FIN AVISOS *****/
+
+
+    $('.resaltado').click(function(){      
+        var tabla = $(this).attr("data-name");
+        console.log(tabla);
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getData.php",
+            data: { tabla: tabla },
+            success: function(response)
+            {
+                console.log(response);
+                $('#nav-table-datos tbody').html(response).fadeIn();
+            }
+        });
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getStructure.php",
+            data: { tabla: tabla },
+            success: function(response)
+            {
+                console.log(response);
+                $('#nav-table-structure tbody').html(response).fadeIn();
+            }
+        });
+            
+    });
     
+
 });
 

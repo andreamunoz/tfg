@@ -13,7 +13,6 @@
         $resultado = $resultado . '<tr>
                 <td>' . $fila["COLUMN_NAME"] . '</td>
                 <td>' . $fila["COLUMN_TYPE"] . '</td>
-                <td>' . $fila["IS_NULLABLE"] . '</td>
                 <td>' . $fila["COLUMN_KEY"] . '</td>
             </tr>';
     }

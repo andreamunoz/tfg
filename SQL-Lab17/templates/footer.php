@@ -23,6 +23,9 @@
     $(document).ready(function () {
         $('#employee_table').DataTable();
     });
+    $(document).ready(function () {
+        $('#employee_list').DataTable();
+    });
     </script>
 </html>
 

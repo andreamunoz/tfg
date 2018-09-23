@@ -15,7 +15,6 @@
         $respuesta = $respuesta . '</tr>';
     }
     $connect->disconnectDB($conexion);
-
     echo $respuesta;
 
 ?>

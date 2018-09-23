@@ -620,3 +620,37 @@ span.red{
     font-size: 15px;
     padding-left: 9px;
 }
+
+.resaltado:hover{
+    background-color: #E6E6E6 !important;
+    cursor: pointer;
+}
+
+.table-striped-config tbody tr:nth-of-type(2n+1) {
+    background: white;
+}
+.table-striped-config thead tr {
+    background: black;
+    color: white;
+    opacity: 0.9
+}
+.table-striped-config thead tr th {
+    width: 2000px;
+}
+
+#nav-table-structure #employee_data_length{
+    display: none;
+} 
+#nav-table-structure #employee_data_filter{
+    display: none;
+} 
+#nav-table-structure #employee_data_paginate{
+    display: none;
+} 
+
+.VBar{
+    width:3px;
+    height:200px;
+    margin-top: 70px;
+    background-color: black;
+}

@@ -10,71 +10,104 @@
         </div>
         <div class="text-right pl-5">
             <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_tables.php" ><?php echo trad('Crear Tabla',$lang) ?></a>
-            <!-- Button trigger modal -->
-            <!--<button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#exampleModalCenter">
-            </button>
-            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog " role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h2 class="mt-4 pl-5"><?php echo trad('Ayuda',$lang) ?></h2>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true"> <img class="img_icon_cerrar cerrar" src="../img/icon_cerrarPanel_blanco.svg"/></span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p class="pl-5">+ <strong><i><?php echo trad('Crear Tabla',$lang) ?>:</i></strong> <?php echo trad('Añade la consulta para Crear/Update/Drop a la tabla.',$lang) ?> </p>
-                            <p class="pl-5">+ <strong><i><?php echo trad('Ver detalles',$lang) ?>:</i></strong></p>
-                            <p class="pl-5"><strong><?php echo trad('Estructura',$lang) ?> </strong><?php echo trad('(Puede ver las columnas que tiene la tabla y el tipo al que corresponde dicho campo)',$lang) ?></p>
-                            <p class="pl-5"><strong><?php echo trad('Datos',$lang) ?> </strong><?php echo trad('(Puede ver el contenido que tienen los campos de esa tabla)',$lang) ?></p>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
         </div>
     </div>
     <div id="accordion">
-        <div class="card" >  
-            <div class="table-responsive">  
-                <table id="employee_data" class="table table-striped-conf table-bordered">  
-                    <thead>
-                        <tr>
-                            <th style="width:30%;"><?php echo trad('Nombre Tabla',$lang) ?></th>
-                            <th style="width:30%;"><?php echo trad('Creador Tabla',$lang) ?></th>
-                            <th style="width:40%;"><?php echo trad('Nº de columnas',$lang) ?></th>
-                            <th style="width:20%;"></th>
-                        </tr>
-                    </thead>
-                    <tbody >
-                        <?php
-                        include_once '../inc/functions.php';
-                        $connect = new Tools();
-                        $conexion = $connect->connectDB();
-                        $sql = "SELECT td.nombre, td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.autoriza = 1";
-                        $consulta = mysqli_query($conexion, $sql);
-                        while (($fila = mysqli_fetch_array($consulta))) {
+        <div class="card" > 
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="table-responsive" style="margin-top: 71px;">  
+                        <table id="employee_list" class="table table-striped-config table-bordered">  
+                            <thead>
+                                <tr>
+                                    <th style="width:30%;"><?php echo trad('Tablas',$lang) ?></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                include_once '../inc/functions.php';
+                                $connect = new Tools();
+                                $conexion = $connect->connectDB();
+                                $sql = "SELECT td.nombre, td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.user = '".$_SESSION['user']."' and u.autoriza = 1";
+                                $consulta = mysqli_query($conexion, $sql);
+                                while (($fila = mysqli_fetch_array($consulta))) {
 
-                            $sql2 = "SELECT COUNT(*) As NumeroCampos FROM Information_Schema.Columns WHERE Table_Name = '" . $fila["nombre"] . "' GROUP BY Table_Name;";
-                            $consulta2 = mysqli_query($conexion, $sql2);
-                            while (($fila2 = mysqli_fetch_array($consulta2))) {
-                                $campos = $fila2["NumeroCampos"];
-                            }
-                            $quitar = $fila["schema_prof"] . "_";
-                            $onlyName = explode($quitar, $fila["nombre"]);
-                            echo '<tr>
-                                    <td>' . $onlyName[1] . '</td>
-                                    <td>' . $fila["schema_prof"] . '</td>
-                                    <td>' . $campos . '</td>
-                                    <td>
-                                        <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_info_tables.php?name=' . $fila["nombre"] . '&num=' . $campos . '"> Ver Detalles </a>
-                                    </td>
-                                </tr>';
-                        }
-                        ?>
+                                    $sql2 = "SELECT COUNT(*) As NumeroCampos FROM Information_Schema.Columns WHERE Table_Name = '" . $fila["nombre"] . "' GROUP BY Table_Name;";
+                                    $consulta2 = mysqli_query($conexion, $sql2);
+                                    while (($fila2 = mysqli_fetch_array($consulta2))) {
+                                        $campos = $fila2["NumeroCampos"];
+                                    }
+                                    $quitar = $fila["schema_prof"] . "_";
+                                    $onlyName = explode($quitar, $fila["nombre"]);
+                                    echo '<tr> <td class="resaltado" data-name="'.$fila["nombre"].'"> ' . $onlyName[1] . '</td> </tr>';
+                                }
+                                ?>
 
-                    </tbody>
-                </table>
-            </div>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="VBar"></div>
+                <div class="col-md-8 resultados" id="tabs">
+                    <nav>
+                        <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                            <a class="nav-item nav-link active" id="nav-tablesE-tab" data-toggle="tab" href="#nav-table-structure" role="tab" aria-controls="nav-table-struct" aria-selected="true"><?php echo trad('Estructura',$lang) ?></a>
+                            <a class="nav-item nav-link" id="nav-tablesD-tab" data-toggle="tab" href="#nav-table-datos" role="tab" aria-controls="nav-table-dat" aria-selected="false"><?php echo trad('Datos',$lang) ?></a>
+                        </div>
+                    </nav>
+                    <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                        <div class="tab-pane fade show active mt-3 pl-4" id="nav-table-structure" role="tabpanel" aria-labelledby="nav-tablesE-tab">
+                            <div id="accordion ">
+                                <div class="card">  
+                                    <div class="table-responsive">  
+                                        <table id="employee_data" class="table table-striped table-bordered">  
+                                            <thead>
+                                                <tr>                                                      
+                                                    <th style="width:30%;"><?php echo trad('Nombre Columna',$lang) ?></th>
+                                                    <th style="width:30%;"><?php echo trad('Tipo Columna',$lang) ?></th>
+                                                    <th style="width:20%;"><?php echo trad('Clave',$lang) ?></th>                                                  
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade mt-3 pl-4" id="nav-table-datos" role="tabpanel" aria-labelledby="nav-tablesD-tab">
+                            <div id="accordion ">
+                                <div class="card">  
+                                    <div class="table-responsive">  
+                                        <table id="employee_table" class="table table-striped table-bordered">  
+                                            <thead>
+                                                <tr>                                                      
+                                                    <?php
+                                                    $array_columnas = array($campos);
+                                                    $columnas = explode("*", $_SESSION["columnas"]);
+                                                    $nada = array_shift($columnas);
+                                                    foreach ($columnas as $key => $value) {
+                                                        echo '<th>' . $value . '</th>';
+                                                        $array_columnas[$key] = $value;
+                                                    }
+                                                    ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                </div> 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div> 
+            
             <?php
                 if(isset($_SESSION['message_new_tables'])){
                     echo $_SESSION['message_new_tables'];

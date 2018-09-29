@@ -213,5 +213,34 @@ class User {
         $connect->disconnectDB($conexion);
         return $resultado;
     }
+    
+    function existEmail($email){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT email FROM sqlab_usuario WHERE email='$email'";
+        $consulta = mysqli_query($conexion, $sql);
+        $email = mysqli_fetch_array($consulta);
+        $connect->disconnectDB($conexion);
+        return $email['email'];
+    }
+    
+    function getNombreUsuario($email){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT nombre, apellidos FROM sqlab_usuario WHERE email='$email'";
+        $consulta = mysqli_query($conexion, $sql);
+        $name = mysqli_fetch_array($consulta);
+        $connect->disconnectDB($conexion);
+        return $name;
+    }
 
+    function getChangePassword($email, $pass){
+              
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "UPDATE sqlab_usuario SET sqlab_usuario.password = AES_ENCRYPT('$pass','SQLab') WHERE sqlab_usuario.email='$email'";
+        $consulta = mysqli_query($conexion, $sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;        
+    }
 }

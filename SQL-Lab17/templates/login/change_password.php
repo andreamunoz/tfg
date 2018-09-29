@@ -27,39 +27,37 @@ $lang = 'es';
                 <p><?php echo trad('Siéntate y comienza a pensar',$lang)."." ?></p>
             </div>
             <div class="col-md-6 center">
-                <form method="post" action="../../handler/validate_login.php">
+                <form method="post" action="../../handler/validate_change_password.php">
                     <div class="offset-md-3 col-md-7 ">
-                        <h3><strong><?php echo trad('Iniciar Sesión',$lang)?></strong></h3>
-                        <p><?php echo trad('Introduzca sus datos de correo electrónico y contraseña para acceder a la web de SQLab.',$lang)?></p>
+                        <h3><strong><?php echo trad('Cambiar Contraseña',$lang)?></strong></h3>
+                        <p><?php echo trad('Por favor, introduce el código que le hemos enviado al correo electrónico y la nueva contraseña',$lang)?></p>
                     </div>
-                    <div class="offset-md-3 col-md-7 pt-5">
+                    <div class="offset-md-3 col-md-7 pt-3">
                         <div class="form-group">
-                            <label for="inputEmail"><?php echo trad('Correo Electrónico',$lang)?></label>  
-                            <input type="email" name="email" id="inputEmail" class="form-control form-control-sm" placeholder='<?php echo trad('Correo Electrónico',$lang)?>' required/>
+                            <label for="inputCode"><?php echo trad('Código de seguridad',$lang)?></label>  
+                            <input type="code" name="code" id="input-recover-code" class="form-control form-control-sm" placeholder='<?php echo trad('Código de seguridad',$lang)?>' required/>
                         </div>
                         
                     </div>
                     <div class="offset-md-3 col-md-7">
                         <div class="form-group ">
-                            <label for="inputPassword"><?php echo trad('Contraseña',$lang)?></label>
-                            <input type="password" name="password" id="inputPassword" class="form-control form-control-sm" placeholder='<?php echo trad('Contraseña',$lang)?>' required />
+                            <label for="inputPassword"><?php echo trad('Nueva Contraseña',$lang)?></label>
+                            <input type="password" name="new_password" id="input-password" class="form-control form-control-sm" placeholder='<?php echo trad('Nueva Contraseña',$lang)?>' required />
                         </div>
                         
                     </div>
-                    <div class="offset-md-6 col-md-5 pl-1">
-                        <a class="enlace-login" href="recover_password.php"><?php echo trad('¿Has olvidado la contraseña?',$lang)?></a>
+                    <div class="offset-md-3 col-md-7">
+                        <div class="form-group ">
+                            <label for="inputPassword2"><?php echo trad('Repetir Contraseña',$lang)?></label>
+                            <input type="password" name="new_password2" id="input-password2" class="form-control form-control-sm" placeholder='<?php echo trad('Repetir Contraseña',$lang)?>' required />
+                        </div>
+                        
                     </div>
-                    <div class="offset-md-8 col-md-3 pl-3">
-                        <a class="enlace-login" href="new_register.php"><?php echo trad('¡Regístrate!',$lang)?></a>
-                    </div>
-                    <div class="offset-md-5 col-md-7 pl-5 mt-5">
-                        <button  type="submit" class="col-md-4 btn btn-primary"><?php echo trad('Entrar',$lang)?></button>
+                    <div class="offset-md-3 col-md-9 pl-5 mt-5">
+                        <button  type="submit" class="col-md-4 btn btn-primary"><?php echo trad('Cambiar Contraseña',$lang)?></button>
+                        <a class="offset-md-2" href="login.php"><?php echo trad('Ir a Login',$lang)?></a>
                     </div>
                     <?php
-                    if(isset($_SESSION['msg_login'])){
-                        echo $_SESSION['msg_login'];
-                        unset($_SESSION['msg_login']);
-                    }
                     if(isset($_SESSION['msg_change'])){
                         echo $_SESSION['msg_change'];
                         unset($_SESSION['msg_change']);

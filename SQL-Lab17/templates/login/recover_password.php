@@ -27,38 +27,27 @@ $lang = 'es';
                 <p><?php echo trad('Siéntate y comienza a pensar',$lang)."." ?></p>
             </div>
             <div class="col-md-6 center">
-                <form method="post" action="../../handler/validate_login.php">
+                <form method="post" action="../../handler/validate_recover.php">
                     <div class="offset-md-3 col-md-7 ">
-                        <h3><strong><?php echo trad('Iniciar Sesión',$lang)?></strong></h3>
-                        <p><?php echo trad('Introduzca sus datos de correo electrónico y contraseña para acceder a la web de SQLab.',$lang)?></p>
+                        <h3><strong><?php echo trad('Recuperar Contraseña',$lang)?></strong></h3>
+                        <p><?php echo trad('Por favor, introduce tus datos de acceso para recuperar la contraseña',$lang)?></p>
                     </div>
-                    <div class="offset-md-3 col-md-7 pt-5">
+                    <div class="offset-md-3 col-md-7 pt-3">
                         <div class="form-group">
                             <label for="inputEmail"><?php echo trad('Correo Electrónico',$lang)?></label>  
-                            <input type="email" name="email" id="inputEmail" class="form-control form-control-sm" placeholder='<?php echo trad('Correo Electrónico',$lang)?>' required/>
+                            <input type="email" name="recover-email" id="input-recover-email" class="form-control form-control-sm" placeholder='<?php echo trad('Correo Electrónico',$lang)?>' required/>
                         </div>
                         
                     </div>
-                    <div class="offset-md-3 col-md-7">
-                        <div class="form-group ">
-                            <label for="inputPassword"><?php echo trad('Contraseña',$lang)?></label>
-                            <input type="password" name="password" id="inputPassword" class="form-control form-control-sm" placeholder='<?php echo trad('Contraseña',$lang)?>' required />
-                        </div>
-                        
+                    <div class="offset-md-3 col-md-9 pl-5 mt-5">
+                        <button  type="submit" class="col-md-4 btn btn-primary"><?php echo trad('Enviar correo',$lang)?></button>
+                        <a class="offset-md-2" href="login.php"><?php echo trad('Ir a Login',$lang)?></a>
                     </div>
-                    <div class="offset-md-6 col-md-5 pl-1">
-                        <a class="enlace-login" href="recover_password.php"><?php echo trad('¿Has olvidado la contraseña?',$lang)?></a>
-                    </div>
-                    <div class="offset-md-8 col-md-3 pl-3">
-                        <a class="enlace-login" href="new_register.php"><?php echo trad('¡Regístrate!',$lang)?></a>
-                    </div>
-                    <div class="offset-md-5 col-md-7 pl-5 mt-5">
-                        <button  type="submit" class="col-md-4 btn btn-primary"><?php echo trad('Entrar',$lang)?></button>
-                    </div>
+                  
                     <?php
-                    if(isset($_SESSION['msg_login'])){
-                        echo $_SESSION['msg_login'];
-                        unset($_SESSION['msg_login']);
+                    if(isset($_SESSION['msg_recover'])){
+                        echo $_SESSION['msg_recover'];
+                        unset($_SESSION['msg_recover']);
                     }
                     if(isset($_SESSION['msg_change'])){
                         echo $_SESSION['msg_change'];

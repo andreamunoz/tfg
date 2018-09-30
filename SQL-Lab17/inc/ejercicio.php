@@ -504,5 +504,22 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta2;
     }
+    
+    function getFieldsAlumno($user, $id_ejer){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT sol.solucion_propuesta from sqlab_solucion as sol where sol.id_ejercicio='$id_ejer' and sol.user='$user'";
+        $consulta = mysqli_query($conexion,$sql);
+        $res='';
+        while($sql2 = $consulta->fetch_assoc()){
+            $res = $sql2['solucion_propuesta'];
+        }
+        if($res!='')
+            $consulta2 = mysqli_query($conexion,$res);
+        else
+            $consulta2 = '';
+        $connect->disconnectDB($conexion);
+        return $consulta2;
+    }
    
 }

@@ -46,7 +46,7 @@ $lang = 'es';
                         </div>
                         
                     </div>
-                    <div class="offset-md-6 col-md-5 pl-1">
+                    <div class="offset-md-6 col-md-5 pl-4">
                         <a class="enlace-login" href="recover_password.php"><?php echo trad('¿Has olvidado la contraseña?',$lang)?></a>
                     </div>
                     <div class="offset-md-8 col-md-3 pl-3">

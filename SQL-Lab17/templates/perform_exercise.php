@@ -5,6 +5,7 @@
     <?php
     include_once '../inc/ejercicio.php';
     include_once '../inc/tablas.php';
+    include_once '../inc/usa.php';
     $ejer = new Ejercicio();
     $id_ejer = $_GET['exercise'];
     $des = $ejer->getDescripcionEjercicio($id_ejer);
@@ -61,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 pl-0 pr-3" id="accordion ">
+                            <div class="col-md-6 pl-0 pr-3 float-left" id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">                
                                         <table id="employee" class="table table-striped table-bordered"> 
@@ -77,8 +78,75 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6 pl-0 pr-3 float-left" id="accordion ">
+                                <div class="card">  
+                                    <div class="table-responsive">                
+                                        <table id="employee" class="table table-striped table-bordered"> 
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center"><?php echo trad('Tablas', $lang) ?></th>                         
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php 
+                                                    $usa = new Usa(); 
+                                                    $nombre_tablas = $usa->getNombreById($id_ejer);
+                                                    while($nameTable = mysqli_fetch_array($nombre_tablas)){
+                                                ?>
+                                                <tr>
+                                                    <td style="text-align: center"> <?php echo $nameTable['nombre']; ?> </td>
+                                                </tr>    
+                                                <?php } ?>    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade mt-3 pl-4" id="nav-exercisesE" role="tabpanel" aria-labelledby="nav-exercisesE-tab">
+                            <div class="float-right col-md-6 pl-0 pr-3" id="accordion ">
+                                <div class="card">  
+                                    <div class="table-responsive">
+                                        <p><?php echo trad('Solución Alumno', $lang) ?></p>
+                                        <table id="employee" class="table table-striped table-bordered"> 
+                                            <?php 
+                                                include_once '../inc/ejercicio.php';
+                                                $ejer = new Ejercicio();
+                                                include_once '../inc/solucion.php';
+                                                $sol = new Solucion(); 
+                                                $fieldsAlum = $ejer->getFieldsAlumno($_SESSION['user'],$id_ejer);
+                                                
+                                                $resAlu = $fieldsAlum;
+                                            ?>
+                                            <thead>                                             
+                                                <tr>
+                                                    <?php if($fieldsAlum != '') { $cont=0;?>
+                                                    <?php while($fields = mysqli_fetch_field($fieldsAlum)){ ?>
+                                                        <th style="width:20%; text-align: center"><?php echo $fields->name ?></th>                         
+                                                    <?php $arrayFileds[$cont] = $fields->name; $cont++; } $contA = $cont;}else {?>
+                                                        <th style="width:20%; text-align: center">No hay datos disponibles</th> 
+                                                        
+                                                    <?php } ?>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php if($resAlu != '') { $cont=0;?>
+                                                <?php while($f = mysqli_fetch_array($resAlu)){ ?>
+                                                <tr>   
+                                                    <?php while($contA > $cont){ ?>
+                                                    <td style="text-align: center"><?php echo $f[$arrayFileds[$cont]]; ?></td>
+                                                    <?php $cont++; } ?>
+                                                </tr>                                               
+                                                <?php $cont=0;} }else { ?>
+                                                <tr>
+                                                    <td style="text-align: center"><?php echo "La consulta no ha obtenido resultados" ?></td>
+                                                </tr> 
+                                                <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col-md-6 pl-0 pr-3" id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">
@@ -96,10 +164,10 @@
                                                 <tr>
                                                     <?php if($fieldsProf != '') { $cont=0;?>
                                                     <?php while($fields = mysqli_fetch_field($fieldsProf)){ ?>
-                                                        <th style="width:20%; text-align: center"><?php echo $fields->name ?></th>                         
-                                                    <?php $arrayFileds[$cont] = $fields->name; $cont++; } }else {?>
-                                                        <th style="width:20%; text-align: center">No tiene datos</th> 
-                                                    <?php } $contF = $cont;?>
+                                                        <th style="text-align: center"><?php echo $fields->name ?></th>                         
+                                                    <?php $arrayFileds[$cont] = $fields->name; $cont++; } $contF = $cont;}else {?>
+                                                        <th style="text-align: center"><?php echo trad('No hay datos disponibles', $lang) ?></th> 
+                                                    <?php } ?>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -107,44 +175,7 @@
                                                 <?php while($f = mysqli_fetch_array($resPro)){ ?>
                                                 <tr>   
                                                     <?php while($contF > $cont){ ?>
-                                                    <td><?php echo $f[$arrayFileds[$cont]]; ?></td>
-                                                    <?php $cont++; } ?>
-                                                </tr>                                               
-                                                <?php $cont=0;} }?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 pl-0 pr-3" id="accordion ">
-                                <div class="card">  
-                                    <div class="table-responsive">
-                                        <p><?php echo trad('Solución Alumno', $lang) ?></p>
-                                        <table id="employee" class="table table-striped table-bordered"> 
-                                            <?php 
-                                                include_once '../inc/ejercicio.php';
-                                                $ejer = new Ejercicio();
-                                                include_once '../inc/solucion.php';
-                                                $sol = new Solucion(); 
-                                                $fieldsAlum = $ejer->getFieldsProfesor($id_ejer);
-                                                $resPro = $fieldsAlum;
-                                            ?>
-                                            <thead>                                             
-                                                <tr>
-                                                    <?php if($fieldsAlum != '') { $cont=0;?>
-                                                    <?php while($fields = mysqli_fetch_field($fieldsAlum)){ ?>
-                                                        <th style="width:20%; text-align: center"><?php echo $fields->name ?></th>                         
-                                                    <?php $arrayFileds[$cont] = $fields->name; $cont++; } }else {?>
-                                                        <th style="width:20%; text-align: center">No tiene datos</th> 
-                                                    <?php } $contA = $cont;?>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php if($resPro != '') { $cont=0;?>
-                                                <?php while($f = mysqli_fetch_array($resPro)){ ?>
-                                                <tr>   
-                                                    <?php while($contA > $cont){ ?>
-                                                    <td><?php echo $f[$arrayFileds[$cont]]; ?></td>
+                                                    <td style="text-align: center"><?php echo $f[$arrayFileds[$cont]]; ?></td>
                                                     <?php $cont++; } ?>
                                                 </tr>                                               
                                                 <?php $cont=0;} }?>

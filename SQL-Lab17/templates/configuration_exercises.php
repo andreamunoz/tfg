@@ -45,7 +45,7 @@
                             <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
                             <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
-                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>                         
+                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -65,19 +65,19 @@
                             //$fila_sol = mysqli_fetch_array($solucion);
                             if($fila['deshabilitar']==0){
                             ?>
-                                <tr>                                    
+                                <tr class="fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php if($_SESSION['user']== $fila['creador_ejercicio']){ ?>
-                                    <?php echo '<td>'
-                                            . '<a type="button" class="btn btn-primary btn-edit mr-4" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Editar</a>'
-                                            . '<a type="button" class="btn btn-secundary pl-5 pr-5" href="../handler/validate_deshabilitar.php?deshabilitar=' . $fila['id_ejercicio'] . '">Deshabilitar</a>'
+                                    <?php echo '<td style="text-align:right;">'
+                                            . '<a type="button" class="mr-4" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '"><i class="fas fa-edit" style="color:black; opacity:0.9;"></i></a>'
+                                            . '<a type="button" class="pr-5" href="../handler/validate_deshabilitar.php?deshabilitar=' . $fila['id_ejercicio'] . '"><i class="fas fa-unlock" style="color:black; opacity:0.9;"></i></a>'
                                             . '</td>';
                                     } else {
                                         echo '<td>'
-                                            . '<a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_show_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Mostrar</a>'
+                                            . '<a type="button" class="mr-4" href="configuration_show_exercises.php?exercise=' . $fila['id_ejercicio'] . '"></a>'
                                             . '</td>';
                                     }
                                     ?>
@@ -85,19 +85,19 @@
                             <?php
                             }else {
                                 ?>
-                                <tr class="habilitar">                                    
+                                <tr class="habilitar fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php if($_SESSION['user']== $fila['creador_ejercicio']){ ?>
-                                    <?php echo '<td>'
-                                            . '<a type="button" class="btn btn-primary btn-edit mr-4" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Editar</a>'
-                                            . '<a method="post" type="button" class="btn btn-secundary btn-habilitar" href="../handler/validate_habilitar.php?habilitar=' . $fila['id_ejercicio'] . '">Habilitar</a>'
+                                    <?php echo '<td style="text-align:right;">'
+                                            . '<a type="button" class="mr-4" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '"><i class="fas fa-edit" ></i></a>'
+                                            . '<a method="post" type="button" class="pr-5" href="../handler/validate_habilitar.php?habilitar=' . $fila['id_ejercicio'] . '"><i class="fas fa-lock"></i></a>'
                                             . '</td>';
                                     } else {
                                         echo '<td>'
-                                            . '<a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_show_exercises.php?exercise=' . $fila['id_ejercicio'] . '">Mostrar</a>'
+                                            . '<a type="button" class="mr-4" href="configuration_show_exercises.php?exercise=' . $fila['id_ejercicio'] . '"></a>'
                                             . '</td>';
                                     }
                                     ?>

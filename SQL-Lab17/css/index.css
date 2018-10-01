@@ -703,6 +703,15 @@ table#structure_table th {
     border-bottom: 1px solid #9b9a9a !important;
 }
 
+.highlight_e i:hover{
+    color: #383 !important;
+    font-size: 15px !important;
+}
+
+.highlight_d i:hover{
+    color: #36c !important;
+    font-size: 15px !important;
+}
 
 
 

@@ -122,7 +122,7 @@
 
                     <thead>
                         <tr>
-                            <th style="width:20%; text-align: center;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:20%; text-align: center;"><?php echo trad('Descripción',$lang) ?></th>
                             <th style="width:10%; text-align: center;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%; text-align: center;"><?php echo trad('Tipo',$lang) ?></th>
                             <th style="width:15%; text-align: center;"><?php echo trad('Profesor',$lang) ?></th>

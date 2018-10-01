@@ -17,7 +17,7 @@ if (isset($_GET['lang'])) {
     }
 }
 if (!isset($_SESSION['user'])) {
-    header("Location: index.php");
+    header("Location: login/login.php");
     exit;
 }
 ?>

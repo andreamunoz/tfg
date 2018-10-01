@@ -120,7 +120,7 @@ $texts = array(
     'Creador Tablas' => 'Creator Tables',
     'Nº de columnas' => 'Nº of columns',
     //Crear tabla
-    'Nueva Tabla' => 'New Table',
+    'Ejecutar Script' => 'Execute Script',
     'CREATE TABLE coches...' => 'CREATE TABLE cars...',
     'Introduzca el código para crear las tablas e introducir los datos. Sólo se permiten las sentencias CREATE TABLE, INSERT INTO, DROP TABLE y ALTER TABLE.' => 'Enter the code to create the tables and enter the data. Only the CREATE TABLE, INSERT INTO, DROP TABLE, and ALTER TABLE statements are allowed.',
     'Ejecutar' => 'Execute',

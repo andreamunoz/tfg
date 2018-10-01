@@ -648,7 +648,62 @@ span.red{
     display: none;
 } 
 
-.VBar{
+table#structure_table {
+    width:100%;
+    margin:0 auto;
+    clear:both;
+    border-collapse:separate;
+    border-spacing:0;
+    cursor: default;
+}
+table#structure_table thead tr{
+    background: black;
+    opacity: 0.9;
+    color: white;
+    font-size: 10px; 
+}
+table#structure_table thead th, 
+table#structure_table thead td{
+    font-weight:bold;
+    padding:10px 18px;
+    border-bottom:1px solid #111;
+    font-size: 12px;
+} 
+/*table#structure_table tbody tr{
+    background-color:#ffffff
+}*/
+table#structure_table tbody tr{
+    font-size: 13px;
+}
+table#structure_table tbody th,
+table#structure_table tbody td{
+    padding:8px 18px
+} 
+table#structure_table tbody tr{
+    background-color:#ffffff;
+    border-bottom: 1px solid #9b9a9a !important;
+}
+table#structure_table tbody tr.selected{
+    background-color:#B0BED9
+} 
+
+table#structure_table tbody tr:hover,
+table#structure_table tbody tr:hover{
+    background-color:#f6f6f6
+}
+table#structure_table tbody tr:hover.selected,
+table#structure_table tbody tr:hover.selected{
+    background-color:#aab7d1
+}
+table#structure_table td,
+table#structure_table th {
+    border-bottom: 1px solid #9b9a9a !important;
+}
+
+
+
+
+.VerticalBar{
     width:3px;
     height:200px;
     margin-top: 70px;

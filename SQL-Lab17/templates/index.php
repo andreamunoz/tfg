@@ -15,32 +15,32 @@
         <?php if($_SESSION['modo'] == 1) {?>
             <a type="button" class="btn btn-primary mt-2 pl-5 pr-5" href="configuration.php"><?php echo trad('Comenzar Ahora',$lang) ?></a>
         <?php } ?>
-    </div>	
-    
-    <?php
-    if ($_SESSION['rol'] == 0) {
-        include_once '../inc/user.php';
-        $user = $_SESSION['user'];
-        $us = new User();
-        $mensajes = $us->getAvisosNoLeidos($user);
-        if (count($mensajes) != 0) {
-            ?>
-            <div class="pt-5" id="avisos">
-                <h5>AVISOS</h5>
-
-                <?php for ($i = 0; $i < count($mensajes); $i++) { ?>
-                    <div class="aviso"><?php echo $mensajes[$i]; ?></div>
-        <?php } ?>
-
-                <div class="row">
-                    <div class="col-md-6 marcarLeidos" data-name="<?php echo $_SESSION['user']; ?>">Marcar estos avisos como leídos</div>
-                    <div class="col-md-6 mostrarTodos" data-name="<?php echo $_SESSION['user']; ?>">Mostrar todos los avisos</div>
-                </div>
-            </div>
+    	
         <?php
+        if ($_SESSION['rol'] == 0 and $_SESSION['modo'] == 1) {
+            include_once '../inc/user.php';
+            $user = $_SESSION['user'];
+            $us = new User();
+            $mensajes = $us->getAvisosNoLeidos($user);
+            if (count($mensajes) != 0) {
+                ?>
+                <div class="pt-5" id="avisos">
+                    <h5>AVISOS</h5>
+
+                    <?php for ($i = 0; $i < count($mensajes); $i++) { ?>
+                        <div class="aviso"><?php echo $mensajes[$i]; ?></div>
+                    <?php } ?>
+
+                    <div class="row">
+                        <div class="col-md-6 marcarLeidos" data-name="<?php echo $_SESSION['user']; ?>">Marcar estos avisos como leídos</div>
+                        <div class="col-md-6 mostrarTodos" data-name="<?php echo $_SESSION['user']; ?>">Mostrar todos los avisos</div>
+                    </div>
+                </div>
+            <?php
+            }
         }
-    }
-    ?>
+        ?>
+    </div>
 </div>
 
 <?php

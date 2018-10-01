@@ -36,7 +36,7 @@
                             while ($fila_hoja = mysqli_fetch_array($result)) {
                                 ?>
 
-                                <tr class="accordion-toggle" id="show-accordion" >
+                                <tr class="accordion-toggle" id="show-accordion" onclick="location='configuration_show_sheet.php?hoja=<?php echo $fila_hoja['id_hoja']; ?>'">
                                     <?php echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $fila_hoja['nombre_hoja'] . '</td>'; ?>
 
                                     <?php echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $fila_hoja['creador_hoja'] . '</td>'; ?>
@@ -47,9 +47,9 @@
                                     echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $row_number["COUNT(id_ejercicio)"] . '</td>';
                                     ?>
                                     <?php if($_SESSION['user'] == $fila_hoja['creador_hoja']){ ?>
-                                    <?php echo '<td >'
-                                            . ' <a type="button" class="btn btn-primary btn-edit mr-4" href="configuration_edit_sheets.php?hoja=' . $fila_hoja['id_hoja'] . '">Editar</a>'
-                                            . ' <button type="button" class="btn btn-secundary pl-5 pr-5" data-toggle="modal" data-target="#modalEliminarHoja'.$cont.'"> Eliminar              
+                                    <?php echo '<td style="text-align:right;">'
+                                            . ' <a type="button" class="mr-4" href="configuration_edit_sheets.php?hoja=' . $fila_hoja['id_hoja'] . '"><i class="fas fa-edit" style="color:black; opacity:0.9;"></i></a>'
+                                            . ' <button type="" class="btn-sin-fondo pr-5" data-toggle="modal" data-target="#modalEliminarHoja'.$cont.'"> <i class="fas fa-trash" style="color:black; opacity:0.9;"> </i>             
                                                 </button>
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="modalEliminarHoja'.$cont.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -72,7 +72,7 @@
                                             . '</td>'; 
                                     } else {?>
                                     <?php echo '<td>'
-                                            . '<a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_show_sheet.php?hoja=' . $fila_hoja['id_hoja'] . '">Mostrar</a>'                                           
+                                            . '<a type="button" class="" href="configuration_show_sheet.php?hoja=' . $fila_hoja['id_hoja'] . '"></a>'                                           
                                             . '</td>';
                                     }?>
                                 </tr>

@@ -29,59 +29,71 @@
                         <?php
                         include_once '../inc/ejercicio.php';
                         $ejer = new Ejercicio();
+                        $result = $ejer->getAllEjercicios();
                         include_once '../inc/solucion.php';
                         $sol = new Solucion();
-                        $result = $ejer->getAllEjercicios();
                         while ($fila = mysqli_fetch_array($result)) {
-                            ?>
+                            $resul_sol = $sol->getCuantosEjerciciosByName($fila['id_ejercicio']);
+                            $fila_sol = $resul_sol->fetch_array(MYSQLI_ASSOC);
 
-                            <?php
+
+
                             $id = $fila['id_ejercicio'];
                             //$solucion = $sol->getAllEjerciciosByName($id);
                             //$fila_sol = mysqli_fetch_array($solucion);
-                            if($fila['deshabilitar']==0){
-                            ?>
+                            if($fila['deshabilitar']==0){ ?>
                                 <tr class="fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
-                                    <?php if($_SESSION['user']== $fila['creador_ejercicio']){ ?>
-                                    <?php echo '<td style="text-align:right;">'
-                                            . '<a type="button" class="mr-4 highlight_e" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '"><i class="fas fa-edit" style="color:black; opacity:0.9;"></i></a>'
-                                            . '<a type="button" class="pr-5 highlight_d" href="../handler/validate_deshabilitar.php?deshabilitar=' . $fila['id_ejercicio'] . '"><i class="fas fa-unlock" style="color:black; opacity:0.9;"></i></a>'
-                                            . '</td>';
-                                    } else {
-                                        echo '<td>'
-                                            . '<a type="button" class="mr-4" href="configuration_show_exercises.php?exercise=' . $fila['id_ejercicio'] . '"></a>'
-                                            . '</td>';
-                                    }
-                                    ?>
+                                    <?php if($_SESSION['user'] === $fila['creador_ejercicio']){ 
+                                           if ($fila_sol["cantidad"] === "0"){?>
+                                            
+                                            <td style="text-align:right;">
+                                                <a type="button" class="mr-4 highlight_e" href="configuration_edit_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>">
+                                                    <i class="fas fa-edit" style="color:black; opacity:0.9;"></i>
+                                                </a>
+
+                                            <?php } ?>
+                                                <a type="button" class="pr-5 highlight_d" href="../handler/validate_deshabilitar.php?deshabilitar=<?php echo $fila['id_ejercicio'] ?>">
+                                                    <i class="fas fa-unlock" style="color:black; opacity:0.9;"></i>
+                                                </a>
+                                                
+                                            </td>
+                                        <?php } else { ?>
+                                        <td>
+                                            <a type="button" class="mr-4" href="configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>"></a>
+                                        </td>
+                                    <?php } ?>
                                 </tr>
                             <?php
-                            }else {
-                                ?>
+                            } else { ?>
                                 <tr class="habilitar fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
-                                    <?php if($_SESSION['user']== $fila['creador_ejercicio']){ ?>
-                                    <?php echo '<td style="text-align:right;">'
-                                            . '<div class="mr-2 mt-2 ml-2 mb-2 highlight"><a type="button" href="configuration_edit_exercises.php?exercise=' . $fila['id_ejercicio'] . '"><i class="fas fa-edit" ></i></a></div>'
-                                            . '<a method="post" type="button" class="pr-5" href="../handler/validate_habilitar.php?habilitar=' . $fila['id_ejercicio'] . '"><i class="fas fa-lock"></i></a>'
-                                            . '</td>';
-                                    } else {
-                                        echo '<td>'
-                                            . '<a type="button" class="mr-4" href="configuration_show_exercises.php?exercise=' . $fila['id_ejercicio'] . '"></a>'
-                                            . '</td>';
-                                    }
-                                    ?>
+                                    <?php if($_SESSION['user']== $fila['creador_ejercicio']){ 
+                                             if ($fila_sol["cantidad"] === "0"){?>
+                                                <td style="text-align:right;">
+                                                    <a type="button" class="mr-4 highlight_e" href="configuration_edit_exercises.php?exercise=<?php $fila['id_ejercicio'] ?>">
+                                                        <i class="fas fa-edit" ></i>
+                                                    </a>
+                                            <?php } ?>
+                                                    <a method="post" type="button" class="pr-5 highlight_d" href="../handler/validate_habilitar.php?habilitar=<?php echo $fila['id_ejercicio'] ?>">
+                                                        <i class="fas fa-lock"></i>
+                                                    </a>
+                                            </td>
+                                    <?php } else { ?>
+                                        <td>
+                                            <a type="button" class="mr-4" href="configuration_show_exercises.php?exercise= <?php echo $fila['id_ejercicio'] ?>"></a>
+                                        </td>
+                                    <?php } ?>
                                 </tr>
                                 <?php
                             }
-                        }
-                        ?>
+                        } ?>
 
                     </tbody>
                 </table>

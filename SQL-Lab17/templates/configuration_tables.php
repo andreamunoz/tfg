@@ -5,11 +5,10 @@
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_tables.php" > <?php echo trad('Tablas',$lang) ?></a></label>
     <h2><strong><?php echo trad('Tablas',$lang) ?></strong></h2>
     <div class="row mb-150">
-        <div class="col-md-8">
-            <p><?php echo trad('Esta pagina muestra las tablas disponibles en la base de datos. Puedes consultar la información de cada una de ellas y si quieres realizar alguna modificación o crear una nueva puedes acceder a la página pulsando el botón "Crear tabla" de la parte superior derecha.',$lang) ?></p>
-        </div>
-        <div class="text-right pl-5">
-            <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_tables.php" ><?php echo trad('Crear Tabla',$lang) ?></a>
+        <div class="offset-md-10 col-md-2">
+            <div class="text-right">
+                <a type="button" class="btn btn-primary pl-3 pr-3" href="configuration_new_tables.php" ><?php echo trad('Ejecutar Script',$lang) ?></a>
+            </div>
         </div>
     </div>
     <div id="accordion">
@@ -49,7 +48,7 @@
 
                 </div>
                 <div class="VBar"></div>
-                <div class="col-md-8 resultados" id="tabs">
+                <div class="col-md-9 resultados" id="tabs">
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-tablesE-tab" data-toggle="tab" href="#nav-table-structure" role="tab" aria-controls="nav-table-struct" aria-selected="true"><?php echo trad('Estructura',$lang) ?></a>
@@ -61,7 +60,7 @@
                             <div id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">  
-                                        <table id="employee_data" class="table table-striped table-bordered">  
+                                        <table id="structure_table"> <!-- class="table table-striped table-bordered">   -->
                                             <thead>
                                                 <tr>                                                      
                                                     <th style="width:30%;"><?php echo trad('Nombre Columna',$lang) ?></th>
@@ -82,19 +81,6 @@
                                 <div class="card">  
                                     <div class="table-responsive">  
                                         <table id="employee_table" class="table table-striped table-bordered">  
-                                            <thead>
-                                                <tr>                                                      
-                                                    <?php
-                                                    $array_columnas = array($campos);
-                                                    $columnas = explode("*", $_SESSION["columnas"]);
-                                                    $nada = array_shift($columnas);
-                                                    foreach ($columnas as $key => $value) {
-                                                        echo '<th>' . $value . '</th>';
-                                                        $array_columnas[$key] = $value;
-                                                    }
-                                                    ?>
-                                                </tr>
-                                            </thead>
                                             <tbody>
                                                 
                                             </tbody>

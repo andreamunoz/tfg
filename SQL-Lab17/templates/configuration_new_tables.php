@@ -3,7 +3,7 @@
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_tables.php" > <?php echo trad('Tablas',$lang) ?></a> > <a class="enlace" href="configuration_new_tables.php" > <?php echo trad('Nueva Tabla',$lang) ?></a></label>
-    <h2><strong><?php echo trad('Nueva Tabla',$lang) ?></strong></h2>
+    <h2><strong><?php echo trad('Ejecutar Script',$lang) ?></strong></h2>
     <section id="tabs">
         <div class="container">
             <div class="row">

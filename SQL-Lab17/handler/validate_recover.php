@@ -51,7 +51,7 @@ if ($result!='') {
     </html>";
     $cabecera = "From: sqlab17@gmail.com\n";
     $cabecera .= "Content-type: text/html; charset=UTF-8;\n";
-    if(mail($to, utf8_decode($asunto), $mensaje, $cabecera)){
+    if(mail($to, utf8_decode($asunto), $mensaje, $cabecera,"sqlab17@gmail.com")){
         
         $_SESSION['msg_recover'] = "<div class='offset-md-3 col-md-8 mt-5 alert alert-success alert-dismissable'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>

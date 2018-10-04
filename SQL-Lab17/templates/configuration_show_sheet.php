@@ -10,8 +10,7 @@
       ?>
     <label><a class="enlance" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlance" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?></strong></h2>
-    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
-    <div class="hrr mt-3 mb-5"></div>			
+    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>		
     <div id="accordion">
         <div class="card">
             <div class="table-responsive">  
@@ -41,16 +40,17 @@
                                 $solucion = $sol->getAllEjerciciosByName($id);
 
                                 $fila_sol = mysqli_fetch_array($solucion);
-                                ?> 	
+                                ?> 
+                            <tr class="fondo_blanco" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
                                 <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
 
-                                <?php echo '<td><a class="btn btn-primary pl-5 pr-5" href="perform_exercise.php?exercise=' . $fila['id_ejercicio'] . '">Ver ejercicio</a>';
+                                <?php echo '<td style="text-align: right;"><a  href="perform_exercise.php?exercise='.$fila['id_ejercicio'].'"></a>';
                                 ?> 
                                 <?php if ($fila_sol['intentos'] > 0)
-                                        echo '<a class="btn btn-secundary pl-5 pr-5" href="configuration_show_intent_exercise.php?hoja='.$hojaparameter.'&exercise=' . $fila['id_ejercicio'] . '">Ver Intentos</a>';
+                                        echo '<a class="pr-5" href="configuration_show_intent_exercise.php?hoja='.$hojaparameter.'&exercise=' . $fila['id_ejercicio'] . '"><i class="fas fa-info" style="color:black; opacity:0.9;"></i></a>';
                                 ?>
                                 <?php echo '</td>'; ?>
 

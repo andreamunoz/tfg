@@ -43,6 +43,7 @@ $lang = 'es';
                         <div class="form-group ">
                             <label for="inputPassword"><?php echo trad('Contraseña',$lang)?></label>
                             <input type="password" name="password" id="inputPassword" class="form-control form-control-sm" placeholder='<?php echo trad('Contraseña',$lang)?>' required />
+                            <i class="fas fa-eye"></i>
                         </div>
                         
                     </div>

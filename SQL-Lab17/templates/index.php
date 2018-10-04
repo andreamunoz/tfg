@@ -13,7 +13,7 @@
         <p class="p_ind"><?php echo trad('También dispone de un apartado donde consultar en unos gráficos sus avances y otro apartado donde encontrará sus datos de usuario.', $lang) ?></p>
         <p class="p_ind"><?php echo trad('En el menú lateral le mostramos todas las opciones para comenzar.', $lang) ?></p>
         <?php if($_SESSION['modo'] == 1) {?>
-            <a type="button" class="btn btn-primary mt-2 pl-5 pr-5" href="configuration.php"><?php echo trad('Comenzar Ahora',$lang) ?></a>
+            <a class="btn btn-primary mt-2 pl-5 pr-5" href="configuration.php"><?php echo trad('Comenzar Ahora',$lang) ?></a>
         <?php } ?>
     	
         <?php

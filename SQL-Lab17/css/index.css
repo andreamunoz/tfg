@@ -42,7 +42,7 @@ a {
 
 .img_perfil {
     width: 100%;
-    height: 800px;
+    //height: 800px;
 }
 
 .img_icon {
@@ -611,9 +611,9 @@ span.red{
     background: rgba(0,0,0,0.1);
 }
 .fa-plus{
-    text-align: right;
+    //text-align: right;
     position: absolute;
-    top: 25px;
+    top: 23px;
 }
 
 #select_hoja {

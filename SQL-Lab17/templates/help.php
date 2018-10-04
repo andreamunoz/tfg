@@ -8,7 +8,7 @@
 
     <div id="accordion">
         <div class="card">
-            <div class="card-header" id="headingOne">
+            <div class="card-header text-right" id="headingOne">
                 <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                     <?php echo trad('Gestionar Tablas', $lang) ?>
                 </a>
@@ -24,7 +24,7 @@
             </div>
         </div>
         <div class="card">
-            <div class="card-header" id="headingTwo">
+            <div class="card-header text-right" id="headingTwo">
                 <a class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                     <?php echo trad('Gestionar Ejercicios', $lang) ?>
                 </a>
@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="card">
-            <div class="card-header" id="headingThree">
+            <div class="card-header text-right" id="headingThree">
                 <a class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                     <?php echo trad('Gestionar Hoja de Ejercicios', $lang) ?>
                 </a>
@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="card">
-            <div class="card-header" id="headingFour">
+            <div class="card-header text-right" id="headingFour">
                 <a class="btn btn-link" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                     <?php echo trad('Gestionar Estadísticas', $lang) ?>
                 </a>

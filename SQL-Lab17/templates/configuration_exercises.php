@@ -5,9 +5,9 @@
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_exercises.php" > <?php echo trad('Ejercicios',$lang) ?></a></label>
     <h2><strong><?php echo trad('Ejercicios',$lang) ?></strong></h2>
     <div class="row mb-150">
-        <div class="offset-md-10 col-md-2">
+        <div class="col-md-12">
             <div class="text-right pl-5">
-                <a type="button" class="btn btn-primary pl-3 pr-3" href="configuration_new_exercises.php" ><?php echo trad('Crear Ejercicio',$lang) ?></a>
+                <a class="btn btn-primary pl-3 pr-3" href="configuration_new_exercises.php" ><?php echo trad('Crear Ejercicio',$lang) ?></a>
             </div>
         </div>
     </div>
@@ -51,19 +51,19 @@
                                            if ($fila_sol["cantidad"] === "0"){?>
                                             
                                             <td style="text-align:right;">
-                                                <a type="button" class="mr-4 highlight_e" href="configuration_edit_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>">
+                                                <a class="mr-4 highlight_e" href="configuration_edit_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>">
                                                     <i class="fas fa-edit" style="color:black; opacity:0.9;"></i>
                                                 </a>
 
                                             <?php } ?>
-                                                <a type="button" class="pr-5 highlight_d" href="../handler/validate_deshabilitar.php?deshabilitar=<?php echo $fila['id_ejercicio'] ?>">
-                                                    <i class="fas fa-unlock" style="color:black; opacity:0.9;"></i>
+                                                <a class=" highlight_d" href="../handler/validate_deshabilitar.php?deshabilitar=<?php echo $fila['id_ejercicio'] ?>">
+                                                    <i class="fas fa-unlock pr-5" style="color:black; opacity:0.9;"></i>
                                                 </a>
                                                 
                                             </td>
                                         <?php } else { ?>
                                         <td>
-                                            <a type="button" class="mr-4" href="configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>"></a>
+                                            <a class="mr-4" href="configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>"></a>
                                         </td>
                                     <?php } ?>
                                 </tr>
@@ -77,17 +77,17 @@
                                     <?php if($_SESSION['user']== $fila['creador_ejercicio']){ 
                                              if ($fila_sol["cantidad"] === "0"){?>
                                                 <td style="text-align:right;">
-                                                    <a type="button" class="mr-4 highlight_e" href="configuration_edit_exercises.php?exercise=<?php $fila['id_ejercicio'] ?>">
+                                                    <a class="mr-4 highlight_e" href="configuration_edit_exercises.php?exercise=<?php $fila['id_ejercicio'] ?>">
                                                         <i class="fas fa-edit" ></i>
                                                     </a>
                                             <?php } ?>
-                                                    <a method="post" type="button" class="pr-5 highlight_d" href="../handler/validate_habilitar.php?habilitar=<?php echo $fila['id_ejercicio'] ?>">
-                                                        <i class="fas fa-lock"></i>
+                                                    <a method="post" class="highlight_d" href="../handler/validate_habilitar.php?habilitar=<?php echo $fila['id_ejercicio'] ?>">
+                                                        <i class="fas fa-lock pr-5 "></i>
                                                     </a>
                                             </td>
                                     <?php } else { ?>
                                         <td>
-                                            <a type="button" class="mr-4" href="configuration_show_exercises.php?exercise= <?php echo $fila['id_ejercicio'] ?>"></a>
+                                            <a class="mr-4" href="configuration_show_exercises.php?exercise= <?php echo $fila['id_ejercicio'] ?>"></a>
                                         </td>
                                     <?php } ?>
                                 </tr>

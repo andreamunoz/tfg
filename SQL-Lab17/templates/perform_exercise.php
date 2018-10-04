@@ -27,7 +27,7 @@
         </div>
     </div>  
     <section id="tabs">
-        <div class="container">
+        <div class="">
             <div class="row">
                 <div class="col-md-12 ">                  
                     <nav>

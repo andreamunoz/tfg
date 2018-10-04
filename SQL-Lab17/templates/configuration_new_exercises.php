@@ -12,7 +12,7 @@
 
 
     <section id="tabs">
-        <div class="container">
+        <div class="">
             <div class="row mt-5">
                 <div class="col-md-12 ">
                     <form id="new_sheets" method="post" action="../handler/validate_new_exercises.php">

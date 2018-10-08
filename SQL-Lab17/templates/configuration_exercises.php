@@ -7,7 +7,7 @@
     <div class="row mb-150">
         <div class="col-md-12">
             <div class="text-right pl-5">
-                <a class="btn btn-primary pl-3 pr-3" href="configuration_new_exercises.php" ><?php echo trad('Crear Ejercicio',$lang) ?></a>
+                <a class="btn btn-primary pl-4 pr-4" href="configuration_new_exercises.php" ><?php echo trad('Crear Ejercicio',$lang) ?></a>
             </div>
         </div>
     </div>
@@ -51,13 +51,15 @@
                                            if ($fila_sol["cantidad"] === "0"){?>
                                             
                                             <td style="text-align:right;">
-                                                <a class="mr-4 highlight_e" href="configuration_edit_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>">
-                                                    <i class="fas fa-edit" style="color:black; opacity:0.9;"></i>
+                                                <a class="highlight_e" href="configuration_edit_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>">
+                                                    <i class="fas fa-edit mr-3" style="color:black; opacity:0.9;" title="<?php echo trad('Editar',$lang) ?>"></i>
                                                 </a>
-
+                                                <a method="post" class="highlight_b" href="../handler/validate_delete_exercise.php?eliminar=<?php echo $fila['id_ejercicio'] ?>">
+                                                    <i class="fas fa-trash mr-3" style="color:black; opacity:0.9;" title="<?php echo trad('Eliminar',$lang) ?>"></i>
+                                                </a>
                                             <?php } ?>
                                                 <a class=" highlight_d" href="../handler/validate_deshabilitar.php?deshabilitar=<?php echo $fila['id_ejercicio'] ?>">
-                                                    <i class="fas fa-unlock pr-5" style="color:black; opacity:0.9;"></i>
+                                                    <i class="fas fa-unlock mr-3" style="color:black; opacity:0.9;" title="<?php echo trad('Deshabilitar',$lang) ?>"></i>
                                                 </a>
                                                 
                                             </td>
@@ -77,12 +79,15 @@
                                     <?php if($_SESSION['user']== $fila['creador_ejercicio']){ 
                                              if ($fila_sol["cantidad"] === "0"){?>
                                                 <td style="text-align:right;">
-                                                    <a class="mr-4 highlight_e" href="configuration_edit_exercises.php?exercise=<?php $fila['id_ejercicio'] ?>">
-                                                        <i class="fas fa-edit" ></i>
+                                                    <a class="highlight_e" href="configuration_edit_exercises.php?exercise=<?php echo $fila['id_ejercicio'] ?>">
+                                                        <i class="fas fa-edit mr-3" title="<?php echo trad('Editar',$lang) ?>"></i>
+                                                    </a>
+                                                    <a method="post" class="highlight_b" href="../handler/validate_delete_exercise.php?eliminar=<?php echo $fila['id_ejercicio'] ?>">
+                                                        <i class="fas fa-trash mr-3" title="<?php echo trad('Eliminar',$lang) ?>"></i>
                                                     </a>
                                             <?php } ?>
                                                     <a method="post" class="highlight_d" href="../handler/validate_habilitar.php?habilitar=<?php echo $fila['id_ejercicio'] ?>">
-                                                        <i class="fas fa-lock pr-5 "></i>
+                                                        <i class="fas fa-lock mr-3" title="<?php echo trad('Habilitar',$lang) ?>"></i>
                                                     </a>
                                             </td>
                                     <?php } else { ?>

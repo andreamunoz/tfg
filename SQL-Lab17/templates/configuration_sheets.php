@@ -5,11 +5,10 @@
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
     <h2><strong><?php echo trad('Hoja de Ejercicios',$lang) ?></strong></h2>
     <div class="row mb-150">
-        <div class="col-md-8">
-            <p><?php echo trad('Añade, edita y elimina la hoja de ejercicios.',$lang) ?></p>
-        </div>
-        <div class="text-right pl-5">
-            <a type="button" class="btn btn-primary pl-5 pr-5" href="configuration_new_sheets.php" ><?php echo trad('Crear Hoja',$lang) ?></a>
+        <div class="col-md-12">
+            <div class="text-right pl-5">
+                <a class="btn btn-primary pl-5 pr-5" href="configuration_new_sheets.php" ><?php echo trad('Crear Hoja',$lang) ?></a>
+            </div>
         </div>
     </div>
     <div id="accordion">
@@ -48,31 +47,12 @@
                                     ?>
                                     <?php if($_SESSION['user'] == $fila_hoja['creador_hoja']){ ?>
                                     <?php echo '<td style="text-align:right;">'
-                                            . ' <a type="button" class="mr-4" href="configuration_edit_sheets.php?hoja=' . $fila_hoja['id_hoja'] . '"><i class="fas fa-edit" style="color:black; opacity:0.9;"></i></a>'
-                                            . ' <button type="" class="btn-sin-fondo pr-5" data-toggle="modal" data-target="#modalEliminarHoja'.$cont.'"> <i class="fas fa-trash" style="color:black; opacity:0.9;"> </i>             
-                                                </button>
-                                                <!-- Modal -->
-                                                <div class="modal fade" id="modalEliminarHoja'.$cont.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                                    <div class="modal-dialog " role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h2 class="mt-4 pl-5">'. $fila_hoja['nombre_hoja'] .'</h2>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true"> <img class="img_icon_cerrar cerrar" src="../img/icon_cerrarPanel_blanco.svg"/></span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <h5 class="pl-5"><strong><i>¿Desea eliminar '. $fila_hoja['nombre_hoja'] .'?</i></strong></h5>
-                                                                <p class="pl-5">Esta hoja contiene '. $row_number["COUNT(id_ejercicio)"] . ' ejercicios.</p>
-                                                                <a method="post" type="button" class="btn btn-secundary pl-5 pr-5 mt-4 ml-5 mb-4" href="../handler/validate_eliminar_hoja.php?eliminar_hoja=' . $fila_hoja['id_hoja'] . '">Eliminar</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>'                                   
+                                            . ' <a class="highlight_e" href="configuration_edit_sheets.php?hoja=' . $fila_hoja['id_hoja'] . '"><i class="fas fa-edit mr-3" style="color:black; opacity:0.9;" title="Editar"></i></a>'
+                                            . ' <a class="btn-sin-fondo highlight_b" href="../handler/validate_eliminar_hoja.php?eliminar_hoja=' . $fila_hoja['id_hoja'] . '"> <i class="fas fa-trash mr-3" style="color:black; opacity:0.9;" title="Eliminar"> </i></a> '                                  
                                             . '</td>'; 
                                     } else {?>
                                     <?php echo '<td>'
-                                            . '<a type="button" class="" href="configuration_show_sheet.php?hoja=' . $fila_hoja['id_hoja'] . '"></a>'                                           
+                                            . '<a class="" href="configuration_show_sheet.php?hoja=' . $fila_hoja['id_hoja'] . '"></a>'                                           
                                             . '</td>';
                                     }?>
                                 </tr>

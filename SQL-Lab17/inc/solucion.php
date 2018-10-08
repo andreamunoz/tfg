@@ -102,4 +102,14 @@ class Solucion{
         return $intentos;
     }
 
+    function eliminarEjercicioSolucion($user,$id) {
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "DELETE FROM `sqlab_solucion` WHERE `sqlab_solucion`.`user` = '$user' AND `sqlab_solucion`.`id_ejercicio` = $id ";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+        
+    }
 }

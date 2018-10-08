@@ -41,7 +41,7 @@
 
                                 $fila_sol = mysqli_fetch_array($solucion);
                                 ?> 
-                            <tr class="fondo_blanco" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
+                            <tr class="fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
                                 <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>

@@ -91,11 +91,55 @@
                                                 <?php 
                                                     $usa = new Usa(); 
                                                     $nombre_tablas = $usa->getNombreById($id_ejer);
+                                                    $cont = 0;
                                                     while($nameTable = mysqli_fetch_array($nombre_tablas)){
                                                 ?>
                                                 <tr>
-                                                    <td style="text-align: center"> <?php echo $nameTable['nombre']; ?> </td>
+                                                    <?php 
+                                                        $arrayTablas[$cont] = $nameTable['nombre'];
+                                                        $cont = $cont + 1;
+                                                        $quitar = $nameTable['schema_prof'] . "_";
+                                                        $onlyName = explode($quitar, $nameTable['nombre']);
+                                                    ?>
+                                                    <td style="text-align: center"> <?php echo $onlyName[1]; ?> </td>
                                                 </tr>    
+                                                <?php } ?>    
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 pl-0 pr-3 float-left" id="accordion ">
+                                <div class="card">  
+                                    <div class="table-responsive">                
+                                        <table id="employee" class="table table-striped table-bordered"> 
+                                            <thead>
+                                                <tr>
+                                                    <th style="text-align: center"><?php echo trad('Campos', $lang) ?></th>                         
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php 
+                                                    $i = 0;
+                                                    while($i < $cont){
+                                                        include_once '../inc/functions.php';
+                                                        $connect = new Tools();
+                                                        $conexion = $connect->connectDB();
+                                                        $sql = "SELECT * FROM $arrayTablas[$i];";
+                                                        $consulta = mysqli_query($conexion, $sql);
+                                                        while($nameCampos = mysqli_fetch_field($consulta)){
+                                                        ?>
+                                                        <tr>
+                                                            <td style="text-align: center"> <?php echo $nameCampos->name; ?> </td>
+                                                        </tr>    
+                                                        <?php }
+                                                        $connect->disconnectDB($conexion); 
+                                                        $i++;
+                                                    }
+                                                    if($i == 0){ ?>
+                                                        <tr>
+                                                            <td style="text-align: center"> <?php echo trad('No existen datos en esta tabla', $lang) ?></td>
+                                                        </tr>
                                                 <?php } ?>    
                                             </tbody>
                                         </table>

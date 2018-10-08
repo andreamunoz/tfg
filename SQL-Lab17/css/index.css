@@ -713,7 +713,10 @@ table#structure_table th {
     font-size: 16px !important;
 }
 
-
+.highlight_b i:hover{
+    color: red !important;
+    font-size: 16px !important;
+}
 
 .VerticalBar{
     width:3px;

@@ -211,9 +211,63 @@ $(document).ready(function () {
             
     });
     
+    $('.checkbox-select-ejer').click(function(){
+        var id_ejer = $(this).attr("value");
+        var id_hoja = $(this).attr("id");
+        var name = $(this).closest('.del').find('td').eq(0).html();
+        var nivel = $(this).closest('.del').find('td').eq(1).html();
+        var tipo = $(this).closest('.del').find('td').eq(2).html();
+        var profe = $(this).closest('.del').find('td').eq(3).html();
+        
+        var tr = '<tr class="add"><td>'+name+'</td><td>'+nivel+'</td><td>'+tipo+'</td><td>'+profe+'</td><td style="text-align: center"><input class="checkbox-add-ejer" id='+id_hoja+' name="seleccionados[]" value='+id_ejer+' type="checkbox"></td></tr>';
+        console.log(tr);
+        var table = $('#employee_data').DataTable({
+            paging:   true,
+            destroy: true,
+            searching: true
+        });
+        table.row.add($(tr)).draw(false);
+        $(this).closest('tr').hide();
+    });
     
-
-
-
+    $('#employee_table_hoja').DataTable({
+            paging:   false,
+            destroy: true,
+            searching: false
+        });
+        
+    $('.checkbox-add-ejer').click(function(){
+        var id_ejer = $(this).attr("value");
+        var id_hoja = $(this).attr("id");
+        var name = $(this).closest('.add').find('td').eq(0).html();
+        var nivel = $(this).closest('.add').find('td').eq(1).html();
+        var tipo = $(this).closest('.add').find('td').eq(2).html();
+        var profe = $(this).closest('.add').find('td').eq(3).html();
+        
+        var tr = '<tr class="del"><td>'+name+'</td><td>'+nivel+'</td><td>'+tipo+'</td><td>'+profe+'</td><td style="text-align: center"><input class="checkbox-select-ejer" id='+id_hoja+' name="seleccionados[]" value='+id_ejer+' checked="" type="checkbox"></td></tr>';
+        $(tr).click();
+        console.log(tr);
+        var table = $('#employee_table_hoja').DataTable();
+        table.row.add($(tr)).draw(false);
+        $(this).closest('tr').hide();
+    });
+    
+    $('.select_profe option').click(function(){
+        var profe = $(this).attr("value");
+        var table = $('#employee_data').DataTable();
+        table.search(profe).draw(false);
+    });
+    
+    $('.select_nivel option').click(function(){
+        var nivel = $(this).attr("value");
+        var table = $('#employee_data').DataTable();
+        table.search(nivel).draw(false);
+    });
+    
+    $('.select_tipo option').click(function(){
+        var tipo = $(this).attr("value");
+        var table = $('#employee_data').DataTable();
+        table.search(tipo).draw(false);
+    });
 });
 

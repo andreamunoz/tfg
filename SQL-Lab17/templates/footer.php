@@ -24,6 +24,9 @@
         $('#employee_table').DataTable();
     });
     $(document).ready(function () {
+        $('#employee_table_hoja').DataTable();
+    });
+    $(document).ready(function () {
         $('#employee_list').DataTable();
     });
     </script>

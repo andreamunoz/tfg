@@ -16,5 +16,5 @@
     }
     $connect->disconnectDB($conexion);
     echo $respuesta;
-
+    
 ?>

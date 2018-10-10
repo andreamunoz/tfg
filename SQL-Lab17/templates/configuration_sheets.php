@@ -13,7 +13,7 @@
     </div>
     <div id="accordion">
         <div class="card" >  
-            <div class="table-responsive">  
+            <div class="table-responsive no-buscar">  
                 <table id="employee_data" class="table table-striped-conf table-bordered">  
                     <thead>
                         <tr>
@@ -28,10 +28,16 @@
                         include_once '../inc/hoja_ejercicio.php';
                         include_once '../inc/esta_contenido.php';
                         $hojaejer = new HojaEjercicio();
-                        $result = $hojaejer->getAllHojas();
+                        $res = $hojaejer->getCreadorHojas();
                         $cont = 0;
-                        if (isset($result)) {
-
+                        if (isset($res)) {
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm select_profe" title="Selecciona hoja" id="select_hoja">';
+                            echo "<option value=" . $row_hoja['creador_hoja'] . ">Todos Profesores </option>";
+                            while ($row_hoja = mysqli_fetch_array($res)) {
+                                echo "<option value=" . $row_hoja['creador_hoja'] . ">" . $row_hoja['creador_hoja'] . " </option>";
+                            }
+                            echo '</select>';
+                            $result = $hojaejer->getAllHojas();
                             while ($fila_hoja = mysqli_fetch_array($result)) {
                                 ?>
 

@@ -25,16 +25,16 @@
                                     <input type="text" id="new_name_sheet" name="new_name_sheet" placeholder="Nombre Hoja" class="form-control form-control-sm" required/>
                                 </div>
                             </div>
-                            <div id="accordion ">
+                            <div id="accordion">
                                 <div class="card">  
-                                    <div class="table-responsive">  
-                                        <table id="employee_data" class="table table-striped table-bordered">  
+                                    <div class="table-responsive no-buscar pt-4">  
+                                        <table id="employee_data" class="table table-striped-conf table-bordered">  
                                             <thead>
                                                 <tr>                                                      
                                                     <th style="width:10%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                                                    <th style="width:10%;"><?php echo trad('Profesor',$lang) ?></th>
                                                     <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
                                                     <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
-                                                    <th style="width:10%;"><?php echo trad('Profesor',$lang) ?></th>
                                                     <th style="width:10%; text-align: center"><?php echo trad('Añadir',$lang) ?></th>
                                                 </tr>
                                             </thead>
@@ -44,6 +44,31 @@
                                                 $ejer = new Ejercicio();
                                                 include_once '../inc/solucion.php';
                                                 $sol = new Solucion();
+                                                include_once '../inc/hoja_ejercicio.php';
+                                                $hojaejer = new HojaEjercicio();
+                                                $res= $ejer->getAllNiveles();
+                                                $resC = $ejer->getAllCategorias();
+                                                $resP = $hojaejer->getCreadorHojas();
+                                                if (isset($res) && isset($resC) && isset($resP)) {
+                                                    echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
+                                                    echo "<option value=". $row_profe['creador_hoja'] .">Todos Profesores </option>";
+                                                    while ($row_profe = mysqli_fetch_array($resP)) {
+                                                        echo "<option value=" . $row_profe['creador_hoja'] . ">" . $row_profe['creador_hoja'] . " </option>";
+                                                    }
+                                                    echo '</select>';
+                                                    echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
+                                                    echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
+                                                    while ($row_nivel = mysqli_fetch_array($res)) {
+                                                        echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
+                                                    }
+                                                    echo '</select>';
+                                                    echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
+                                                    echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
+                                                    while ($row_tipo = mysqli_fetch_array($resC)) {
+                                                        echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
+                                                    }
+                                                    echo '</select>';
+                                                    
                                                 $result = $ejer->getAllEjerciciosHabilitados();
                                                 while ($fila = mysqli_fetch_array($result)) {
                                                     ?>
@@ -56,9 +81,9 @@
                                                     <tr>
 
                                                         <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
+                                                        <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                                         <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                         <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                                        <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
 
                                                         <?php echo '<td style="text-align: center"><input type="checkbox" id="checkbox-editar-hoja" name="seleccionados[]" value='. $fila["id_ejercicio"] .'></td>'?>
 
@@ -66,7 +91,7 @@
 
                                                     </tr>
                                                     <?php
-                                                }
+                                                } }
                                                 ?>
 
                                             </tbody>

@@ -185,7 +185,17 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
-
+    
+    function getAllEjerciciosHabilitadosOrden($id){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT DISTINCT(`sqlab_ejercicio`.`id_ejercicio`),`nivel`,`tipo`,`creador_ejercicio`, `orden` FROM `sqlab_ejercicio`,`sqlab_esta_contenido` WHERE `sqlab_ejercicio`.`id_ejercicio`=`sqlab_esta_contenido`.`id_ejercicio` and `deshabilitar`='0' and `sqlab_esta_contenido`.`id_hoja`=$id ORDER BY `sqlab_esta_contenido`.`orden` ASC";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    
     function getAllEjerciciosDesHabilitados(){
         
         $connect = new Tools();

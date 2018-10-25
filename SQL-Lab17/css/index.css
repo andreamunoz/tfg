@@ -551,6 +551,11 @@ span.red{
     font-size: 12px;
     background-size: 8px 8px;
 }
+.custom-select:focus {
+    border-color: #dcdcdc;
+    outline: 0;
+    box-shadow: 0 0 0 .1rem #dcdcdc;
+}
 
 .dropdown-item.active, .dropdown-item:active {
     background: none;
@@ -617,11 +622,11 @@ span.red{
 }
 
 #select_hoja {
-    width: 25%;
+    width: 22%;
     float: left;
     position: relative;
-    font-size: 15px;
-    padding-left: 9px;
+    font-size: 13px;
+    padding-left: 12px;
 }
 
 .resaltado:hover{
@@ -723,4 +728,8 @@ table#structure_table th {
     height:200px;
     margin-top: 70px;
     background-color: black;
+}
+
+.dataTables_wrapper {
+    position: unset !important;
 }

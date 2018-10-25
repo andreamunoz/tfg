@@ -7,20 +7,23 @@
      $hojaparameter = $_GET['hoja'];
      $hojaejer = new HojaEjercicio();
      $nombreHoja = $hojaejer->getHojaById($hojaparameter);
+     $_SESSION['HOJA_EXE']= 0;
+     $_SESSION['HOJA_VISTA']=$hojaparameter;
+     $_SESSION['HOJA_VISTA_NOMBRE']=$nombreHoja;
       ?>
     <label><a class="enlance" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlance" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?></strong></h2>
     <p><?php echo trad('Textooooo aquí........',$lang) ?></p>		
     <div id="accordion">
         <div class="card">
-            <div class="table-responsive">  
-                <table id="employee_data" class="table table-striped table-bordered">
+            <div class="table-responsive no-buscar">  
+                <table id="employee_data" class="table table-striped-conf table-bordered">
                     <thead>
                         <tr>
                             <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
                             <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
-                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
                             <th></th>
 
                         </tr>
@@ -28,10 +31,36 @@
                     <tbody>
                         <?php
                         include_once '../inc/ejercicio.php';
-                        $ejer = new HojaEjercicio();
-                        $result = $ejer->getHojasYEjerciciosById($hojaparameter);
+                        $ejer = new Ejercicio();
                         include_once '../inc/solucion.php';
                         $sol = new Solucion();
+                        include_once '../inc/hoja_ejercicio.php';
+                        $hojaejer = new HojaEjercicio();
+                        $res= $ejer->getAllNiveles();
+                        $resC = $ejer->getAllCategorias();
+                        $resP = $hojaejer->getCreadorHojas();
+                        if (isset($res) && isset($resC) && isset($resP)) {
+                            
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
+                            echo "<option value=". $row_profe['creador_hoja'] .">Todos Profesores </option>";
+                            while ($row_profe = mysqli_fetch_array($resP)) {
+                                echo "<option value=" . $row_profe['creador_hoja'] . ">" . $row_profe['creador_hoja'] . " </option>";
+                            }
+                            echo '</select>';
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
+                            echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
+                            while ($row_nivel = mysqli_fetch_array($res)) {
+                                echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
+                            }
+                            echo '</select>';
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
+                            echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
+                            while ($row_tipo = mysqli_fetch_array($resC)) {
+                                echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
+                            }
+                            echo '</select>';
+                        $result = $hojaejer->getHojasYEjerciciosById($hojaparameter);
+                        
                         while ($fila = mysqli_fetch_array($result)) {
                             ?>
 
@@ -43,9 +72,9 @@
                                 ?> 
                             <tr class="fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
                                 <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
+                                <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
 
                                 <?php echo '<td style="text-align: right;"><a  href="perform_exercise.php?exercise='.$fila['id_ejercicio'].'"></a>';
                                 ?> 
@@ -55,7 +84,7 @@
                                 <?php echo '</td>'; ?>
 
                             </tr>
-                        <?php } ?>
+                        <?php } }?>
 
                     </tbody>
                 </table>

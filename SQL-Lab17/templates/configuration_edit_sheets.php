@@ -38,13 +38,13 @@
                         <div id="accordion ">
                             <div class="card">  
                                 <div class="table-responsive">  
-                                    <table id="employee_table_hoja" class="table table-striped table-bordered">  
+                                    <table id="employee_table_hoja" class="table table-striped-conf table-bordered table-sortable">  
                                         <thead>
                                             <tr>                                                      
                                                 <th style="width:10%;"><?php echo trad('Nombre Ejercicio', $lang) ?></th>
+                                                <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Nivel', $lang) ?></th>
                                                 <th style="width:20%;"><?php echo trad('Tipo', $lang) ?></th>
-                                                <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%; text-align: center"><?php echo trad('Seleccionados', $lang) ?></th>
                                             </tr>
                                         </thead>
@@ -55,19 +55,19 @@
                                             include_once '../inc/solucion.php';
                                             $sol = new Solucion();
                                             include_once '../inc/ejercicio.php';
-                                            $result = $ejer->getAllEjerciciosHabilitados();
+                                            $result = $ejer->getAllEjerciciosHabilitadosOrden($id_hoja);
                                             while ($fila = mysqli_fetch_array($result)) {
                                                 $id = $fila['id_ejercicio'];
                                                 $solucion = $sol->getAllEjerciciosByName($id);
                                                 $ejercicios_hoja = $ejer->getExistEjerciciosHoja($id_hoja, $id);
                                                 ?>
                                                 <?php if ($ejercicios_hoja == 1) { ?>
-                                                <tr class="del">
+                                                <tr class="del" data-index="<?php echo $fila['id_ejercicio']?>" data-index-sheet="<?php echo $id_hoja?>" data-position="<?php echo $fila['orden']?>">
                                                     <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
+                                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
-                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-select-ejer" id='.$id_hoja.' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' checked ></td>' ?>
+                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-select-ejer" id='. $fila["id_ejercicio"] .' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' onclick=checkDes('. $fila["id_ejercicio"] .') checked ></td>' ?>
                                                 </tr>
                                             <?php } }?>
                                         </tbody>
@@ -82,14 +82,14 @@
                         </div>
                         <div id="accordion ">
                             <div class="card">  
-                                <div class="table-responsive">  
-                                    <table id="employee_data" class="table table-striped table-bordered añadir">  
+                                <div class="table-responsive no-buscar">  
+                                    <table id="employee_data" class="table table-striped-conf table-bordered añadir">  
                                         <thead>
                                             <tr>                                                      
                                                 <th style="width:10%;"><?php echo trad('Nombre Ejercicio', $lang) ?></th>
+                                                <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Nivel', $lang) ?></th>
                                                 <th style="width:20%;"><?php echo trad('Tipo', $lang) ?></th>
-                                                <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%; text-align: center"><?php echo trad('Añadir', $lang) ?></th>
                                             </tr>
                                         </thead>
@@ -99,7 +99,31 @@
                                             $ejer = new Ejercicio();
                                             include_once '../inc/solucion.php';
                                             $sol = new Solucion();
-                                            include_once '../inc/ejercicio.php';
+                                            include_once '../inc/hoja_ejercicio.php';
+                                            $hojaejer = new HojaEjercicio();
+                                            $res= $ejer->getAllNiveles();
+                                            $resC = $ejer->getAllCategorias();
+                                            $resP = $hojaejer->getCreadorHojas();
+                                            if (isset($res) && isset($resC) && isset($resP)) {
+                                                echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
+                                                echo "<option value=". $row_profe['creador_hoja'] .">Todos Profesores </option>";
+                                                while ($row_profe = mysqli_fetch_array($resP)) {
+                                                    echo "<option value=" . $row_profe['creador_hoja'] . ">" . $row_profe['creador_hoja'] . " </option>";
+                                                }
+                                                echo '</select>';
+                                                echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
+                                                echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
+                                                while ($row_nivel = mysqli_fetch_array($res)) {
+                                                    echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
+                                                }
+                                                echo '</select>';
+                                                echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
+                                                echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
+                                                while ($row_tipo = mysqli_fetch_array($resC)) {
+                                                    echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
+                                                }
+                                                echo '</select>';
+                                                
                                             $result = $ejer->getAllEjerciciosHabilitados();
                                             while ($fila = mysqli_fetch_array($result)) {
                                                 $id = $fila['id_ejercicio'];
@@ -107,14 +131,14 @@
                                                 $ejercicios_hoja = $ejer->getExistEjerciciosHoja($id_hoja, $id);
                                                 ?>
                                                 <?php if ($ejercicios_hoja != 1) { ?>
-                                                <tr class="add">
+                                                <tr class="add" data-index="<?php echo $fila['id_ejercicio']?>" data-index-sheet="<?php echo $id_hoja?>" data-position="">
                                                     <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
+                                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?> 
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?> 
-                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-add-ejer" id='.$id_hoja.' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' ></td>' ?>
+                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-add-ejer" id='. $fila["id_ejercicio"] .' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' onclick=checkAdd('. $fila["id_ejercicio"] .')></td>' ?>
                                                 </tr>
-                                                <?php } }  ?>
+                                            <?php } } }?>
                                         </tbody>
                                     </table>
                                 </div>  
@@ -135,4 +159,64 @@
         </div>
     </section>
 </div>
+<script>
+    function checkDes(id){
+        var id_ejer = $('td').find("input[id="+id+"]").attr("value");
+        alert(id_ejer);
+        var name = $('td').find("input[id="+id+"]").closest('.del').find('td').eq(0).html();
+        var nivel = $('td').find("input[id="+id+"]").closest('.del').find('td').eq(1).html();
+        var tipo = $('td').find("input[id="+id+"]").closest('.del').find('td').eq(2).html();
+        var profe = $('td').find("input[id="+id+"]").closest('.del').find('td').eq(3).html();
+        
+        var tr = '<tr class="add ui-sortable-handle" data-index='+id_ejer+' data-index-sheet="49" data-position=""><td>'+name+'</td><td>'+nivel+'</td><td>'+tipo+'</td><td>'+profe+'</td><td style="text-align: center"><input class="checkbox-add-ejer" id='+id_ejer+' name="seleccionados[]" value='+id_ejer+' onclick="checkAdd('+id_ejer+')" type="checkbox"></td></tr>';
+        $(tr).click();    
+        console.log(tr);
+        var table = $('#employee_data').DataTable({
+            paging:   true,
+            destroy: true,
+            searching: true
+        });
+        table.row.add($(tr)).draw(false);
+        $('td').find("input[id="+id+"]").closest('tr').hide();
+    }
+    
+    function checkAdd(id){
+        var id_ejer = $('td').find("input[id="+id+"]").attr("value");
+        alert(id_ejer);
+        var name = $('td').find("input[id="+id+"]").closest('.add').find('td').eq(0).html();
+        var nivel = $('td').find("input[id="+id+"]").closest('.add').find('td').eq(1).html();
+        var tipo = $('td').find("input[id="+id+"]").closest('.add').find('td').eq(2).html();
+        var profe = $('td').find("input[id="+id+"]").closest('.add').find('td').eq(3).html();
+        
+        var tr = '<tr class="del ui-sortable-handle" data-index='+id_ejer+' data-index-sheet="49" data-position=""><td>'+name+'</td><td>'+nivel+'</td><td>'+tipo+'</td><td>'+profe+'</td><td style="text-align: center"><input class="checkbox-add-ejer" id='+id_ejer+' name="seleccionados[]" value='+id_ejer+' onclick="checkDel('+id_ejer+')" type="checkbox" checked></td></tr>';
+        $(tr).click();    
+        console.log(tr);
+        var table = $('#employee_table_hoja').DataTable({
+            paging:   true,
+            destroy: true,
+            searching: true
+        });
+        table.row.add($(tr)).draw(false);
+        $('td').find("input[id="+id+"]").closest('tr').hide();
+    }
+//function checkAdd(element){
+        //$('.checkbox-add-ejer').click(function(){
+//        alert(document.getElementsByTagName("input").item(0));
+//        var id_ejer = $(this).attr("value");
+//        var id_hoja = $('.checkbox-add-ejer').attr("49");
+//        alert(id_hoja);
+//        var name = $('.checkbox-add-ejer').closest('.add').find('td').eq(0).html();
+//        var nivel = $('.checkbox-add-ejer').closest('.add').find('td').eq(1).html();
+//        var tipo = $('.checkbox-add-ejer').closest('.add').find('td').eq(2).html();
+//        var profe = $('.checkbox-add-ejer').closest('.add').find('td').eq(3).html();
+//        
+//        var tr = '<tr class="add"><td>'+name+'</td><td>'+nivel+'</td><td>'+tipo+'</td><td>'+profe+'</td><td style="text-align: center"><input class="checkbox-select-ejer" id='+id_hoja+' name="seleccionados[]" value='+id_ejer+' checked="" type="checkbox"></td></tr>';
+//        $(tr).click();
+//        console.log(tr);
+//        var table = $('#employee_data').DataTable();
+//        table.row.add($(tr)).draw(false);
+//        $('.checkbox-select-ejer').closest('.add').hide();
+    //});
+//    }
+</script>
 <?php include("footer.php"); ?> 

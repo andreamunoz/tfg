@@ -1,6 +1,8 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
-<?php include("menus/menu_horizontal.php"); ?>
+<?php include("menus/menu_horizontal.php"); 
+$_SESSION['HOJA_EXE']= 1;
+?>
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_exercises.php" > <?php echo trad('Ejercicios',$lang) ?></a></label>
     <h2><strong><?php echo trad('Ejercicios',$lang) ?></strong></h2>
@@ -13,15 +15,15 @@
     </div>
     <div id="accordion ">
         <div class="card">  
-            <div class="table-responsive"> 
+            <div class="table-responsive no-buscar"> 
                 
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>
                         <tr>
                             <th style="width:40%;"><?php echo trad('Descripción',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
                             <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
-                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
                             <th></th>
                         </tr>
                     </thead>
@@ -29,9 +31,34 @@
                         <?php
                         include_once '../inc/ejercicio.php';
                         $ejer = new Ejercicio();
-                        $result = $ejer->getAllEjercicios();
                         include_once '../inc/solucion.php';
                         $sol = new Solucion();
+                        include_once '../inc/hoja_ejercicio.php';
+                        $hojaejer = new HojaEjercicio();
+                        $res= $ejer->getAllNiveles();
+                        $resC = $ejer->getAllCategorias();
+                        $resP = $hojaejer->getCreadorHojas();
+                        if (isset($res) && isset($resC) && isset($resP)) {
+                            
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
+                            echo "<option value=". $row_profe['creador_hoja'] .">Todos Profesores </option>";
+                            while ($row_profe = mysqli_fetch_array($resP)) {
+                                echo "<option value=" . $row_profe['creador_hoja'] . ">" . $row_profe['creador_hoja'] . " </option>";
+                            }
+                            echo '</select>';
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
+                            echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
+                            while ($row_nivel = mysqli_fetch_array($res)) {
+                                echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
+                            }
+                            echo '</select>';
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
+                            echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
+                            while ($row_tipo = mysqli_fetch_array($resC)) {
+                                echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
+                            }
+                            echo '</select>';
+                        $result = $ejer->getAllEjercicios();
                         while ($fila = mysqli_fetch_array($result)) {
                             $resul_sol = $sol->getCuantosEjerciciosByName($fila['id_ejercicio']);
                             $fila_sol = $resul_sol->fetch_array(MYSQLI_ASSOC);
@@ -73,9 +100,9 @@
                             } else { ?>
                                 <tr class="habilitar fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
+                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php if($_SESSION['user']== $fila['creador_ejercicio']){ 
                                              if ($fila_sol["cantidad"] === "0"){?>
                                                 <td style="text-align:right;">
@@ -98,7 +125,7 @@
                                 </tr>
                                 <?php
                             }
-                        } ?>
+                        } }?>
 
                     </tbody>
                 </table>

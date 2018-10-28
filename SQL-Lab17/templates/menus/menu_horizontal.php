@@ -25,7 +25,7 @@
                     <?php } else if ($_SESSION['modo'] == 0){?>
                     <a class="dropdown-item "href="../templates/adm_profesor/getModo.php" ><i class="fas fa-user-tie pr-3"></i> <?php echo trad('Volver a Modo Profesor',$lang) ?></a>
                     <?php } ?>
-                    <a class="dropdown-item" href="login/login.php"><i class="fas fa-power-off pr-3"></i> <?php echo trad('Salir',$lang) ?></a>                   
+                    <a class="dropdown-item" href="../handler/validate_logout.php"><i class="fas fa-power-off pr-3"></i> <?php echo trad('Salir',$lang) ?></a>                   
                 </div>
             </li>
         </ul>

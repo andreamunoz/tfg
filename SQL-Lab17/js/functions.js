@@ -285,6 +285,9 @@ $(document).ready(function () {
         table.columns(3).search(tipo).draw(false);
     });
     
-    
+    $('.contenedor-item').click(function(){
+       var borrar = $(this).removeClass('border-left-white'); 
+       console.log($(this));
+    });
 });
 

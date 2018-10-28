@@ -47,13 +47,15 @@ $_SESSION['HOJA_EXE']= 1;
                             }
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
-                            echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
-                            while ($row_nivel = mysqli_fetch_array($res)) {
-                                echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
-                            }
+                            
+                                echo "<option value=None>Todos Niveles </option>";
+                                echo "<option value=facil> Facil </option>";
+                                echo "<option value=medio> Medio </option>";
+                                echo "<option value=dificil> Difícil </option>";
+                                
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
-                            echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
+                            echo "<option value=" . $row_tipo['tipo'] . ">Todas Categorías </option>";
                             while ($row_tipo = mysqli_fetch_array($resC)) {
                                 echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
                             }
@@ -71,9 +73,9 @@ $_SESSION['HOJA_EXE']= 1;
                             if($fila['deshabilitar']==0){ ?>
                                 <tr class="fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
+                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php if($_SESSION['user'] === $fila['creador_ejercicio']){ 
                                            if ($fila_sol["cantidad"] === "0"){?>
                                             

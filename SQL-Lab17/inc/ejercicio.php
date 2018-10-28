@@ -127,7 +127,7 @@ class Ejercicio{
         return $count;
     }
     
-    function getAllNiveles(){
+    function getAllNiveles(){ // NO DEVUELVE LOS DISTINTOS NIVELES.
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $sql = "SELECT DISTINCT(nivel) FROM sqlab_ejercicio";

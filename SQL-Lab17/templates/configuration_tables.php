@@ -27,7 +27,7 @@
                                 include_once '../inc/functions.php';
                                 $connect = new Tools();
                                 $conexion = $connect->connectDB();
-                                $sql = "SELECT td.nombre, td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.user = '".$_SESSION['user']."' and u.autoriza = 1";
+                                $sql = "SELECT td.nombre, td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.user = '".$_SESSION['user']."'";
                                 $consulta = mysqli_query($conexion, $sql);
                                 while (($fila = mysqli_fetch_array($consulta))) {
 
@@ -60,7 +60,7 @@
                             <div id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">  
-                                        <table id="structure_table"> <!-- class="table table-striped table-bordered">   -->
+                                        <table id="structure_table" class="structure"> <!-- class="table table-striped table-bordered">   -->
                                             <thead>
                                                 <tr>                                                      
                                                     <th style="width:30%;"><?php echo trad('Nombre Columna',$lang) ?></th>
@@ -80,10 +80,14 @@
                             <div id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">  
-                                        <table id="employee_table" class="table table-striped table-bordered">  
+                                        <table id="employee_table"><!--  class="table table-striped table-bordered data"> -->
+                                            <thead>
+                                            
+                                            </thead>
                                             <tbody>
                                                 
-                                            </tbody>
+                                            </tbody> 
+                                            
                                         </table>
                                     </div>  
                                 </div> 

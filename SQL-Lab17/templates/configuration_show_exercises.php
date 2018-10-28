@@ -32,14 +32,14 @@
     <div id="accordion" class="col-md-2 pr-1 float-right">
         <div class="card">  
             <div class="table-responsive">                
-                <table id="employee" class="table table-striped-config table-bordered"> 
+                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
-                            <th style="width:10%; text-align: center;"><?php echo trad('Nivel', $lang) ?></th>
+                            <th style="width:10%;"><?php echo trad('Nivel', $lang).":" ?></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <td style="text-align: center;"> <?php echo $ejercicioId['nivel']; ?> </td>
+                        <td > <?php echo $ejercicioId['nivel']; ?> </td>
                     </tbody>
                 </table>
             </div>
@@ -48,14 +48,14 @@
     <div id="accordion" class="col-md-3 pr-1 float-right">
         <div class="card">  
             <div class="table-responsive">                
-                <table id="employee" class="table table-striped-config table-bordered"> 
+                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
-                            <th style="width:20%; text-align: center;"><?php echo trad('Tipo', $lang) ?></th>
+                            <th style="width:20%;"><?php echo trad('Tipo', $lang).":" ?></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <td style="text-align: center;"> <?php echo $ejercicioId['tipo']; ?> </td>
+                        <td> <?php echo $ejercicioId['tipo']; ?> </td>
                     </tbody>
                 </table>
             </div>
@@ -64,14 +64,14 @@
     <div id="accordion" class="col-md-3 pr-1 float-right">
         <div class="card">  
             <div class="table-responsive">                
-                <table id="employee" class="table table-striped-config table-bordered"> 
+                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
-                            <th style="width:20%; text-align: center;"><?php echo trad('Descripción', $lang) ?></th>
+                            <th style="width:20%"><?php echo trad('Descripción', $lang).":" ?></th>
                         </tr>
                     </thead>
                     <tbody>
-                    <td style="text-align: center;"> <?php echo $ejercicioId['descripcion']; ?> </td>
+                    <td > <?php echo $ejercicioId['descripcion']; ?> </td>
                     </tbody>
                 </table>
             </div>
@@ -80,14 +80,14 @@
     <div class="col-md-8 pr-1 float-right" id="accordion ">
         <div class="card">  
             <div class="table-responsive">                
-                <table id="employee" class="table table-striped-config table-bordered"> 
+                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
-                            <th style="width:20%; padding-left: 100px;"><?php echo trad('Enunciado', $lang) ?></th>                         
+                            <th style="width:20%;"><?php echo trad('Enunciado', $lang).":" ?></th>                         
                         </tr>
                     </thead>
                     <tbody>
-                    <td style="padding-left: 100px; padding-right: 100px;"> <?php echo $ejercicioId['enunciado']; ?> </td>
+                    <td> <?php echo $ejercicioId['enunciado']; ?> </td>
                     </tbody>
                 </table>
             </div>
@@ -96,14 +96,14 @@
     <div class="col-md-8 pr-1 float-right" id="accordion ">
         <div class="card">  
             <div class="table-responsive">                
-                <table id="employee" class="table table-striped-config table-bordered"> 
+                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
-                            <th style="width:20%; padding-left: 100px;"><?php echo trad('Solución', $lang) ?></th>                         
+                            <th style="width:20%;"><?php echo trad('Solución', $lang).":" ?></th>                         
                         </tr>
                     </thead>
                     <tbody>
-                    <td style="padding-left: 100px; padding-right: 100px;"> <?php echo $ejercicioId['solucion'] ?> </td>
+                    <td > <?php echo $ejercicioId['solucion'] ?> </td>
                     </tbody>
                 </table>
             </div>
@@ -112,10 +112,10 @@
     <div class="col-md-4 pr-4" id="accordion ">
         <div class="card">  
             <div class="table-responsive">                
-                <table id="employee_table_hoja" class="table table-striped-config table-bordered"> 
+                <table id="employee_table_hoja" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
-                            <th style="text-align: center"><?php echo trad('Tablas', $lang) ?></th>                         
+                            <th><?php echo trad('Tablas', $lang).":" ?></th>                         
                         </tr>
                     </thead>
                     <tbody>
@@ -132,7 +132,7 @@
                                 $quitar = $nameTable['schema_prof'] . "_";
                                 $onlyName = explode($quitar, $nameTable['nombre']);
                                 ?>
-                                <td class="addFields" data-name="<?php echo $nameTable["nombre"]?>" style="text-align: center"> <?php echo $onlyName[1]; ?> </td>
+                                <td class="addFields" data-name="<?php echo $nameTable["nombre"]?>" > <?php echo $onlyName[1]; ?> </td>
                             </tr>    
                         <?php } ?>    
                     </tbody>
@@ -143,10 +143,10 @@
     <div class="col-md-4 pr-4" id="accordion ">
         <div class="card">  
             <div class="table-responsive">                
-                <table id="employee-fields" class="table table-striped-config table-bordered"> 
+                <table id="employee-fields" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
-                            <th style="text-align: center"><?php echo trad('Campos', $lang) ?></th>                         
+                            <th><?php echo trad('Campos', $lang).":" ?></th>                         
                         </tr>
                     </thead>
                     <tbody>

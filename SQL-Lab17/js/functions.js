@@ -19,6 +19,7 @@ $(document).ready(function () {
     $.ajax({
         type: "POST",
         url: "../templates/adm_profesor/getUser.php",
+        data: { prof: username },
         success: function (response)
         {
             $(".selector-user select").html(response).fadeIn();
@@ -105,6 +106,15 @@ $(document).ready(function () {
                 success: function(response)
                 {   
                     $('.structure tbody').html(response).fadeIn();
+                }
+            });
+            $.ajaz({
+                type: "POST",
+                url: "adm_profesor/getHeadColumns.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    $('.data thead').html(response).fadeIn();
                 }
             });
             $.ajax({
@@ -284,7 +294,7 @@ $(document).ready(function () {
         var table = $('#employee_data').DataTable();
         table.columns(3).search(tipo).draw(false);
     });
-    
+
     
 });
 

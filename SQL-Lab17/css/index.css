@@ -733,3 +733,23 @@ table#structure_table th {
 .dataTables_wrapper {
     position: unset !important;
 }
+
+.cambio-cabecera{
+}
+.cambio-cabecera thead tr{
+    background:#FFF ;
+    color: black;
+    text-align: left;
+    border-bottom: none !important;
+    border-top: none !important;
+}
+.cambio-cabecera thead tr th{
+    font-size: 13px !important;
+    border-bottom: none !important;
+    border-top: none !important;
+}
+.cambio-cabecera tbody td, table th {
+    border: none !important;
+    padding: .30rem !important;
+    /*border-bottom: 1px solid #D2D2D2;*/
+}

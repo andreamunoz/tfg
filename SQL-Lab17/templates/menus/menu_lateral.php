@@ -78,7 +78,7 @@
             <div class="logo-interior">
                 <i class="fas fa-table"></i>
             </div>
-            <p class="text-menu"><?php echo trad('Gestión de Datos',$lang) ?></p>
+            <p class="text-menu"><?php echo trad('Gestión de Tablas',$lang) ?></p>
         </div></a>
     <hr class="hrr">
     <a class="menu-item" href="configuration_exercises.php"><div class="contenedor-item">  

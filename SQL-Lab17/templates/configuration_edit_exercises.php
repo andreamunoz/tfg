@@ -64,14 +64,17 @@
                                     </div>
                                     <div class="col-md-2">
                                         <label for="name" ><strong><?php echo trad('Nivel',$lang) ?><span class="red"> *</span></strong></label> 
-                                        <select name="nivel" class="custom-select form-control-sm " title="Selecciona" id="select_nivel">
+                                        <select name="nivel" class="custom-select form-control-sm " title="Selecciona" id="nivel">
                                             <?php
-                                            $niveles = $ejer->getAllNiveles();
-                                            while ($nivel = mysqli_fetch_array($niveles)) {                                              
-                                                if($ejercicioId['nivel'] == $nivel['nivel'])                                                   
-                                                    echo "<option value=" . $nivel['nivel'] . " selected>" . $nivel['nivel'] . " </option>";
-                                                else
-                                                    echo "<option value=" . $nivel['nivel'] . " >" . $nivel['nivel'] . " </option>";
+                                            $niveles = array("facil","medio","dificil");
+                                            for ($i=0; $i < count($niveles); $i++) { 
+                                                                                          
+                                                var_dump($niveles[$i]);
+                                                if ($ejercicioId['nivel'] === $niveles[$i]){                                                   
+                                                    echo "<option value=".$niveles[$i]." selected>".$niveles[$i]." </option>";
+                                                } else {
+                                                    echo "<option value=".$niveles[$i]." >".$niveles[$i]." </option>";
+                                                }
                                             }   
                                             ?>              
                                         </select>                                        

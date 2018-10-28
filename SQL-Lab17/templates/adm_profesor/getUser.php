@@ -4,7 +4,7 @@ include_once '../../inc/functions.php';
 
 $connect = new Tools();
 $conexion = $connect->connectDB();
-$sql = "SELECT DISTINCT td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.autoriza = 1";
+$sql = "SELECT DISTINCT td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where (td.schema_prof = u.user and u.autoriza = 1) or (td.schema_prof = u.user and u.user = '".$_REQUEST["prof"]."'); ";
 $consulta = mysqli_query($conexion,$sql);
 $i=1;
 $nombres = array();

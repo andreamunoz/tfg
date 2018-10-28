@@ -27,7 +27,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 p-0">                                    
-                                <input type="text" id="edit_name_sheet" name="edit_name_sheet" value="<?php echo $descripcion ?>" class="form-control form-control-sm" required/>
+                                <input type="text" id="edit_name_sheet" name="edit_name_sheet" value="<?php echo $descripcion ?>" class="form-control form-control-sm" disabled/>
                             </div>
                         </div>
                         <div class="row">

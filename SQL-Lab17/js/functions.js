@@ -296,5 +296,10 @@ $(document).ready(function () {
     });
 
     
+    $('.contenedor-item').click(function(){
+       var borrar = $(this).removeClass('border-left-white'); 
+       console.log($(this));
+    });
+
 });
 

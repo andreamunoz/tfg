@@ -11,7 +11,7 @@
 
     </div>
      
-    <a class="menu-item" href="index.php"><div id="contenedor-general-espacio" class="contenedor-item">
+    <a class="menu-item" href="index.php"><div id="contenedor-general-espacio" class="contenedor-item border-left-white">
         <div class="logo-interior">
             <i class="fas fa-home"></i>
         </div>
@@ -67,7 +67,7 @@
 
     </div>
      
-    <a class="menu-item" href="index.php"><div id="contenedor-general-espacio" class="contenedor-item">
+    <a class="menu-item" href="index.php"><div id="contenedor-general-espacio" class="contenedor-item border-left-white">
         <div class="logo-interior">
             <i class="fas fa-home"></i>
         </div>

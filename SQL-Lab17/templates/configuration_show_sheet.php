@@ -20,7 +20,7 @@
                 <table id="employee_data" class="table table-striped-conf table-bordered">
                     <thead>
                         <tr>
-                            <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:20%;"><?php echo trad('Descripción',$lang) ?></th>
                             <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
                             <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
@@ -44,7 +44,7 @@
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
                             echo "<option value=". $row_profe['creador_ejercicio'] .">Todos Profesores </option>";
                             while ($row_profe = mysqli_fetch_array($resP)) {
-                                echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['creador_ejercicio'] . " </option>";
+                                echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['nombre'].' '. $row_profe['apellidos']. " </option>";
                             }
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
@@ -73,8 +73,8 @@
                                 $fila_sol = mysqli_fetch_array($solucion);
                                 ?> 
                             <tr class="fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
-                                <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
-                                <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
+                                <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
+                                <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
 

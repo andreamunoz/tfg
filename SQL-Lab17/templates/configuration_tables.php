@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="table-responsive" style="margin-top: 71px;">  
-                        <table id="employee_list" class="table table-striped-config table-bordered">  
+                        <table id="employee" class="table table-striped-config table-bordered">  
                             <thead>
                                 <tr>
                                     <th style="width:30%;"><?php echo trad('Tablas',$lang) ?></th>
@@ -60,13 +60,9 @@
                             <div id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">  
-                                        <table id="structure_table" class="structure"> <!-- class="table table-striped table-bordered">   -->
+                                        <table id="structure_table" > <!-- class="table table-striped table-bordered">   -->
                                             <thead>
-                                                <tr>                                                      
-                                                    <th style="width:30%;"><?php echo trad('Nombre Columna',$lang) ?></th>
-                                                    <th style="width:30%;"><?php echo trad('Tipo Columna',$lang) ?></th>
-                                                    <th style="width:20%;"><?php echo trad('Clave',$lang) ?></th>                                                  
-                                                </tr>
+                                                
                                             </thead>
                                             <tbody>
                                                 
@@ -80,7 +76,7 @@
                             <div id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">  
-                                        <table id="employee_table"><!--  class="table table-striped table-bordered data"> -->
+                                        <table id="structure_table">
                                             <thead>
                                             
                                             </thead>

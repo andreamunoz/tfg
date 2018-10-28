@@ -53,14 +53,16 @@
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
                                                     echo "<option value=". $row_profe['creador_ejercicio'] .">Todos Profesores </option>";
                                                     while ($row_profe = mysqli_fetch_array($resP)) {
-                                                        echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['creador_ejercicio'] . " </option>";
+                                                        echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
                                                     }
                                                     echo '</select>';
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
                                                     echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
-                                                    while ($row_nivel = mysqli_fetch_array($res)) {
-                                                        echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
-                                                    }
+                                                    
+                                                        echo "<option value='facil'>Facil </option>";
+                                                        echo "<option value='medio'>Medio </option>";
+                                                        echo "<option value='dificil'>Dificil </option>";
+                                                    
                                                     echo '</select>';
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
                                                     echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
@@ -81,7 +83,7 @@
                                                     <tr>
 
                                                         <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
-                                                        <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
+                                                        <?php echo '<td>' . $fila['nombre'].' '. $fila['apellidos']. '</td>'; ?>
                                                         <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                         <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
 

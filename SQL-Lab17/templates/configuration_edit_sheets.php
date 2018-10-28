@@ -41,7 +41,7 @@
                                     <table id="employee_table_hoja" class="table table-striped-conf table-bordered table-sortable">  
                                         <thead>
                                             <tr>                                                      
-                                                <th style="width:10%;"><?php echo trad('Nombre Ejercicio', $lang) ?></th>
+                                                <th style="width:10%;"><?php echo trad('Descripción', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Nivel', $lang) ?></th>
                                                 <th style="width:20%;"><?php echo trad('Tipo', $lang) ?></th>
@@ -63,8 +63,8 @@
                                                 ?>
                                                 <?php if ($ejercicios_hoja == 1) { ?>
                                                 <tr class="del" data-index="<?php echo $fila['id_ejercicio']?>" data-index-sheet="<?php echo $id_hoja?>" data-position="<?php echo $fila['orden']?>">
-                                                    <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
-                                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
+                                                    <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
+                                                    <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                                     <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-select-ejer" id='. $fila["id_ejercicio"] .' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' onclick=checkDes('. $fila["id_ejercicio"] .') checked ></td>' ?>
@@ -86,7 +86,7 @@
                                     <table id="employee_data" class="table table-striped-conf table-bordered añadir">  
                                         <thead>
                                             <tr>                                                      
-                                                <th style="width:10%;"><?php echo trad('Nombre Ejercicio', $lang) ?></th>
+                                                <th style="width:10%;"><?php echo trad('Descripción', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Nivel', $lang) ?></th>
                                                 <th style="width:20%;"><?php echo trad('Tipo', $lang) ?></th>
@@ -108,14 +108,16 @@
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
                                                 echo "<option value=". $row_profe['creador_ejercicio'] .">Todos Profesores </option>";
                                                 while ($row_profe = mysqli_fetch_array($resP)) {
-                                                    echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['creador_ejercicio'] . " </option>";
+                                                    echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
                                                 }
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
                                                 echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
-                                                while ($row_nivel = mysqli_fetch_array($res)) {
-                                                    echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
-                                                }
+                                                
+                                                    echo "<option value='facil'>Fácil</option>";
+                                                    echo "<option value='medio'>Medio</option>";
+                                                    echo "<option value='dificil'>Difícil</option>";
+                                                
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
                                                 echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
@@ -132,7 +134,7 @@
                                                 ?>
                                                 <?php if ($ejercicios_hoja != 1) { ?>
                                                 <tr class="add" data-index="<?php echo $fila['id_ejercicio']?>" data-index-sheet="<?php echo $id_hoja?>" data-position="">
-                                                    <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
+                                                    <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?> 
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>

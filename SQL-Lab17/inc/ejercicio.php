@@ -149,7 +149,7 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM sqlab_ejercicio ORDER BY descripcion;";
+        $sql = "SELECT e.descripcion, e.nivel, e.tipo, e.id_ejercicio, e.creador_ejercicio, e.deshabilitar, u.nombre, u.apellidos FROM sqlab_ejercicio e, sqlab_usuario u WHERE e.creador_ejercicio = u.user ORDER BY e.descripcion;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -180,7 +180,7 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM sqlab_ejercicio WHERE deshabilitar='0';";
+        $sql = "SELECT e.id_ejercicio, e.nivel, e.enunciado, e.descripcion, e.deshabilitar, e.tipo, e.creador_ejercicio, e.dueño_tablas, e.solucion, u.nombre, u.apellidos FROM sqlab_ejercicio e, sqlab_usuario u WHERE deshabilitar='0' and u.user = e.creador_ejercicio;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -190,7 +190,7 @@ class Ejercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT DISTINCT(`sqlab_ejercicio`.`id_ejercicio`),`nivel`,`tipo`,`creador_ejercicio`, `orden` FROM `sqlab_ejercicio`,`sqlab_esta_contenido` WHERE `sqlab_ejercicio`.`id_ejercicio`=`sqlab_esta_contenido`.`id_ejercicio` and `deshabilitar`='0' and `sqlab_esta_contenido`.`id_hoja`=$id ORDER BY `sqlab_esta_contenido`.`orden` ASC";
+        $sql = "SELECT DISTINCT(sqlab_ejercicio.id_ejercicio),nivel,tipo,descripcion, creador_ejercicio, orden, nombre, apellidos FROM sqlab_ejercicio,sqlab_esta_contenido, sqlab_usuario WHERE sqlab_ejercicio.id_ejercicio=sqlab_esta_contenido.id_ejercicio and deshabilitar='0' and sqlab_usuario.user = sqlab_ejercicio.creador_ejercicio and sqlab_esta_contenido.id_hoja=$id ORDER BY sqlab_esta_contenido.orden ASC";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -544,7 +544,7 @@ class Ejercicio{
     function getCreadorEjercicio(){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT DISTINCT(`creador_ejercicio`) FROM `sqlab_ejercicio`;";
+        $sql = "SELECT DISTINCT(e.creador_ejercicio), u.nombre, u.apellidos FROM sqlab_ejercicio e, sqlab_usuario u WHERE e.creador_ejercicio = u.user;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

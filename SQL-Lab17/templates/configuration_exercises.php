@@ -43,7 +43,7 @@ $_SESSION['HOJA_EXE']= 1;
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
                             echo "<option value=". $row_profe['creador_hoja'] .">Todos Profesores </option>";
                             while ($row_profe = mysqli_fetch_array($resP)) {
-                                echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['creador_ejercicio'] . " </option>";
+                                echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['nombre'].' '. $row_profe['apellidos'] . " </option>";
                             }
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
@@ -73,7 +73,7 @@ $_SESSION['HOJA_EXE']= 1;
                             if($fila['deshabilitar']==0){ ?>
                                 <tr class="fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
-                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
+                                    <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                     <?php if($_SESSION['user'] === $fila['creador_ejercicio']){ 

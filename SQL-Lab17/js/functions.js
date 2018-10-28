@@ -108,7 +108,7 @@ $(document).ready(function () {
                     $('.structure tbody').html(response).fadeIn();
                 }
             });
-            $.ajaz({
+            $.ajax({
                 type: "POST",
                 url: "adm_profesor/getHeadColumns.php",
                 data: form_data,
@@ -197,24 +197,34 @@ $(document).ready(function () {
 
     $('.resaltado').click(function(){      
         var tabla = $(this).attr("data-name");
-        console.log(tabla);
+
+        $('#nav-table-structure thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/getData.php",
             data: { tabla: tabla },
             success: function(response)
             {
-                console.log(response);
+                // console.log(response);
                 $('#nav-table-datos tbody').html(response).fadeIn();
             }
         });
+        $.ajax({
+                type: "POST",
+                url: "../templates/adm_profesor/getHeadColumns.php",
+                data: { tabla: tabla },
+                success: function(response)
+                {   
+                    $('#nav-table-datos thead').html(response).fadeIn();
+                }
+            });
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/getStructure.php",
             data: { tabla: tabla },
             success: function(response)
             {
-                console.log(response);
+                // console.log(response);
                 $('#nav-table-structure tbody').html(response).fadeIn();
             }
         });

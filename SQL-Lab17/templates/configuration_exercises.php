@@ -20,9 +20,9 @@ $_SESSION['HOJA_EXE']= 1;
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>
                         <tr>
-                            <th style="width:40%;"><?php echo trad('Descripción',$lang) ?></th>
+                            <th style="width:25%;"><?php echo trad('Descripción',$lang) ?></th>
                             <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
-                            <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
                             <th></th>
                         </tr>
@@ -37,13 +37,13 @@ $_SESSION['HOJA_EXE']= 1;
                         $hojaejer = new HojaEjercicio();
                         $res= $ejer->getAllNiveles();
                         $resC = $ejer->getAllCategorias();
-                        $resP = $hojaejer->getCreadorHojas();
+                        $resP = $ejer->getCreadorEjercicio();
                         if (isset($res) && isset($resC) && isset($resP)) {
                             
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
                             echo "<option value=". $row_profe['creador_hoja'] .">Todos Profesores </option>";
                             while ($row_profe = mysqli_fetch_array($resP)) {
-                                echo "<option value=" . $row_profe['creador_hoja'] . ">" . $row_profe['creador_hoja'] . " </option>";
+                                echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['creador_ejercicio'] . " </option>";
                             }
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
@@ -71,9 +71,9 @@ $_SESSION['HOJA_EXE']= 1;
                             if($fila['deshabilitar']==0){ ?>
                                 <tr class="fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
+                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
                                     <?php if($_SESSION['user'] === $fila['creador_ejercicio']){ 
                                            if ($fila_sol["cantidad"] === "0"){?>
                                             

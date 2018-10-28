@@ -38,13 +38,13 @@
                         $hojaejer = new HojaEjercicio();
                         $res= $ejer->getAllNiveles();
                         $resC = $ejer->getAllCategorias();
-                        $resP = $hojaejer->getCreadorHojas();
+                        $resP = $ejer->getCreadorEjercicio();
                         if (isset($res) && isset($resC) && isset($resP)) {
                             
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
-                            echo "<option value=". $row_profe['creador_hoja'] .">Todos Profesores </option>";
+                            echo "<option value=". $row_profe['creador_ejercicio'] .">Todos Profesores </option>";
                             while ($row_profe = mysqli_fetch_array($resP)) {
-                                echo "<option value=" . $row_profe['creador_hoja'] . ">" . $row_profe['creador_hoja'] . " </option>";
+                                echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['creador_ejercicio'] . " </option>";
                             }
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';

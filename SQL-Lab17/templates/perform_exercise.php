@@ -65,14 +65,14 @@
                             <div class="col-md-6 pl-0 pr-3 float-left" id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">                
-                                        <table id="employee" class="table table-striped table-bordered"> 
+                                        <table id="employee" class="table table-striped-config table-bordered"> 
                                             <thead>
                                                 <tr>
                                                     <th style="width:20%; text-align: center"><?php echo trad('Enunciado', $lang) ?></th>                         
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <td > <?php echo $ejercicioId['enunciado']; ?> </td>
+                                            <td style="padding-left: 75px; padding-right: 75px;"> <?php echo $ejercicioId['enunciado']; ?> </td>
                                             </tbody>
                                         </table>
                                     </div>
@@ -81,7 +81,7 @@
                             <div class="col-md-6 pl-0 pr-3 float-left" id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">                
-                                        <table id="employee" class="table table-striped table-bordered"> 
+                                        <table id="employee_table_hoja" class="table table-striped-config table-bordered"> 
                                             <thead>
                                                 <tr>
                                                     <th style="text-align: center"><?php echo trad('Tablas', $lang) ?></th>                         
@@ -101,7 +101,7 @@
                                                         $quitar = $nameTable['schema_prof'] . "_";
                                                         $onlyName = explode($quitar, $nameTable['nombre']);
                                                     ?>
-                                                    <td style="text-align: center"> <?php echo $onlyName[1]; ?> </td>
+                                                    <td class="addFields" data-name="<?php echo $nameTable["nombre"]?>" style="text-align: center"> <?php echo $onlyName[1]; ?> </td>
                                                 </tr>    
                                                 <?php } ?>    
                                             </tbody>
@@ -112,35 +112,14 @@
                             <div class="col-md-6 pl-0 pr-3 float-left" id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">                
-                                        <table id="employee" class="table table-striped table-bordered"> 
+                                        <table id="employee-fields" class="table table-striped-config table-bordered"> 
                                             <thead>
                                                 <tr>
                                                     <th style="text-align: center"><?php echo trad('Campos', $lang) ?></th>                         
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php 
-                                                    $i = 0;
-                                                    while($i < $cont){
-                                                        include_once '../inc/functions.php';
-                                                        $connect = new Tools();
-                                                        $conexion = $connect->connectDB();
-                                                        $sql = "SELECT * FROM $arrayTablas[$i];";
-                                                        $consulta = mysqli_query($conexion, $sql);
-                                                        while($nameCampos = mysqli_fetch_field($consulta)){
-                                                        ?>
-                                                        <tr>
-                                                            <td style="text-align: center"> <?php echo $nameCampos->name; ?> </td>
-                                                        </tr>    
-                                                        <?php }
-                                                        $connect->disconnectDB($conexion); 
-                                                        $i++;
-                                                    }
-                                                    if($i == 0){ ?>
-                                                        <tr>
-                                                            <td style="text-align: center"> <?php echo trad('No existen datos en esta tabla', $lang) ?></td>
-                                                        </tr>
-                                                <?php } ?>    
+                                                
                                             </tbody>
                                         </table>
                                     </div>

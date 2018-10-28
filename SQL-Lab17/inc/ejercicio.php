@@ -541,4 +541,12 @@ class Ejercicio{
         return $consulta;
     }
    
+    function getCreadorEjercicio(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT DISTINCT(`creador_ejercicio`) FROM `sqlab_ejercicio`;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
 }

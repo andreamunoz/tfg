@@ -47,7 +47,8 @@
                 <table id="employee_data" class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:5%;"></th>
                             <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
                             <th style="width:15%;"><?php echo trad('N. Intentos',$lang) ?></th>                      
@@ -56,10 +57,28 @@
                     <tbody>
                         <?php
                         include_once '../inc/ejercicio.php';
-                        $ejer = new HojaEjercicio();
-                        $result = $ejer->getHojasYEjerciciosById($hojaparameter);
+                        $ejer = new Ejercicio();
                         include_once '../inc/solucion.php';
                         $sol = new Solucion();
+                        include_once '../inc/hoja_ejercicio.php';
+                        $hojaejer = new HojaEjercicio();
+                        $res= $ejer->getAllNiveles();
+                        $resC = $ejer->getAllCategorias();
+                        $resP = $hojaejer->getCreadorHojas();
+                        if (isset($res) && isset($resC) && isset($resP)) {
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
+                            echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
+                            while ($row_nivel = mysqli_fetch_array($res)) {
+                                echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
+                            }
+                            echo '</select>';
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
+                            echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
+                            while ($row_tipo = mysqli_fetch_array($resC)) {
+                                echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
+                            }
+                            echo '</select>';
+                        $result = $hojaejer->getHojasYEjerciciosById($hojaparameter);
                         while ($fila = mysqli_fetch_array($result)) {
                             $id = $fila['id_ejercicio'];
                             $user = $_SESSION['user'];
@@ -74,6 +93,7 @@
                                 <tr class="fondo_blanco" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
                             <?php } ?> 	
                                 <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
+                                <?php echo '<td></td>'; ?>    
                                 <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                 <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                 <?php if($numIntentos['intentos'] != '') { ?>
@@ -81,7 +101,7 @@
                                 <?php } else { ?>
                                     <?php echo '<td>0</td>'; }?>
                                 </tr>
-                        <?php } ?>
+                        <?php } } ?>
                     </tbody>
                 </table>
             </div>

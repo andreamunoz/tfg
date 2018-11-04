@@ -186,7 +186,7 @@ class Administrar_schema{
 
         $admin->updateTablasDisponibles($profe);
         if($bienEjecutadas === $contador){
-            $arrayResultado = "Sentencias ejecutadas correctamente.";
+            $arrayResultado = "";
             unset($_SESSION['guardarDatosTablas']);
         }else{
             foreach ($arrayResultado as $key => $value) {

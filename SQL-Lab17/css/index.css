@@ -455,6 +455,15 @@ table.dataTable .border-veredictoA{
 
 }
 
+.modal-header .close{
+    color: #9b9a9a;
+    cursor: pointer;
+    float: right;
+}
+.close:hover{
+    color: #CECDCD !important;
+}
+
 .modal-body {
     text-align: left;
 }

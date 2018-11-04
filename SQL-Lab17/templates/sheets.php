@@ -14,7 +14,7 @@
                             <th style="width:20%;"><?php echo trad('Nombre Hoja',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Nombre Profesor',$lang) ?></th>
                             <th style="width: 15%"><?php echo trad('N. Ejercicios',$lang) ?></th>
-                            <th style="width: 20%"><?php echo trad('N. Ejercicios Resueltos Bien',$lang) ?></th>
+                            <th style="width: 20%"><?php echo trad('N. Ejercicios Resueltos',$lang) ?></th>
                             <th style="width: 20%"><?php echo trad('N. Ejercicios Intentados',$lang) ?></th>                          
                         </tr>
                     </thead>

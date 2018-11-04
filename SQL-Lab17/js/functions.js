@@ -311,5 +311,10 @@ $(document).ready(function () {
        console.log($(this));
     });
 
+    $('#close-tablas').click(function(){
+        $('#modal-tables').hide();
+    });
+
+
 });
 

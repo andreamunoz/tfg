@@ -11,11 +11,12 @@
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>
                         <tr>
-                            <th style="width:20%;"><?php echo trad('Nombre Ejercicio',$lang) ?></th>
+                            <th style="width:39%;"><?php echo trad('Descripción',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Profesor',$lang) ?></th>
                             <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
-                            <th style="width:15%;"><?php echo trad('N. Intentos',$lang) ?></th>                      
+                            <th style="width:10%;"><?php echo trad('N. Intentos',$lang) ?></th>                      
+                            <th style="width:1%;"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -61,16 +62,25 @@
                                 <?php } else if ($fila_sol['veredicto'] == '0') { ?> 
                                     <tr class="ejercicio_fallo" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
                                 <?php } else { ?>
-                                    <tr class="fondo_blanco" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
+                                    <tr class="fondo_blanco" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'"> 
                                 <?php } ?>
-                                    <?php echo '<td>Ejercicio ' . $fila['id_ejercicio'] . '</td>'; ?>
+                                    <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nombre'] .' '.$fila['apellidos']. '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                     <?php if($numIntentos['intentos'] != '') { ?>
-                                        <?php echo '<td>' . $numIntentos['intentos'] . '</td>'; ?>     
+                                        <?php 
+                                            echo '<td>' . $numIntentos['intentos'] . '</td>'; 
+                                            if($fila_sol['veredicto'] == '1') {
+                                                echo '<td style="background-color: green"></td>';
+                                            }else{
+                                                echo '<td style="background-color: red"></td>';
+
+                                            }
+                                             
+                                        ?>
                                     <?php } else { ?>
-                                        <?php echo '<td>0</td>'; }?>
+                                        <?php echo '<td>0</td><td style="background-color: purple"></td>'; }?>
                                     </tr>  
                             <?php } 
                         } ?>

@@ -27,7 +27,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 p-0">                                    
-                                <input type="text" id="edit_name_sheet" name="edit_name_sheet" value="<?php echo $descripcion ?>" class="form-control form-control-sm" disabled/>
+                                <input type="text" id="edit_name_sheet" name="edit_name_sheet" value="<?php echo $descripcion ?>" class="form-control form-control-sm" required/>
                             </div>
                         </div>
                         <div class="row">
@@ -41,10 +41,10 @@
                                     <table id="employee_table_hoja" class="table table-striped-conf table-bordered table-sortable">  
                                         <thead>
                                             <tr>                                                      
-                                                <th style="width:10%;"><?php echo trad('Descripción', $lang) ?></th>
+                                                <th style="width:30%;"><?php echo trad('Descripción', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Nivel', $lang) ?></th>
-                                                <th style="width:20%;"><?php echo trad('Tipo', $lang) ?></th>
+                                                <th style="width:10%;"><?php echo trad('Tipo', $lang) ?></th>
                                                 <th style="width:10%; text-align: center"><?php echo trad('Seleccionados', $lang) ?></th>
                                             </tr>
                                         </thead>
@@ -86,10 +86,10 @@
                                     <table id="employee_data" class="table table-striped-conf table-bordered añadir">  
                                         <thead>
                                             <tr>                                                      
-                                                <th style="width:10%;"><?php echo trad('Descripción', $lang) ?></th>
+                                                <th style="width:30%;"><?php echo trad('Descripción', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Nivel', $lang) ?></th>
-                                                <th style="width:20%;"><?php echo trad('Tipo', $lang) ?></th>
+                                                <th style="width:10%;"><?php echo trad('Tipo', $lang) ?></th>
                                                 <th style="width:10%; text-align: center"><?php echo trad('Añadir', $lang) ?></th>
                                             </tr>
                                         </thead>
@@ -105,22 +105,22 @@
                                             $resC = $ejer->getAllCategorias();
                                             $resP = $ejer->getCreadorEjercicio();
                                             if (isset($res) && isset($resC) && isset($resP)) {
-                                                echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
-                                                echo "<option value=". $row_profe['creador_ejercicio'] .">Todos Profesores </option>";
+                                                echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona Profesor" id="select_hoja">';
+                                                echo "<option value=''>Todos Profesores </option>";
                                                 while ($row_profe = mysqli_fetch_array($resP)) {
                                                     echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
                                                 }
                                                 echo '</select>';
-                                                echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
-                                                echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
+                                                echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona Nivel" id="select_hoja">';
+                                                echo "<option value=". $row_nivel['nivel'] .">Todos Niveles </option>";
                                                 
                                                     echo "<option value='facil'>Fácil</option>";
                                                     echo "<option value='medio'>Medio</option>";
                                                     echo "<option value='dificil'>Difícil</option>";
                                                 
                                                 echo '</select>';
-                                                echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
-                                                echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
+                                                echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona Categoria" id="select_hoja">';
+                                                echo "<option value=''>Todas Categorías</option>";
                                                 while ($row_tipo = mysqli_fetch_array($resC)) {
                                                     echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
                                                 }

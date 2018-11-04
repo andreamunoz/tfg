@@ -755,3 +755,16 @@ table#structure_table th {
     padding: .30rem !important;
     /*border-bottom: 1px solid #D2D2D2;*/
 }
+
+p#small{
+    font-size: 10px !important;
+    font-style: italic !important;
+}
+
+.line-left{
+    border-left: solid 3px #969595;
+    margin: 8px;
+}
+.progress{
+    background-color: #CBCBCB; 
+}

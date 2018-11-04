@@ -31,7 +31,7 @@
     </div> 
     <div id="accordion" class="col-md-2 pr-1 float-right">
         <div class="card">  
-            <div class="table-responsive">                
+            <div class="table-responsive line-left">                
                 <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
@@ -47,7 +47,7 @@
     </div>
     <div id="accordion" class="col-md-3 pr-1 float-right">
         <div class="card">  
-            <div class="table-responsive">                
+            <div class="table-responsive line-left">                
                 <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
@@ -63,7 +63,7 @@
     </div>
     <div id="accordion" class="col-md-3 pr-1 float-right">
         <div class="card">  
-            <div class="table-responsive">                
+            <div class="table-responsive line-left">                
                 <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
@@ -77,9 +77,9 @@
             </div>
         </div>
     </div>
-    <div class="col-md-8 pr-1 float-right" id="accordion ">
+    <div class="col-md-8 pr-1 float-right" id="accordion">
         <div class="card">  
-            <div class="table-responsive">                
+            <div class="table-responsive line-left">                
                 <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
@@ -95,7 +95,7 @@
     </div>
     <div class="col-md-8 pr-1 float-right" id="accordion ">
         <div class="card">  
-            <div class="table-responsive">                
+            <div class="table-responsive line-left">                
                 <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
@@ -111,11 +111,11 @@
     </div>
     <div class="col-md-4 pr-4" id="accordion ">
         <div class="card">  
-            <div class="table-responsive">                
+            <div class="table-responsive line-left">                
                 <table id="employee_table_hoja" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>
-                            <th><?php echo trad('Tablas', $lang).":" ?></th>                         
+                            <th><?php echo trad('Tablas', $lang).":"?><p id="small"> <?php echo '('.trad('Pulsa cada tabla para ver sus campos', $lang).')'; ?> </p></th>                         
                         </tr>
                     </thead>
                     <tbody>
@@ -142,7 +142,7 @@
     </div>
     <div class="col-md-4 pr-4" id="accordion ">
         <div class="card">  
-            <div class="table-responsive">                
+            <div class="table-responsive line-left">                
                 <table id="employee-fields" class="table table-striped-config table-bordered cambio-cabecera"> 
                     <thead>
                         <tr>

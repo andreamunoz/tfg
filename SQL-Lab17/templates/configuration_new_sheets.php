@@ -51,13 +51,13 @@
                                                 $resP = $ejer->getCreadorEjercicio();
                                                 if (isset($res) && isset($resC) && isset($resP)) {
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
-                                                    echo "<option value=". $row_profe['creador_ejercicio'] .">Todos Profesores </option>";
+                                                    echo "<option value=''>Todos Profesores </option>";
                                                     while ($row_profe = mysqli_fetch_array($resP)) {
                                                         echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
                                                     }
                                                     echo '</select>';
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
-                                                    echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
+                                                    echo "<option value=''>Todos Niveles </option>";
                                                     
                                                         echo "<option value='facil'>Facil </option>";
                                                         echo "<option value='medio'>Medio </option>";
@@ -65,7 +65,7 @@
                                                     
                                                     echo '</select>';
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
-                                                    echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
+                                                    echo "<option value=''>Todas Categorías </option>";
                                                     while ($row_tipo = mysqli_fetch_array($resC)) {
                                                         echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
                                                     }

@@ -11,13 +11,12 @@
       ?>
     <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="sheet_exercise.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?> | Profesor: <?php echo $nombreProfesor['nombre'] .' '. $nombreProfesor['apellidos']; ?> </strong></h2>
-    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
     <div class="row pt-2 pb-4">
         <div class="col-md-3  offset-9">
             <div class="progress">
                 <?php
                 $res = $hojaejer->getIdByName($hojaparameter);
-                $idHoja = $res['id_hoja'];
+                $idHoja = $_GET['hoja'];
                 include_once '../inc/esta_contenido.php';
                 $estaCon = new EstaContenido();
                 $r = $estaCon->getNumEjercicios($idHoja);
@@ -29,13 +28,12 @@
                 if ($rCon['veredicto'] > '0') {
                     $resultadoDec = ($rCon['veredicto'] / $r['num']) * 100;
                     $resultado = round($resultadoDec);
-                    echo '<div class="progress-bar" role="progressbar" aria-valuenow="70"
-					  aria-valuemin="0" aria-valuemax="100" style="width:' . $resultado . '%"><p>' . $resultado . '%</p>
+                    echo '<div class="progress-bar" role="progressbar" aria-valuenow='.$resultado.'
+					  aria-valuemin="0" aria-valuemax="100" style="width:' . $resultado . '%"><span>' . $resultado . '%</span>
 					  </div>';
                 } else {
-                    echo '<div class="progress-bar" role="progressbar" aria-valuenow="0"
-					  aria-valuemin="0" aria-valuemax="100" style="width:0%"><p>0%</p>
-					  </div>';
+                    echo '<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span>0%</span>
+					    </div>';
                 }
                 ?>
             </div> 
@@ -67,13 +65,13 @@
                         $resP = $hojaejer->getCreadorHojas();
                         if (isset($res) && isset($resC) && isset($resP)) {
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
-                            echo "<option value=". $row_nivel['nivel'] .">Niveles </option>";
+                            echo "<option value=''>Todos Niveles </option>";
                             while ($row_nivel = mysqli_fetch_array($res)) {
                                 echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
                             }
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
-                            echo "<option value=" . $row_tipo['tipo'] . ">Categoría </option>";
+                            echo "<option value=''>Todas Categorías </option>";
                             while ($row_tipo = mysqli_fetch_array($resC)) {
                                 echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
                             }

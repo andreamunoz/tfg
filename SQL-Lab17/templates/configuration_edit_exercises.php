@@ -50,10 +50,7 @@
                                     <div class="col-md-4">
                                         <label><strong><?php echo trad('Información Campos',$lang) ?></strong></label>
                                         <div class=" columnas-tabla" >
-                                            <table id="columnas" class="form-control">
-                                                <tbody>
-                                                </tbody>
-                                            </table>                                                             
+                                            <table id="columnas" class="form-control"><tbody></tbody></table>                                                             
                                         </div>
                                     </div>
                                 </div>

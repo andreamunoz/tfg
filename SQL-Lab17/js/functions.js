@@ -74,10 +74,10 @@ $(document).ready(function () {
         });
     });
 
-    $(".selector-tabla select").click(function() {
+    $(".selector-tabla-show select").click(function() {
         var form_data = {
             is_ajax: 1,
-            tabla: $(".selector-tabla select option:checked").val()
+            tabla: $(".selector-tabla-show select option:checked").val()
         };
         $.ajax({
             type: "POST",
@@ -85,7 +85,7 @@ $(document).ready(function () {
             data: form_data,
             success: function(response)
             {   
-                $('.columnas-tabla #columnas tbody').html(response).fadeIn();
+                $('.columnas-tabla-show #columnas tbody').html(response).fadeIn();
             }
         });
     });
@@ -193,11 +193,14 @@ $(document).ready(function () {
     });
     
 /***** FIN AVISOS *****/
-
-
+    
+    $(".tabla-tablas tr").click(function() { 
+        var selected = $(this).hasClass("highlight"); 
+        $(".tabla-tablas tr").removeClass("highlight"); 
+        if(!selected) $(this).addClass("highlight"); 
+    }); 
     $('.resaltado').click(function(){      
         var tabla = $(this).attr("data-name");
-
         $('#nav-table-structure thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
         $.ajax({
             method: "POST",

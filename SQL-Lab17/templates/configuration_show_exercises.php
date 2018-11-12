@@ -29,130 +29,101 @@
             <p><?php echo trad('Muestra el ejercicio con todos sus campos que se encuentran en la BBDD.', $lang) ?></p>
         </div>
     </div> 
-    <div id="accordion" class="col-md-2 pr-1 float-right">
-        <div class="card">  
-            <div class="table-responsive line-left">                
-                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
-                    <thead>
-                        <tr>
-                            <th style="width:10%;"><?php echo trad('Nivel', $lang).":" ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td > <?php echo $ejercicioId['nivel']; ?> </td>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div id="accordion" class="col-md-3 pr-1 float-right">
-        <div class="card">  
-            <div class="table-responsive line-left">                
-                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
-                    <thead>
-                        <tr>
-                            <th style="width:20%;"><?php echo trad('Tipo', $lang).":" ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <td> <?php echo $ejercicioId['tipo']; ?> </td>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div id="accordion" class="col-md-3 pr-1 float-right">
-        <div class="card">  
-            <div class="table-responsive line-left">                
-                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
-                    <thead>
-                        <tr>
-                            <th style="width:20%"><?php echo trad('Descripción', $lang).":" ?></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <td > <?php echo $ejercicioId['descripcion']; ?> </td>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-8 pr-1 float-right" id="accordion">
-        <div class="card">  
-            <div class="table-responsive line-left">                
-                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
-                    <thead>
-                        <tr>
-                            <th style="width:20%;"><?php echo trad('Enunciado', $lang).":" ?></th>                         
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <td> <?php echo $ejercicioId['enunciado']; ?> </td>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-8 pr-1 float-right" id="accordion ">
-        <div class="card">  
-            <div class="table-responsive line-left">                
-                <table id="employee" class="table table-striped-config table-bordered cambio-cabecera"> 
-                    <thead>
-                        <tr>
-                            <th style="width:20%;"><?php echo trad('Solución', $lang).":" ?></th>                         
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <td > <?php echo $ejercicioId['solucion'] ?> </td>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 pr-4" id="accordion ">
-        <div class="card">  
-            <div class="table-responsive line-left">                
-                <table id="employee_table_hoja" class="table table-striped-config table-bordered cambio-cabecera"> 
-                    <thead>
-                        <tr>
-                            <th><?php echo trad('Tablas', $lang).":"?><p id="small"> <?php echo '('.trad('Pulsa cada tabla para ver sus campos', $lang).')'; ?> </p></th>                         
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $usa = new Usa();
-                        $nombre_tablas = $usa->getNombreById($id_ejer);
-                        $cont = 0;
-                        while ($nameTable = mysqli_fetch_array($nombre_tablas)) {
-                            ?>
-                            <tr>
-                                <?php
-                                $arrayTablas[$cont] = $nameTable['nombre'];
-                                $cont = $cont + 1;
+    <div class="row mt-5">
+        <div class="col-md-12 ">
+            <div class="row">
+                <!-- <div class="col-md-4">
+                    <label><strong><?php echo trad('Creador Tablas',$lang) ?> <span class="red"> *</span></strong></label>
+                    <div class=" selector-user" >
+                        <table id="columnas" class="form-control" ><tbody></tbody></table>
+                                            
+                    </div>
+                </div> -->
+                <div class="col-md-4">
+                    <label><strong><?php echo trad('Tablas',$lang) ?></strong></label>
+                    <div class="selector-tabla-show" >
+                        <select type="text" name="tablas" class="custom-select form-control-sm"> 
+                            <option value="">Selecciona Tabla</option>
+                        <?php 
+                            $usa = new Usa();
+                            $nombre_tablas = $usa->getNombreById($id_ejer);
+                            while ($nameTable = mysqli_fetch_array($nombre_tablas)) {
+                            
                                 $quitar = $nameTable['schema_prof'] . "_";
                                 $onlyName = explode($quitar, $nameTable['nombre']);
-                                ?>
-                                <td class="addFields" data-name="<?php echo $nameTable["nombre"]?>" > <?php echo $onlyName[1]; ?> </td>
-                            </tr>    
-                        <?php } ?>    
-                    </tbody>
-                </table>
+                                
+                                echo "<option value='".$nameTable['nombre']."'>".$onlyName[1]."</option>"; 
+                              
+                            }
+                         ?>
+                        </select>                               
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <label><strong><?php echo trad('Campos',$lang) ?></strong></label>
+                    <div class="columnas-tabla-show" >
+                        <table id="columnas" class="form-control" ><tbody></tbody></table>                               
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="col-md-4 pr-4" id="accordion ">
-        <div class="card">  
-            <div class="table-responsive line-left">                
-                <table id="employee-fields" class="table table-striped-config table-bordered cambio-cabecera"> 
-                    <thead>
-                        <tr>
-                            <th><?php echo trad('Campos', $lang).":" ?></th>                         
-                        </tr>
-                    </thead>
-                    <tbody>
-                        
-                    </tbody>
-                </table>
+            <div class="row mt-4">
+                <div class="col-md-5">
+                    <label for="name" ><strong><?php echo trad('Descripción',$lang) ?> </strong></label>
+                    <table class="form-control">
+                        <tbody>
+                            <tr><td> <?php echo $ejercicioId['descripcion']; ?> </td></tr>
+                        </tbody>
+                    </table> 
+                </div>
+                <div class="col-md-2">
+                    <label for="name" ><strong><?php echo trad('Nivel',$lang) ?></strong></label>
+                    <table class="form-control">
+                        <tbody>
+                            <tr><td> <?php echo $ejercicioId['nivel']; ?> </td></tr>
+                        </tbody>
+                    </table>                                
+                </div>
+                <div class="col-md-3">
+                    <label for="name" ><strong><?php echo trad('Categoría',$lang) ?></strong></label>
+                    <table class="form-control">
+                        <tbody>
+                            <tr><td> <?php echo $ejercicioId['tipo']; ?> </td></tr>
+                        </tbody>
+                    </table>          
+                </div>
+                <div class="col-md-2">
+                    <label for="name" ><strong><?php echo trad('Vista',$lang) ?></strong></label>
+                    <table class="form-control">
+                        <tbody>
+                            <tr><td> 
+                                <?php if (!$ejercicioId['deshabilitar']){ 
+                                        echo trad("Habilitado", $lang);
+                                    } else {
+                                        echo trad("Deshabilitado", $lang);
+                                    } ?> 
+                            </td></tr>
+                        </tbody>
+                    </table>            
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <label><strong><?php echo trad('Enunciado',$lang) ?></strong></label>
+                    <table class="form-control">
+                        <tbody>
+                            <tr><td style="padding-bottom: 25px"> <?php echo $ejercicioId['enunciado']; ?> </td></tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div class="col-md-6">
+                    <label><strong><?php echo trad('Solución',$lang) ?> </strong></label>
+                    <table class="form-control">
+                        <tbody>
+                            <tr><td style="padding-bottom: 25px"> <?php echo $ejercicioId['solucion']; ?> </td></tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

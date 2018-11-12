@@ -644,6 +644,10 @@ span.red{
     background-color: #E6E6E6 !important;
     cursor: pointer;
 }
+.highlight { 
+     background-color: #C6C6C6 !important;
+     cursor: pointer;
+}
 
 .table-striped-config tbody tr:nth-of-type(2n+1) {
     background: white;

@@ -44,6 +44,6 @@
             </div>
         </div>";
     }
-    header("Location: ../templates/configuration_new_tables.php");
+    header("Location: ../templates/configuration_tables.php");
     exit();
 ?>

@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="table-responsive" style="margin-top: 71px;">  
-                        <table id="employee" class="table table-striped-config table-bordered">  
+                        <table id="employee" class="table table-striped-config table-bordered tabla-tablas">  
                             <thead>
                                 <tr>
                                     <th style="width:30%;"><?php echo trad('Tablas',$lang) ?></th>

@@ -18,6 +18,7 @@ if($_REQUEST["cambio"] == true){
 }
 
 $consulta = mysqli_query($conexion,$sql);
+echo '<option value="">Selecciona Tabla</option>';
 while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {
 	$onlyName = explode($quitar, $fila["nombre"]);
 	echo '<option value="'.$fila["nombre"].'">'.$onlyName[1].'</option>';

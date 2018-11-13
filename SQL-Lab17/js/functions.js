@@ -285,9 +285,23 @@ $(document).ready(function () {
         table.columns(3).search(tipo).draw(false);
     });
     
-    $('.contenedor-item').click(function(){
-       var borrar = $(this).removeClass('border-left-white'); 
-       console.log($(this));
-    });
+//    $('.contenedor-item').on('',function(){
+//        $(function() {
+//            alert('holaaa');
+//            $('.contenedor-item').removeClass('border-left-white')
+//            $(this).addClass('border-left-white');
+//        });
+//        $('.contenedor-item').removeClass('border-left-white').fadeIn(); 
+//        $(this).addClass('border-left-white').fadeIn();
+//        window.onload = init;
+//    });
+    
 });
+
+//$( window ).on( "load", function() {
+//    $('.contenedor-item').removeClass('border-left-white'); 
+//    $('.contenedor-item').on(function(){
+//        alert('holaaa');
+//    });
+//});
 

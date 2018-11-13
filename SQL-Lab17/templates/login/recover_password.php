@@ -27,7 +27,7 @@ $lang = 'es';
                 <p><?php echo trad('Siéntate y comienza a pensar',$lang)."." ?></p>
             </div>
             <div class="col-md-6 center">
-                <form method="post" action="../../handler/validate_recover.php">
+                <form method="post" action="../../handler/validate_recovery.php">
                     <div class="offset-md-3 col-md-7 ">
                         <h3><strong><?php echo trad('Recuperar Contraseña',$lang)?></strong></h3>
                         <p><?php echo trad('Por favor, introduce tus datos de acceso para recuperar la contraseña',$lang)?></p>

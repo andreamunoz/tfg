@@ -54,11 +54,11 @@
                                                         <textarea  id="solucion" name="sol_ejercicio" class="form-control" rows="18" placeholder="<?php echo trad('Escribe la solución aquí...', $lang) ?>" required></textarea>
                                                     </td>
 
-                                                </tr>                       
-                                                <?php echo '</form>'; ?>
+                                                </tr> 
                                             </tbody>
                                         </table>
                                         <button type="submit" id="alert-sol" class="btn btn-primary mt-5 mb-5 pl-5 pr-5 float-right"><?php echo trad('Ejecutar', $lang) ?></button>
+                                        <?php echo '</form>'; ?>
                                     </div>
                                 </div>
                             </div>

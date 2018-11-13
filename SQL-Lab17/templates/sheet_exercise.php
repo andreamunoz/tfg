@@ -12,6 +12,13 @@
     <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="sheet_exercise.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?> | Profesor ( <?php echo $nombreProfesor['nombre'] .' '. $nombreProfesor['apellidos']; ?> )</strong></h2>
     <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
+    <div class="row mb-150">
+        <div class="col-md-12">
+            <div class="text-right pl-5">
+                <a class="btn btn-primary pl-5 pr-5" href="files/sheet_pdf.php?sheet=<?php echo $hojaparameter; ?> "><?php echo trad('Ver PDF',$lang) ?></a>
+            </div>
+        </div>
+    </div>
     <div class="row pt-2 pb-4">
         <div class="col-md-3  offset-9">
             <div class="progress">

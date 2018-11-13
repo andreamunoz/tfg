@@ -2,9 +2,9 @@
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
 <div class="container-tabla pt-4 pb-5">
-    <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
+    <label><a class="enlace" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
     <h2><strong><?php echo trad('Hoja de Ejercicios',$lang) ?></strong></h2>
-    <p><?php echo trad('Texto a añadir aquí...',$lang) ?></p>    
+    <p><?php echo trad('Texto a añadir aquí...',$lang) ?></p>  
     <div id="accordion ">
         <div class="card pt-4" >  
             <div class="table-responsive no-buscar">  

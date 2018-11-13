@@ -94,7 +94,7 @@ if ($result != '') {
                             <h1 style='text-align:center;'>Hola, Roberto Díaz Gómez!</h1>
                             <p style='padding-top: 25px; padding-left: 25px;'>Ha solicitado restablecer la contraseña de SQLab, sigue los siguientes pasos:</p>
                             <p style='padding-left: 50px;'>1. Copie el siguiente código de seguridad <strong>$psswd</strong></p>
-                            <p style='padding-bottom: 25px; padding-left: 50px;'>2. Pinche en el siguiente enlace para acceder a cambiar la contraseña <a style='text-align:center; color: gray' href='http://localhost/tfg/SQL-Lab17/templates/login/change_password.php'>Restablecer contraseña</a></p>
+                            <p style='padding-bottom: 25px; padding-left: 50px;'>2. Pinche en el siguiente enlace para acceder a cambiar la contraseña <a style='text-align:center; color: gray' href='http://chusky.fdi.ucm.es/~tfg17sql/SQL-Lab17/templates/login/change_password.php'>Restablecer contraseña</a></p>
                         </td>
                     </tr>
                 </tbody>

@@ -62,7 +62,7 @@ class EstaContenido{
         $consulta = mysqli_query($conexion,$sql);
         $count = mysqli_fetch_assoc($consulta);
         $connect->disconnectDB($conexion);
-        return $count;
+        return $count["num"];
     }
     
     function getDeleteAllEjerciciosHoja($id_hoja){

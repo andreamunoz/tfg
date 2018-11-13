@@ -34,7 +34,7 @@
                             echo '<select name="lista_hoja" class="custom-select form-control-sm select_profe" title="Selecciona hoja" id="select_hoja">';
                             echo "<option value=" . $row_hoja['creador_hoja'] . ">Todos Profesores </option>";
                             while ($row_hoja = mysqli_fetch_array($res)) {
-                                echo "<option value=" . $row_hoja['creador_hoja'] . ">" . $row_hoja['creador_hoja'] . " </option>";
+                                echo "<option value=" . $row_hoja['creador_hoja'] . ">" . $row_hoja['nombre'].' '. $row_hoja['apellidos']. " </option>";
                             }
                             echo '</select>';
                             $result = $hojaejer->getAllHojas();
@@ -44,7 +44,7 @@
                                 <tr class="accordion-toggle" id="show-accordion" onclick="location='configuration_show_sheet.php?hoja=<?php echo $fila_hoja['id_hoja']; ?>'">
                                     <?php echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $fila_hoja['nombre_hoja'] . '</td>'; ?>
 
-                                    <?php echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $fila_hoja['creador_hoja'] . '</td>'; ?>
+                                    <?php echo '<td data-toggle="collapse" data-target="#collapse_' . $fila_hoja['id_hoja'] . '">' . $fila_hoja['nombre'].' '.$fila_hoja['apellidos'] . '</td>'; ?>
                                     <?php
                                     $number = new EstaContenido();
                                     $id_hoja = $fila_hoja['id_hoja'];

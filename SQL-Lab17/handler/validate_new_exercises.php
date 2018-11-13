@@ -176,15 +176,17 @@
                     //var_dump("posFrom".$posFrom);
                     $longParteUno = $posFinParteUno - $posInicioParteUno;
                     $parteUno = substr($aux, $posInicioParteUno, $longParteUno);
-                    //var_dump($parteUno);
+                    
                     foreach($tablasSolucionSinDueno as $key => $value){
                             for($j=0; $j<10; $j++){
-                                    $posNombreSiExiste = strpos($parteUno, " ".$value.".");
+                                    $compara = " ".$value.".";
+                                    $posNombreSiExiste = strpos($parteUno, $compara);
                                     $posNombre = $posNombreSiExiste + $avance +1;
                                     if($posNombreSiExiste != false){
                                             $aux = substr($aux, 0,$posNombre). $dueno."_".substr($aux, $posNombre);
                                             $solucion = substr($solucion, 0, $posNombre). $dueno."_".substr($solucion, $posNombre);
                                             $posFinParteUno = strpos($aux, "from", $avance);
+                                            $parteUno = substr($aux, $posInicioParteUno, $posFinParteUno);
 
                                     }
                             }
@@ -260,8 +262,8 @@
 
             }
             //var_dump("fuera del for: ->");
-            var_dump($aux);
-            var_dump($solucion);
+            //var_dump($aux);
+            //var_dump($solucion);
             return $solucion;
     }
 
@@ -289,9 +291,9 @@
             juntarArrayRecursivo($total, $tablas, $count);
 
             $tablasSolucionSinDueno = eliminarRepetidos($total);
-
+  //          var_dump($tablasSolucionSinDueno);
             $tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
-
+//            var_dump($tablasSolucion);
             $ejer = new Ejercicio();
             $tablasDisponibles = $ejer->getTodasTablas();
             
@@ -307,7 +309,7 @@
                     //      //var_dump($solucion);
                     // }
                     $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
-                    // var_dump($solucion);
+                    var_dump($solucion);
                     $resultadoSolucion = $ejer->executeSolucion($solucion);
 
                     if($resultadoSolucion[0] === false){

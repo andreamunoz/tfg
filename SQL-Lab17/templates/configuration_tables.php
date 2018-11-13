@@ -16,7 +16,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="table-responsive" style="margin-top: 71px;">  
-                        <table id="employee_list" class="table table-striped-config table-bordered">  
+                        <table id="employee" class="table table-striped-config table-bordered tabla-tablas">  
                             <thead>
                                 <tr>
                                     <th style="width:30%;"><?php echo trad('Tablas',$lang) ?></th>
@@ -27,7 +27,7 @@
                                 include_once '../inc/functions.php';
                                 $connect = new Tools();
                                 $conexion = $connect->connectDB();
-                                $sql = "SELECT td.nombre, td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.user = '".$_SESSION['user']."' and u.autoriza = 1";
+                                $sql = "SELECT td.nombre, td.schema_prof from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.user = '".$_SESSION['user']."'";
                                 $consulta = mysqli_query($conexion, $sql);
                                 while (($fila = mysqli_fetch_array($consulta))) {
 
@@ -60,13 +60,9 @@
                             <div id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">  
-                                        <table id="structure_table"> <!-- class="table table-striped table-bordered">   -->
+                                        <table id="structure_table" > <!-- class="table table-striped table-bordered">   -->
                                             <thead>
-                                                <tr>                                                      
-                                                    <th style="width:30%;"><?php echo trad('Nombre Columna',$lang) ?></th>
-                                                    <th style="width:30%;"><?php echo trad('Tipo Columna',$lang) ?></th>
-                                                    <th style="width:20%;"><?php echo trad('Clave',$lang) ?></th>                                                  
-                                                </tr>
+                                                
                                             </thead>
                                             <tbody>
                                                 
@@ -80,10 +76,14 @@
                             <div id="accordion ">
                                 <div class="card">  
                                     <div class="table-responsive">  
-                                        <table id="employee_table" class="table table-striped table-bordered">  
+                                        <table id="structure_table">
+                                            <thead>
+                                            
+                                            </thead>
                                             <tbody>
                                                 
-                                            </tbody>
+                                            </tbody> 
+                                            
                                         </table>
                                     </div>  
                                 </div> 
@@ -93,13 +93,7 @@
 
                 </div>
             </div> 
-            
-            <?php
-                if(isset($_SESSION['message_new_tables'])){
-                    echo $_SESSION['message_new_tables'];
-                    unset($_SESSION['message_new_tables']);
-                }
-            ?>  
+             
         </div> 
     </div>
 </div>

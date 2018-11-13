@@ -455,6 +455,15 @@ table.dataTable .border-veredictoA{
 
 }
 
+.modal-header .close{
+    color: #9b9a9a;
+    cursor: pointer;
+    float: right;
+}
+.close:hover{
+    color: #CECDCD !important;
+}
+
 .modal-body {
     text-align: left;
 }
@@ -635,6 +644,10 @@ span.red{
     background-color: #E6E6E6 !important;
     cursor: pointer;
 }
+.highlight { 
+     background-color: #C6C6C6 !important;
+     cursor: pointer;
+}
 
 .table-striped-config tbody tr:nth-of-type(2n+1) {
     background: white;
@@ -734,4 +747,37 @@ table#structure_table th {
 
 .dataTables_wrapper {
     position: unset !important;
+}
+
+.cambio-cabecera{
+}
+.cambio-cabecera thead tr{
+    background:#FFF ;
+    color: black;
+    text-align: left;
+    border-bottom: none !important;
+    border-top: none !important;
+}
+.cambio-cabecera thead tr th{
+    font-size: 13px !important;
+    border-bottom: none !important;
+    border-top: none !important;
+}
+.cambio-cabecera tbody td, table th {
+    border: none !important;
+    padding: .30rem !important;
+    /*border-bottom: 1px solid #D2D2D2;*/
+}
+
+p#small{
+    font-size: 10px !important;
+    font-style: italic !important;
+}
+
+.line-left{
+    border-left: solid 3px #969595;
+    margin: 8px;
+}
+.progress{
+    background-color: #CBCBCB; 
 }

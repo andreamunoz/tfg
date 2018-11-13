@@ -31,7 +31,7 @@ class HojaEjercicio{
     	
         $connect = new Tools();
         $conexion = $connect->connectDB();
-    	$sql = "SELECT * FROM sqlab_hoja_ejercicios;";
+    	$sql = "SELECT he.id_hoja, he.nombre_hoja, he.creador_hoja, u.nombre, u.apellidos FROM sqlab_hoja_ejercicios he, sqlab_usuario u WHERE he.creador_hoja = u.user;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -78,7 +78,7 @@ class HojaEjercicio{
     function getIdByName($nombre){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT id_hoja FROM sqlab_hoja_ejercicios WHERE id_hoja=$id;";
+        $sql = "SELECT id_hoja FROM sqlab_hoja_ejercicios WHERE nombre_hoja=$nombre;";
         $consulta = mysqli_query($conexion,$sql);
         $res = mysqli_fetch_assoc($consulta);
         $connect->disconnectDB($conexion);
@@ -152,7 +152,7 @@ class HojaEjercicio{
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM sqlab_hoja_ejercicios he, sqlab_esta_contenido ec, sqlab_ejercicio e WHERE e.id_ejercicio = ec.id_ejercicio AND he.id_hoja = ec.id_hoja AND he.id_hoja=$id ORDER BY ec.orden;";
+        $sql = "SELECT * FROM sqlab_hoja_ejercicios he, sqlab_esta_contenido ec, sqlab_ejercicio e, sqlab_usuario u WHERE e.id_ejercicio = ec.id_ejercicio AND he.id_hoja = ec.id_hoja AND e.creador_ejercicio = u.user AND he.id_hoja=$id ORDER BY ec.orden;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -214,7 +214,7 @@ class HojaEjercicio{
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-    	$sql = "SELECT DISTINCT(creador_hoja) FROM sqlab_hoja_ejercicios;";
+    	$sql = "SELECT DISTINCT(he.creador_hoja), u.nombre, u.apellidos FROM sqlab_hoja_ejercicios he, sqlab_usuario u WHERE he.creador_hoja = u.user;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

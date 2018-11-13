@@ -19,6 +19,7 @@ $(document).ready(function () {
     $.ajax({
         type: "POST",
         url: "../templates/adm_profesor/getUser.php",
+        data: { prof: username },
         success: function (response)
         {
             $(".selector-user select").html(response).fadeIn();
@@ -73,10 +74,10 @@ $(document).ready(function () {
         });
     });
 
-    $(".selector-tabla select").click(function() {
+    $(".selector-tabla-show select").click(function() {
         var form_data = {
             is_ajax: 1,
-            tabla: $(".selector-tabla select option:checked").val()
+            tabla: $(".selector-tabla-show select option:checked").val()
         };
         $.ajax({
             type: "POST",
@@ -84,7 +85,7 @@ $(document).ready(function () {
             data: form_data,
             success: function(response)
             {   
-                $('.columnas-tabla #columnas tbody').html(response).fadeIn();
+                $('.columnas-tabla-show #columnas tbody').html(response).fadeIn();
             }
         });
     });
@@ -105,6 +106,15 @@ $(document).ready(function () {
                 success: function(response)
                 {   
                     $('.structure tbody').html(response).fadeIn();
+                }
+            });
+            $.ajax({
+                type: "POST",
+                url: "adm_profesor/getHeadColumns.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    $('.data thead').html(response).fadeIn();
                 }
             });
             $.ajax({
@@ -183,28 +193,41 @@ $(document).ready(function () {
     });
     
 /***** FIN AVISOS *****/
-
-
+    
+    $(".tabla-tablas tr").click(function() { 
+        var selected = $(this).hasClass("highlight"); 
+        $(".tabla-tablas tr").removeClass("highlight"); 
+        if(!selected) $(this).addClass("highlight"); 
+    }); 
     $('.resaltado').click(function(){      
         var tabla = $(this).attr("data-name");
-        console.log(tabla);
+        $('#nav-table-structure thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/getData.php",
             data: { tabla: tabla },
             success: function(response)
             {
-                console.log(response);
+                // console.log(response);
                 $('#nav-table-datos tbody').html(response).fadeIn();
             }
         });
+        $.ajax({
+                type: "POST",
+                url: "../templates/adm_profesor/getHeadColumns.php",
+                data: { tabla: tabla },
+                success: function(response)
+                {   
+                    $('#nav-table-datos thead').html(response).fadeIn();
+                }
+            });
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/getStructure.php",
             data: { tabla: tabla },
             success: function(response)
             {
-                console.log(response);
+                // console.log(response);
                 $('#nav-table-structure tbody').html(response).fadeIn();
             }
         });
@@ -284,7 +307,7 @@ $(document).ready(function () {
         var table = $('#employee_data').DataTable();
         table.columns(3).search(tipo).draw(false);
     });
-    
+
 //    $('.contenedor-item').on('',function(){
 //        $(function() {
 //            alert('holaaa');
@@ -296,6 +319,15 @@ $(document).ready(function () {
 //        window.onload = init;
 //    });
     
+    $('.contenedor-item').click(function(){
+       var borrar = $(this).removeClass('border-left-white'); 
+       console.log($(this));
+    });
+
+    $('#close-tablas').click(function(){
+        $('#modal-tables').hide();
+    });
+
 });
 
 //$( window ).on( "load", function() {

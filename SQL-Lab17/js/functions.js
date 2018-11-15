@@ -291,7 +291,9 @@ $(document).ready(function () {
 //    });
     
     $('.select_profe option').click(function(){
-        var profe = $(this).attr("value");
+        var profe = $(this).attr("title");
+        console.log(this);
+        console.log(profe);
         var table = $('#employee_data').DataTable();
          table.columns(1).search(profe).draw(false);
          
@@ -327,6 +329,19 @@ $(document).ready(function () {
     $('#close-tablas').click(function(){
         $('#modal-tables').hide();
     });
+
+    $('#new_exercice').click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getBorrarDatosCrearEjercicio.php",
+            success: function(response)
+            {
+                location.assign("../templates/configuration_new_exercises.php");
+            }
+        });
+    });
+
+
 
 });
 

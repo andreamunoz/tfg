@@ -80,25 +80,44 @@
                                         <label for="name" ><strong><?php echo trad('Categoría',$lang) ?><span class="red"> *</span></strong></label>
                                         <select name="categoria" class="custom-select form-control-sm " title="Selecciona" id="categoria">
                                             <?php
-                                            $categorias = $ejer->getAllCategorias();
-                                            while ($categoria = mysqli_fetch_array($categorias)) {
-                                                if($ejercicioId['tipo'] == $categoria['tipo'])
-                                                    echo "<option value=" . $categoria['tipo'] . " selected>" . $categoria['tipo'] . " </option>";
-                                                else
-                                                    echo "<option value=" . $categoria['tipo'] . " >" . $categoria['tipo'] . " </option>";                                                                      
-                                            }
+                                            //$categorias = $ejer->getAllCategorias();
+                                            //while ($categoria = mysqli_fetch_array($categorias)) {
+
+                                                //if($ejercicioId['tipo'] == $categoria['tipo'])
+                                                    //echo "<option value=" . $categoria['tipo'] . " selected>" . $categoria['tipo'] . " </option>";
+                                                //else
+                                                    //echo "<option value='" . $categoria['tipo'] . "' >" . $categoria['tipo'] . " </option>";                      
+                                            //}
                                             ?>
+                                             <?php 
+                                                include_once '../inc/ejercicio.php';
+                                                $ejer = new Ejercicio();
+                                                $resultado = $ejer->getCategorias();
+                                                var_dump($ejercicioId);
+                                                var_dump("----------------");
+                                                var_dump($resultado);
+                                                foreach ($resultado as $key => $value) { 
+                                                    $newKey = "c".($key+1);
+                                                   
+                                                    if($value === $ejercicioId['tipo']){ ?>
+                                                        <option value=<?php echo $newKey ?> selected="selected"> <?php echo $value ?> </option>
+                                                    <?php } else{ ?>
+                                                        <option value=<?php echo $newKey ?> > <?php echo $value ?> </option>
+                                                    <?php } 
+                                                    
+                                                } ?> 
+
                                         </select> 
                                     </div>
                                     <div class="col-md-2">
                                         <label for="name" ><strong><?php echo trad('Vista',$lang) ?> <span class="red"> *</span></strong></label> 
                                         <select name="habdes" class="custom-select form-control-sm " title="Selecciona" id="select_habilitar">
                                             <?php if($ejercicioId['deshabilitar'] == 1){?>
-                                                    <option value="1" selected=''><?php echo trad('Habilitar',$lang) ?></option>
-                                                    <option value="0" ><?php echo trad('Deshabilitar',$lang) ?></option>
+                                                    <option value="1" selected=''><?php echo trad('Deshabilitado',$lang) ?></option>
+                                                    <option value="0" ><?php echo trad('Habilitado',$lang) ?></option>
                                             <?php }else{ ?>
-                                                    <option value="1" ><?php echo trad('Habilitar',$lang) ?></option>
-                                                    <option value="0" selected=''><?php echo trad('Deshabilitar',$lang) ?></option>
+                                                    <option value="1" ><?php echo trad('Deshabilitado',$lang) ?></option>
+                                                    <option value="0" selected=''><?php echo trad('Habilitado',$lang) ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>

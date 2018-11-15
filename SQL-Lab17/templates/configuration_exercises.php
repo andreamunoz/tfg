@@ -8,8 +8,8 @@ $_SESSION['HOJA_EXE']= 1;
     <h2><strong><?php echo trad('Ejercicios',$lang) ?></strong></h2>
     <div class="row mb-150">
         <div class="col-md-12">
-            <div class="text-right pl-5">
-                <a class="btn btn-primary pl-4 pr-4" href="configuration_new_exercises.php" ><?php echo trad('Crear Ejercicio',$lang) ?></a>
+            <div class="text-right pl-5" >
+                <a class="btn btn-primary pl-4 pr-4" id="new_exercice" href="#" ><?php echo trad('Crear Ejercicio',$lang) ?></a>
             </div>
         </div>
     </div>
@@ -73,7 +73,10 @@ $_SESSION['HOJA_EXE']= 1;
                             if($fila['deshabilitar']==0){ ?>
                                 <tr class="fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
-                                    <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?>
+
+                                    <?php echo '<td data-name="'. $fila['creador_ejercicio'] .'">' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?> 
+
+                                    <?php //echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                     <?php if($_SESSION['user'] === $fila['creador_ejercicio']){ 
@@ -102,7 +105,9 @@ $_SESSION['HOJA_EXE']= 1;
                             } else { ?>
                                 <tr class="habilitar fondo_blanco" onclick="location='configuration_show_exercises.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">                                    
                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
-                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
+                                    <?php echo '<td title="'. $fila['creador_ejercicio'] .'">' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?> 
+                                    <?php //echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?>
+                                    <?php //echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                     <?php if($_SESSION['user']== $fila['creador_ejercicio']){ 
@@ -132,10 +137,10 @@ $_SESSION['HOJA_EXE']= 1;
                     </tbody>
                 </table>
                 <?php
-                if(isset($_SESSION['msg_habilitar'])){
-                    echo $_SESSION['msg_habilitar'];
-                    unset($_SESSION['msg_habilitar']);
-                }
+                // if(isset($_SESSION['msg_habilitar'])){
+                //     echo $_SESSION['msg_habilitar'];
+                //     unset($_SESSION['msg_habilitar']);
+                // }
                 if(isset($_SESSION['message_sheets'])){
                     echo $_SESSION['message_sheets'];
                     unset($_SESSION['message_sheets']);

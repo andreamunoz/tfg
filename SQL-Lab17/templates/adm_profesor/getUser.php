@@ -4,7 +4,12 @@ include_once '../../inc/functions.php';
 
 $connect = new Tools();
 $conexion = $connect->connectDB();
-$sql = "SELECT DISTINCT td.schema_prof, u.nombre, u.apellidos from sqlab_tablas_disponibles as td, sqlab_usuario as u where (td.schema_prof = u.user and u.autoriza = 1) or (td.schema_prof = u.user and u.user = '".$_REQUEST["prof"]."'); ";
+
+if ( isset($_REQUEST["prof"])){
+	$sql = "SELECT DISTINCT td.schema_prof, u.nombre, u.apellidos from sqlab_tablas_disponibles as td, sqlab_usuario as u where (td.schema_prof = u.user and u.autoriza = 1) or (td.schema_prof = u.user and u.user = '".$_REQUEST["prof"]."'); ";
+} else{
+	$sql = "SELECT DISTINCT td.schema_prof, u.nombre, u.apellidos from sqlab_tablas_disponibles as td, sqlab_usuario as u where (td.schema_prof = u.user and u.autoriza = 1) or (td.schema_prof = u.user); ";
+}
 $consulta = mysqli_query($conexion,$sql);
 $i=1;
 $nombres = array();

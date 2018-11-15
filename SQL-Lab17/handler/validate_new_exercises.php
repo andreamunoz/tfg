@@ -33,7 +33,6 @@
         case 'c7':
                 $categoria = "Operaciones Manipulacion de Datos";
                 break;
-
     }
 
     $guardarDatos = array($user_tablas, $_POST['categoria'], $nivel, $deshabilitar, $descripcion, $enunciado, $solucion);
@@ -496,16 +495,6 @@
         $resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $resultado[1]);
 
         if($resultadoCrear){
-                $_SESSION['message_sheets'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
-                        <div class='modal-dialog modal-dialog-centered' role='document'>
-                            <div class='modal-content'>
-                                <div class='modal-body'>
-                                    <h2><strong>¡Felicidades!</strong></h2>
-                                    <p>El ejercicio se ha creado correctamente.</p>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>";
                 unset($_SESSION['guardarDatos']);
                 header("Location: ../templates/configuration_exercises.php");
         }else{

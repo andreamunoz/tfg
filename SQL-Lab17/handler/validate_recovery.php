@@ -13,45 +13,11 @@ $result = $user->existEmail($to);
 if ($result != '') {
 
     $userName = $user->getNombreUsuario($to);
+    $nombre = $userName['nombre'];
+    $apellidos = $userName['apellidos'];
     $psswd = substr(md5(microtime()), 1, 8);
     $_SESSION['emailNewPass'] = $to;
     $_SESSION['passwd'] = $psswd;
-    $mensaje = "<html>
-    <head>
-        <meta charset='UTF-8'>
-    </head>
-    <body style='background:#e8e8e8;'>
-    	<div>
-            <table width='0' cellspacing='0' cellpadding='10' border='0' align='center'>
-                <thead>
-                    <tr>
-                        <td width='600' style='text-align:center; padding: 21px; font-size: 25px;'>
-                            <a href='http://chusky.fdi.ucm.es/~tfg17sql/SQL-Lab17/templates/login/login.php' style='margin: 10px; color: gray;'>SQLab</a>
-                        </td>
-                    </tr>
-                </thead>
-                <tbody style='background: white'>
-                    <tr>
-                        <td width='600' style='font-size: 15px; border-top: 6px solid gray;'>
-                            <h1 style='text-align:center;'>Hola, Roberto Díaz Gómez!</h1>
-                            <p style='padding-top: 25px; padding-left: 25px;'>Ha solicitado restablecer la contraseña de SQLab, sigue los siguientes pasos:</p>
-                            <p style='padding-left: 50px;'>1. Copie el siguiente código de seguridad <strong>$psswd</strong></p>
-                            <p style='padding-bottom: 25px; padding-left: 50px;'>2. Pinche en el siguiente enlace para acceder a cambiar la contraseña <a style='text-align:center; color: gray' href='http://localhost/tfg/SQL-Lab17/templates/login/change_password.php'>Restablecer contraseña</a></p>
-                        </td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td width='600'>
-                            <p style='font-size: 15px; color: gray'>Este mensaje ha sido enviado a $to por un sistema automático. Por favor no respondas a este correo electrónico. Tienes 30 minutos para cambiar la contraseña con este código,
-                                de lo contrario tendrá que realiza otra vez la misma operación.</p>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-    	</div>	
-    </body>
-    </html>";
     
     // Datos de la cuenta de correo utilizada para enviar v�a SMTP
     $smtpHost = "smtp.gmail.com";  // Dominio alternativo brindado en el email de alta 
@@ -91,7 +57,7 @@ if ($result != '') {
                 <tbody style='background: white'>
                     <tr>
                         <td width='600' style='font-size: 15px; border-top: 6px solid gray;'>
-                            <h1 style='text-align:center;'>Hola, Roberto Díaz Gómez!</h1>
+                            <h1 style='text-align:center;'>Hola, $nombre $apellidos!</h1>
                             <p style='padding-top: 25px; padding-left: 25px;'>Ha solicitado restablecer la contraseña de SQLab, sigue los siguientes pasos:</p>
                             <p style='padding-left: 50px;'>1. Copie el siguiente código de seguridad <strong>$psswd</strong></p>
                             <p style='padding-bottom: 25px; padding-left: 50px;'>2. Pinche en el siguiente enlace para acceder a cambiar la contraseña <a style='text-align:center; color: gray' href='http://chusky.fdi.ucm.es/~tfg17sql/SQL-Lab17/templates/login/change_password.php'>Restablecer contraseña</a></p>

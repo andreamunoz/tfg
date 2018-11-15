@@ -181,6 +181,7 @@
                                                 include_once '../inc/solucion.php';
                                                 $sol = new Solucion(); 
                                                 $fieldsProf = $ejer->getFieldsProfesor($id_ejer);
+                                                echo '<p>'.$fieldsProf.'</p>';
                                                 $resPro = $fieldsProf;
                                             ?>
                                             <thead>                                             

@@ -236,6 +236,8 @@ $(document).ready(function () {
     
     $('.addFields').click(function(){      
         var tabla = $(this).attr("data-name");
+        $('tr').removeClass("gradient");
+        $(this).closest('tr').addClass("gradient");
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/getAddFields.php",
@@ -247,24 +249,6 @@ $(document).ready(function () {
             }
         });
     });
-//    $('.checkbox-select-ejer').click(function(){
-//        var id_ejer = $(this).attr("value");
-//        var id_hoja = $(this).attr("id");
-//        var name = $(this).closest('.del').find('td').eq(0).html();
-//        var nivel = $(this).closest('.del').find('td').eq(1).html();
-//        var tipo = $(this).closest('.del').find('td').eq(2).html();
-//        var profe = $(this).closest('.del').find('td').eq(3).html();
-//        
-//        var tr = '<tr class="add ui-sortable-handle" data-index='+id_ejer+' data-index-sheet='+id_hoja+' data-position=""><td>'+name+'</td><td>'+nivel+'</td><td>'+tipo+'</td><td>'+profe+'</td><td style="text-align: center"><input class="checkbox-add-ejer" id='+id_hoja+' name="seleccionados[]" value='+id_ejer+' onclick="checkDes('+id_ejer+')" type="checkbox"></td></tr>';
-//        console.log(tr);
-//        var table = $('#employee_data').DataTable({
-//            paging:   true,
-//            destroy: true,
-//            searching: true
-//        });
-//        table.row.add($(tr)).draw(false);
-//        $(this).closest('tr').hide();
-//    });
     
     $('#employee_table_hoja').DataTable({
             paging:   false,
@@ -272,23 +256,22 @@ $(document).ready(function () {
             ordering: false,
             searching: false
         });
+           
+    $('.checkbox-select-ejer').click(function(){
+        var id_ejer = $(this).attr("value");
+        var id_hoja = $(this).closest('.del').attr("data-index-sheet");
+        var name = $(this).closest('.del').find('td').eq(0).html();
+        var nivel = $(this).closest('.del').find('td').eq(1).html();
+        var tipo = $(this).closest('.del').find('td').eq(2).html();
+        var profe = $(this).closest('.del').find('td').eq(3).html();
         
-        
-//    $('.checkbox-add-ejer').click(function(){
-//        var id_ejer = $(this).attr("value");
-//        var id_hoja = $(this).attr("id");
-//        var name = $(this).closest('.add').find('td').eq(0).html();
-//        var nivel = $(this).closest('.add').find('td').eq(1).html();
-//        var tipo = $(this).closest('.add').find('td').eq(2).html();
-//        var profe = $(this).closest('.add').find('td').eq(3).html();
-//        
-//        var tr = '<tr class="del ui-sortable-handle" data-index='+id_ejer+' data-index-sheet='+id_hoja+' data-position=""><td>'+name+'</td><td>'+nivel+'</td><td>'+tipo+'</td><td>'+profe+'</td><td style="text-align: center"><input class="checkbox-select-ejer" id='+id_ejer+' name="seleccionados[]" value='+id_ejer+' checked="" onclick="checkAdd('+id_ejer+')" type="checkbox"></td></tr>';
-//        $(tr).click();
-//        console.log(tr);
-//        var table = $('#employee_table_hoja').DataTable();
-//        table.row.add($(tr)).draw(false);
-//        $(this).closest('tr').hide();
-//    });
+        var tr = '<tr class="add" data-index='+id_ejer+' data-index-sheet='+id_hoja+' data-position=""><td>'+name+'</td><td>'+nivel+'</td><td>'+tipo+'</td><td>'+profe+'</td><td style="text-align: center"><input class="checkbox-add-ejer" type="checkbox" id='+id_ejer+' name="seleccionados[]" value='+id_ejer+' ></td></tr>';
+        $(tr).click();
+        console.log(tr);
+        var table = $('#employee_data').DataTable();
+        table.row.add($(tr)).draw(false);
+        $(this).closest('tr').hide();
+    });
     
     $('.select_profe option').click(function(){
         var profe = $(this).attr("value");
@@ -308,20 +291,8 @@ $(document).ready(function () {
         table.columns(3).search(tipo).draw(false);
     });
 
-//    $('.contenedor-item').on('',function(){
-//        $(function() {
-//            alert('holaaa');
-//            $('.contenedor-item').removeClass('border-left-white')
-//            $(this).addClass('border-left-white');
-//        });
-//        $('.contenedor-item').removeClass('border-left-white').fadeIn(); 
-//        $(this).addClass('border-left-white').fadeIn();
-//        window.onload = init;
-//    });
-    
-    $('.contenedor-item').click(function(){
-       var borrar = $(this).removeClass('border-left-white'); 
-       console.log($(this));
+    $('.contenedor-item').on('click',function(){
+        $('.contenedor-item').removeClass('border-left-white');
     });
 
     $('#close-tablas').click(function(){
@@ -330,10 +301,17 @@ $(document).ready(function () {
 
 });
 
-//$( window ).on( "load", function() {
-//    $('.contenedor-item').removeClass('border-left-white'); 
-//    $('.contenedor-item').on(function(){
-//        alert('holaaa');
-//    });
-//});
+function cargar(){
+    $('.contenedor-item').removeClass('border-left-white');
+    var array = window.location.href.split('/');
+    $('.menu-item').each(function( index ) {
+        if($(this).attr('href') == array[array.length-1]){
+            $(this).children('.contenedor-item').addClass('border-left-white');
+        }
+    });
+}
+
+$( window ).on( "load", function() {    
+    cargar();
+});
 

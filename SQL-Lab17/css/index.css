@@ -121,7 +121,9 @@ a {
     height: 30px;
     margin-top: 10px;
 }
-
+.gradient {
+    background: linear-gradient(to bottom, #fff 0%, #dcdcdc 100%) !important;
+}
 .active{
     border-left: 5px solid white;
 }

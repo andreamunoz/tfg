@@ -15,7 +15,7 @@
     <div class="row mb-150">
         <div class="col-md-12">
             <div class="text-right pl-5">
-                <a class="btn btn-primary pl-5 pr-5" href="files/sheet_pdf.php?sheet=<?php echo $hojaparameter; ?> "><?php echo trad('Ver PDF',$lang) ?></a>
+                <a class="btn btn-primary pl-4 pr-4" href="files/sheet_pdf.php?sheet=<?php echo $hojaparameter; ?> "><?php echo trad('DESCARGAR',$lang) ?><i style="font-size:25px; vertical-align: middle;" class="fas fa-file-pdf pl-2"></i></a>
             </div>
         </div>
     </div>

@@ -11,21 +11,21 @@
 
     </div>
      
-    <a class="menu-item" href="index.php"><div id="contenedor-general-espacio" class="contenedor-item border-left-white">
+    <a class="menu-item" href="index.php"><div id="contenedor-general-espacio" class="contenedor-item">
         <div class="logo-interior">
             <i class="fas fa-home"></i>
         </div>
         <p class="text-menu"><?php echo trad('Inicio',$lang) ?></p>
         </div></a>
     <hr class="hrr">
-    <a class="menu-item" href="exercises.php"><div class="contenedor-item">  
+    <a  class="menu-item" href="exercises.php"><div id="ejercicio" class="contenedor-item">  
         <div class="logo-interior">
             <i class="fas fa-file-code"></i>
         </div>
         <p class="text-menu"><?php echo trad('Ejercicios',$lang) ?></p>
         </div></a>
     <hr class="hrr">
-    <a class="menu-item" href="sheets.php"><div class="contenedor-item">   
+    <a  class="menu-item" href="sheets.php"><div id="hojas" class="contenedor-item">   
             <div class="logo-interior">
                 <i class="fas fa-copy"></i>
             </div>
@@ -67,7 +67,7 @@
 
     </div>
      
-    <a class="menu-item" href="index.php"><div id="contenedor-general-espacio" class="contenedor-item border-left-white">
+    <a class="menu-item" href="index.php"><div id="contenedor-general-espacio" class="contenedor-item">
         <div class="logo-interior">
             <i class="fas fa-home"></i>
         </div>

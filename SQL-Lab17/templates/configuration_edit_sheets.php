@@ -67,7 +67,7 @@
                                                     <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-select-ejer" id='. $fila["id_ejercicio"] .' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' onclick=checkDes('. $fila["id_ejercicio"] .') checked ></td>' ?>
+                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-select-ejer" id='. $fila["id_ejercicio"] .' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' checked ></td>' ?>
                                                 </tr>
                                             <?php } }?>
                                         </tbody>
@@ -108,7 +108,7 @@
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona Profesor" id="select_hoja">';
                                                 echo "<option value=''>Todos Profesores </option>";
                                                 while ($row_profe = mysqli_fetch_array($resP)) {
-                                                    echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
+                                                    echo "<option value=" . $row_profe['nombre'].' '.$row_profe['apellidos'] . ">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
                                                 }
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona Nivel" id="select_hoja">';
@@ -135,10 +135,10 @@
                                                 <?php if ($ejercicios_hoja != 1) { ?>
                                                 <tr class="add" data-index="<?php echo $fila['id_ejercicio']?>" data-index-sheet="<?php echo $id_hoja?>" data-position="">
                                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
-                                                    <?php echo '<td>' . $fila['creador_ejercicio'] . '</td>'; ?> 
+                                                    <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?> 
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-add-ejer" id='. $fila["id_ejercicio"] .' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' onclick=checkAdd('. $fila["id_ejercicio"] .')></td>' ?>
+                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-add-ejer" id='. $fila["id_ejercicio"] .' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' ></td>' ?>
                                                 </tr>
                                             <?php } } }?>
                                         </tbody>
@@ -162,7 +162,7 @@
     </section>
 </div>
 <script>
-    function checkDes(id){
+    /*function checkDes(id){
         var id_ejer = $('td').find("input[id="+id+"]").attr("value");
         alert(id_ejer);
         var name = $('td').find("input[id="+id+"]").closest('.del').find('td').eq(0).html();
@@ -200,7 +200,7 @@
         });
         table.row.add($(tr)).draw(false);
         $('td').find("input[id="+id+"]").closest('tr').hide();
-    }
+    }*/
 //function checkAdd(element){
         //$('.checkbox-add-ejer').click(function(){
 //        alert(document.getElementsByTagName("input").item(0));

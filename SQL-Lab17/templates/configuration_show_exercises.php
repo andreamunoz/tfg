@@ -40,6 +40,16 @@
                     </div>
                 </div> -->
                 <div class="col-md-4">
+                    <label><strong><?php echo trad('Creador Tablas',$lang) ?></strong></label>
+                    
+                    <table class="form-control">
+                        <tbody>
+                            <tr><td> <?php echo $ejercicioId['dueño_tablas']; ?> </td></tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+                <div class="col-md-4">
                     <label><strong><?php echo trad('Tablas',$lang) ?></strong></label>
                     <div class="selector-tabla-show" >
                         <select type="text" name="tablas" class="custom-select form-control-sm"> 

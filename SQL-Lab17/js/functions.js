@@ -274,9 +274,10 @@ $(document).ready(function () {
     });
     
     $('.select_profe option').click(function(){
-        var profe = $(this).attr("title");
-        console.log(this);
-        console.log(profe);
+        var name = $(this).attr("name");
+        var apellido1 = $(this).attr("apellido1");
+        var apellido2 = $(this).attr("apellido2");
+        var profe = name + " " + apellido1 + " " + apellido2;
         var table = $('#employee_data').DataTable();
          table.columns(1).search(profe).draw(false);
          

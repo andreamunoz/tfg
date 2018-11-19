@@ -41,10 +41,10 @@
                                     <table id="employee_table_hoja" class="table table-striped-conf table-bordered table-sortable">  
                                         <thead>
                                             <tr>                                                      
-                                                <th style="width:30%;"><?php echo trad('Descripción', $lang) ?></th>
+                                                <th style="width:20%;"><?php echo trad('Descripción', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Nivel', $lang) ?></th>
-                                                <th style="width:10%;"><?php echo trad('Tipo', $lang) ?></th>
+                                                <th style="width:15%;"><?php echo trad('Tipo', $lang) ?></th>
                                                 <th style="width:10%; text-align: center"><?php echo trad('Seleccionados', $lang) ?></th>
                                             </tr>
                                         </thead>
@@ -86,10 +86,10 @@
                                     <table id="employee_data" class="table table-striped-conf table-bordered añadir">  
                                         <thead>
                                             <tr>                                                      
-                                                <th style="width:30%;"><?php echo trad('Descripción', $lang) ?></th>
+                                                <th style="width:20%;"><?php echo trad('Descripción', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Profesor', $lang) ?></th>
                                                 <th style="width:10%;"><?php echo trad('Nivel', $lang) ?></th>
-                                                <th style="width:10%;"><?php echo trad('Tipo', $lang) ?></th>
+                                                <th style="width:15%;"><?php echo trad('Tipo', $lang) ?></th>
                                                 <th style="width:10%; text-align: center"><?php echo trad('Añadir', $lang) ?></th>
                                             </tr>
                                         </thead>
@@ -108,7 +108,8 @@
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona Profesor" id="select_hoja">';
                                                 echo "<option value=''>Todos Profesores </option>";
                                                 while ($row_profe = mysqli_fetch_array($resP)) {
-                                                    echo "<option value=" . $row_profe['nombre'].' '.$row_profe['apellidos'] . ">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
+                                                    $apellidos = explode(" ",$row_profe['apellidos']);
+                                                    echo "<option name=". $row_profe['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
                                                 }
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona Nivel" id="select_hoja">';

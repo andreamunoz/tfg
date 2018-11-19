@@ -53,7 +53,8 @@
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
                                                     echo "<option value=''>Todos Profesores </option>";
                                                     while ($row_profe = mysqli_fetch_array($resP)) {
-                                                        echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
+                                                        $apellidos = explode(" ",$row_profe['apellidos']);
+                                                        echo "<option name=". $row_profe['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
                                                     }
                                                     echo '</select>';
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
@@ -81,16 +82,11 @@
                                                     $fila_sol = mysqli_fetch_array($solucion);
                                                     ?>
                                                     <tr>
-
                                                         <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
                                                         <?php echo '<td>' . $fila['nombre'].' '. $fila['apellidos']. '</td>'; ?>
                                                         <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                         <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-
                                                         <?php echo '<td style="text-align: center"><input type="checkbox" id="checkbox-editar-hoja" name="seleccionados[]" value='. $fila["id_ejercicio"] .'></td>'?>
-
-
-
                                                     </tr>
                                                     <?php
                                                 } }

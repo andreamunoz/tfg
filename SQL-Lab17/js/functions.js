@@ -74,6 +74,29 @@ $(document).ready(function () {
         });
     });
 
+    /*Nueva forma mostrar columnas en crear ejercicio: */
+    $(".selector-tabla select").change(function() {
+        var form_data = {
+            is_ajax: 1,
+            tabla: $(".selector-tabla select option:checked").val()
+        };
+         if (form_data.tabla !== ""){
+            $('#structure_table thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
+
+            $.ajax({
+                type: "POST",
+                url: "adm_profesor/getStructure.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    $('#structure_table tbody').html(response).fadeIn();
+                }
+            });
+        }else{
+            $('.structure-table tbody').html("").fadeIn();
+        }
+    });
+
     $(".selector-tabla-show select").click(function() {
         var form_data = {
             is_ajax: 1,
@@ -96,7 +119,7 @@ $(document).ready(function () {
             is_ajax: 1,
             tabla: $(".selector-tabla-sol select option:checked").val()
         };
-        console.log(form_data.tabla);
+        //console.log(form_data.tabla);
         if (form_data.tabla !== ""){
 
             $.ajax({

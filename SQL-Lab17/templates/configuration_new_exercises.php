@@ -18,28 +18,36 @@
                     <form id="new_sheets" method="post" action="../handler/validate_new_exercises.php">
                             
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label><strong><?php echo trad('Creador Tablas',$lang) ?> <span class="red"> *</span></strong></label>
                                 <div class=" selector-user" >
                                     <select name="user_tablas" class=" custom-select form-control-sm" id="user_tablas" title="<?php echo trad('Seleccionar',$lang) ?>" required>                                    
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <label><strong><?php echo trad('Información Tablas',$lang) ?></strong></label>
                                 <div class=" selector-tabla" >
                                     <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm">                                               
                                     </select>                                
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <label><strong><?php echo trad('Información Campos',$lang) ?></strong></label>
+                            <div class="col-md-6">
+                                <!-- <label><strong><?php //echo trad('Información Campos',$lang) ?></strong></label> -->
                                 <div class="columnas-tabla" >
-                                    <table id="columnas" class="form-control" ><tbody></tbody></table>                               
+                                    <!-- <table id="columnas" class="form-control" ><tbody></tbody></table> -->
+                                    <table id="structure_table"> <!-- class="table table-striped table-bordered">   -->
+                                            <thead>
+                                                
+                                            </thead>
+                                            <tbody style="border: 1px solid black">
+                                                
+                                            </tbody>
+                                        </table>
                                 </div>
                             </div>
                         </div>
-                            
+                        <br>
                         <div class="row">
                             <div class="col-md-5">
                                 <label for="name" ><strong><?php echo trad('Descripción',$lang) ?> <span class="red"> *</span></strong></label>

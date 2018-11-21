@@ -32,7 +32,7 @@
                         $cont = 0;
                         if (isset($res)) {
                             echo '<select name="lista_hoja" class="custom-select form-control-sm select_profe" title="Selecciona hoja" id="select_hoja">';
-                            echo "<option value=" . $row_hoja['creador_hoja'] . ">Todos Profesores </option>";
+                            echo "<option name='' apellido1='' apellido2=''>Todos Profesores </option>";
                             while ($row_hoja = mysqli_fetch_array($res)) {
                                 $apellidos = explode(" ",$row_hoja['apellidos']);
                                 echo "<option name=". $row_hoja['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_hoja['nombre'].' '. $row_hoja['apellidos']. " </option>";

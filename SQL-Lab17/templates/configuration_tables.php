@@ -7,7 +7,7 @@
     <div class="row mb-150">
         <div class="offset-md-10 col-md-2">
             <div class="text-right">
-                <a type="button" class="btn btn-primary pl-3 pr-3" href="configuration_new_tables.php" ><?php echo trad('Ejecutar Script',$lang) ?></a>
+                <a type="button" class="btn btn-primary pl-3 pr-3" id="new_table" href="#" ><?php echo trad('Ejecutar Script',$lang) ?></a>
             </div>
         </div>
     </div>

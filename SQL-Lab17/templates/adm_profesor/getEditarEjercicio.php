@@ -16,7 +16,7 @@
     	$tablas = $tablas.$separado[1]." ";
     }
     $resultado = $ejer->getCategorias();
-    $niveles = array("facil","medio","dificil");
+    $niveles = array("Principiante","Intermedio","Avanzado");
     if($resul){
     	$datos = array();
     	 

@@ -50,9 +50,9 @@ $_SESSION['HOJA_EXE']= 1;
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
                             
                                 echo "<option value=''>Todos Niveles </option>";
-                                echo "<option value=facil> Facil </option>";
-                                echo "<option value=medio> Medio </option>";
-                                echo "<option value=dificil> Difícil </option>";
+                                echo "<option value=Principiante> Principiante </option>";
+                                echo "<option value=Intermedio> Intermedio </option>";
+                                echo "<option value=Avanzado> Avanzado </option>";
                                 
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';

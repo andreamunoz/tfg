@@ -336,7 +336,27 @@ $(document).ready(function () {
         });
     });
 
+    $('#new_table').click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getBorrarDatosCrearTablas.php",
+            success: function(response)
+            {
+                location.assign("../templates/configuration_new_tables.php");
+            }
+        });
+    });
 
+    $('#logout').click(function(){
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getBorrarDatosSesion.php",
+            success: function(response)
+            {
+                location.assign("../templates/login/login.php");
+            }
+        });
+    });    
 
 });
 

@@ -35,7 +35,11 @@
                                         <div class=" selector-user-edit" >
                                             <select class=" custom-select form-control-sm" id="user_tablas" name="user_tablas" title="Selecciona" disabled>
                                                 <option value="<?php echo $ejercicioId['dueño_tablas']?>" selected="selected">
-                                                    <?php echo $ejercicioId['dueño_tablas']?>    
+                                                    <?php 
+                                                    $nombreCompleto = $ejer->getNombreYApellidos($ejercicioId['dueño_tablas']);
+                                                    echo $nombreCompleto["nombre"]." ".$nombreCompleto["apellidos"];
+                                                    ?>  
+
                                                 </option>
                                             </select>
                                         </div>
@@ -63,7 +67,7 @@
                                         <label for="name" ><strong><?php echo trad('Nivel',$lang) ?><span class="red"> *</span></strong></label> 
                                         <select name="nivel" class="custom-select form-control-sm " title="Selecciona" id="nivel">
                                             <?php
-                                            $niveles = array("facil","medio","dificil");
+                                            $niveles = array("Principiante","Intermedio","Avanzado");
                                             for ($i=0; $i < count($niveles); $i++) { 
                                                                                           
                                                 var_dump($niveles[$i]);

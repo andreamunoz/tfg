@@ -123,82 +123,86 @@ class Administrar_schema{
         $sentencias = explode(";", $contenido);
         $contador = count($sentencias) - 1;
         $bienEjecutadas = 0;
-        
-        for ($j = 0; $j < $contador; $j++) {
-            $sentencias[$j] = trim($sentencias[$j]);
-        }        
-        $i = 0;
-        $arrayResultado = array($contador);
-        $subsentencia = array();
-        while ($i < $contador ) {
+        if($contador > 0){
+            for ($j = 0; $j < $contador; $j++) {
+                $sentencias[$j] = trim($sentencias[$j]);
+            }        
+            $i = 0;
+            $arrayResultado = array($contador);
+            $subsentencia = array();
+            while ($i < $contador ) {
 
-            $subsentencia = explode(" ", $sentencias[$i], 4);
-            $nombre_tabla_con_comillas = $admin->comprobarSintaxis($sentencias[$i]);
+                $subsentencia = explode(" ", $sentencias[$i], 4);
+                $nombre_tabla_con_comillas = $admin->comprobarSintaxis($sentencias[$i]);
 
-            if($nombre_tabla_con_comillas !== FALSE){
+                if($nombre_tabla_con_comillas !== FALSE){
 
-                $miSentenciaEntera = $sentencias[$i];
+                    $miSentenciaEntera = $sentencias[$i];
 
-                //QUITAR COMILLAS DEL NOMBRE
-                $arrayComillas = array("`", '"', "'");
-            var_dump($nombre_tabla_con_comillas);
-                $nombre_tabla = str_replace($arrayComillas, "", $nombre_tabla_con_comillas);
-            var_dump($nombre_tabla);
-                
-                //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
-                $nuevoNombre = $profe."_".$nombre_tabla;
-                
-                $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla_con_comillas, $nuevoNombre, $miSentenciaEntera);
-                var_dump($miSentenciaEntera);
-                //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
-                $miSentenciaEntera = str_replace("'", '"', $miSentenciaEntera);
+                    //QUITAR COMILLAS DEL NOMBRE
+                    $arrayComillas = array("`", '"', "'");
+                var_dump($nombre_tabla_con_comillas);
+                    $nombre_tabla = str_replace($arrayComillas, "", $nombre_tabla_con_comillas);
+                var_dump($nombre_tabla);
+                    
+                    //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
+                    $nuevoNombre = $profe."_".$nombre_tabla;
+                    
+                    $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla_con_comillas, $nuevoNombre, $miSentenciaEntera);
+                    var_dump($miSentenciaEntera);
+                    //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
+                    $miSentenciaEntera = str_replace("'", '"', $miSentenciaEntera);
 
-                if((stripos($sentencias[$i], "create"))!==FALSE){
+                    if((stripos($sentencias[$i], "create"))!==FALSE){
 
-                    //SI ES UN CREATE TABLE, BUSCAMOS SI TIENE REFERENCIAS PARA AÑADIR EL PREFIJO AL NOMBRE DE LA TABLA
-                    $miSentenciaEntera = $admin->reemplazar_referencias("references ", "references ".$profe."_", $miSentenciaEntera);
-                    //EJECUTAMOS LA SENTENCIA
-                    $respuesta = $admin->executeCode($miSentenciaEntera.";");
-                    //var_dump($respuesta);
-                } elseif(((stripos($sentencias[$i], "drop"))!==FALSE) || ((stripos($sentencias[$i], "alter"))!==FALSE) ){
-                    include_once 'ejercicio.php';
-                    $ejer = new Ejercicio();
-                    $resultado = $ejer->comprobarSiEstaUsada($nuevoNombre);
-                    if ($resultado === 0) {
+                        //SI ES UN CREATE TABLE, BUSCAMOS SI TIENE REFERENCIAS PARA AÑADIR EL PREFIJO AL NOMBRE DE LA TABLA
+                        $miSentenciaEntera = $admin->reemplazar_referencias("references ", "references ".$profe."_", $miSentenciaEntera);
                         //EJECUTAMOS LA SENTENCIA
-                        $respuesta = $admin->executeCode($miSentenciaEntera.";");        
-                    } else{
-                        $respuesta = "No se puede ejecutar porque las tablas están siendo usadas.";
+                        $respuesta = $admin->executeCode($miSentenciaEntera.";");
+                        //var_dump($respuesta);
+                    } elseif(((stripos($sentencias[$i], "drop"))!==FALSE) || ((stripos($sentencias[$i], "alter"))!==FALSE) ){
+                        include_once 'ejercicio.php';
+                        $ejer = new Ejercicio();
+                        $resultado = $ejer->comprobarSiEstaUsada($nuevoNombre);
+                        if ($resultado === 0) {
+                            //EJECUTAMOS LA SENTENCIA
+                            $respuesta = $admin->executeCode($miSentenciaEntera.";");        
+                        } else{
+                            $respuesta = "No se puede ejecutar porque las tablas están siendo usadas.";
+                        }
+                    }elseif((stripos($sentencias[$i], "insert"))!==FALSE){
+                        //EJECUTAMOS LA SENTENCIA
+                        $respuesta = $admin->executeCode($miSentenciaEntera.";");
+                    }   
+                    if($respuesta !== true){
+                        $arrayResultado[$i] = "La sentencia número ".($i+1)." falló. Mensaje: ".$respuesta;
+                    }else{
+                        $bienEjecutadas++;
+                        // $arrayResultado[$i] = $respuesta;
                     }
-                }elseif((stripos($sentencias[$i], "insert"))!==FALSE){
-                    //EJECUTAMOS LA SENTENCIA
-                    $respuesta = $admin->executeCode($miSentenciaEntera.";");
-                }   
-                if($respuesta !== true){
-                    $arrayResultado[$i] = "La sentencia número ".($i+1)." falló. Mensaje: ".$respuesta;
+                    
                 }else{
-                    $bienEjecutadas++;
-                    // $arrayResultado[$i] = $respuesta;
+                    $arrayResultado[$i] = "La sentencia número ". ($i+1) ." no tiene una sintaxis correcta.";
                 }
-                
-            }else{
-                $arrayResultado[$i] = "La sentencia número ". ($i+1) ." no tiene una sintaxis correcta.";
+                $i = $i+1;
             }
-            $i = $i+1;
-        }
 
-        $admin->updateTablasDisponibles($profe);
-        if($bienEjecutadas === $contador){
-            $arrayResultado = "";
-            unset($_SESSION['guardarDatosTablas']);
-        }else{
-            foreach ($arrayResultado as $key => $value) {
-                //var_dump($value);
-                $recorte = explode(";", $value); //recortamos el error que devuelve phpmyadmin
-                $arrayResultado[$key] = $recorte[0];
-                
+            $admin->updateTablasDisponibles($profe);
+            if($bienEjecutadas === $contador){
+                $arrayResultado = "";
+                unset($_SESSION['guardarDatosTablas']);
+            }else{
+                foreach ($arrayResultado as $key => $value) {
+                    //var_dump($value);
+                    $recorte = explode(";", $value); //recortamos el error que devuelve phpmyadmin
+                    $arrayResultado[$key] = $recorte[0];
+                    
+                }
             }
+        }else{
+            $arrayResultado = "La sentencia debe terminar en ';'";
         }
+        
         return $arrayResultado;
     }
 

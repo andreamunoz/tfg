@@ -10,7 +10,7 @@
     $admin_schema = new Administrar_schema();
 
     $arrayResultado = $admin_schema->obtenerSentencias($code, $user_name);
-    //var_dump($arrayResultado);
+
 
     $mensaje = "";
     if(is_array($arrayResultado)){
@@ -23,9 +23,9 @@
             }
         }
     }else{
-        if ($arrayResultado != ""){
+        //if ($arrayResultado != ""){
             $mensaje = $arrayResultado;
-        }
+        //}
     }
 
     if ($mensaje != ""){
@@ -43,7 +43,11 @@
                 </div>
             </div>
         </div>";
+        header("Location: ../templates/configuration_new_tables.php");
+    }else{
+        header("Location: ../templates/configuration_tables.php");
+        
     }
-    header("Location: ../templates/configuration_tables.php");
+
     exit();
 ?>

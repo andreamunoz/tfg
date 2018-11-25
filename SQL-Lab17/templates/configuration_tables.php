@@ -93,7 +93,12 @@
 
                 </div>
             </div> 
-             
+            <?php
+                if(isset($_SESSION['message_new_tables'])){
+                    echo $_SESSION['message_new_tables'];
+                    unset($_SESSION['message_new_tables']);
+                }
+            ?> 
         </div> 
     </div>
 </div>

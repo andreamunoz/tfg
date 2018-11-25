@@ -106,6 +106,7 @@ class Administrar_schema{
     }
 
     function reemplazar_primero($buscar, $remplazar, $texto){
+        var_dump("BUSCAR:".$buscar." REEMPLAZAR:".$remplazar." TEXTO:".$texto);
         $pos = strpos($texto, " ".$buscar);
         if($pos !== false){
             $texto = substr_replace($texto, $remplazar, $pos+1, strlen($buscar));
@@ -132,21 +133,23 @@ class Administrar_schema{
         while ($i < $contador ) {
 
             $subsentencia = explode(" ", $sentencias[$i], 4);
-            $nombre_tabla = $admin->comprobarSintaxis($sentencias[$i]);
+            $nombre_tabla_con_comillas = $admin->comprobarSintaxis($sentencias[$i]);
 
-            if($nombre_tabla !== FALSE){
+            if($nombre_tabla_con_comillas !== FALSE){
 
                 $miSentenciaEntera = $sentencias[$i];
 
                 //QUITAR COMILLAS DEL NOMBRE
                 $arrayComillas = array("`", '"', "'");
-                $nombre_tabla = str_replace($arrayComillas, "", $nombre_tabla);
+            var_dump($nombre_tabla_con_comillas);
+                $nombre_tabla = str_replace($arrayComillas, "", $nombre_tabla_con_comillas);
+            var_dump($nombre_tabla);
                 
                 //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
                 $nuevoNombre = $profe."_".$nombre_tabla;
                 
-                $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla, $nuevoNombre, $miSentenciaEntera);
-
+                $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla_con_comillas, $nuevoNombre, $miSentenciaEntera);
+                var_dump($miSentenciaEntera);
                 //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
                 $miSentenciaEntera = str_replace("'", '"', $miSentenciaEntera);
 

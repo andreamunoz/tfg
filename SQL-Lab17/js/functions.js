@@ -321,8 +321,8 @@ $(document).ready(function () {
         $('.contenedor-item').removeClass('border-left-white');
     });
 
-    $('#close-tablas').click(function(){
-        $('#modal-tables').hide();
+    $('#close-modal').click(function(){
+        $('#modal-close').hide();
     });
 
     $('#new_exercice').click(function(){

@@ -459,11 +459,16 @@
              var_dump($resultadoEditar);
             if($resultadoEditar){
                 $ejer->enviarAviso($id);
-                header("Location: ../templates/configuration_exercises.php");
+                header("Location: ../templates/configuration_edit_exercises.php?exercise=$id");
             }else{
-                $_SESSION['message_edit_sheets'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                $_SESSION['message_edit_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>
                         <div class='modal-content'>
+                            <div class='modal-header'>
+                                <div class='close' id='close-modal'>
+                                    <i class='fas fa-times' data-dismiss='modal'></i>
+                                </div>
+                            </div>
                             <div class='modal-body'>
                                 <h2><strong>¡Error!</strong></h2>
                                 <p>Error al modificar el ejercicio</p>
@@ -475,9 +480,14 @@
             }
         
     }else{
-        $_SESSION['message_edit_sheets'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+        $_SESSION['message_edit_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>
                         <div class='modal-content'>
+                            <div class='modal-header'>
+                                <div class='close' id='close-modal'>
+                                    <i class='fas fa-times' data-dismiss='modal'></i>
+                                </div>
+                            </div>
                             <div class='modal-body'>
                                 <h2><strong>¡Error!</strong></h2>
                                 <p>Por favor repase la solución y asegurese de que sea válida.</p>

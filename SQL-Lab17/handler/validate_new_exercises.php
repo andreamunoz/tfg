@@ -43,6 +43,7 @@
 
     $solucion = strtolower($solucion);
 
+
     function quitarPalabrasFinales($frase){
 
             $palabrasBuscar = array(" where "," group "," having "," order "," limit ", ";", "select");
@@ -321,7 +322,7 @@
                     }
 
             }else{
-                    $resultado[0] = false;
+                $resultado[0] = false;
             }
 
             return $resultado;
@@ -372,6 +373,7 @@
 
             }else{
                     $resultado[0] = false;
+                    $resultado[1] = "El creador de las tablas seleccionado no corresponde al de las tablas usadas.";
             }
             return $resultado;
     }
@@ -498,9 +500,14 @@
                 unset($_SESSION['guardarDatos']);
                 header("Location: ../templates/configuration_exercises.php");
         }else{
-                $_SESSION['message_sheets'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                         <div class='modal-dialog modal-dialog-centered' role='document'>
                             <div class='modal-content'>
+                                <div class='modal-header'>
+                                  <div class='close' id='close-modal'>
+                                    <i class='fas fa-times' data-dismiss='modal'></i>
+                                  </div>
+                                </div>
                                 <div class='modal-body'>
                                     <h2><strong>¡Error!</strong></h2>
                                     <p>Error al crear el ejercicio.</p>
@@ -512,9 +519,14 @@
         }
 
     }else{
-        $_SESSION['message_sheets'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+        $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                 <div class='modal-dialog modal-dialog-centered' role='document'>
                     <div class='modal-content'>
+                        <div class='modal-header'>
+                          <div class='close' id='close-modal'>
+                            <i class='fas fa-times' data-dismiss='modal'></i>
+                          </div>
+                        </div>
                         <div class='modal-body'>
                             <h2><strong>¡Error!</strong></h2>
                             <p>Por favor repase las tablas de la solución y asegurese de que sean válidas.</p>

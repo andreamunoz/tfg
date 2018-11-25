@@ -29,11 +29,11 @@
     }
 
     if ($mensaje != ""){
-        $_SESSION['message_new_tables'] = "<div class='modal fade show' id='modal-tables' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+        $_SESSION['message_new_tables'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
             <div class='modal-dialog modal-dialog-centered' role='document'>
                 <div class='modal-content'>
                     <div class='modal-header'>
-                      <div class='close' id='close-tablas'>
+                      <div class='close' id='close-modal'>
                         <i class='fas fa-times' data-dismiss='modal'></i>
                       </div>
                     </div>

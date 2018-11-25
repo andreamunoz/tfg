@@ -32,9 +32,14 @@ if ($borrado) {
                 $result = $ejercicio->eliminarEjercicio($id);
                 if (!empty($result)) {
 
-                    $_SESSION['msg_habilitar'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                    $_SESSION['msg_habilitar'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>
                         <div class='modal-content'>
+                            <div class='modal-header'>
+                              <div class='close' id='close-modal'>
+                                <i class='fas fa-times' data-dismiss='modal'></i>
+                              </div>
+                            </div>
                             <div class='modal-body'>
                                 <h2><strong>¡Felicidades!</strong></h2>
                                 <p>Se ha habilitado el ejercicio correctamente.</p>
@@ -44,9 +49,14 @@ if ($borrado) {
                 </div>";
                     header("Location: ../templates/configuration_exercises.php");
                 } else {
-                    $_SESSION['msg_habilitar'] = "<div class='modal fade show' id='modalsheet' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                    $_SESSION['msg_habilitar'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>
                         <div class='modal-content'>
+                            <div class='modal-header'>
+                                <div class='close' id='close-modal'>
+                                    <i class='fas fa-times' data-dismiss='modal'></i>
+                                </div>
+                            </div>
                             <div class='modal-body'>
                                 <h2><strong>¡Error!</strong></h2>
                                 <p>No se ha podido Habilitar el ejercicio correctamente.</p>

@@ -141,15 +141,14 @@ class Administrar_schema{
 
                     //QUITAR COMILLAS DEL NOMBRE
                     $arrayComillas = array("`", '"', "'");
-                var_dump($nombre_tabla_con_comillas);
                     $nombre_tabla = str_replace($arrayComillas, "", $nombre_tabla_con_comillas);
-                var_dump($nombre_tabla);
+                // var_dump($nombre_tabla);
                     
                     //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
                     $nuevoNombre = $profe."_".$nombre_tabla;
                     
                     $miSentenciaEntera = $admin->reemplazar_primero($nombre_tabla_con_comillas, $nuevoNombre, $miSentenciaEntera);
-                    var_dump($miSentenciaEntera);
+                    // var_dump($miSentenciaEntera);
                     //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
                     $miSentenciaEntera = str_replace("'", '"', $miSentenciaEntera);
 
@@ -157,6 +156,8 @@ class Administrar_schema{
 
                         //SI ES UN CREATE TABLE, BUSCAMOS SI TIENE REFERENCIAS PARA AÑADIR EL PREFIJO AL NOMBRE DE LA TABLA
                         $miSentenciaEntera = $admin->reemplazar_referencias("references ", "references ".$profe."_", $miSentenciaEntera);
+                    var_dump($miSentenciaEntera);
+
                         //EJECUTAMOS LA SENTENCIA
                         $respuesta = $admin->executeCode($miSentenciaEntera.";");
                         //var_dump($respuesta);

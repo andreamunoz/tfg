@@ -5,13 +5,14 @@
     $_SESSION['guardarDatosTablas'] = $_POST['crea_tabla'];
     $user_name = $_SESSION['user'];
     $code = strtolower($code);
+    $code = preg_replace('/( ){2,}/u',' ',$code);
     // print_r($_SESSION);
 
     $admin_schema = new Administrar_schema();
 
     $arrayResultado = $admin_schema->obtenerSentencias($code, $user_name);
 
-
+    //var_dump($arrayResultado);
     $mensaje = "";
     if(is_array($arrayResultado)){
 

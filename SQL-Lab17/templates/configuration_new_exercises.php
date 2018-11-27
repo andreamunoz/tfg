@@ -36,11 +36,11 @@
                                 <!-- <label><strong><?php //echo trad('Información Campos',$lang) ?></strong></label> -->
                                 <div class="columnas-tabla" >
                                     <!-- <table id="columnas" class="form-control" ><tbody></tbody></table> -->
-                                    <table id="structure_table"> <!-- class="table table-striped table-bordered">   -->
-                                            <thead>
+                                    <table id="structure_table" class=""> <!-- class="table table-striped table-bordered">   -->
+                                            <thead class="light-style">
                                                 
                                             </thead>
-                                            <tbody style="border: 1px solid black">
+                                            <tbody class="body-tablas-style">
                                                 
                                             </tbody>
                                         </table>

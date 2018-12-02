@@ -309,7 +309,7 @@
                     //      //var_dump($solucion);
                     // }
                     $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
-                    var_dump($solucion);
+                    //var_dump($solucion);
                     $resultadoSolucion = $ejer->executeSolucion($solucion);
 
                     if($resultadoSolucion[0] === false){
@@ -323,6 +323,7 @@
 
             }else{
                 $resultado[0] = false;
+                $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
             }
 
             return $resultado;
@@ -358,22 +359,22 @@
             $ok = validarTablas($tablasSolucion, $tablasDisponibles);
 
             if($ok){
-                    $nombreAntiguo = " ".$tabla[0];
-                    $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
-                    $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+                $nombreAntiguo = " ".$tabla[0];
+                $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+                $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
 
-                    if($resultadoSolucion[0] === false){
-                            $resultado[0] = false;
-                            $resultado[1] = $resultadoSolucion[1];
-                    }else{
-                            $resultado[0] = true;
-                            $resultado[1] = $tablasSolucion;
-                            $resultado[2] = $resultadoSolucion;
-                    }
+                if($resultadoSolucion[0] === false){
+                        $resultado[0] = false;
+                        $resultado[1] = $resultadoSolucion[1];
+                }else{
+                        $resultado[0] = true;
+                        $resultado[1] = $tablasSolucion;
+                        $resultado[2] = $resultadoSolucion;
+                }
 
             }else{
                     $resultado[0] = false;
-                    $resultado[1] = "El creador de las tablas seleccionado no corresponde al de las tablas usadas.";
+                    $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
             }
             return $resultado;
     }
@@ -409,10 +410,13 @@
                             }
 
                     }else{
-                            $resultado[0] = false;
+                        $resultado[0] = false;
+                        $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
+
                     }
             }else{
                     $resultado[0] = false;
+                    $resultado[4] = "La solución no tiene una sintaxis correcta.";
             }
             return $resultado;
     }
@@ -448,9 +452,13 @@
 
                     }else{
                             $resultado[0] = false;
+                            $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
+
                     }
             }else{
                     $resultado[0] = false;
+                    $resultado[4] = "La solución no tiene una sintaxis correcta.";
+
             }
             return $resultado;
     }
@@ -482,6 +490,7 @@
 
         }else{
                 $resultado[0] = FALSE;
+                $resultado[4] = "La solución no tiene una sintaxis correcta.";
         }
 
         return $resultado;
@@ -519,7 +528,25 @@
         }
 
     }else{
-        $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+
+        if (isset($resultado[4])){
+            $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                          <div class='close' id='close-modal'>
+                            <i class='fas fa-times' data-dismiss='modal'></i>
+                          </div>
+                        </div>
+                        <div class='modal-body'>
+                            <h2><strong>¡Error!</strong></h2>
+                            <p>". $resultado[4] ."</p>
+                        </div>
+                    </div>
+                </div>   
+            </div>";
+        }else{
+            $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                 <div class='modal-dialog modal-dialog-centered' role='document'>
                     <div class='modal-content'>
                         <div class='modal-header'>
@@ -533,7 +560,9 @@
                         </div>
                     </div>
                 </div>   
-            </div>";
+            </div>";            
+        }
+        
         header("Location: ../templates/configuration_new_exercises.php");
     }
     // var_dump($resultado);

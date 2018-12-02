@@ -9,11 +9,16 @@
     $ejer = new Ejercicio();
     $id_ejer = $_GET['exercise'];
     $des = $ejer->getDescripcionEjercicio($id_ejer);
-    $hojaparameter = $_SESSION['HOJA_VISTA'];
-    $nombreHoja = $_SESSION['HOJA_VISTA_NOMBRE'];
+    if(isset($_SESSION['HOJA_VISTA'])){
+        $hojaparameter = $_SESSION['HOJA_VISTA'];
+    }
+    if isset($_SESSION['HOJA_VISTA_NOMBRE']){
+        $nombreHoja = $_SESSION['HOJA_VISTA_NOMBRE'];
+    }
+        
     if($_SESSION['HOJA_EXE']== 0){
     ?>
-    <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor', $lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios', $lang) ?></a> > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a> > <a class="enlace" href="configuration_show_exercises.php?exercise=<?php echo $id_ejer ?>" > <?php echo trad('Ver Ejercicio', $lang) ?></a></label>
+        <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor', $lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios', $lang) ?></a> > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a> > <a class="enlace" href="configuration_show_exercises.php?exercise=<?php echo $id_ejer ?>" > <?php echo trad('Ver Ejercicio', $lang) ?></a></label>
     <?php } else{ ?>
         <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor', $lang) ?> </a> > <a class="enlace" href="configuration_exercises.php" > <?php echo trad('Ejercicios', $lang) ?></a> > <a class="enlace" href="configuration_show_exercises.php?exercise=<?php echo $id_ejer ?>" > <?php echo trad('Ver Ejercicio', $lang) ?></a></label>
     <?php } ?>

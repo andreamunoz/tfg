@@ -12,7 +12,7 @@
     if(isset($_SESSION['HOJA_VISTA'])){
         $hojaparameter = $_SESSION['HOJA_VISTA'];
     }
-    if isset($_SESSION['HOJA_VISTA_NOMBRE']){
+    if (isset($_SESSION['HOJA_VISTA_NOMBRE'])){
         $nombreHoja = $_SESSION['HOJA_VISTA_NOMBRE'];
     }
         
@@ -44,7 +44,7 @@
                                             
                     </div>
                 </div> -->
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label><strong><?php echo trad('Creador Tablas',$lang) ?></strong></label>
                     
                     <table class="form-control">
@@ -54,10 +54,10 @@
                     </table>
                     
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <label><strong><?php echo trad('Tablas',$lang) ?></strong></label>
-                    <div class="selector-tabla-show" >
-                        <select type="text" name="tablas" class="custom-select form-control-sm"> 
+                    <div class="sel-tab-show" >
+                        <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm"> 
                             <option value="">Selecciona Tabla</option>
                         <?php 
                             $usa = new Usa();
@@ -74,10 +74,16 @@
                         </select>                               
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <label><strong><?php echo trad('Campos',$lang) ?></strong></label>
-                    <div class="columnas-tabla-show" >
-                        <table id="columnas" class="form-control" ><tbody></tbody></table>                               
+                <div class="col-md-6">
+                    <div class="col-tab-show" >
+                        <table id="structure_table" class="" >
+                            <thead class="light-style">
+                                                
+                            </thead>
+                            <tbody class="body-tablas-style">
+                                
+                            </tbody>
+                        </table>                               
                     </div>
                 </div>
             </div>

@@ -80,7 +80,8 @@ $(document).ready(function () {
             is_ajax: 1,
             tabla: $(".selector-tabla select option:checked").val()
         };
-         if (form_data.tabla !== ""){
+        console.log(form_data.tabla);
+        if (form_data.tabla !== ""){
             $('#structure_table thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
 
             $.ajax({
@@ -357,6 +358,36 @@ $(document).ready(function () {
             }
         });
     });    
+
+
+    $(".sel-tab-show select ").change(function(){
+        
+        var form_data = {
+            is_ajax: 1,
+            tabla: $(".sel-tab-show select option:checked").val()
+        };
+        if (form_data.tabla !== ""){
+            
+            $.ajax({
+                type: "POST",
+                url: "adm_profesor/getStructure.php",
+                data: form_data,
+                success: function(response)
+                {   
+                    $('.col-tab-show thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
+                    $('.col-tab-show tbody').html(response).fadeIn();
+                }
+            });
+
+        }else{
+            $('.structure_table tbody').html("").fadeIn();
+        }
+    });
+
+    $("nav-exercisesE-tab").click(function(){
+        
+    });
+
 
 });
 

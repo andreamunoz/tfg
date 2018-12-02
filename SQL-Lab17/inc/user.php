@@ -169,7 +169,7 @@ class User {
     function getAvisosNoLeidos($user) {
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $consulta = "SELECT mensaje FROM sqlab_avisos WHERE leido = 0 AND nombre = '$user'";
+        $consulta = "SELECT DISTINCT mensaje FROM sqlab_avisos WHERE leido = 0 AND nombre = '$user'";
         $resultado = mysqli_query($conexion, $consulta);
         $resul = array();
         $i = 0;
@@ -184,7 +184,7 @@ class User {
     function getAvisos($user) {
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $consulta = "SELECT mensaje FROM sqlab_avisos WHERE nombre = '$user'";
+        $consulta = "SELECT DISTINCT mensaje FROM sqlab_avisos WHERE nombre = '$user'";
         $resultado = mysqli_query($conexion, $consulta);
         $resul = array();
         $i = 0;

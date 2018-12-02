@@ -37,13 +37,13 @@
                                 <div class="columnas-tabla" >
                                     <!-- <table id="columnas" class="form-control" ><tbody></tbody></table> -->
                                     <table id="structure_table" class=""> <!-- class="table table-striped table-bordered">   -->
-                                            <thead class="light-style">
+                                        <thead class="light-style">
+                                            
+                                        </thead>
+                                        <tbody class="body-tablas-style">
                                                 
-                                            </thead>
-                                            <tbody class="body-tablas-style">
-                                                
-                                            </tbody>
-                                        </table>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>

@@ -13,7 +13,14 @@
       ?>
     <label><a class="enlance" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlance" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?></strong></h2>
-    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>		
+    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
+    <div class="row mb-150">
+        <div class="col-md-12">
+            <div class="text-right pl-5">
+                <a class="btn btn-primary pl-4 pr-4" href="files/sheet_pdf.php?sheet=<?php echo $hojaparameter; ?> "><?php echo trad('DESCARGAR',$lang) ?><i style="font-size:25px; vertical-align: middle;" class="fas fa-file-pdf pl-2"></i></a>
+            </div>
+        </div>
+    </div>
     <div id="accordion">
         <div class="card">
             <div class="table-responsive no-buscar">  
@@ -42,18 +49,17 @@
                         if (isset($res) && isset($resC) && isset($resP)) {
                             
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_hoja">';
-                            echo "<option value=". $row_profe['creador_ejercicio'] .">Todos Profesores </option>";
+                            echo "<option name='' apellido1='' apellido2=''>Todos Profesores </option>";
                             while ($row_profe = mysqli_fetch_array($resP)) {
-                                echo "<option value=" . $row_profe['creador_ejercicio'] . ">" . $row_profe['nombre'].' '. $row_profe['apellidos']. " </option>";
+                                $apellidos = explode(" ",$row_profe['apellidos']);
+                                echo "<option name=". $row_profe['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_profe['nombre'].' '. $row_profe['apellidos']. " </option>";
                             }
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
-                           
-                                echo "<option value='None'>Todos Niveles </option>";
-                                echo "<option value='facil'> Facil </option>";
-                                echo "<option value='medio'> Medio </option>";
-                                echo "<option value='dificil'> Difícil </option>";
-                           
+                                echo "<option value=''>Todos Niveles </option>";
+                                echo "<option value='Principiante'>Principiante </option>";
+                                echo "<option value='Intermedio'>Intermedio </option>";
+                                echo "<option value='Avanzado'>Avanzado </option>";
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
                             echo "<option value=" . $row_tipo['tipo'] . ">Todas Categorías </option>";

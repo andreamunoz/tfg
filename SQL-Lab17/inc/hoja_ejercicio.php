@@ -119,10 +119,9 @@ class HojaEjercicio{
     function updateHojaAnadirEjercicios($id, $user, $nombre, $ejercicios){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        
         $sql = "update sqlab_hoja_ejercicios set nombre_hoja = '$nombre' , creador_hoja = '$user' where id_hoja='$id'" ;
         $consulta = mysqli_query($conexion,$sql);
-       
+        
         $rs = mysqli_query($conexion,"SELECT MAX(id_hoja) AS id FROM sqlab_hoja_ejercicios");
         if( $row = mysqli_fetch_row($rs)){
             $id_e = trim($row[0]);

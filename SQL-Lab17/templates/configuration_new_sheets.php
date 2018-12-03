@@ -13,7 +13,7 @@
         <div class="">
             <div class="row">
                 <div class="col-md-12 ">
-                    <form id="new_sheets" method="post" action="../handler/validate_new_sheets.php">
+                    <!--<form id="new_sheets" method="post" action="../handler/validate_new_sheets.php">-->
                         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                             <div class="row">
                                 <div class="col-md-3 p-0">
@@ -60,9 +60,9 @@
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
                                                     echo "<option value=''>Todos Niveles </option>";
                                                     
-                                                        echo "<option value='facil'>Facil </option>";
-                                                        echo "<option value='medio'>Medio </option>";
-                                                        echo "<option value='dificil'>Dificil </option>";
+                                                        echo "<option value='Principiante'>Principiante </option>";
+                                                        echo "<option value='Intermedio'>Intermedio </option>";
+                                                        echo "<option value='Avanzado'>Avanzado </option>";
                                                     
                                                     echo '</select>';
                                                     echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
@@ -98,7 +98,7 @@
                                 </div> 
                             </div>
                             <div class="form-group text-right">
-                                <button class="btn btn-primary pl-5 pr-5 mt-5 mb-5" name="new_sheet" type="submit"><?php echo trad('Crear Hoja',$lang) ?></button>
+                                <button class="btn btn-primary pl-5 pr-5 mt-5 mb-5 createSheet" name=""><?php echo trad('Crear Hoja',$lang) ?></button>
                             </div>
                         </div>
                         <?php
@@ -107,7 +107,7 @@
                             unset($_SESSION['message_sheets']);
                         }
                         ?>
-                    </form>
+                    <!--</form>-->
                 </div>
             </div>
         </div>

@@ -336,8 +336,7 @@ table.dataTable tbody tr {
 
 table.dataTable thead .sorting_asc {
     background-image: url("../img/flecha-ampliar.svg") !important;
-   
-    
+    padding-left: 20px !important;
 }
 .table.dataTable tbody th, table.dataTable tbody td {
     font-size: 13px;
@@ -349,6 +348,7 @@ table.dataTable thead .sorting {
 
 table.dataTable thead .sorting_desc {
     background-image: url("../img/flecha-hacia-abajo.svg") !important;
+    padding-left: 20px !important;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {
@@ -635,6 +635,30 @@ span.red{
 }
 
 #select_hoja {
+    width: 22%;
+    float: left;
+    position: relative;
+    font-size: 13px;
+    padding-left: 12px;
+}
+
+#select_niv {
+    width: 22%;
+    float: left;
+    position: relative;
+    font-size: 13px;
+    padding-left: 12px;
+}
+
+#select_tip {
+    width: 22%;
+    float: left;
+    position: relative;
+    font-size: 13px;
+    padding-left: 12px;
+}
+
+#select_pro {
     width: 22%;
     float: left;
     position: relative;

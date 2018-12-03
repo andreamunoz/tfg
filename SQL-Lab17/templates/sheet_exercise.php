@@ -74,9 +74,9 @@
                         if (isset($res) && isset($resC) && isset($resP)) {
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_hoja">';
                             echo "<option value=''>Todos Niveles </option>";
-                            while ($row_nivel = mysqli_fetch_array($res)) {
-                                echo "<option value=" . $row_nivel['nivel'] . ">" . $row_nivel['nivel'] . " </option>";
-                            }
+                                echo "<option value='Principiante'>Principiante </option>";
+                                echo "<option value='Intermedio'>Intermedio </option>";
+                                echo "<option value='Avanzado'>Avanzado </option>";
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_hoja">';
                             echo "<option value=''>Todas Categorías </option>";

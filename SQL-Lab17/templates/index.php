@@ -1,6 +1,7 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
+<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t'])?>
 
 <img class="img_index" src="../img/img_index.png"/>
 <div class='contenedor'>

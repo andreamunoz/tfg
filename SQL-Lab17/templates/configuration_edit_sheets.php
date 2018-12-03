@@ -19,7 +19,12 @@
         <div class="">
             <div class="row">
                 <div class="col-md-12 ">
-                    <form id="edit_sheets" method="post" action="../handler/validate_edit_sheets.php?hoja=<?php echo $id_hoja ?>">
+                    <!--<form id="edit_sheets" method="post" action="#">-->
+                       
+                        <?php if(isset($_SESSION['message_edit_sheets'])){
+                                echo $_SESSION['message_edit_sheets'];
+                                unset($_SESSION['message_edit_sheets']);
+                        } ?>
                         <div class="row">
                             <div class="col-md-3 p-0">
                                 <p for="name" ><strong><?php echo trad('Nombre', $lang) ?> </strong></p>                                    
@@ -67,7 +72,7 @@
                                                     <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-select-ejer" id='. $fila["id_ejercicio"] .' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' checked ></td>' ?>
+                                                    <?php echo '<td style="text-align: center"><i id='.$id_hoja.' value=' . $fila["id_ejercicio"] . ' class="deleteExercise fas fa-trash mr-3" style="color:black; opacity:0.9;" title="Eliminar"> </i></td>' ?>
                                                 </tr>
                                             <?php } }?>
                                         </tbody>
@@ -113,12 +118,10 @@
                                                 }
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona Nivel" id="select_hoja">';
-                                                echo "<option value=". $row_nivel['nivel'] .">Todos Niveles </option>";
-                                                
-                                                    echo "<option value='facil'>Fácil</option>";
-                                                    echo "<option value='medio'>Medio</option>";
-                                                    echo "<option value='dificil'>Difícil</option>";
-                                                
+                                                echo "<option value=''>Todos Niveles </option>";
+                                                        echo "<option value='Principiante'>Principiante </option>";
+                                                        echo "<option value='Intermedio'>Intermedio </option>";
+                                                        echo "<option value='Avanzado'>Avanzado </option>";
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona Categoria" id="select_hoja">';
                                                 echo "<option value=''>Todas Categorías</option>";
@@ -139,7 +142,7 @@
                                                     <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?> 
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-add-ejer" id='. $fila["id_ejercicio"] .' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' ></td>' ?>
+                                                    <?php echo '<td style="text-align: center"><input type="checkbox" class="checkbox-add-ejer" id='.$id_hoja.' name="seleccionados[]" value=' . $fila["id_ejercicio"] . ' data-name='.$descripcion.'></td>' ?>
                                                 </tr>
                                             <?php } } }?>
                                         </tbody>
@@ -148,7 +151,7 @@
                             </div>
                         </div>
                         <div class="form-group text-right">
-                            <button class="btn btn-primary pl-5 pr-5 mt-5 mb-5" name="new_sheet" type="submit"><?php echo trad('Actualizar Hoja', $lang) ?></button>
+                            <button class="btn btn-primary pl-5 pr-5 mt-5 mb-5 updateSheet" name="<?php echo $id_hoja ?>" ><?php echo trad('Actualizar Hoja', $lang) ?></button>
                         </div>
                         <?php
                         if (isset($_SESSION['message_sheets'])) {
@@ -156,7 +159,7 @@
                             unset($_SESSION['message_sheets']);
                         }
                         ?>
-                    </form>
+                    <!--</form>-->
                 </div>
             </div>
         </div>

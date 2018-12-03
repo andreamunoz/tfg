@@ -79,10 +79,7 @@
                         echo $_SESSION['msg_eleminar_hoja'];
                         unset($_SESSION['msg_eleminar_hoja']);
                     }
-                    if(isset($_SESSION['message_edit_sheets'])){
-                        echo $_SESSION['message_edit_sheets'];
-                        unset($_SESSION['message_edit_sheets']);
-                    }
+                    
                 ?>
             </div>  
         </div> 

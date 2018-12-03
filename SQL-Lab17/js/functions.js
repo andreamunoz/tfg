@@ -273,6 +273,74 @@ $(document).ready(function () {
         });
     });
     
+    $('.deleteExercise').click(function(){
+        var table = $('#employee_data').DataTable();
+        var data = table.rows().nodes();
+        var exercise = $(this).attr('value');
+        var hoja = $(this).attr('id');
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getEliminarEjercicioHoja.php",
+            data: {hoja: hoja, exercise: exercise},
+            success: function(exercise)
+            {
+               location.reload();
+            }
+        });
+        
+    });
+    
+    $('.createSheet').click(function(){
+        var table = $('#employee_data').DataTable();
+        var data = table.rows().nodes();
+        var seleccionados = [];
+        var i=0;
+        var name = $('#new_name_sheet').val();
+        $.each(data, function (index, value) {
+            if($(this).find('input').prop('checked')){
+                seleccionados[i] = $(this).find('input').attr('value');
+                console.log(seleccionados[i]);
+                i++;
+            }
+        });
+        
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getAñadirHoja.php",
+            data: {name: name, seleccionados: seleccionados},
+            success: function(seleccionados)
+            {
+               location.assign("../templates/configuration_sheets.php");
+            }
+        });
+    });
+    
+    $('.updateSheet').click(function(){
+        var table = $('#employee_data').DataTable();
+        var data = table.rows().nodes();
+        var seleccionados = [];
+        var i=0;
+        var name = $('#edit_name_sheet').val();
+        var hoja = $(this).attr('name');
+        $.each(data, function (index, value) {
+            if($(this).find('input').prop('checked')){
+                seleccionados[i] = $(this).find('input').attr('value');
+                console.log(seleccionados[i]);
+                i++;
+            }
+        });
+        
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getEditarHoja.php",
+            data: {hoja: hoja, name: name, seleccionados: seleccionados},
+            success: function(seleccionados)
+            {
+               location.reload();
+            }
+        });
+    });
+    
     $('#employee_table_hoja').DataTable({
             paging:   false,
             destroy: true,
@@ -302,19 +370,47 @@ $(document).ready(function () {
         var apellido2 = $(this).attr("apellido2");
         var profe = name + " " + apellido1 + " " + apellido2;
         var table = $('#employee_data').DataTable();
-         table.columns(1).search(profe).draw(false);
-         
+        table.columns(1).search(profe).draw(false);
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/select/getSelectProfesor.php",
+            data: {profe:profe},
+            success: function(response)
+            {
+                
+            }
+        });
     });
+
     $('.select_nivel option').click(function(){
+        
         var nivel = $(this).attr("value");
         var table = $('#employee_data').DataTable();
         table.columns(2).search(nivel).draw(false);
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/select/getSelectNivel.php",
+            data: {nivel:nivel},
+            success: function(response)
+            {
+                
+            }
+        });
     });
     
     $('.select_tipo option').click(function(){
         var tipo = $(this).attr("value");
         var table = $('#employee_data').DataTable();
         table.columns(3).search(tipo).draw(false);
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/select/getSelectTipo.php",
+            data: {tipo:tipo},
+            success: function(response)
+            {
+                //location.assign("../templates/configuration_new_exercises.php");
+            }
+        });
     });
 
     $('.contenedor-item').on('click',function(){
@@ -350,7 +446,24 @@ function cargar(){
     });
 }
 
+function selects(){
+    
+//    var profe = $('#select_pro').find(":selected").text();
+//    var table = $('#employee_data').DataTable();
+//    table.columns(1).search(profe).draw(false);
+    
+    var nivel = $('#select_niv').find(":selected").text();
+    var table = $('#employee_data').DataTable();
+    table.columns(2).search(nivel).draw(false);
+    
+    var tipo = $('#select_tip').find(":selected").text();
+    var table = $('#employee_data').DataTable();
+    table.columns(3).search(tipo).draw(false);
+    //alert(name);
+}
+
 $( window ).on( "load", function() {    
     cargar();
+    selects();
 });
 

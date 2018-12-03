@@ -25,7 +25,6 @@ $lang = 'es';
             <div class="col-md-6 contenedor-login">
                 <h1>SQLab</h1>
                 <p><?php echo trad('Siéntate y comienza a pensar',$lang)."." ?></p>
-                <?php echo $_SESSION['user'] ?>
             </div>
             <div class="col-md-6 center">
                 <form method="post" action="../../handler/validate_login.php">

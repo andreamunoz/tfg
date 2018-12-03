@@ -807,3 +807,13 @@ p#small{
 .progress{
     background-color: #CBCBCB; 
 }
+
+/*cabecera de la tabla donde se muestran las tablas en crear ejercicio y editar ejercicio*/
+.light-style > * {
+    background-color: white !important;
+    color: black !important;
+}
+/*body de la tabla donde se muestran las tablas en crear ejercicio y editar ejercicio*/
+.body-tablas-style tr > * {
+    padding: 5px 18px !important;
+}

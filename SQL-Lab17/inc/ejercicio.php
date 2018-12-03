@@ -549,4 +549,14 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+
+    function getNombreYApellidos($username){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT nombre, apellidos FROM sqlab_usuario WHERE user = '$username';";
+        $consulta = mysqli_query($conexion,$sql);
+        $res = mysqli_fetch_assoc($consulta);
+        $connect->disconnectDB($conexion);
+        return $res;
+    }
 }

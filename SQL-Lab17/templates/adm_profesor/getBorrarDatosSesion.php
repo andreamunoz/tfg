@@ -1,0 +1,15 @@
+<?php 
+	session_start();
+	unset($_SESSION["email"]);
+	unset($_SESSION["password"]);
+	unset($_SESSION["rol"]);
+	unset($_SESSION["user"]);
+	unset($_SESSION["autoriza"]);
+	unset($_SESSION['lang']);
+	unset($_SESSION['guardarDatos']);
+	unset($_SESSION['msg_congratulations']);
+	unset($_SESSION['msg_new_register']);
+	unset($_SESSION['guardarDatos']);
+	unset($_SESSION['guardarDatosTablas']);
+	session_destroy();
+?>

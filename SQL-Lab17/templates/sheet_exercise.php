@@ -11,7 +11,6 @@
       ?>
     <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="sheet_exercise.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?> | Profesor ( <?php echo $nombreProfesor['nombre'] .' '. $nombreProfesor['apellidos']; ?> )</strong></h2>
-    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
     <div class="row mb-150">
         <div class="col-md-12">
             <div class="text-right pl-5">

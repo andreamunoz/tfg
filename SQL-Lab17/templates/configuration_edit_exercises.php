@@ -5,6 +5,7 @@
     <?php 
     include_once '../inc/ejercicio.php';
     include_once '../inc/tablas.php';
+    include_once '../inc/usa.php';
     $ejer = new Ejercicio();
     $id_ejer = $_GET['exercise'];
     $des = $ejer->getDescripcionEjercicio($id_ejer);
@@ -30,27 +31,50 @@
                                 ?>
 
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label><strong><?php echo trad('Creador Tablas',$lang) ?></strong></label>
                                         <div class=" selector-user-edit" >
                                             <select class=" custom-select form-control-sm" id="user_tablas" name="user_tablas" title="Selecciona" disabled>
                                                 <option value="<?php echo $ejercicioId['dueño_tablas']?>" selected="selected">
-                                                    <?php echo $ejercicioId['dueño_tablas']?>    
+                                                    <?php 
+                                                    $nombreCompleto = $ejer->getNombreYApellidos($ejercicioId['dueño_tablas']);
+                                                    echo $nombreCompleto["nombre"]." ".$nombreCompleto["apellidos"];
+                                                    ?>  
+
                                                 </option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <label><strong><?php echo trad('Información Tablas',$lang) ?></strong></label>
-                                        <div class=" selector-tabla" >
+                                        <div class=" sel-tab-show" >
                                             <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm">
+                                                <option value="">Selecciona Tabla</option>
+                                                <?php 
+                                                    $usa = new Usa();
+                                                    $nombre_tablas = $usa->getNombreById($id_ejer);
+                                                    while ($nameTable = mysqli_fetch_array($nombre_tablas)) {
+                                                    
+                                                        $quitar = $nameTable['schema_prof'] . "_";
+                                                        $onlyName = explode($quitar, $nameTable['nombre']);
+                                                        
+                                                        echo "<option value='".$nameTable['nombre']."'>".$onlyName[1]."</option>"; 
+                                                      
+                                                    }
+                                                 ?>
                                             </select>                                
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <label><strong><?php echo trad('Información Campos',$lang) ?></strong></label>
-                                        <div class=" columnas-tabla" >
-                                            <table id="columnas" class="form-control"><tbody></tbody></table>                                                             
+                                    <div class="col-md-6">
+                                        <div class=" col-tab-show" >
+                                            <table id="structure_table" class="">
+                                                <thead class="light-style">
+                                                
+                                                </thead>
+                                                <tbody class="body-tablas-style">
+
+                                                </tbody>
+                                            </table>                                                             
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +87,7 @@
                                         <label for="name" ><strong><?php echo trad('Nivel',$lang) ?><span class="red"> *</span></strong></label> 
                                         <select name="nivel" class="custom-select form-control-sm " title="Selecciona" id="nivel">
                                             <?php
-                                            $niveles = array("facil","medio","dificil");
+                                            $niveles = array("Principiante","Intermedio","Avanzado");
                                             for ($i=0; $i < count($niveles); $i++) { 
                                                                                           
                                                 var_dump($niveles[$i]);

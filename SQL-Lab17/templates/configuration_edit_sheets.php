@@ -118,10 +118,12 @@
                                                 }
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona Nivel" id="select_hoja">';
-                                                echo "<option value=''>Todos Niveles </option>";
-                                                        echo "<option value='Principiante'>Principiante </option>";
-                                                        echo "<option value='Intermedio'>Intermedio </option>";
-                                                        echo "<option value='Avanzado'>Avanzado </option>";
+                                                echo "<option value=". $row_nivel['nivel'] .">Todos Niveles </option>";
+                                                
+                                                    echo "<option value='Principiante'>Principiante</option>";
+                                                    echo "<option value='Intermadio'>Intermedio</option>";
+                                                    echo "<option value='Avanzado'>Avanzado</option>";
+
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona Categoria" id="select_hoja">';
                                                 echo "<option value=''>Todas Categorías</option>";

@@ -36,14 +36,14 @@
                                 <!-- <label><strong><?php //echo trad('Información Campos',$lang) ?></strong></label> -->
                                 <div class="columnas-tabla" >
                                     <!-- <table id="columnas" class="form-control" ><tbody></tbody></table> -->
-                                    <table id="structure_table"> <!-- class="table table-striped table-bordered">   -->
-                                            <thead>
+                                    <table id="structure_table" class=""> <!-- class="table table-striped table-bordered">   -->
+                                        <thead class="light-style">
+                                            
+                                        </thead>
+                                        <tbody class="body-tablas-style">
                                                 
-                                            </thead>
-                                            <tbody style="border: 1px solid black">
-                                                
-                                            </tbody>
-                                        </table>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -61,23 +61,23 @@
                                 <label for="name" ><strong><?php echo trad('Nivel',$lang) ?> <span class="red"> *</span></strong></label>
                                 <select type="text" id="nivel" name="nivel" class="custom-select form-control-sm " title="Selecciona" required>
                                     <?php if (isset($_SESSION['guardarDatos'])) { 
-                                        if( $_SESSION['guardarDatos'][2] === "facil"){ ?>
-                                            <option value="facil" selected="selected"><?php echo trad('Principiante',$lang) ?></option>
-                                            <option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
-                                            <option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>
-                                    <?php } else if( $_SESSION['guardarDatos'][2] === "medio"){ ?>
-                                            <option value="facil"><?php echo trad('Principiante',$lang) ?></option>
-                                            <option value="medio" selected="selected"><?php echo trad('Intermedio',$lang) ?></option>
-                                            <option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>
-                                    <?php } else if( $_SESSION['guardarDatos'][2] === "dificil"){ ?>
-                                            <option value="facil"><?php echo trad('Principiante',$lang) ?></option>
-                                            <option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
-                                            <option value="dificil" selected="selected"><?php echo trad('Avanzado',$lang) ?></option>
+                                        if( $_SESSION['guardarDatos'][2] === "Principiante"){ ?>
+                                            <option value="Principiante" selected="selected"><?php echo trad('Principiante',$lang) ?></option>
+                                            <option value="Intermedio"><?php echo trad('Intermedio',$lang) ?></option>
+                                            <option value="Avanzado"><?php echo trad('Avanzado',$lang) ?></option>
+                                    <?php } else if( $_SESSION['guardarDatos'][2] === "Intermedio"){ ?>
+                                            <option value="Principiante"><?php echo trad('Principiante',$lang) ?></option>
+                                            <option value="Intermedio" selected="selected"><?php echo trad('Intermedio',$lang) ?></option>
+                                            <option value="Avanzado"><?php echo trad('Avanzado',$lang) ?></option>
+                                    <?php } else if( $_SESSION['guardarDatos'][2] === "Avanzado"){ ?>
+                                            <option value="Principiante"><?php echo trad('Principiante',$lang) ?></option>
+                                            <option value="Intermedio"><?php echo trad('Intermedio',$lang) ?></option>
+                                            <option value="Avanzado" selected="selected"><?php echo trad('Avanzado',$lang) ?></option>
                                     <?php } 
                                     }else { ?>
-                                        <option value="facil"><?php echo trad('Principiante',$lang) ?></option>
-                                        <option value="medio"><?php echo trad('Intermedio',$lang) ?></option>
-                                        <option value="dificil"><?php echo trad('Avanzado',$lang) ?></option>
+                                        <option value="Principiante"><?php echo trad('Principiante',$lang) ?></option>
+                                        <option value="Intermedio"><?php echo trad('Intermedio',$lang) ?></option>
+                                        <option value="Avanzado"><?php echo trad('Avanzado',$lang) ?></option>
                                     <?php   } ?>                
                                 </select>                                    
                             </div>

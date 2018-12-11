@@ -1,48 +1,26 @@
-<?php 
-	include_once '../inc/ejercicio.php';
-	session_start();
-	$user = $_SESSION['user'];
-	$descripcion= $_POST['descripcion'];
-    $ejer = new Ejercicio();
-    $exist = $ejer->getExistEjercicio($descripcion);
-    $user_tablas = $_POST['user_tablas'];
-    $enunciado = $_POST['enunciado'];
-    $solucion = $_POST['solucion'];
-    $nivel = $_POST['nivel'];
-    $deshabilitar = $_POST['deshabilitar'];
-    $tipo = $_POST['categoria'];
-    switch ($tipo) {
-        case 'c1':
-                $categoria = "Select-Basico";
-                break;
-        case 'c2':
-                $categoria = "Select-Join";
-                break;
-        case 'c3':
-                $categoria = "Select-Group-Basico";
-                break;
-        case 'c4':
-                $categoria = "Select-Group-Having";
-                break;
-        case 'c5':
-                $categoria = "Subqueries-Valor";
-                break;
-        case 'c6':
-                $categoria = "Subqueries-Conjuntos";
-                break;
-        case 'c7':
-                $categoria = "Operaciones Manipulacion de Datos";
-                break;
+<?php     
+    session_start();                                        
+    include_once '../../inc/functions.php';
+    $connect = new Tools();
+    include_once '../../inc/solucion.php';
+    $sol = new Solucion(); 
+    include_once '../../inc/ejercicio.php';
+    include_once '../../inc/usa.php';
+    $usa = new Usa();
+    $conexion = $connect->connectDB();
+    $sujeto = $_REQUEST["sujeto"];
+    $solucion_profesor = $_SESSION["solProf"];
+    //var_dump($_SESSION["solAlum"]);
+    if(isset($_SESSION["solAlum"])){
+        $solucion_alumno = $_SESSION["solAlum"];
+    }else{
+        $solucion_alumno = "";
     }
+    $dueno_tabla = $_SESSION["duenoTablas"];
+    $id_ejer = $_SESSION["idEjer"];
 
-    $guardarDatos = array($user_tablas, $_POST['categoria'], $nivel, $deshabilitar, $descripcion, $enunciado, $solucion);
-    $_SESSION['guardarDatos']= $guardarDatos;
-
-    $arrayComillas = array("`", "'");
-    $solucion = str_replace($arrayComillas, '"', $solucion);
-
-    $solucion = strtolower($solucion);
-
+    $tablas_usadas = $usa->getTablasUsadas($id_ejer);
+    //var_dump($tablas_usadas);
 
     function quitarPalabrasFinales($frase){
 
@@ -155,9 +133,9 @@
             return $ok;
     }
     function sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno){
-    //var_dump($tablasSolucionSinDueno);
-    //var_dump($solucion);
-    //var_dump($dueno);
+        //var_dump($tablasSolucionSinDueno);
+        //var_dump($solucion);
+        //var_dump($dueno);
             $cambios = array('!='=>' ', ','=>' ', '('=>' ', ')'=>' ', '='=>' ', '>'=>' ', '<'=>' ', '>='=>' ', '<='=>' ', '<>'=>' ', '&&'=>' ', '||'=>' ');
 
             $aux = strtr($solucion,$cambios);
@@ -291,9 +269,9 @@
             juntarArrayRecursivo($total, $tablas, $count);
 
             $tablasSolucionSinDueno = eliminarRepetidos($total);
-  //          var_dump($tablasSolucionSinDueno);
+            //var_dump($tablasSolucionSinDueno);
             $tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
-//            var_dump($tablasSolucion);
+            //var_dump($tablasSolucion);
             $ejer = new Ejercicio();
             $tablasDisponibles = $ejer->getTodasTablas();
             
@@ -496,77 +474,56 @@
         return $resultado;
     }
 
-    $resultado = distinguirSentencia($solucion, $user_tablas);
-    // var_dump($resultado);
-    if($resultado[0]){
 
-        $ejer = new Ejercicio();
-        $resultadoCrear = "";
+    $arrayComillas = array("`", "'");
 
-        $resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $resultado[1]);
-
-        if($resultadoCrear){
-                unset($_SESSION['guardarDatos']);
-                header("Location: ../templates/configuration_exercises.php");
-        }else{
-                $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
-                        <div class='modal-dialog modal-dialog-centered' role='document'>
-                            <div class='modal-content'>
-                                <div class='modal-header'>
-                                  <div class='close' id='close-modal'>
-                                    <i class='fas fa-times' data-dismiss='modal'></i>
-                                  </div>
-                                </div>
-                                <div class='modal-body'>
-                                    <h2><strong>¡Error!</strong></h2>
-                                    <p>Error al crear el ejercicio.</p>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>";
-                header("Location: ../templates/configuration_new_exercises.php");
-        }
-
-    }else{
-
-        if (isset($resultado[4])){
-            $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
-                <div class='modal-dialog modal-dialog-centered' role='document'>
-                    <div class='modal-content'>
-                        <div class='modal-header'>
-                          <div class='close' id='close-modal'>
-                            <i class='fas fa-times' data-dismiss='modal'></i>
-                          </div>
-                        </div>
-                        <div class='modal-body'>
-                            <h2><strong>¡Error!</strong></h2>
-                            <p>". $resultado[4] ."</p>
-                        </div>
-                    </div>
-                </div>   
-            </div>";
-        }else{
-            $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
-                <div class='modal-dialog modal-dialog-centered' role='document'>
-                    <div class='modal-content'>
-                        <div class='modal-header'>
-                          <div class='close' id='close-modal'>
-                            <i class='fas fa-times' data-dismiss='modal'></i>
-                          </div>
-                        </div>
-                        <div class='modal-body'>
-                            <h2><strong>¡Error!</strong></h2>
-                            <p>Por favor repase las tablas de la solución y asegurese de que sean válidas.</p>
-                        </div>
-                    </div>
-                </div>   
-            </div>";            
-        }
+    if ($sujeto === "Profesor"){
+        $solucion_profesor = str_replace($arrayComillas, '"', $solucion_profesor);
+        $solucion_profesor = strtolower($solucion_profesor);
         
-        header("Location: ../templates/configuration_new_exercises.php");
+        $resultado = distinguirSentencia($solucion_profesor, $dueno_tabla);
+    }else{
+        $solucion_alumno = str_replace($arrayComillas, '"', $solucion_alumno);
+        $solucion_alumno = strtolower($solucion_alumno);
+        
+        $resultado = distinguirSentencia($solucion_alumno, $dueno_tabla);
     }
-    // var_dump($resultado);
-    // header("Location: ../templates/prf_crear_ejercicio.php");
-    exit();
-      
+    if(!$resultado[0]){
+        $mostrar = "";
+    }else{
+        $datos = $resultado[2][0];
+        // var_dump($datos);
+        $mostrar = '';
+        foreach ($datos as $key => $value) {
+            $mostrar = $mostrar . '<tr>';
+            foreach ($value as $key => $value2) {
+                $mostrar = $mostrar . '<td style="text-align: center; width: 150px">' . $value2 . '</td>';
+            }
+            $mostrar = $mostrar .'</tr>';
+        }
+    }
+    
+    
+    //var_dump($mostrar);
+    
+
+
+
+    //var_dump($solucion_profesor);
+    //$resultadoSolucionProfesor = $ejer->executeSolucion($solucion_profesor);
+    //var_dump($resultadoSolucionProfesor);
+
+//    $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" .$_REQUEST["tabla"]. "';";
+    
+//    $consulta = mysqli_query($conexion, $sql);
+//    $_SESSION["columnas"] = "";
+    // $_SESSION["num_col"] = 0;
+    // $resultado = "";
+    // while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {
+        // $resultado = $resultado . '<tr>
+                // <td style="text-align: center">' . $fila["COLUMN_NAME"] . '</td>
+            // </tr>';
+    // }
+    // $connect->disconnectDB($conexion);
+    echo $mostrar;
 ?>

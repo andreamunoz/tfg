@@ -317,9 +317,12 @@ class Ejercicio{
     function getRowsSolucion($solucion){
         $connect = new Tools();
         $consulta = array();
+        var_dump($solucion);
         $conexion = $connect->connectDB();
         $resultado=mysqli_query($conexion,$solucion);
-        $fila = $resultado->num_rows;
+        var_dump("PREERROR: ".$resultado);
+        //$fila = $resultado->num_rows;
+        $fila = 0;
         $connect->disconnectDB($conexion);
         return $fila;
     }
@@ -328,6 +331,7 @@ class Ejercicio{
         $consulta = array();
         $conexion = $connect->connectDB();
         $resultado=mysqli_query($conexion,$solucion);
+        var_dump($resultado);
         $col = mysqli_num_fields($resultado);
         $connect->disconnectDB($conexion);
         return $col;
@@ -368,7 +372,15 @@ class Ejercicio{
             $consulta[0] = false;
             $consulta[1] = $conexion->error;
         }else{
-            $consulta[0] = $resultado;
+            $rawdata = array();
+            $i=0;
+            while($row = mysqli_fetch_assoc($resultado))
+            {
+                $rawdata[$i] = $row;
+                $i++;
+            }
+            //var_dump($rawdata);
+            $consulta[0] = $rawdata;
         }
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -384,12 +396,33 @@ class Ejercicio{
         if(!$resultado){
             $consulta[0] = false;
             $consulta[1] = $conexion->error;
+        }else if ($resultado){
+            var_dump($resultado);
         }else{
-            $consulta[0] = $resultado;
+            var_dump($resultado);
+            
+            $rawdata = array();
+            $i=0;
+            while($row = mysqli_fetch_assoc($resultado))
+            {
+                $rawdata[$i] = $row;
+                $i++;
+            }
+            //var_dump($rawdata);
+            $consulta[0] = $rawdata;
         }
         $conexion->rollback();
         $connect->disconnectDB($conexion);
         return $consulta;
+    }
+
+    function getDatosSolucion($solucion){
+        $connect = new Tools();
+        $consulta = array();
+        $datos_solucion = $connect->getArraySQL($solucion);
+        var_dump($datos_solucion);
+        $connect->disconnectDB($conexion);
+        return $datos_solucion;
     }
 
     function getTablasUsa($id){
@@ -513,6 +546,15 @@ class Ejercicio{
         $consulta2 = mysqli_query($conexion,$res);
         $connect->disconnectDB($conexion);
         return $consulta2;
+    }
+
+    function getSolucionProfesor($id_ejer){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT solucion from sqlab_ejercicio where id_ejercicio='$id_ejer'";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
     }
     
     function getFieldsAlumno($user, $id_ejer){

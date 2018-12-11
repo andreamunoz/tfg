@@ -19,7 +19,7 @@
                             <th style="width:1%;"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tablaEjerResolver">
                         <?php
                         include_once '../inc/ejercicio.php';
                         $ejer = new Ejercicio();
@@ -55,34 +55,28 @@
                                 $id = $fila['id_ejercicio'];
                                 $user = $_SESSION['user'];
                                 $solucion = $sol->getSolEjerciciosByName($id,$user);
-                                $numIntentos = $sol->getNumIntentosEjercicio($id,$user);
-                                $fila_sol = mysqli_fetch_array($solucion);
+                                $resultadoIntentosVeredicto = $sol->getInfoVeredictoParaTabla($id,$user);
+                                $fila_sol = mysqli_fetch_array($solucion); ?>
+                                    
+                                <tr id="resolverEjer" class="fondo_blanco"  data-number=<?php echo $fila['id_ejercicio']; ?> > 
+                                <?php
+                                    echo '<td>' . $fila['descripcion'] . '</td>'; 
+                                    echo '<td>' . $fila['nombre'] .' '.$fila['apellidos']. '</td>'; 
+                                    echo '<td>' . $fila['nivel'] . '</td>'; 
+                                    echo '<td>' . $fila['tipo'] . '</td>'; 
+                                    if($resultadoIntentosVeredicto[0] != '') {
+                                        echo '<td>' . $resultadoIntentosVeredicto[0] . '</td>'; 
+                                        if($resultadoIntentosVeredicto[1] == '1') {
+                                            echo '<td style="background-color: green"></td>';
+                                        }else{
+                                            echo '<td style="background-color: red"></td>';
 
-                                if ($fila_sol['veredicto'] == '1') { ?>
-                                    <tr class="ejercicio_acierto" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
-                                <?php } else if ($fila_sol['veredicto'] == '0') { ?> 
-                                    <tr class="ejercicio_fallo" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'">
-                                <?php } else { ?>
-                                    <tr class="fondo_blanco" onclick="location='perform_exercise.php?exercise=<?php echo $fila['id_ejercicio']; ?>'"> 
-                                <?php } ?>
-                                    <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
-                                    <?php echo '<td>' . $fila['nombre'] .' '.$fila['apellidos']. '</td>'; ?>
-                                    <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
-                                    <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                    <?php if($numIntentos['intentos'] != '') { ?>
-                                        <?php 
-                                            echo '<td>' . $numIntentos['intentos'] . '</td>'; 
-                                            if($fila_sol['veredicto'] == '1') {
-                                                echo '<td style="background-color: green"></td>';
-                                            }else{
-                                                echo '<td style="background-color: red"></td>';
-
-                                            }
-                                             
-                                        ?>
-                                    <?php } else { ?>
-                                        <?php echo '<td>0</td><td style="background-color: purple"></td>'; }?>
-                                    </tr>  
+                                        }                                    
+                                    } else { 
+                                        echo '<td>0</td><td style="background-color: grey"></td>'; 
+                                    }
+                                ?>
+                                </tr>  
                             <?php } 
                         } ?>
                     </tbody>

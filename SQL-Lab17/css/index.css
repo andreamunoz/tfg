@@ -817,3 +817,19 @@ p#small{
 .body-tablas-style tr > * {
     padding: 5px 18px !important;
 }
+
+#contenedorDeResultados{
+    height: 600px;
+    overflow: auto;
+    white-space: nowrap; 
+}
+
+#tituloCabe{
+    background: black;
+    color: white;
+    opacity: 0.9;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    padding: .30rem !important;
+}

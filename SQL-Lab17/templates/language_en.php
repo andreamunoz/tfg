@@ -26,7 +26,7 @@ $texts = array(
     'Ya tengo una cuenta ir a' => 'I already have an account go to',
     //Mensaje register         
     //Barra horizontal
-    'Bienvenido' => 'Welcome',
+    'Hola' => 'Hello',
     'Idioma' => 'Language',
     'Español' => 'Spanish',
     'Inglés' => 'English',

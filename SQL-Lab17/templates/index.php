@@ -5,7 +5,7 @@
 
 <img class="img_index" src="../img/img_index.png"/>
 <div class='contenedor'>
-    <h1 class="left_title"><?php echo trad('Bienvenido', $lang) ?> <?php echo $_SESSION['user']; ?>!</h1>
+    <h1 class="left_title"><?php echo trad('Hola', $lang) ?> <?php echo $_SESSION['name']; ?>!</h1>
     
     <div class="margin-ok">	
         <p class="p_ind"><?php echo trad('<b>SQL-Lab</b> es una aplicación que le permitirá aprender las sentencias básicas de MySQL.', $lang) ?></p>

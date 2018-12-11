@@ -251,7 +251,6 @@ $(document).ready(function () {
             data: { tabla: tabla },
             success: function(response)
             {
-                // console.log(response);
                 $('#nav-table-structure tbody').html(response).fadeIn();
             }
         });
@@ -264,12 +263,12 @@ $(document).ready(function () {
         $(this).closest('tr').addClass("gradient");
         $.ajax({
             method: "POST",
-            url: "../templates/adm_profesor/getAddFields.php",
+            url: "../templates/adm_profesor/getStructure.php",
             data: { tabla: tabla },
             success: function(response)
             {
-                console.log(response);
-                $('#employee-fields tbody').html(response).fadeIn();
+                var resultado = response.substring(23);
+                $('#structure_table tbody').html(resultado).fadeIn();
             }
         });
     });
@@ -326,7 +325,7 @@ $(document).ready(function () {
         $.each(data, function (index, value) {
             if($(this).find('input').prop('checked')){
                 seleccionados[i] = $(this).find('input').attr('value');
-                console.log(seleccionados[i]);
+                //console.log(seleccionados[i]);
                 i++;
             }
         });
@@ -433,6 +432,21 @@ $(document).ready(function () {
         });
     });
 
+    $('#tablaEjerResolver').on("click", "#resolverEjer", function(){
+        var id_ejercicio = $(this).attr("data-number");
+        console.log(id_ejercicio);
+        $.ajax({
+            method: "POST",
+            data: { id_ejercicio: id_ejercicio},
+            url: "../templates/adm_profesor/getBorrarDatosResolverEjercicio.php",
+            success: function(response)
+            {
+                console.log("OK");
+                location.assign(response);
+            }
+        });
+    });
+
     $('#new_table').click(function(){
         $.ajax({
             method: "POST",
@@ -480,8 +494,27 @@ $(document).ready(function () {
         }
     });
 
-    $("nav-exercisesE-tab").click(function(){
-        
+    $("#nav-exercisesE-tab").click(function(){
+        $.ajax({
+            type: "POST",
+            data: {sujeto: "Profesor"},
+            url: "adm_profesor/getResultadoSolucionProfesor.php",
+            success: function(response)
+            {   
+                var resultado = response.substring(23);
+                $('.profesorResultadoSolucion table tbody').html(response).fadeIn();
+            }
+        });
+        $.ajax({
+            type: "POST",
+            data:{sujeto: "Alumno"},
+            url: "adm_profesor/getResultadoSolucionProfesor.php",
+            success: function(response)
+            {   
+                var resultado = response.substring(23);
+                $('.alumnoResultadoSolucion table tbody').html(response).fadeIn();
+            }
+        });
     });
 
 

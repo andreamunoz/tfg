@@ -6,7 +6,7 @@
         <i class="fas fa-angle-right"></i>
         <p class="text-menu text-titulo">SQLab</p>
         <!--<img src="../../img/icon_desplegar.svg"/>-->
-        <p class="text-menu text-b"><?php echo trad('Bienvenido',$lang) ?>,</p>
+        <p class="text-menu text-b"><?php echo trad('Hola',$lang) ?>,</p>
         <p class="text-menu"><?php echo $_SESSION['name']." ".$_SESSION['apellidos'] ?></p>
 
     </div>
@@ -62,7 +62,7 @@
         <i class="fas fa-angle-right"></i>
         <p class="text-menu text-titulo">SQLab</p>
         <!--<img src="../../img/icon_desplegar.svg"/>-->
-        <p class="text-menu text-b"><?php echo trad('Bienvenido',$lang) ?>,</p>
+        <p class="text-menu text-b"><?php echo trad('Hola',$lang) ?>,</p>
         <p class="text-menu"><?php echo $_SESSION['name']." ".$_SESSION['apellidos'] ?></p>
 
     </div>

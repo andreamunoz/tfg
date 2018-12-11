@@ -16,7 +16,7 @@
             </li>
             <li class="nav-item dropdown ">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <?php echo trad('Bienvenido',$lang) ?> <?php echo $_SESSION['name']." ".$_SESSION['apellidos'] ?>
+                    <?php echo trad('Hola',$lang) ?> <?php echo $_SESSION['name']." ".$_SESSION['apellidos'] ?>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink2">
                     <a class="dropdown-item" href="profile.php"><i class="fas fa-user-edit pr-3"></i> <?php echo trad('Perfil',$lang) ?></a>

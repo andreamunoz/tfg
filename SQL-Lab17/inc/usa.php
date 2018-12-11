@@ -13,6 +13,20 @@ class Usa{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+
+    function getTablasUsadas($id_ejercicio){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT DISTINCT(nombre) FROM `sqlab_usa` WHERE id_ejercicio = $id_ejercicio;";
+        $consulta = mysqli_query($conexion,$sql);
+        $cont = 0;
+        while ($fila = $consulta->fetch_assoc()) {
+            $names[$cont] = $fila["nombre"];
+            $cont++;
+        }
+        $connect->disconnectDB($conexion);
+        return $names;
+    }
     
     function eliminarEjerById($id){
         $connect = new Tools();

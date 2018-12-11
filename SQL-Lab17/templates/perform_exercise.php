@@ -17,6 +17,9 @@
         $tabla = new Tablas();
         $ejercicioId = $ejer->getEjercicioById($id_ejer);
         $dueño = $ejercicioId['dueño_tablas'];
+        $_SESSION["solProf"] = $ejercicioId['solucion'];
+        $_SESSION["duenoTablas"] = $ejercicioId['dueño_tablas'];
+        $_SESSION["idEjer"] = $ejercicioId['id_ejercicio'];
         $tab = $tabla->getTablasByProfesor($dueño);
         ?>
         <div class="col-md-10">
@@ -51,7 +54,11 @@
                                                 <?php echo '<form action="../handler/validate_exercise.php?exercise=' . $id_ejer . '" method="post">' ?>
                                                 <tr>
                                                     <td>
-                                                        <textarea  id="solucion" name="sol_ejercicio" class="form-control" rows="18" placeholder="<?php echo trad('Escribe la solución aquí...', $lang) ?>" required></textarea>
+                                                        <?php if (isset($_SESSION["solAlum"])){ ?>
+                                                            <textarea  id="solucion" name="sol_ejercicio" class="form-control" rows="15" required><?php echo $_SESSION["solAlum"]; ?></textarea>
+                                                        <?php } else { ?>
+                                                            <textarea  id="solucion" name="sol_ejercicio" class="form-control" rows="15" placeholder="<?php echo trad('Escribe la solución aquí...', $lang) ?>" required></textarea>
+                                                        <?php } ?>
                                                     </td>
 
                                                 </tr> 
@@ -68,7 +75,7 @@
                                         <table id="employee" class="table table-striped-config table-bordered"> 
                                             <thead>
                                                 <tr>
-                                                    <th style="width:20%; text-align: center"><?php echo trad('Enunciado', $lang) ?></th>                         
+                                                    <th style="width:20%; text-align: center; font-size: 12px;"><?php echo trad('Enunciado', $lang) ?></th>                         
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -111,98 +118,39 @@
                             </div>
                             <div class="col-md-6 pl-0 pr-3 float-left" id="accordion ">
                                 <div class="card">  
-                                    <div class="table-responsive">                
-                                        <table id="employee-fields" class="table table-striped-config table-bordered"> 
-                                            <thead>
-                                                <tr>
-                                                    <th style="text-align: center"><?php echo trad('Campos', $lang) ?></th>                         
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                
-                                            </tbody>
-                                        </table>
+                                    <div class="table-responsive">
+                                        <div id="tituloCabe"> <?php echo trad('Campos', $lang) ?></div>               
+                                            <div class="col-md-12">
+                                                <div class="columnas-tabla" >
+                                                    <table id="structure_table" class="">
+                                                        <tbody class="body-tablas-style">
+                                                                
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="tab-pane fade mt-3 pl-4" id="nav-exercisesE" role="tabpanel" aria-labelledby="nav-exercisesE-tab">
-                            <div class="float-right col-md-6 pl-0 pr-3" id="accordion ">
+                            <div class="float-right col-md-6 pl-0 pl-3" id="contenedorDeResultados">
                                 <div class="card">  
-                                    <div class="table-responsive">
+                                    <div class="table-responsive alumnoResultadoSolucion">
                                         <p><?php echo trad('Solución Alumno', $lang) ?></p>
                                         <table id="employee" class="table table-striped table-bordered"> 
-                                            <?php 
-                                                include_once '../inc/ejercicio.php';
-                                                $ejer = new Ejercicio();
-                                                include_once '../inc/solucion.php';
-                                                $sol = new Solucion(); 
-                                                $fieldsAlum = $ejer->getFieldsAlumno($_SESSION['user'],$id_ejer);
-                                                
-                                                $resAlu = $fieldsAlum;
-                                            ?>
-                                            <thead>                                             
-                                                <tr>
-                                                    <?php if($fieldsAlum != '') { $cont=0;?>
-                                                    <?php while($fields = mysqli_fetch_field($fieldsAlum)){ ?>
-                                                        <th style="width:20%; text-align: center"><?php echo $fields->name ?></th>                         
-                                                    <?php $arrayFileds[$cont] = $fields->name; $cont++; } $contA = $cont;}else {?>
-                                                        <th style="width:20%; text-align: center">No hay datos disponibles</th> 
-                                                        
-                                                    <?php } ?>
-                                                </tr>
-                                            </thead>
                                             <tbody>
-                                                <?php if($resAlu != '') { $cont=0;?>
-                                                <?php while($f = mysqli_fetch_array($resAlu)){ ?>
-                                                <tr>   
-                                                    <?php while($contA > $cont){ ?>
-                                                    <td style="text-align: center"><?php echo $f[$arrayFileds[$cont]]; ?></td>
-                                                    <?php $cont++; } ?>
-                                                </tr>                                               
-                                                <?php $cont=0;} }else { ?>
-                                                <tr>
-                                                    <td style="text-align: center"><?php echo "La consulta no ha obtenido resultados" ?></td>
-                                                </tr> 
-                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 pl-0 pr-3" id="accordion ">
+                            <div class="col-md-6 pl-0 pr-2" id="contenedorDeResultados">
                                 <div class="card">  
-                                    <div class="table-responsive">
+                                    <div class="table-responsive profesorResultadoSolucion">
                                         <p><?php echo trad('Solución Profesor', $lang) ?></p>
                                         <table id="employee" class="table table-striped table-bordered"> 
-                                            <?php 
-                                                include_once '../inc/ejercicio.php';
-                                                $ejer = new Ejercicio();
-                                                include_once '../inc/solucion.php';
-                                                $sol = new Solucion(); 
-                                                $fieldsProf = $ejer->getFieldsProfesor($id_ejer);
-                                                echo '<p>'.$fieldsProf.'</p>';
-                                                $resPro = $fieldsProf;
-                                            ?>
-                                            <thead>                                             
-                                                <tr>
-                                                    <?php if($fieldsProf != '') { $cont=0;?>
-                                                    <?php while($fields = mysqli_fetch_field($fieldsProf)){ ?>
-                                                        <th style="text-align: center"><?php echo $fields->name ?></th>                         
-                                                    <?php $arrayFileds[$cont] = $fields->name; $cont++; } $contF = $cont;}else {?>
-                                                        <th style="text-align: center"><?php echo trad('No hay datos disponibles', $lang) ?></th> 
-                                                    <?php } ?>
-                                                </tr>
-                                            </thead>
                                             <tbody>
-                                                <?php if($resPro != '') { $cont=0;?>
-                                                <?php while($f = mysqli_fetch_array($resPro)){ ?>
-                                                <tr>   
-                                                    <?php while($contF > $cont){ ?>
-                                                    <td style="text-align: center"><?php echo $f[$arrayFileds[$cont]]; ?></td>
-                                                    <?php $cont++; } ?>
-                                                </tr>                                               
-                                                <?php $cont=0;} }?>
                                             </tbody>
                                         </table>
                                     </div>

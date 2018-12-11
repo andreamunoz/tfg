@@ -2,6 +2,8 @@
 	session_start();
 	unset($_SESSION["email"]);
 	unset($_SESSION["password"]);
+	unset($_SESSION["name"]);
+	unset($_SESSION["apellidos"]);
 	unset($_SESSION["rol"]);
 	unset($_SESSION["user"]);
 	unset($_SESSION["autoriza"]);
@@ -11,5 +13,6 @@
 	unset($_SESSION['msg_new_register']);
 	unset($_SESSION['guardarDatos']);
 	unset($_SESSION['guardarDatosTablas']);
+	unset($_SESSION["solAlum"]);
 	session_destroy();
 ?>

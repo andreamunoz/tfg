@@ -20,7 +20,9 @@
             <div class="row">
                 <div class="col-md-12 ">
                     <!--<form id="edit_sheets" method="post" action="#">-->
-                       
+                        <div class="form-group text-right">
+                            <button class="btn btn-primary pl-5 pr-5 mt-1 updateSheet" name="<?php echo $id_hoja ?>" ><?php echo trad('Actualizar Hoja', $lang) ?></button>
+                        </div>
                         <?php if(isset($_SESSION['message_edit_sheets'])){
                                 echo $_SESSION['message_edit_sheets'];
                                 unset($_SESSION['message_edit_sheets']);
@@ -152,9 +154,7 @@
                                 </div>  
                             </div>
                         </div>
-                        <div class="form-group text-right">
-                            <button class="btn btn-primary pl-5 pr-5 mt-5 mb-5 updateSheet" name="<?php echo $id_hoja ?>" ><?php echo trad('Actualizar Hoja', $lang) ?></button>
-                        </div>
+                        
                         <?php
                         if (isset($_SESSION['message_sheets'])) {
                             echo $_SESSION['message_sheets'];

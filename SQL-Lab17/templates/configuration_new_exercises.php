@@ -16,7 +16,13 @@
             <div class="row mt-5">
                 <div class="col-md-12 ">
                     <form id="new_sheets" method="post" action="../handler/validate_new_exercises.php">
-                            
+                        <div class="row">
+                            <div class="offset-md-10 col-md-2">
+                                <div class="form-group text-right">
+                                    <button class="btn btn-primary pl-3 pr-3 mt-1 mb-3" name="new_exercise" type="submit"><?php echo trad('Crear Ejercicio',$lang) ?></button>
+                                </div>
+                            </div>  
+                        </div>    
                         <div class="row">
                             <div class="col-md-3">
                                 <label><strong><?php echo trad('Creador Tablas',$lang) ?> <span class="red"> *</span></strong></label>
@@ -122,7 +128,7 @@
                             </div>                                   
                         </div>
 
-                        <div class="row">
+                        <div class="row  mb-150">
                             <div class="col-md-6">
                                 <label><strong><?php echo trad('Enunciado',$lang) ?> <span class="red"> *</span></strong></label>
 
@@ -141,13 +147,7 @@
                                 <?php } ?>
                             </div>
                         </div>
-                        <div class="row mb-150">
-                            <div class="offset-md-10 col-md-2">
-                                <div class="form-group text-right">
-                                    <button class="btn btn-primary pl-3 pr-3 mt-5 mb-3" name="new_exercise" type="submit"><?php echo trad('Crear Ejercicio',$lang) ?></button>
-                                </div>
-                            </div>  
-                        </div>
+                        
                             
                             
                                 

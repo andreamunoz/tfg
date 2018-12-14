@@ -15,6 +15,9 @@
                 <div class="col-md-12 ">
                     <!--<form id="new_sheets" method="post" action="../handler/validate_new_sheets.php">-->
                         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                            <div class="form-group text-right">
+                                <button class="btn btn-primary pl-5 pr-5 createSheet" name=""><?php echo trad('Crear Hoja',$lang) ?></button>
+                            </div>
                             <div class="row">
                                 <div class="col-md-3 p-0">
                                     <label for="name" ><strong><?php echo trad('Nombre',$lang) ?> </strong></label>                                    
@@ -97,9 +100,7 @@
                                     </div>  
                                 </div> 
                             </div>
-                            <div class="form-group text-right">
-                                <button class="btn btn-primary pl-5 pr-5 mt-5 mb-5 createSheet" name=""><?php echo trad('Crear Hoja',$lang) ?></button>
-                            </div>
+                            
                         </div>
                         <?php
                         if(isset($_SESSION['message_sheets'])){

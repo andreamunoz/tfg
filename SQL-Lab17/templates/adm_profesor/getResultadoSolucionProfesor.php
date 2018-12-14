@@ -10,7 +10,7 @@
     $conexion = $connect->connectDB();
     $sujeto = $_REQUEST["sujeto"];
     $solucion_profesor = $_SESSION["solProf"];
-    //var_dump($_SESSION["solAlum"]);
+
     if(isset($_SESSION["solAlum"])){
         $solucion_alumno = $_SESSION["solAlum"];
     }else{
@@ -307,139 +307,139 @@
             return $resultado;
     }
 
-    function validarInsert($solucion, $dueno){
-            $sentencia = explode(" ", $solucion);
+    // function validarInsert($solucion, $dueno){
+    //         $sentencia = explode(" ", $solucion);
 
-            $i=0;
-            $palabras = array("low_priority","delayed","high_priority","ignore","into",";");
-            while ($i < count($palabras)){
-                    if(in_array($palabras[$i], $sentencia)){
-                            $pos = array_search($palabras[$i], $sentencia);
-                            unset($sentencia[$pos]);
-                    }
-                    $i++;
-            }
-            $contador = 0;
-            foreach ($sentencia as $key => $value) {
-                    if($contador > 1){
-                            unset($sentencia[$key]);
-                    }
-                    $contador++;
-            }
-            $tabla = array();
-            $tabla[0] = array_pop($sentencia);
+    //         $i=0;
+    //         $palabras = array("low_priority","delayed","high_priority","ignore","into",";");
+    //         while ($i < count($palabras)){
+    //                 if(in_array($palabras[$i], $sentencia)){
+    //                         $pos = array_search($palabras[$i], $sentencia);
+    //                         unset($sentencia[$pos]);
+    //                 }
+    //                 $i++;
+    //         }
+    //         $contador = 0;
+    //         foreach ($sentencia as $key => $value) {
+    //                 if($contador > 1){
+    //                         unset($sentencia[$key]);
+    //                 }
+    //                 $contador++;
+    //         }
+    //         $tabla = array();
+    //         $tabla[0] = array_pop($sentencia);
 
-            $tablasSolucion = anadirDueno($tabla, $dueno);
+    //         $tablasSolucion = anadirDueno($tabla, $dueno);
 
-            $ejer = new Ejercicio();
-            $tablasDisponibles = $ejer->getTodasTablas();
+    //         $ejer = new Ejercicio();
+    //         $tablasDisponibles = $ejer->getTodasTablas();
 
-            $ok = validarTablas($tablasSolucion, $tablasDisponibles);
+    //         $ok = validarTablas($tablasSolucion, $tablasDisponibles);
 
-            if($ok){
-                $nombreAntiguo = " ".$tabla[0];
-                $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
-                $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+    //         if($ok){
+    //             $nombreAntiguo = " ".$tabla[0];
+    //             $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+    //             $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
 
-                if($resultadoSolucion[0] === false){
-                        $resultado[0] = false;
-                        $resultado[1] = $resultadoSolucion[1];
-                }else{
-                        $resultado[0] = true;
-                        $resultado[1] = $tablasSolucion;
-                        $resultado[2] = $resultadoSolucion;
-                }
+    //             if($resultadoSolucion[0] === false){
+    //                     $resultado[0] = false;
+    //                     $resultado[1] = $resultadoSolucion[1];
+    //             }else{
+    //                     $resultado[0] = true;
+    //                     $resultado[1] = $tablasSolucion;
+    //                     $resultado[2] = $resultadoSolucion;
+    //             }
 
-            }else{
-                    $resultado[0] = false;
-                    $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
-            }
-            return $resultado;
-    }
+    //         }else{
+    //                 $resultado[0] = false;
+    //                 $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
+    //         }
+    //         return $resultado;
+    // }
 
-    function validarUpdate($solucion, $dueno){
-            //$solucionCopia = strtoupper($solucion);
-            $sentencia = explode(" ", $solucion);
-            // $sentenciaCopia = explode(" ", $solucionCopia);
+    // function validarUpdate($solucion, $dueno){
+    //         //$solucionCopia = strtoupper($solucion);
+    //         $sentencia = explode(" ", $solucion);
+    //         // $sentenciaCopia = explode(" ", $solucionCopia);
 
-            if(in_array("set", $sentencia)){
+    //         if(in_array("set", $sentencia)){
 
-                    $pos = array_search("set", $sentencia);
-                    $tabla[0] = $sentencia[$pos - 1];
-                    $tablasSolucion = anadirDueno($tabla, $dueno);
+    //                 $pos = array_search("set", $sentencia);
+    //                 $tabla[0] = $sentencia[$pos - 1];
+    //                 $tablasSolucion = anadirDueno($tabla, $dueno);
 
-                    $ejer = new Ejercicio();
-                    $tablasDisponibles = $ejer->getTodasTablas();
+    //                 $ejer = new Ejercicio();
+    //                 $tablasDisponibles = $ejer->getTodasTablas();
 
-                    $ok = validarTablas($tablasSolucion, $tablasDisponibles);
+    //                 $ok = validarTablas($tablasSolucion, $tablasDisponibles);
 
-                    if($ok){
-                            $nombreAntiguo = " ".$tabla[0];
-                            $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
-                            $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+    //                 if($ok){
+    //                         $nombreAntiguo = " ".$tabla[0];
+    //                         $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+    //                         $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
 
-                            if($resultadoSolucion[0] === false){
-                                    $resultado[0] = false;
-                                    $resultado[1] = $resultadoSolucion[1];
-                            }else{
-                                    $resultado[0] = true;
-                                    $resultado[1] = $tablasSolucion;
-                                    $resultado[2] = $resultadoSolucion;
-                            }
+    //                         if($resultadoSolucion[0] === false){
+    //                                 $resultado[0] = false;
+    //                                 $resultado[1] = $resultadoSolucion[1];
+    //                         }else{
+    //                                 $resultado[0] = true;
+    //                                 $resultado[1] = $tablasSolucion;
+    //                                 $resultado[2] = $resultadoSolucion;
+    //                         }
 
-                    }else{
-                        $resultado[0] = false;
-                        $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
+    //                 }else{
+    //                     $resultado[0] = false;
+    //                     $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
 
-                    }
-            }else{
-                    $resultado[0] = false;
-                    $resultado[4] = "La solución no tiene una sintaxis correcta.";
-            }
-            return $resultado;
-    }
+    //                 }
+    //         }else{
+    //                 $resultado[0] = false;
+    //                 $resultado[4] = "La solución no tiene una sintaxis correcta.";
+    //         }
+    //         return $resultado;
+    // }
 
-    function validarDelete($solucion, $dueno){
+    // function validarDelete($solucion, $dueno){
 
-            $sentencia = explode(" ", $solucion);
+    //         $sentencia = explode(" ", $solucion);
 
-            if(in_array("from", $sentencia)){
+    //         if(in_array("from", $sentencia)){
 
-                    $pos = array_search("from", $sentencia);
-                    $tabla[0] = $sentencia[$pos + 1];
-                    $tablasSolucion = anadirDueno($tabla, $dueno);
+    //                 $pos = array_search("from", $sentencia);
+    //                 $tabla[0] = $sentencia[$pos + 1];
+    //                 $tablasSolucion = anadirDueno($tabla, $dueno);
 
-                    $ejer = new Ejercicio();
-                    $tablasDisponibles = $ejer->getTodasTablas();
+    //                 $ejer = new Ejercicio();
+    //                 $tablasDisponibles = $ejer->getTodasTablas();
 
-                    $ok = validarTablas($tablasSolucion, $tablasDisponibles);
+    //                 $ok = validarTablas($tablasSolucion, $tablasDisponibles);
 
-                    if($ok){
-                            $nombreAntiguo = " ".$tabla[0];
-                            $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
-                            $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+    //                 if($ok){
+    //                         $nombreAntiguo = " ".$tabla[0];
+    //                         $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+    //                         $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
 
-                            if($resultadoSolucion[0] === false){
-                                    $resultado[0] = false;
-                                    $resultado[1] = $resultadoSolucion[1];
-                            }else{
-                                    $resultado[0] = true;
-                                    $resultado[1] = $tablasSolucion;
-                                    $resultado[2] = $resultadoSolucion;
-                            }
+    //                         if($resultadoSolucion[0] === false){
+    //                                 $resultado[0] = false;
+    //                                 $resultado[1] = $resultadoSolucion[1];
+    //                         }else{
+    //                                 $resultado[0] = true;
+    //                                 $resultado[1] = $tablasSolucion;
+    //                                 $resultado[2] = $resultadoSolucion;
+    //                         }
 
-                    }else{
-                            $resultado[0] = false;
-                            $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
+    //                 }else{
+    //                         $resultado[0] = false;
+    //                         $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
 
-                    }
-            }else{
-                    $resultado[0] = false;
-                    $resultado[4] = "La solución no tiene una sintaxis correcta.";
+    //                 }
+    //         }else{
+    //                 $resultado[0] = false;
+    //                 $resultado[4] = "La solución no tiene una sintaxis correcta.";
 
-            }
-            return $resultado;
-    }
+    //         }
+    //         return $resultado;
+    // }
 
     function distinguirSentencia($solucionPropuesta, $user_tablas){
         // var_dump("AL ENTRAR".$solucionPropuesta);
@@ -459,16 +459,16 @@
         $resultado = array();
         if ($sentencia[0] === "select"){
                 $resultado = validarSelect($solucionPropuesta, $user_tablas);
-        }elseif ($sentencia[0] === "insert"){
-                $resultado = validarInsert($solucionPropuesta, $user_tablas);
-        }elseif ($sentencia[0] === "update") {
-                $resultado = validarUpdate($solucionPropuesta, $user_tablas);
-        }elseif ($sentencia[0] === "delete"){
-                $resultado = validarDelete($solucionPropuesta, $user_tablas);
+        // }elseif ($sentencia[0] === "insert"){
+        //         $resultado = validarInsert($solucionPropuesta, $user_tablas);
+        // }elseif ($sentencia[0] === "update") {
+        //         $resultado = validarUpdate($solucionPropuesta, $user_tablas);
+        // }elseif ($sentencia[0] === "delete"){
+        //         $resultado = validarDelete($solucionPropuesta, $user_tablas);
 
         }else{
                 $resultado[0] = FALSE;
-                $resultado[4] = "La solución no tiene una sintaxis correcta.";
+                $resultado[4] = "No hay datos disponibles.";
         }
 
         return $resultado;
@@ -489,11 +489,24 @@
         $resultado = distinguirSentencia($solucion_alumno, $dueno_tabla);
     }
     if(!$resultado[0]){
-        $mostrar = "";
+        if($resultado[4] !== ""){
+            $mostrar = $resultado[4];
+        }else{
+            $mostrar = "";
+        }
     }else{
         $datos = $resultado[2][0];
-        // var_dump($datos);
-        $mostrar = '';
+        $mostrar = '<thead><tr>';
+        $contador = 0;
+        foreach ($datos as $key => $value) {
+            if($contador == 0){
+                foreach ($value as $key => $value2) {
+                    $mostrar = $mostrar . '<th style="text-align: center; width: 150px">' . $key . '</th>';
+                    $contador = 1;
+                }
+            }
+        }
+        $mostrar = $mostrar . '</tr></thead><tbody>';
         foreach ($datos as $key => $value) {
             $mostrar = $mostrar . '<tr>';
             foreach ($value as $key => $value2) {
@@ -501,11 +514,9 @@
             }
             $mostrar = $mostrar .'</tr>';
         }
+        $mostrar = $mostrar .'</tbody>';
     }
-    
-    
-    //var_dump($mostrar);
-    
+   
 
 
 
@@ -513,7 +524,7 @@
     //$resultadoSolucionProfesor = $ejer->executeSolucion($solucion_profesor);
     //var_dump($resultadoSolucionProfesor);
 
-//    $sql = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" .$_REQUEST["tabla"]. "';";
+
     
 //    $consulta = mysqli_query($conexion, $sql);
 //    $_SESSION["columnas"] = "";

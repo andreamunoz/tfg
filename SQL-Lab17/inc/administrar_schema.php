@@ -106,7 +106,7 @@ class Administrar_schema{
     }
 
     function reemplazar_primero($buscar, $remplazar, $texto){
-        var_dump("BUSCAR:".$buscar." REEMPLAZAR:".$remplazar." TEXTO:".$texto);
+        //var_dump("BUSCAR:".$buscar." REEMPLAZAR:".$remplazar." TEXTO:".$texto);
         $pos = strpos($texto, " ".$buscar);
         if($pos !== false){
             $texto = substr_replace($texto, $remplazar, $pos+1, strlen($buscar));
@@ -121,6 +121,8 @@ class Administrar_schema{
     function obtenerSentencias($contenido, $profe){
         $admin = new Administrar_schema();
         $sentencias = explode(";", $contenido);
+        // var_dump("aqui empieza");
+        // var_dump($contenido);
         $contador = count($sentencias) - 1;
         $bienEjecutadas = 0;
         if($contador > 0){
@@ -156,7 +158,7 @@ class Administrar_schema{
 
                         //SI ES UN CREATE TABLE, BUSCAMOS SI TIENE REFERENCIAS PARA AÑADIR EL PREFIJO AL NOMBRE DE LA TABLA
                         $miSentenciaEntera = $admin->reemplazar_referencias("references ", "references ".$profe."_", $miSentenciaEntera);
-                    var_dump($miSentenciaEntera);
+                    //var_dump($miSentenciaEntera);
 
                         //EJECUTAMOS LA SENTENCIA
                         $respuesta = $admin->executeCode($miSentenciaEntera.";");

@@ -502,7 +502,7 @@ $(document).ready(function () {
             success: function(response)
             {   
                 var resultado = response.substring(23);
-                $('.profesorResultadoSolucion table tbody').html(response).fadeIn();
+                $('.profesorResultadoSolucion table').html(response).fadeIn();
             }
         });
         $.ajax({
@@ -512,7 +512,7 @@ $(document).ready(function () {
             success: function(response)
             {   
                 var resultado = response.substring(23);
-                $('.alumnoResultadoSolucion table tbody').html(response).fadeIn();
+                $('.alumnoResultadoSolucion table').html(response).fadeIn();
             }
         });
     });

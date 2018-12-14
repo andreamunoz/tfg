@@ -139,6 +139,8 @@
                                     <div class="table-responsive alumnoResultadoSolucion">
                                         <p><?php echo trad('Solución Alumno', $lang) ?></p>
                                         <table id="employee" class="table table-striped table-bordered"> 
+                                            <thead>
+                                            </thead>
                                             <tbody>
                                             </tbody>
                                         </table>
@@ -150,6 +152,8 @@
                                     <div class="table-responsive profesorResultadoSolucion">
                                         <p><?php echo trad('Solución Profesor', $lang) ?></p>
                                         <table id="employee" class="table table-striped table-bordered"> 
+                                            <thead>
+                                            </thead>
                                             <tbody>
                                             </tbody>
                                         </table>

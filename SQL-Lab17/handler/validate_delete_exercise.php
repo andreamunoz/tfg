@@ -41,8 +41,7 @@ if ($borrado) {
                               </div>
                             </div>
                             <div class='modal-body'>
-                                <h2><strong>¡Felicidades!</strong></h2>
-                                <p>Se ha habilitado el ejercicio correctamente.</p>
+                                <p>Se ha borrado el ejercicio correctamente.</p>
                             </div>
                         </div>
                     </div>   
@@ -58,8 +57,7 @@ if ($borrado) {
                                 </div>
                             </div>
                             <div class='modal-body'>
-                                <h2><strong>¡Error!</strong></h2>
-                                <p>No se ha podido Habilitar el ejercicio correctamente.</p>
+                                <p>No se ha podido borrar el ejercicio correctamente.</p>
                             </div>
                         </div>
                     </div>   

@@ -37,7 +37,7 @@
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-exercisesD-tab" data-toggle="tab" href="#nav-new-exercises" role="tab" aria-controls="nav-new-exercises" aria-selected="true"><?php echo trad('Resolver',$lang) ?></a>
                             <a class="nav-item nav-link" id="nav-exercisesE-tab" data-toggle="tab" href="#nav-exercisesE" role="tab" aria-controls="nav-enun-sol" aria-selected="false"><?php echo trad('Resultados',$lang) ?></a>
-                            <a class="nav-item nav-link" id="nav-exercises-historico" data-toggle="tab" href="#nav-historico" role="tab" aria-controls="nav-exercise-hist" aria-selected="false"><?php echo trad('Historicos',$lang) ?></a>
+                            <a class="nav-item nav-link" id="nav-exercises-historico" data-toggle="tab" href="#nav-historico" role="tab" aria-controls="nav-exercise-hist" aria-selected="false"><?php echo trad('Soluciones previas', $lang) ?></a>
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
@@ -163,7 +163,25 @@
                             </div>
                         </div>  
                         <div class="tab-pane fade mt-3 pl-4" id="nav-historico" role="tabpanel" aria-labelledby="nav-exercises-historico">
-                            <p>Historico</p>
+                            <p><?php echo trad('Soluciones previas', $lang) ?></p>
+                            <div id="accordion ">
+                                <div class="card pt-4">  
+                                    <div class="table-responsive no-buscar">  
+                                        <table id="employee_data" class="table table-striped table-bordered">  
+                                            <thead>
+                                                <tr>
+                                                    <th style="width:8%;"><?php echo trad('Nº de intento',$lang) ?></th>
+                                                    <th style="width:20%;"><?php echo trad('Fecha',$lang) ?></th>
+                                                    <th style="width:8%;"><?php echo trad('Veredicto',$lang) ?></th>
+                                                    <th style="width:64%;"><?php echo trad('Solución',$lang) ?></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tablaSolucionesPropuesta">
+                                            </tbody>
+                                        </table>
+                                    </div>  
+                                </div> 
+                            </div>
                         </div>
                     </div>                   
                 </div>

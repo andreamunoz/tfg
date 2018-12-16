@@ -40,17 +40,31 @@ $_SESSION['HOJA_EXE']= 1;
                         $resP = $ejer->getCreadorEjercicio();
                         if (isset($res) && isset($resC) && isset($resP)) {
                             
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona hoja" id="select_pro">';
-                            echo "<option name='' apellido1='' apellido2=''>Todos Profesores </option>";
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profesor" title="Selecciona hoja" id="select_pro">';
+                            echo "<option value='' >Todos Profesores </option>";  
                             while ($row_profe = mysqli_fetch_array($resP)) {
-                                 $apellidos = explode(" ",$row_profe['apellidos']);
-                                 echo "<option name=". $row_profe['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1]." >" . $row_profe['nombre'].' '. $row_profe['apellidos'] . " </option>";
+                                $nombre = explode(" ",$row_profe['nombre']);
+                                $apellidos = explode(" ",$row_profe['apellidos']);
+                                if ($nombre[1] == '' && $apellidos[1]=='')
+                                    $nombreCompu = "$nombre[0]-$apellidos[0]";
+                                else if($nombre[1] == '')
+                                    $nombreCompu = "$nombre[0]-$apellidos[0]-$apellidos[1]";
+                                else if($nombre[1] != '' && $apellidos[1]=='')
+                                    $nombreCompu = "$nombre[0]-$nombre[1]-$apellidos[0]";
+                                else
+                                    $nombreCompu = "$nombre[0]-$nombre[1]-$apellidos[0]-$apellidos[1]";
+                                
+                                if($_SESSION['select_p'] == $nombreCompu){
+                                    echo "<option value=" . $nombreCompu . " selected>" . $row_profe['nombre'].' '. $row_profe['apellidos'] . " </option>";
+                                }else {
+                                    echo "<option value=" . $nombreCompu . " > " . $row_profe['nombre'].' '. $row_profe['apellidos'] . " </option>";
+                                }
                             }
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_niv">';
                              
                             if($_SESSION['select_n'] == ''){
-                                echo "<option value=''>Todos Niveles </option>";  
+                                echo "<option value='' selected>Todos Niveles </option>";  
                                 echo "<option value='Principiante'> Principiante </option>";
                                 echo "<option value='Intermedio'> Intermedio </option>";
                                 echo "<option value='Avanzado'> Avanzado </option>";
@@ -72,7 +86,7 @@ $_SESSION['HOJA_EXE']= 1;
                             } 
                             echo '</select>';
                             echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_tip">';
-                            echo "<option value=''>Todas Categorías </option>";
+                            echo "<option value='' >Todas Categorías </option>";
                             while ($row_tipo = mysqli_fetch_array($resC)) {
                                 if($_SESSION['select_t'] == $row_tipo['tipo'] ){
                                     echo "<option value=" . $row_tipo['tipo'] . " selected>" . $row_tipo['tipo'] . " </option>";

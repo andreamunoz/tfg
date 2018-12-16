@@ -37,6 +37,7 @@
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-exercisesD-tab" data-toggle="tab" href="#nav-new-exercises" role="tab" aria-controls="nav-new-exercises" aria-selected="true"><?php echo trad('Resolver',$lang) ?></a>
                             <a class="nav-item nav-link" id="nav-exercisesE-tab" data-toggle="tab" href="#nav-exercisesE" role="tab" aria-controls="nav-enun-sol" aria-selected="false"><?php echo trad('Resultados',$lang) ?></a>
+                            <a class="nav-item nav-link" id="nav-exercises-historico" data-toggle="tab" href="#nav-historico" role="tab" aria-controls="nav-exercise-hist" aria-selected="false"><?php echo trad('Historicos',$lang) ?></a>
                         </div>
                     </nav>
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
@@ -160,7 +161,10 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                     
+                        </div>  
+                        <div class="tab-pane fade mt-3 pl-4" id="nav-historico" role="tabpanel" aria-labelledby="nav-exercises-historico">
+                            <p>Historico</p>
+                        </div>
                     </div>                   
                 </div>
             </div>

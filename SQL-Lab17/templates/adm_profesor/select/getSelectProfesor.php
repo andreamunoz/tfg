@@ -1,5 +1,5 @@
 <?php
 session_start();
-$_SESSION['select_p'] = $_REQUEST['profe'];
+$_SESSION['select_p'] = $_REQUEST['name'];
 ?>
 

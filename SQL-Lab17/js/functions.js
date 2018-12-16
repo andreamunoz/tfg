@@ -368,13 +368,20 @@ $(document).ready(function () {
         var name = $(this).attr("name");
         var apellido1 = $(this).attr("apellido1");
         var apellido2 = $(this).attr("apellido2");
-        var profe = name + " " + apellido1 + " " + apellido2;
+        var profe = name + ' ' + apellido1 + ' ' + apellido2;
+        var table = $('#employee_data').DataTable();
+        table.columns(1).search(profe).draw(false);
+    });
+    
+    $('.select_profesor option').click(function(){
+        var name = $(this).attr("value");
+        var profe = name.replace(/-/g,' ');
         var table = $('#employee_data').DataTable();
         table.columns(1).search(profe).draw(false);
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/select/getSelectProfesor.php",
-            data: {profe:profe},
+            data: {name:name},
             success: function(response)
             {
                 
@@ -532,15 +539,24 @@ function cargar(){
 
 function selects(){
     
-//    var profe = $('#select_pro').find(":selected").text();
-//    var table = $('#employee_data').DataTable();
-//    table.columns(1).search(profe).draw(false);
+    var profe = $('#select_pro').find(":selected").text();
+    if(profe === "Todos Profesores ")
+        profe = '';
+    console.log(profe);
+    var table = $('#employee_data').DataTable();
+    table.columns(1).search(profe).draw(false);
     
     var nivel = $('#select_niv').find(":selected").text();
+    if(nivel === "Todos Niveles ")
+        nivel = '';
+    console.log(nivel);
     var table = $('#employee_data').DataTable();
     table.columns(2).search(nivel).draw(false);
     
     var tipo = $('#select_tip').find(":selected").text();
+    if(tipo === "Todas Categorías ")
+        tipo = '';
+    console.log(tipo);
     var table = $('#employee_data').DataTable();
     table.columns(3).search(tipo).draw(false);
     //alert(name);

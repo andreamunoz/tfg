@@ -1,6 +1,7 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
+<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t'])?>
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
     <h2><strong><?php echo trad('Hoja de Ejercicios',$lang) ?></strong></h2>

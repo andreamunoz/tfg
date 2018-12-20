@@ -6,6 +6,7 @@
     include_once '../inc/ejercicio.php';
     include_once '../inc/tablas.php';
     include_once '../inc/usa.php';
+    include_once '../inc/solucion.php';
     $ejer = new Ejercicio();
     $id_ejer = $_GET['exercise'];
     $des = $ejer->getDescripcionEjercicio($id_ejer);
@@ -175,7 +176,20 @@
                                                     <th style="width:64%;"><?php echo trad('Solución',$lang) ?></th>
                                                 </tr>
                                             </thead>
-                                            <tbody id="tablaSolucionesPropuesta">
+                                            <tbody id="tablaSolucionesPropuesta"> 
+                                                <?php 
+                                                    /*onclick="activarTabSolucion()"*/
+                                                    $sol = new Solucion(); 
+                                                    $historico = $sol->getAllEjerciciosByName($id_ejer);
+                                                    while($arrayHistorico = mysqli_fetch_array($historico)){
+//                                                ?>
+                                                    <tr class="solucionPropuesta"> 
+                                                        <td> <?php echo $arrayHistorico['intentos']; ?> </td>
+                                                        <td> <?php echo $arrayHistorico['fecha']; ?> </td>
+                                                        <td> <?php echo $arrayHistorico['veredicto']; ?> </td>
+                                                        <td id="sol_propuesta"> <?php echo $arrayHistorico['solucion_propuesta']; ?> </td>
+                                                    </tr>    
+                                                <?php } ?> 
                                             </tbody>
                                         </table>
                                     </div>  

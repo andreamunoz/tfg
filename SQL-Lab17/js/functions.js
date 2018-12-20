@@ -476,7 +476,6 @@ $(document).ready(function () {
         });
     });    
 
-
     $(".sel-tab-show select ").change(function(){
         
         var form_data = {
@@ -500,7 +499,7 @@ $(document).ready(function () {
             $('.structure_table tbody').html("").fadeIn();
         }
     });
-
+    
     $("#nav-exercisesE-tab").click(function(){
         $.ajax({
             type: "POST",
@@ -524,7 +523,12 @@ $(document).ready(function () {
         });
     });
 
-
+     $(".solucionPropuesta").click(function(){
+            var sol_propuesta = $(this).children('td').eq(3).html();
+            $('.nav-tabs a[href="#nav-new-exercises"]').tab('show');
+            $('#solucion').val(sol_propuesta);
+     });
+    
 });
 
 function cargar(){

@@ -163,7 +163,6 @@
                             </div>
                         </div>  
                         <div class="tab-pane fade mt-3 pl-4" id="nav-historico" role="tabpanel" aria-labelledby="nav-exercises-historico">
-                            <p><?php echo trad('Soluciones previas', $lang) ?></p>
                             <div id="accordion ">
                                 <div class="card pt-4">  
                                     <div class="table-responsive no-buscar">  

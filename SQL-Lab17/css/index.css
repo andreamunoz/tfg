@@ -138,8 +138,8 @@ a {
 }
 
 .logo-principal{
-    width: 40px;
-    height: 40px;
+    width:225px;
+    height: 0px;
     float:left;
     margin-top: 10px;
 }
@@ -227,11 +227,12 @@ a.enlance:hover {
 .text-menu {
     margin-left: 68px;
     line-height: 20px;
+    margin-bottom: 5px;
 }
 
 .text-b {
     font-size: 15px;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 .text-titulo {
     font-size: 20px;
@@ -805,8 +806,18 @@ p#small{
     margin: 8px;
 }
 .progress{
-    background-color: #CBCBCB; 
+    background: linear-gradient(to bottom, #fefef  0%, #dcdcdc 100%) !important;
 }
+.progress-bar-success {
+    color: black;
+    background: linear-gradient(to bottom, #8ab66b 0%, #c9de96 100%) !important;
+}
+.progress-bar-none {
+    margin-left: 10px;
+    color: black;
+    background: linear-gradient(to bottom, #fefef  0%, #dcdcdc 100%) !important;
+}
+
 
 /*cabecera de la tabla donde se muestran las tablas en crear ejercicio y editar ejercicio*/
 .light-style > * {

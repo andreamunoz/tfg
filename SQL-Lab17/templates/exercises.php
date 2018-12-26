@@ -11,12 +11,12 @@
                 <table id="employee_data" class="table table-striped table-bordered">  
                     <thead>
                         <tr>
-                            <th style="width:39%;"><?php echo trad('Descripción',$lang) ?></th>
-                            <th style="width:20%;"><?php echo trad('Profesor',$lang) ?></th>
-                            <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
+                            <th style="width:20%;"><?php echo trad('Descripción',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
                             <th style="width:10%;"><?php echo trad('N. Intentos',$lang) ?></th>                      
-                            <th style="width:1%;"></th>
+                            <th style="width:10%;"><?php echo trad('Resultado',$lang) ?></th>
                         </tr>
                     </thead>
                     <tbody id="tablaEjerResolver">
@@ -67,13 +67,13 @@
                                     if($resultadoIntentosVeredicto[0] != '') {
                                         echo '<td>' . $resultadoIntentosVeredicto[0] . '</td>'; 
                                         if($resultadoIntentosVeredicto[1] == '1') {
-                                            echo '<td style="background-color: green"></td>';
+                                            echo '<td>'. trad('Acierto',$lang) .'</td>';
                                         }else{
-                                            echo '<td style="background-color: red"></td>';
+                                            echo '<td>'. trad('Fallo',$lang) .'</td>';
 
                                         }                                    
                                     } else { 
-                                        echo '<td>0</td><td style="background-color: grey"></td>'; 
+                                        echo '<td>0</td><td>' . trad('No realizado',$lang) .'</td>'; 
                                     }
                                 ?>
                                 </tr>  

@@ -20,8 +20,7 @@
     </div>
     <div class="row pt-2 pb-4">
         <div class="col-md-3  offset-9">
-            <div class="progress">
-                <?php
+            <?php
                 $res = $hojaejer->getIdByName($hojaparameter);
                 $idHoja = $_GET['hoja'];
                 include_once '../inc/esta_contenido.php';
@@ -31,18 +30,16 @@
                 include_once '../inc/estadisticas.php';
                 $contenido = new Estadisticas();
                 $rCon = $contenido->getPorcentajeAciertos($idHoja);
-
                 if ($rCon['veredicto'] > '0') {
-                    $resultadoDec = ($rCon['veredicto'] / $r['num']) * 100;
+                    $resultadoDec = ($rCon['veredicto'] / $r) * 100;
                     $resultado = round($resultadoDec);
-                    echo '<div class="progress-bar" role="progressbar" aria-valuenow='.$resultado.'
-					  aria-valuemin="0" aria-valuemax="100" style="width:' . $resultado . '%"><span>' . $resultado . '%</span>
-					  </div>';
-                } else {
-                    echo '<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span>0%</span>
-					    </div>';
-                }
-                ?>
+             ?>
+            <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow='<?php echo $num ?>' aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $resultado ?>%"><span><?php echo $resultado ?>%</span></div>
+            <?php } else { ?>
+            <div class="progress">
+                <div class="progress-bar progress-bar-none" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span>0%</span></div>
+            <?php } ?>
             </div> 
         </div>
     </div>			

@@ -844,3 +844,17 @@ p#small{
     font-weight: bold;
     padding: .30rem !important;
 }
+
+/*ancho columnas de la tabla "soluciones previas" en perform_exercice*/
+.ancho_intento{
+    width: 15% !important;
+}
+.ancho_fecha{
+    width:15% !important;
+}
+.ancho_vered{
+    width:8% !important;
+}
+.ancho_sol{
+    width:62% !important;
+}

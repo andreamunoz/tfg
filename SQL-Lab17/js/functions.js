@@ -523,11 +523,14 @@ $(document).ready(function () {
         });
     });
 
-     $(".solucionPropuesta").click(function(){
-            var sol_propuesta = $(this).children('td').eq(3).html();
-            $('.nav-tabs a[href="#nav-new-exercises"]').tab('show');
-            $('#solucion').val(sol_propuesta);
-     });
+    $(".solucionPropuesta").click(function(){
+        // var sol_propuesta = $(this).children('td').eq(3).html();
+        var sol_propuesta = $(this).find("td:eq(3)").text();
+
+        solucion = sol_propuesta.trim();
+        $('.nav-tabs a[href="#nav-new-exercises"]').tab('show');
+        $('#solucion').val(solucion);
+    });
     
 });
 
@@ -546,21 +549,21 @@ function selects(){
     var profe = $('#select_pro').find(":selected").text();
     if(profe === "Todos Profesores ")
         profe = '';
-    console.log(profe);
+    // console.log(profe);
     var table = $('#employee_data').DataTable();
     table.columns(1).search(profe).draw(false);
     
     var nivel = $('#select_niv').find(":selected").text();
     if(nivel === "Todos Niveles ")
         nivel = '';
-    console.log(nivel);
+    // console.log(nivel);
     var table = $('#employee_data').DataTable();
     table.columns(2).search(nivel).draw(false);
     
     var tipo = $('#select_tip').find(":selected").text();
     if(tipo === "Todas Categorías ")
         tipo = '';
-    console.log(tipo);
+    // console.log(tipo);
     var table = $('#employee_data').DataTable();
     table.columns(3).search(tipo).draw(false);
     //alert(name);

@@ -350,19 +350,19 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
-    function compareSolucion($solucionA,$solucionP){
-        $connect = new Tools();
-        $consulta = array();
-        $conexion = $connect->connectDB();
-        $resultadoA=mysqli_query($conexion,$solucionA);
-        $resultadoP=mysqli_query($conexion,$solucionP);
-        if($resultadoA == $resultadoP)
-            $ok = true;
-        else
-            $ok = false;
-        $connect->disconnectDB($conexion);
-        return $ok;
-    }
+    // function compareSolucion($solucionA,$solucionP){
+    //     $connect = new Tools();
+    //     $consulta = array();
+    //     $conexion = $connect->connectDB();
+    //     $resultadoA=mysqli_query($conexion,$solucionA);
+    //     $resultadoP=mysqli_query($conexion,$solucionP);
+    //     if($resultadoA == $resultadoP)
+    //         $ok = true;
+    //     else
+    //         $ok = false;
+    //     $connect->disconnectDB($conexion);
+    //     return $ok;
+    // }
     function executeSolucion($solucion){
         $connect = new Tools();
         $consulta = array();
@@ -385,7 +385,7 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
-    function executeSolucionNoSelect($solucion){
+    function executeSolucionNoSelect($solucion, $tabla){
         $connect = new Tools();
         $consulta = array();
         $conexion = $connect->connectDB();
@@ -397,8 +397,31 @@ class Ejercicio{
             $consulta[0] = false;
             $consulta[1] = $conexion->error;
         }else if ($resultado){
-            var_dump($resultado);
+
+            $consulta[0] = true;
+            $sql1 = "SELECT * from $tabla;";
+            // var_dump("sentencia: ".$sql1);
+            $resultado1 = mysqli_query($conexion,$sql1);
+            if(!$resultado1){
+                $consulta[1] = false;
+                $consulta[2] = $conexion->error;
+            }else{
+                $consulta[1] = true;
+                $rawdata = array();
+                $i=0;
+                while($row = mysqli_fetch_assoc($resultado1))
+                {
+                    $rawdata[$i] = $row;
+                    $i++;
+                }
+                $consulta[2] = $rawdata;
+            }
+
+// var_dump("LO Que DEVUELVE:");
+// var_dump($consulta);
+
         }else{
+            var_dump("ELSE");
             var_dump($resultado);
             
             $rawdata = array();

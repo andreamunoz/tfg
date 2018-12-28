@@ -5,20 +5,18 @@ class Solucion{
 
 
     function insertarSolucion($user, $id_ejercicio,$solucion, $veredicto){
-    	// * cambiarlo por nombre de hoja
+
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $intentos = 0;
         $consulta2 = $consulta1 = false;
-        //cambiar consulta (mirar en libretita);
-        //consulta para saber si existe un ejercicio concreto
 
         $intentos=1;
         $sql1 = "INSERT INTO sqlab_resuelve(user, id_ejercicio) VALUES ('".$user."',". $id_ejercicio.");";
         $consulta1 = mysqli_query($conexion,$sql1);
         if ($consulta1){
 
-            $sql2 = "INSERT INTO sqlab_solucion(intentos,user,id_ejercicio,fecha,veredicto,solucion_propuesta) VALUES ('".$intentos."','".$user."','".$id_ejercicio."',NOW(),'".$veredicto."','".$solucion."');";
+            $sql2 = "INSERT INTO sqlab_solucion(intentos,user,id_ejercicio,fecha,veredicto,solucion_propuesta) VALUES (".$intentos.",'".$user."',".$id_ejercicio.",NOW(),".$veredicto.",'".$solucion."');";
             $consulta2 = mysqli_query($conexion,$sql2);
         }
 
@@ -32,7 +30,6 @@ class Solucion{
 
         $sql = "INSERT INTO sqlab_solucion(intentos,user,id_ejercicio,fecha,veredicto,solucion_propuesta) VALUES ('".$intentos."','".$user."','".$id_ejercicio."',NOW(),'".$veredicto."','".$solucion."');";
         $consulta = mysqli_query($conexion,$sql);
-    var_dump($consulta);
 
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -52,6 +49,14 @@ class Solucion{
         $connect = new Tools();
         $conexion = $connect->connectDB();
         $sql = "SELECT * FROM sqlab_solucion WHERE id_ejercicio=$id;";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+    function getHistoricoEjercicios($id,$user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT * FROM sqlab_solucion WHERE id_ejercicio=$id AND user='$user' ;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -104,15 +109,15 @@ class Solucion{
         return $consulta;
     }
     
-    function getNumIntentosEjercicio($id,$user){
-        $connect = new Tools();
-        $conexion = $connect->connectDB();
-        $sql = "SELECT MAX(intentos) AS intentos FROM sqlab_solucion WHERE id_ejercicio=$id and user='$user';";
-        $consulta = mysqli_query($conexion,$sql);
-        $intentos = mysqli_fetch_array($consulta);
-        $connect->disconnectDB($conexion);
-        return $intentos;
-    }
+    // function getNumIntentosEjercicio($id,$user){ 
+    //     $connect = new Tools();
+    //     $conexion = $connect->connectDB();
+    //     $sql = "SELECT MAX(intentos) AS intentos FROM sqlab_solucion WHERE id_ejercicio=$id and user='$user';";
+    //     $consulta = mysqli_query($conexion,$sql);
+    //     $intentos = mysqli_fetch_array($consulta);
+    //     $connect->disconnectDB($conexion);
+    //     return $intentos;
+    // }
 
     function getInfoVeredictoParaTabla($id, $user){
         $connect = new Tools();
@@ -124,7 +129,7 @@ class Solucion{
             $resul[0] = $intentos[0];
             $resul[1] = $intentos[1];
         }else{
-            $resul[0] = '';
+            $resul[0] = 0;
             $resul[1] = '';
         }
         $connect->disconnectDB($conexion);

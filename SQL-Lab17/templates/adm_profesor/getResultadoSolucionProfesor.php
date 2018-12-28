@@ -489,7 +489,8 @@
         $resultado = distinguirSentencia($solucion_alumno, $dueno_tabla);
     }
     if(!$resultado[0]){
-        if($resultado[4] !== ""){
+
+        if(isset($resultado[4])){
             $mostrar = $resultado[4];
         }else{
             $mostrar = "";

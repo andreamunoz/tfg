@@ -170,24 +170,33 @@
                                         <table id="employee_data" class="table table-striped table-bordered">  
                                             <thead>
                                                 <tr>
-                                                    <th style="width:8%;"><?php echo trad('Nº de intento',$lang) ?></th>
-                                                    <th style="width:20%;"><?php echo trad('Fecha',$lang) ?></th>
-                                                    <th style="width:8%;"><?php echo trad('Veredicto',$lang) ?></th>
-                                                    <th style="width:64%;"><?php echo trad('Solución',$lang) ?></th>
+                                                    <th class="ancho_intento"><?php echo trad('Nº de intento',$lang) ?></th>
+                                                    <th class="ancho_fecha" ><?php echo trad('Fecha y hora',$lang) ?></th>
+                                                    <th class="ancho_vered"><?php echo trad('Veredicto',$lang) ?></th>
+                                                    <th class="ancho_sol"><?php echo trad('Solución',$lang) ?></th>
                                                 </tr>
                                             </thead>
                                             <tbody id="tablaSolucionesPropuesta"> 
                                                 <?php 
                                                     /*onclick="activarTabSolucion()"*/
                                                     $sol = new Solucion(); 
-                                                    $historico = $sol->getAllEjerciciosByName($id_ejer);
+                                                    $historico = $sol->getHistoricoEjercicios($id_ejer, $_SESSION ["user"]);
                                                     while($arrayHistorico = mysqli_fetch_array($historico)){
-//                                                ?>
-                                                    <tr class="solucionPropuesta"> 
+                                                ?>
+                                                    <tr  class="solucionPropuesta" > 
+                                                        <!-- data-sol="<?php //echo '"'.$arrayHistorico['solucion_propuesta'].'"'; ?>" -->
                                                         <td> <?php echo $arrayHistorico['intentos']; ?> </td>
                                                         <td> <?php echo $arrayHistorico['fecha']; ?> </td>
-                                                        <td> <?php echo $arrayHistorico['veredicto']; ?> </td>
-                                                        <td id="sol_propuesta"> <?php echo $arrayHistorico['solucion_propuesta']; ?> </td>
+                                                        <td> 
+                                                            <?php if ($arrayHistorico['veredicto'] == 1){
+                                                                echo trad('Acierto',$lang);
+                                                            } else {
+                                                                echo trad('Fallo', $lang);
+                                                            } ?> 
+                                                        </td>
+                                                        <td id="sol_propuesta"> 
+                                                            <?php echo $arrayHistorico['solucion_propuesta']; ?> 
+                                                        </td>
                                                     </tr>    
                                                 <?php } ?> 
                                             </tbody>

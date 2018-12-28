@@ -326,19 +326,19 @@ function validarInsert($solucion, $dueno){
         $tablasDisponibles = $ejer->getTodasTablas();
 
         $ok = validarTablas($tablasSolucion, $tablasDisponibles);
-
+        // var_dump($tablasSolucion[0]);
         if($ok){
             $nombreAntiguo = " ".$tabla[0];
             $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
-            $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+            $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion, $tablasSolucion[0]);
 
             if($resultadoSolucion[0] === false){
                     $resultado[0] = false;
                     $resultado[1] = $resultadoSolucion[1];
             }else{
                     $resultado[0] = true;
-                    $resultado[1] = $tablasSolucion;
-                    $resultado[2] = $resultadoSolucion;
+                    $resultado[1] = $resultadoSolucion[1];
+                    $resultado[2] = $resultadoSolucion[2];
             }
 
         }else{
@@ -355,34 +355,34 @@ function validarUpdate($solucion, $dueno){
 
         if(in_array("set", $sentencia)){
 
-                $pos = array_search("set", $sentencia);
-                $tabla[0] = $sentencia[$pos - 1];
-                $tablasSolucion = anadirDueno($tabla, $dueno);
+            $pos = array_search("set", $sentencia);
+            $tabla[0] = $sentencia[$pos - 1];
+            $tablasSolucion = anadirDueno($tabla, $dueno);
 
-                $ejer = new Ejercicio();
-                $tablasDisponibles = $ejer->getTodasTablas();
+            $ejer = new Ejercicio();
+            $tablasDisponibles = $ejer->getTodasTablas();
 
-                $ok = validarTablas($tablasSolucion, $tablasDisponibles);
+            $ok = validarTablas($tablasSolucion, $tablasDisponibles);
 
-                if($ok){
-                        $nombreAntiguo = " ".$tabla[0];
-                        $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
-                        $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+            if($ok){
+                    $nombreAntiguo = " ".$tabla[0];
+                    $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+                    $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion, $tablasSolucion[0]);
 
-                        if($resultadoSolucion[0] === false){
-                                $resultado[0] = false;
-                                $resultado[1] = $resultadoSolucion[1];
-                        }else{
-                                $resultado[0] = true;
-                                $resultado[1] = $tablasSolucion;
-                                $resultado[2] = $resultadoSolucion;
-                        }
+                    if($resultadoSolucion[0] === false){
+                            $resultado[0] = false;
+                            $resultado[1] = $resultadoSolucion[1];
+                    }else{
+                            $resultado[0] = true;
+                            $resultado[1] = $resultadoSolucion[1];
+                            $resultado[2] = $resultadoSolucion[2];
+                    }
 
-                }else{
-                    $resultado[0] = false;
-                    $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
+            }else{
+                $resultado[0] = false;
+                $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
 
-                }
+            }
         }else{
                 $resultado[0] = false;
                 $resultado[4] = "La solución no tiene una sintaxis correcta.";
@@ -408,15 +408,15 @@ function validarDelete($solucion, $dueno){
                 if($ok){
                         $nombreAntiguo = " ".$tabla[0];
                         $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
-                        $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+                        $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion, $tablasSolucion[0]);
 
                         if($resultadoSolucion[0] === false){
                                 $resultado[0] = false;
                                 $resultado[1] = $resultadoSolucion[1];
                         }else{
                                 $resultado[0] = true;
-                                $resultado[1] = $tablasSolucion;
-                                $resultado[2] = $resultadoSolucion;
+                                $resultado[1] = $resultadoSolucion[1];
+                                $resultado[2] = $resultadoSolucion[2];
                         }
 
                 }else{
@@ -449,17 +449,21 @@ function distinguirSentencia($solucionPropuesta, $user_tablas){
 
     $resultado = array();
     if ($sentencia[0] === "select"){
-            $resultado = validarSelect($solucionPropuesta, $user_tablas);
+        $resultado = validarSelect($solucionPropuesta, $user_tablas);
+        $resultado[10] = "select";
     }elseif ($sentencia[0] === "insert"){
-            $resultado = validarInsert($solucionPropuesta, $user_tablas);
+        $resultado = validarInsert($solucionPropuesta, $user_tablas);
+        $resultado[10] = "otro";
     }elseif ($sentencia[0] === "update") {
-            $resultado = validarUpdate($solucionPropuesta, $user_tablas);
+        $resultado = validarUpdate($solucionPropuesta, $user_tablas);
+        $resultado[10] = "otro";
     }elseif ($sentencia[0] === "delete"){
-            $resultado = validarDelete($solucionPropuesta, $user_tablas);
+        $resultado = validarDelete($solucionPropuesta, $user_tablas);
+        $resultado[10] = "otro";
 
     }else{
-            $resultado[0] = FALSE;
-            $resultado[4] = "La solución no tiene una sintaxis correcta.";
+        $resultado[0] = FALSE;
+        $resultado[4] = "La solución no tiene una sintaxis correcta.";
     }
 
     return $resultado;
@@ -471,86 +475,78 @@ $solucion_alumno = str_replace($arrayComillas, '"', $solucion_alumno);
 $solucion_alumno = strtolower($solucion_alumno);
 $resultado_alumno = distinguirSentencia($solucion_alumno, $dueno_tabla);
 
-//$ejecutable = $ejer->getExecuteCorrectSolucionAlumno($solucion_alumno);
 
-//Si la ejecucion es correcta 
+//Si la ejecucion de la solucion del alumno es correcta 
 if ($resultado_alumno[0] !== false) {
-    // var_dump($resultado_alumno);
-    $resultadoDatosAlumno = $resultado_alumno[2][0];
 
-    $solucion_profesor = str_replace($arrayComillas, '"', $solucion_profesor);
-    $solucion_profesor = strtolower($solucion_profesor);
-        
-    $resultado_profesor = distinguirSentencia($solucion_profesor, $dueno_tabla);
+    if($resultado_alumno[10] === "select"){ //SELECT
+        //var_dump($resultado_alumno);
+        //$resultadoDatosAlumno = $resultado_alumno[2][0];
 
-// var_dump($resultado_alumno[2][0]);        
-// var_dump("-------------------------------------------------------------------------------");
-// var_dump($resultado_profesor[2][0]);
-// var_dump("-------------------------------------------------------------------------------");
-// $resul_comparacionPA = array_intersect_assoc( $resultado_profesor[2][0], $resultado_alumno[2][0]);
-// $resul_comparacionAP = array_intersect_assoc( $resultado_alumno[2][0], $resultado_profesor[2][0]);
+        $solucion_profesor = str_replace($arrayComillas, '"', $solucion_profesor);
+        $solucion_profesor = strtolower($solucion_profesor);
+            
+        $resultado_profesor = distinguirSentencia($solucion_profesor, $dueno_tabla);
 
-// var_dump($resul_comparacionPA);   
-// var_dump("-------------------------------------------------------------------------------");
-// var_dump($resul_comparacionAP);
-// var_dump("-------------------------------------------------------------------------------");
-// var_dump($resul_comparacionAP == $resul_comparacionPA);
-// var_dump("-------------------------------------------------------------------------------");
-// var_dump(array_unique(array_merge($resul_comparacionPA,$resul_comparacionAP)));//*****************************************
-    //Comparar string
-    //$solucion_profesor = $ejer->getSolucionEjercicios($id);
-    //if (strcasecmp($solucion_alumno, $solucion_profesor) == 0) {
-    if ($resultado_alumno[2][0] === $resultado_profesor[2][0]) {
-        $_SESSION['msg_solucion'] = "<div class=''><h1>El ejercicio se ha completado correctamente<h1></div>";
-        $num_intentos = $sol->getNumIntentosEjercicio($id, $user);
-        var_dump("Num_intentos:".$num_intentos[0]);
-        $datosVeredictoIntentos = $sol->getInfoVeredictoParaTabla($id,$user);
-        var_dump($datosVeredictoIntentos);
-        if($num_intentos[0]>=1){
-            $intentos = $num_intentos[0] + 1;
-            $resultadoGuardarSolucion = $sol->insertarOtroIntentoDeSolucion($user, $id,$solucion_alumno, $intentos, 1);
-        }else{
-            $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id,$solucion_alumno, 1);
-        }
-        //var_dump($resultadoGuardarSolucion);
-        //header("Location: ../templates/perform_exercise.php?exercise=" . $id);
-    } else {
-        //$rowsA = $ejer->getRowsSolucion($solucion_alumno);
-        //$rowsP = $ejer->getRowsSolucion($solucion_profesor);
- 
-        
-        if (count($resultado_alumno[2][0]) == count($resultado_profesor[2][0])) {
-            //$colA = $ejer->getColsSolucion($solucion_alumno);
-            //$colP = $ejer->getColsSolucion($solucion_profesor);
-            if (count($resultado_alumno[2][0][0]) == count($resultado_profesor[2][0][0])) {
+        // var_dump($resultado_alumno[2][0]);        
+        // var_dump("-------------------------------------------------------------------------------");
+        // var_dump($resultado_profesor[2][0]);
+        // var_dump("-------------------------------------------------------------------------------");
+        // $resul_comparacionPA = array_intersect_assoc( $resultado_profesor[2][0], $resultado_alumno[2][0]);
+        // $resul_comparacionAP = array_intersect_assoc( $resultado_alumno[2][0], $resultado_profesor[2][0]);
 
-                $ok = false;
-                //$ok=$ejer->compareSolucion($solucion_profesor,$solucion_alumno);
-                if($ok == true){
+        // var_dump($resul_comparacionPA);   
+        // var_dump("-------------------------------------------------------------------------------");
+        // var_dump($resul_comparacionAP);
+        // var_dump("-------------------------------------------------------------------------------");
+        // var_dump($resul_comparacionAP == $resul_comparacionPA);
+        // var_dump("-------------------------------------------------------------------------------");
 
 
-                    $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 1);
-                    //var_dump($resultadoGuardarSolucion);
-
-                    $_SESSION['msg_solucion'] = 
-                    "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
-                        <div class='modal-dialog modal-dialog-centered' role='document'>
-                            <div class='modal-content'>
-                                <div class='modal-header'>
-                                    <div class='close' id='close-modal'>
-                                        <i class='fas fa-times' data-dismiss='modal'></i>
+        //Comparar string
+        //$solucion_profesor = $ejer->getSolucionEjercicios($id);
+        //if (strcasecmp($solucion_alumno, $solucion_profesor) == 0) {
+        if ($resultado_alumno[2][0] == $resultado_profesor[2][0]) {
+            $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                            <div class='modal-dialog modal-dialog-centered' role='document'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <div class='close' id='close-modal'>
+                                            <i class='fas fa-times' data-dismiss='modal'></i>
+                                        </div>
+                                    </div>
+                                    <div class='modal-body'>
+                                        <h2><strong>¡Felicidades!</strong></h2>
+                                        <p>El ejercicio esta resuelto correctamente.</p>
                                     </div>
                                 </div>
-                                <div class='modal-body'>
-                                    <h2><strong>¡Felicidades!</strong></h2>
-                                    <p>El ejercicio esta resuelto correctamente.</p>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>";
-                    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&all=true");
-                }
-                else{
+                            </div>   
+                        </div>";
+            
+            $datosVeredictoIntentos = $sol->getInfoVeredictoParaTabla($id,$user);
+            if($datosVeredictoIntentos[0] >= 1){
+                $intentos = $datosVeredictoIntentos[0] + 1;
+                $resultadoGuardarSolucion = $sol->insertarOtroIntentoDeSolucion($user, $id, $solucion_alumno, $intentos, 1);
+            }else if ($datosVeredictoIntentos[0] == 0){
+                $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 1);
+            }
+
+            header("Location: ../templates/perform_exercise.php?exercise=" . $id);
+
+        } else {
+
+            $datosVeredictoIntentos = $sol->getInfoVeredictoParaTabla($id,$user);
+            if($datosVeredictoIntentos[0] >= 1){
+                $intentos = $datosVeredictoIntentos[0] + 1;
+                $resultadoGuardarSolucion = $sol->insertarOtroIntentoDeSolucion($user, $id, $solucion_alumno, $intentos, 0);
+            }else if ($datosVeredictoIntentos[0] == 0){
+                $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 0);
+            }
+            
+            if (count($resultado_alumno[2][0]) == count($resultado_profesor[2][0])) {
+
+                if (count($resultado_alumno[2][0][0]) != count($resultado_profesor[2][0][0])) {
+
                     $_SESSION['msg_solucion'] = 
                     "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                         <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -562,16 +558,34 @@ if ($resultado_alumno[0] !== false) {
                                 </div>
                                 <div class='modal-body'>
                                     <h2><strong>¡Error!</strong></h2>
-                                    <p>El .</p>
-                                    <p>El ejercicio ya CASI está.</p>
+                                    <p>El número de columnas de la solución propuesta no es correcto.</p>
                                 </div>
                             </div>
                         </div>   
                     </div>";
-                    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&yet=false");
+                    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
+                }else{
+                    $_SESSION['msg_solucion'] = 
+                    "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                        <div class='modal-dialog modal-dialog-centered' role='document'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <div class='close' id='close-modal'>
+                                        <i class='fas fa-times' data-dismiss='modal'></i>
+                                    </div>
+                                </div>
+                                <div class='modal-body'>
+                                    <h2><strong>¡Error!</strong></h2>
+                                    <p>Los nombres de las columnas no coinciden. Consulte los resultados.</p>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>"; 
+                    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
+
                 }
-            }else{
-                $_SESSION['msg_solucion'] = 
+            } else {
+                 $_SESSION['msg_solucion'] = 
                 "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>
                         <div class='modal-content'>
@@ -582,15 +596,126 @@ if ($resultado_alumno[0] !== false) {
                             </div>
                             <div class='modal-body'>
                                 <h2><strong>¡Error!</strong></h2>
-                                <p>El número de columnas de la solución propuesta no es correcto.</p>
+                                <p>Filas de la consulta INCORRECTAS.</p>
                             </div>
                         </div>
                     </div>   
                 </div>";
-                header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
+                header("Location: ../templates/perform_exercise.php?exercise=" . $id."&row=false");
             }
-        } else {
-             $_SESSION['msg_solucion'] = 
+        }
+
+    }else if ($resultado_alumno[10] === "otro"){ // INSERT - UPDATE - DELETE
+        $solucion_profesor = str_replace($arrayComillas, '"', $solucion_profesor);
+        $solucion_profesor = strtolower($solucion_profesor);
+            
+        $resultado_profesor = distinguirSentencia($solucion_profesor, $dueno_tabla);
+        if($resultado_alumno[1] and $resultado_profesor[1]){
+        // var_dump("Estoy en otro");
+        // var_dump($resultado_alumno[2]);
+        // var_dump("---------------------------");
+        // var_dump($resultado_profesor[2]);
+            if ($resultado_alumno[2] == $resultado_profesor[2]) {
+                $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                                <div class='modal-dialog modal-dialog-centered' role='document'>
+                                    <div class='modal-content'>
+                                        <div class='modal-header'>
+                                            <div class='close' id='close-modal'>
+                                                <i class='fas fa-times' data-dismiss='modal'></i>
+                                            </div>
+                                        </div>
+                                        <div class='modal-body'>
+                                            <h2><strong>¡Felicidades!</strong></h2>
+                                            <p>El ejercicio esta resuelto correctamente.</p>
+                                        </div>
+                                    </div>
+                                </div>   
+                            </div>";
+                
+                $datosVeredictoIntentos = $sol->getInfoVeredictoParaTabla($id,$user);
+                if($datosVeredictoIntentos[0] >= 1){
+                    $intentos = $datosVeredictoIntentos[0] + 1;
+                    $resultadoGuardarSolucion = $sol->insertarOtroIntentoDeSolucion($user, $id, $solucion_alumno, $intentos, 1);
+                }else if ($datosVeredictoIntentos[0] == 0){
+                    $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 1);
+                }
+
+                header("Location: ../templates/perform_exercise.php?exercise=" . $id);
+
+            } else {
+                $datosVeredictoIntentos = $sol->getInfoVeredictoParaTabla($id,$user);
+                if($datosVeredictoIntentos[0] >= 1){
+                    $intentos = $datosVeredictoIntentos[0] + 1;
+                    $resultadoGuardarSolucion = $sol->insertarOtroIntentoDeSolucion($user, $id, $solucion_alumno, $intentos, 0);
+                }else if ($datosVeredictoIntentos[0] == 0){
+                    $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 0);
+                }
+                
+                if (count($resultado_alumno[2]) == count($resultado_profesor[2])) {
+
+                    if (count($resultado_alumno[2][0]) != count($resultado_profesor[2][0])) {
+
+                        $_SESSION['msg_solucion'] = 
+                        "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                            <div class='modal-dialog modal-dialog-centered' role='document'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <div class='close' id='close-modal'>
+                                            <i class='fas fa-times' data-dismiss='modal'></i>
+                                        </div>
+                                    </div>
+                                    <div class='modal-body'>
+                                        <h2><strong>¡Error!</strong></h2>
+                                        <p>El número de columnas de la solución propuesta no es correcto.</p>
+                                    </div>
+                                </div>
+                            </div>   
+                        </div>";
+                        header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
+                    }else{
+                        $_SESSION['msg_solucion'] = 
+                        "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                            <div class='modal-dialog modal-dialog-centered' role='document'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <div class='close' id='close-modal'>
+                                            <i class='fas fa-times' data-dismiss='modal'></i>
+                                        </div>
+                                    </div>
+                                    <div class='modal-body'>
+                                        <h2><strong>¡Error!</strong></h2>
+                                        <p>Los datos introducidos no son válidos. Repase el enunciado.</p>
+                                    </div>
+                                </div>
+                            </div>   
+                        </div>"; 
+                        header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
+
+                    }
+                } else {
+                     $_SESSION['msg_solucion'] = 
+                    "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                        <div class='modal-dialog modal-dialog-centered' role='document'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <div class='close' id='close-modal'>
+                                        <i class='fas fa-times' data-dismiss='modal'></i>
+                                    </div>
+                                </div>
+                                <div class='modal-body'>
+                                    <h2><strong>¡Error!</strong></h2>
+                                    <p>Filas de la consulta INCORRECTAS.</p>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>";
+                    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&row=false");
+                }
+            }
+        }
+
+    }else{
+        $_SESSION['msg_solucion'] = 
             "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                 <div class='modal-dialog modal-dialog-centered' role='document'>
                     <div class='modal-content'>
@@ -601,14 +726,15 @@ if ($resultado_alumno[0] !== false) {
                         </div>
                         <div class='modal-body'>
                             <h2><strong>¡Error!</strong></h2>
-                            <p>Filas de la consulta INCORRECTAS.</p>
+                            <p>El ejercicio es INCORRECTO.</p>
                         </div>
                     </div>
                 </div>   
             </div>";
-            header("Location: ../templates/perform_exercise.php?exercise=" . $id."&row=false");
-        }
+        header("Location: ../templates/perform_exercise.php?exercise=" . $id."&all=false");
     }
+
+
 } else {
     $_SESSION['msg_solucion'] = 
             "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
@@ -628,4 +754,5 @@ if ($resultado_alumno[0] !== false) {
             </div>";
     header("Location: ../templates/perform_exercise.php?exercise=" . $id."&all=false");
 }
+
 ?>

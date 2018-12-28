@@ -715,6 +715,13 @@ if ($resultado_alumno[0] !== false) {
         }
 
     }else{
+        $datosVeredictoIntentos = $sol->getInfoVeredictoParaTabla($id,$user);
+        if($datosVeredictoIntentos[0] >= 1){
+            $intentos = $datosVeredictoIntentos[0] + 1;
+            $resultadoGuardarSolucion = $sol->insertarOtroIntentoDeSolucion($user, $id, $solucion_alumno, $intentos, 0);
+        }else if ($datosVeredictoIntentos[0] == 0){
+            $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 0);
+        }
         $_SESSION['msg_solucion'] = 
             "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                 <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -736,6 +743,13 @@ if ($resultado_alumno[0] !== false) {
 
 
 } else {
+    $datosVeredictoIntentos = $sol->getInfoVeredictoParaTabla($id,$user);
+    if($datosVeredictoIntentos[0] >= 1){
+        $intentos = $datosVeredictoIntentos[0] + 1;
+        $resultadoGuardarSolucion = $sol->insertarOtroIntentoDeSolucion($user, $id, $solucion_alumno, $intentos, 0);
+    }else if ($datosVeredictoIntentos[0] == 0){
+        $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 0);
+    }
     $_SESSION['msg_solucion'] = 
             "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                 <div class='modal-dialog modal-dialog-centered' role='document'>

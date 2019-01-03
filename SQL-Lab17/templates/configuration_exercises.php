@@ -40,7 +40,7 @@ $_SESSION['HOJA_EXE']= 1;
                         $resP = $ejer->getCreadorEjercicio();
                         if (isset($res) && isset($resC) && isset($resP)) {
                             
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profesor" title="Selecciona hoja" id="select_pro">';
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profesor" title="Selecciona profesor" id="select_pro">';
                             echo "<option value='' >Todos Profesores </option>";  
                             while ($row_profe = mysqli_fetch_array($resP)) {
                                 $nombre = explode(" ",$row_profe['nombre']);
@@ -61,7 +61,7 @@ $_SESSION['HOJA_EXE']= 1;
                                 }
                             }
                             echo '</select>';
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona hoja" id="select_niv">';
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona nivel" id="select_niv">';
                              
                             if($_SESSION['select_n'] == ''){
                                 echo "<option value='' selected>Todos Niveles </option>";  
@@ -85,7 +85,7 @@ $_SESSION['HOJA_EXE']= 1;
                                 echo "<option value='Avanzado' selected> Avanzado </option>";
                             } 
                             echo '</select>';
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona hoja" id="select_tip">';
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona categoría" id="select_tip">';
                             echo "<option value='' >Todas Categorías </option>";
                             while ($row_tipo = mysqli_fetch_array($resC)) {
                                 if($_SESSION['select_t'] == $row_tipo['tipo'] ){
@@ -122,11 +122,12 @@ $_SESSION['HOJA_EXE']= 1;
                                                 <a method="post" class="highlight_b" href="../handler/validate_delete_exercise.php?eliminar=<?php echo $fila['id_ejercicio'] ?>">
                                                     <i class="fas fa-trash mr-3" style="color:black; opacity:0.9;" title="<?php echo trad('Eliminar',$lang) ?>"></i>
                                                 </a>
-                                            <?php } ?>
+                                            <?php } else { ?>
+                                                <td style="text-align:right;">
                                                 <a class=" highlight_d" href="../handler/validate_deshabilitar.php?deshabilitar=<?php echo $fila['id_ejercicio'] ?>">
                                                     <i class="fas fa-unlock mr-3" style="color:black; opacity:0.9;" title="<?php echo trad('Deshabilitar',$lang) ?>"></i>
                                                 </a>
-                                                
+                                            <?php } ?>  
                                             </td>
                                         <?php } else { ?>
                                         <td>
@@ -152,10 +153,12 @@ $_SESSION['HOJA_EXE']= 1;
                                                     <a method="post" class="highlight_b" href="../handler/validate_delete_exercise.php?eliminar=<?php echo $fila['id_ejercicio'] ?>">
                                                         <i class="fas fa-trash mr-3" title="<?php echo trad('Eliminar',$lang) ?>"></i>
                                                     </a>
-                                            <?php } ?>
+                                            <?php } else { ?>
+                                                    <td style="text-align:right;">
                                                     <a method="post" class="highlight_d" href="../handler/validate_habilitar.php?habilitar=<?php echo $fila['id_ejercicio'] ?>">
                                                         <i class="fas fa-lock mr-3" title="<?php echo trad('Habilitar',$lang) ?>"></i>
                                                     </a>
+                                            <?php } ?>
                                             </td>
                                     <?php } else { ?>
                                         <td>

@@ -25,7 +25,7 @@
                         $hojaejer = new HojaEjercicio();
                         $res = $hojaejer->getCreadorHojas();
                         if (isset($res)) {
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm select_profe" title="Selecciona hoja" id="select_hoja">';
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm select_profe" title="Selecciona profesor" id="select_hoja">';
                             echo "<option name='' apellido1='' apellido2=''>Todos Profesores </option>";
                             while ($row_hoja = mysqli_fetch_array($res)) {
                                 $apellidos = explode(" ",$row_hoja['apellidos']);

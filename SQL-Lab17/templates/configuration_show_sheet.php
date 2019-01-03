@@ -13,7 +13,7 @@
       ?>
     <label><a class="enlance" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlance" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a></label>
     <h2><strong><?php echo $nombreHoja ?></strong></h2>
-    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
+    <!-- <p><?php //echo trad('Textooooo aquí........',$lang) ?></p> -->
     <div class="row mb-150">
         <div class="col-md-12">
             <div class="text-right pl-5">

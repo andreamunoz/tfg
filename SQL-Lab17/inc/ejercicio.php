@@ -176,11 +176,11 @@ class Ejercicio{
         return $res['descripcion'];
     }
     
-    function getAllEjerciciosHabilitados(){
+    function getAllEjerciciosHabilitados($username){
         
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT e.id_ejercicio, e.nivel, e.enunciado, e.descripcion, e.deshabilitar, e.tipo, e.creador_ejercicio, e.dueño_tablas, e.solucion, u.nombre, u.apellidos FROM sqlab_ejercicio e, sqlab_usuario u WHERE deshabilitar='0' and u.user = e.creador_ejercicio;";
+        $sql = "SELECT e.id_ejercicio, e.nivel, e.enunciado, e.descripcion, e.deshabilitar, e.tipo, e.creador_ejercicio, e.dueño_tablas, e.solucion, u.nombre, u.apellidos FROM sqlab_ejercicio e, sqlab_usuario u WHERE deshabilitar='0' and u.user = e.creador_ejercicio and (u.autoriza = 1 or e.creador_ejercicio = '$username');";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -258,7 +258,7 @@ class Ejercicio{
     function getTodasTablas(){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT td.nombre from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user and u.autoriza = 1";
+        $sql = "SELECT td.nombre from sqlab_tablas_disponibles as td, sqlab_usuario as u where td.schema_prof = u.user";
         $consulta = mysqli_query($conexion,$sql);
         $tablasDisponibles = array();
         while ($fila = $consulta->fetch_assoc()) {

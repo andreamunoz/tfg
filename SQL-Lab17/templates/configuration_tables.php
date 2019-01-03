@@ -37,7 +37,7 @@
                                     while (($fila2 = mysqli_fetch_array($consulta2))) {
                                         $campos = $fila2["NumeroCampos"];
                                     }
-                                    $quitar = $fila["schema_prof"] . "_";
+                                    $quitar = strtolower($fila["schema_prof"] . "_");
                                     $onlyName = explode($quitar, $fila["nombre"]);
                                     echo '<tr> <td class="resaltado" data-name="'.$fila["nombre"].'"> ' . $onlyName[1] . '</td> </tr>';
                                 }

@@ -27,7 +27,7 @@ if (!empty($result)) {
         header("Location: ../templates/index.php");
     }
 } else {
-    $_SESSION['msg_login'] = "<div class='offset-md-3 col-md-8 mt-5 alert alert-danger alert-dismissable'>
+    $_SESSION['msg_login'] = "<div class='offset-md-3 col-md-8 mt-3 alert alert-danger alert-dismissable'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
                     <strong>¡Error!</strong> El correo electrónico o contraseña son incorrectos.
                 </div>";

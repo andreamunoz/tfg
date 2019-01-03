@@ -32,6 +32,16 @@ $lang = 'es';
                         <h3><strong><?php echo trad('Iniciar Sesión',$lang)?></strong></h3>
                         <p><?php echo trad('Introduzca sus datos de correo electrónico y contraseña para acceder a la web de SQLab.',$lang)?></p>
                     </div>
+                    <?php
+                    if(isset($_SESSION['msg_login'])){
+                        echo $_SESSION['msg_login'];
+                        unset($_SESSION['msg_login']);
+                    }
+                    if(isset($_SESSION['msg_change'])){
+                        echo $_SESSION['msg_change'];
+                        unset($_SESSION['msg_change']);
+                    }
+                    ?>
                     <div class="offset-md-3 col-md-7 pt-5">
                         <div class="form-group">
                             <label for="inputEmail"><?php echo trad('Correo Electrónico',$lang)?></label>  

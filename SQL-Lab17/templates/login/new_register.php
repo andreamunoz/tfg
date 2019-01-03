@@ -30,6 +30,12 @@ $lang = 'en';
                             <p><?php echo trad('Rellene el formulario con sus datos personales para acceder a la página web y poder realizar los ejercicio de SQLab.',$lang) ?></p>
                         </div>
                     </div>
+                    <?php
+                    if(isset($_SESSION['msg_new_register'])){
+                        echo $_SESSION['msg_new_register'];
+                        unset($_SESSION['msg_new_register']);
+                    }
+                    ?>
                     <div class="form-row">
                         <div class="form-group offset-md-2 col-md-4">
                             <label for="name"><?php echo trad('Nombre',$lang) ?></label>  
@@ -77,12 +83,7 @@ $lang = 'en';
                             <button class="btn btn-primary ml-4 pl-5 pr-5" type="submit"><?php echo trad('Crear Cuenta',$lang) ?></button>
                         </div>
                     </div>
-                    <?php
-                    if(isset($_SESSION['msg_new_register'])){
-                        echo $_SESSION['msg_new_register'];
-                        unset($_SESSION['msg_new_register']);
-                    }
-                    ?>
+                    
                 </form>
             </div>
         </div>

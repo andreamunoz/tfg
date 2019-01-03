@@ -14,7 +14,7 @@
       ?>
     <label><a class="enlance" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlance" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a>  > <a class="enlance" href="configuration_show_sheet.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nomHoja['nombre_hoja'] ?></a> > <a class="enlance" href="configuration_show_intent_exercise.php?hoja=<?php echo $hojaparameter  ?>&exercise=<?php echo $id_ejercicio  ?>" ><?php echo $descrip['descripcion']  ?></a></label>
     <h2><strong><?php echo trad('Lista de Intentos',$lang) ?> | <?php echo $descrip['descripcion'] ?></strong></h2>
-    <p><?php echo trad('Textooooo aquí........',$lang) ?></p>
+    <!-- <p><?php //echo trad('Textooooo aquí........',$lang) ?></p> -->
     <div class="hrr mt-3 mb-5"></div>			
     <div id="accordion">
         <div class="card">

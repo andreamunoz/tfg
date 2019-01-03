@@ -63,6 +63,20 @@ class User {
         return $filas;
     }
 
+    public function existUsername($username) {
+        if($username !== "sqlab"){
+            $connect = new Tools();
+            $conexion = $connect->connectDB();
+            $sql = "SELECT user FROM sqlab_usuario WHERE user='$username'";
+            $consulta = mysqli_query($conexion, $sql);
+            $filas = mysqli_num_rows($consulta);
+            $connect->disconnectDB($conexion);
+            return $filas;
+        }else{
+            return 1;
+        }
+    }
+
     //Crear usuario
     function createUser($name, $apellidos, $name_user, $rol, $email, $pass, $autoriza) {
 

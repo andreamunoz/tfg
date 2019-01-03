@@ -56,7 +56,7 @@
                                 echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
                             }
                             echo '</select>';
-                            $result = $ejer->getAllEjerciciosHabilitados();
+                            $result = $ejer->getAllEjerciciosHabilitados($_SESSION['user']);
                             while ($fila = mysqli_fetch_array($result)) {
                                 $id = $fila['id_ejercicio'];
                                 $user = $_SESSION['user'];

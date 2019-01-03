@@ -75,7 +75,7 @@
                                                     }
                                                     echo '</select>';
                                                     
-                                                $result = $ejer->getAllEjerciciosHabilitados();
+                                                $result = $ejer->getAllEjerciciosHabilitados($_SESSION['user']);
                                                 while ($fila = mysqli_fetch_array($result)) {
                                                     ?>
 

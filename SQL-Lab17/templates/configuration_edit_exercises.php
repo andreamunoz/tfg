@@ -88,7 +88,7 @@
                                 <div class="row">
                                     <div class="col-md-5">
                                         <label for="name" ><strong><?php echo trad('Descripción',$lang) ?> <span class="red"> *</span></strong></label>                                    
-                                        <input type="text" id="descripcion" name="descripcion" value="<?php echo $ejercicioId['descripcion'] ?>" class="form-control form-control-sm" required>
+                                        <input type="text" id="descripcion" name="descripcion" maxlength="50" value="<?php echo $ejercicioId['descripcion'] ?>" class="form-control form-control-sm" required>
                                     </div>
                                     <div class="col-md-2">
                                         <label for="name" ><strong><?php echo trad('Nivel',$lang) ?><span class="red"> *</span></strong></label> 
@@ -158,11 +158,11 @@
                                 <div class="row  mb-150">
                                     <div class="col-md-6">
                                         <label><strong><?php echo trad('Enunciado',$lang) ?> <span class="red"> *</span></strong></label>
-                                        <textarea id="enunciado" name="enunciado" class="form-control" rows="10" required="" ><?php echo $ejercicioId['enunciado'] ?></textarea>
+                                        <textarea maxlength="300" id="enunciado" name="enunciado" class="form-control" rows="10" required="" ><?php echo $ejercicioId['enunciado'] ?></textarea>
                                     </div>
                                     <div class="col-md-6">
                                         <label><strong><?php echo trad('Solución',$lang) ?> <span class="red"> *</span></strong></label>
-                                        <textarea id="solucion" name="solucion" class="form-control" rows="10" required=""><?php echo $ejercicioId['solucion'] ?></textarea>
+                                        <textarea maxlength="300" id="solucion" name="solucion" class="form-control" rows="10" required=""><?php echo $ejercicioId['solucion'] ?></textarea>
                                     </div>
                                 </div>
                                 

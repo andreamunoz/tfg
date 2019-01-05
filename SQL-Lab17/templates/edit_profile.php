@@ -18,7 +18,7 @@
                 <label for="name" ><strong><?php echo trad('Nombre',$lang) ?> </strong></label>		
             </div>
             <div class="col-md-3 ">
-                <input type="text" id="edit_nombre" name="edit_nombre" value="<?php echo $_SESSION['name'] ?>" class="form-control form-control-sm" required/>
+                <input type="text" maxlength="60" id="edit_nombre" name="edit_nombre" value="<?php echo $_SESSION['name'] ?>" class="form-control form-control-sm" required/>
             </div>
         </div>
         <div class="row mb-2">
@@ -26,7 +26,7 @@
                 <label for="name" ><strong><?php echo trad('Apellidos',$lang) ?> </strong></label>		
             </div>
             <div class="col-md-3 ">
-                <input type="text" id="edit_apellido" name="edit_apellidos" value="<?php echo $_SESSION['apellidos'] ?>" class="form-control form-control-sm" required/>
+                <input type="text" id="edit_apellido" maxlength="70" name="edit_apellidos" value="<?php echo $_SESSION['apellidos'] ?>" class="form-control form-control-sm" required/>
             </div>
         </div>
         <div class="row mb-2">	

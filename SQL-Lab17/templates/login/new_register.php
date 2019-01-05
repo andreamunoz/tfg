@@ -39,17 +39,17 @@ $lang = 'en';
                     <div class="form-row">
                         <div class="form-group offset-md-2 col-md-4">
                             <label for="name"><?php echo trad('Nombre',$lang) ?></label>  
-                            <input type="text" id="name" name="nombre" class="form-control form-control-sm" required />
+                            <input type="text" maxlength="60" id="name" name="nombre" class="form-control form-control-sm" required />
                         </div>
                         <div class="form-group col-md-5">
                             <label for="apellido"><?php echo trad('Apellidos',$lang) ?></label> 
-                            <input type="text" id="apellido" name="apellidos" class="form-control form-control-sm" required />
+                            <input type="text" maxlength="70" id="apellido" name="apellidos" class="form-control form-control-sm" required />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group offset-md-2 col-md-5">
                             <label for="nom_usuario"><?php echo trad('Nombre de usuario',$lang) ?></label> 
-                            <input type="text" id="nom_usuario" name="nombre_usuario" class="form-control form-control-sm" required />
+                            <input type="text" maxlength="40" ="" id="nom_usuario" name="nombre_usuario" class="form-control form-control-sm" required />
                         </div>
                         <div class="form-group col-md-4">
                             <label for="prof_alumn" required><?php echo trad('Rol',$lang) ?></label> 
@@ -68,7 +68,7 @@ $lang = 'en';
                     <div class="form-row">
                         <div class="form-group offset-md-2 col-md-9">
                             <label for="inputEmail"><?php echo trad('Correo Electrónico',$lang) ?></label>
-                            <input type="email" id="inputEmail" name="email" class="form-control form-control-sm" required />
+                            <input type="email" maxlength="25" id="inputEmail" name="email" class="form-control form-control-sm" required />
                         </div>
                         <div class="form-group offset-md-2 col-md-9">
                             <label for="inputPassword"><?php echo trad('Contraseña',$lang) ?></label>

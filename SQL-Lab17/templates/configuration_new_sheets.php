@@ -25,7 +25,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3 p-0">                                    
-                                    <input type="text" id="new_name_sheet" name="new_name_sheet" placeholder="Nombre Hoja" class="form-control form-control-sm" required/>
+                                    <input type="text" maxlength="50" id="new_name_sheet" name="new_name_sheet" placeholder="Nombre Hoja" class="form-control form-control-sm" required/>
                                 </div>
                             </div>
                             <div id="accordion">

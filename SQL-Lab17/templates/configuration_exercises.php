@@ -2,6 +2,7 @@
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); 
 $_SESSION['HOJA_EXE']= 1;
+unset($_SESSION['guardarDatosEditar']);
 ?>
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_exercises.php" > <?php echo trad('Ejercicios',$lang) ?></a></label>
@@ -116,7 +117,7 @@ $_SESSION['HOJA_EXE']= 1;
                                            if ($fila_sol["cantidad"] === "0"){?>
                                             
                                             <td style="text-align:right;">
-                                                <a class="highlight_e" href="configuration_edit_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>">
+                                                <a class="highlight_e" href="configuration_edit_exercises.php?exercise=<?php echo $fila['id_ejercicio']?>" >
                                                     <i class="fas fa-edit mr-3" style="color:black; opacity:0.9;" title="<?php echo trad('Editar',$lang) ?>"></i>
                                                 </a>
                                                 <a method="post" class="highlight_b" href="../handler/validate_delete_exercise.php?eliminar=<?php echo $fila['id_ejercicio'] ?>">
@@ -148,7 +149,7 @@ $_SESSION['HOJA_EXE']= 1;
                                              if ($fila_sol["cantidad"] === "0"){?>
                                                 <td style="text-align:right;">
                                                     <a class="highlight_e" href="configuration_edit_exercises.php?exercise=<?php echo $fila['id_ejercicio'] ?>">
-                                                        <i class="fas fa-edit mr-3" title="<?php echo trad('Editar',$lang) ?>"></i>
+                                                        <i class="fas fa-edit mr-3"  title="<?php echo trad('Editar',$lang) ?>"></i>
                                                     </a>
                                                     <a method="post" class="highlight_b" href="../handler/validate_delete_exercise.php?eliminar=<?php echo $fila['id_ejercicio'] ?>">
                                                         <i class="fas fa-trash mr-3" title="<?php echo trad('Eliminar',$lang) ?>"></i>

@@ -441,14 +441,12 @@ $(document).ready(function () {
 
     $('#tablaEjerResolver').on("click", "#resolverEjer", function(){
         var id_ejercicio = $(this).attr("data-number");
-        console.log(id_ejercicio);
         $.ajax({
             method: "POST",
             data: { id_ejercicio: id_ejercicio},
             url: "../templates/adm_profesor/getBorrarDatosResolverEjercicio.php",
             success: function(response)
             {
-                console.log("OK");
                 location.assign(response);
             }
         });

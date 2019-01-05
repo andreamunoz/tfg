@@ -41,7 +41,7 @@
     }
     
 
-    $guardarDatosEditar = array($user_tablas, $_POST['categoria'], $nivel, $deshabilitar, $descripcion, $enunciado, $solucion);
+    $guardarDatosEditar = array($user_tablas, $_POST['categoria'], $nivel, $deshabilitar, $descripcion, $enunciado, $solucion, $id);
     $_SESSION['guardarDatosEditar']= $guardarDatosEditar;
     // var_dump( $_SESSION['guardarDatosEditar']);
 

@@ -12,6 +12,7 @@
 	unset($_SESSION['msg_congratulations']);
 	unset($_SESSION['msg_new_register']);
 	unset($_SESSION['guardarDatos']);
+	unset($_SESSION['guardarDatosEditar']);
 	unset($_SESSION['guardarDatosTablas']);
 	unset($_SESSION["solAlum"]);
 	session_destroy();

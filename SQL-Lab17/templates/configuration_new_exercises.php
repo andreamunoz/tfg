@@ -59,7 +59,7 @@
                                 <label for="name" ><strong><?php echo trad('Descripción',$lang) ?> <span class="red"> *</span></strong></label>
                                 <?php if (isset($_SESSION['guardarDatos'])) { ?>
                                     <input type="text" id="descripcion" name="descripcion" class="form-control form-control-sm" maxlength="50" required value="<?php echo $_SESSION['guardarDatos'][4] ?>" />
-                                <?php } else {?>
+                                <?php } else { ?>
                                     <input type="text" id="descripcion" name="descripcion" class="form-control form-control-sm" maxlength="50" required />
                                 <?php } ?>
                             </div>

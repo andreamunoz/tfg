@@ -35,6 +35,10 @@
                 break;
     }
 
+    if(substr($solucion, -1) !== ";"){
+        $solucion = $solucion.";";
+    }
+
     $guardarDatos = array($user_tablas, $_POST['categoria'], $nivel, $deshabilitar, $descripcion, $enunciado, $solucion);
     $_SESSION['guardarDatos']= $guardarDatos;
 
@@ -154,10 +158,11 @@
             }
             return $ok;
     }
+
     function sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno){
-    //var_dump($tablasSolucionSinDueno);
-    //var_dump($solucion);
-    //var_dump($dueno);
+        //var_dump($tablasSolucionSinDueno);
+        //var_dump($solucion);
+        //var_dump($dueno);
             $cambios = array('!='=>' ', ','=>' ', '('=>' ', ')'=>' ', '='=>' ', '>'=>' ', '<'=>' ', '>='=>' ', '<='=>' ', '<>'=>' ', '&&'=>' ', '||'=>' ');
 
             $aux = strtr($solucion,$cambios);
@@ -291,26 +296,22 @@
             juntarArrayRecursivo($total, $tablas, $count);
 
             $tablasSolucionSinDueno = eliminarRepetidos($total);
-  //          var_dump($tablasSolucionSinDueno);
+            //var_dump($tablasSolucionSinDueno);
             $tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
-//            var_dump($tablasSolucion);
+            //var_dump($tablasSolucion);
             $ejer = new Ejercicio();
             $tablasDisponibles = $ejer->getTodasTablas();
             
             $ok = validarTablas($tablasSolucion, $tablasDisponibles);
-
+                    //var_dump($tablasSolucion);
+                    //var_dump($tablasDisponibles);
             $resultado = array();
             if($ok){
                     $ejer = new Ejercicio();
-                    // for ($i =0; $i<count($tablasSolucion); $i++) {
-                    //      $nombreAntiguo = " ".$tablasSolucionSinDueno[$i];
-                    //      // var_dump($nombreAntiguo." -> ".$tablasSolucion[$i]);
-                    //      $solucion = str_replace($nombreAntiguo, " ".strtolower($tablasSolucion[$i]), $solucion );
-                    //      //var_dump($solucion);
-                    // }
+                    
                     $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
                     //var_dump($solucion);
-                    $resultadoSolucion = $ejer->executeSolucion($solucion);
+                    $resultadoSolucion = $ejer->executeSolucion($solucion, $tablasSolucion[0]);
 
                     if($resultadoSolucion[0] === false){
                             $resultado[0] = false;
@@ -361,7 +362,7 @@
             if($ok){
                 $nombreAntiguo = " ".$tabla[0];
                 $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
-                $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+                $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion, $tablasSolucion[0]);
 
                 if($resultadoSolucion[0] === false){
                         $resultado[0] = false;
@@ -398,7 +399,7 @@
                     if($ok){
                             $nombreAntiguo = " ".$tabla[0];
                             $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
-                            $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion);
+                            $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion, $tablasSolucion[0]);
 
                             if($resultadoSolucion[0] === false){
                                     $resultado[0] = false;
@@ -565,8 +566,6 @@
         
         header("Location: ../templates/configuration_new_exercises.php");
     }
-    // var_dump($resultado);
-    // header("Location: ../templates/prf_crear_ejercicio.php");
     exit();
       
 ?>

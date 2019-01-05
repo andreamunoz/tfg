@@ -36,17 +36,38 @@ class Ejercicio{
         return $resul;
     }
  
-    function update($id,$nivel,$enun,$descrip,$deshab,$tipo,$sol,$user){
+    function update($id,$nivel,$enun,$descrip,$deshab,$tipo,$sol,$user, $tablas){
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
+        $resultado = "";
         $sql = "UPDATE sqlab_ejercicio SET nivel = '$nivel', enunciado = '$enun', descripcion = '$descrip', deshabilitar = '$deshab', tipo = '$tipo', solucion = '$sol' WHERE id_ejercicio = $id;";
         $consulta = mysqli_query($conexion,$sql);
         if(!$consulta){
-               echo "No se ha podido modificar la base de datos<br><br>".mysqli_error($conexion);
+               $resultado = "No se ha podido modificar la base de datos. ".mysqli_error($conexion);
+        }else{
+            $sql1 = "DELETE FROM sqlab_usa WHERE id_ejercicio = $id;";
+            $consulta1 = mysqli_query($conexion,$sql1);
+            if (!$consulta1) {
+                $resultado = "No se ha podido modificar la base de datos".mysqli_error($conexion);
+            }else{
+            
+                foreach ($tablas as $keyt => $valuet) {
+                    
+                    $dividido = explode("_", $valuet, 2);
+                    $sql2 = "insert into sqlab_usa (id_ejercicio, nombre, schema_prof) values (".$id.",'".trim($valuet)."','".$dividido[0]."');";
+                    
+                    $resul = mysqli_query($conexion,$sql2);
+                    if(!($resul)){ 
+                        $resultado = $conexion->error;
+                    }else{
+                        $resultado = $resul;
+                    }
+                }
+            }
         }
         $connect->disconnectDB($conexion);
-        return $consulta;
+        return $resultado;
     }
    
     function deleteEjercicio($id){

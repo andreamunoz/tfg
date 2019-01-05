@@ -35,8 +35,16 @@
                 $categoria = "Operaciones Manipulacion de Datos";
                 break;
     }
-    var_dump($categoria);
+
+    if(substr($solucion, -1) !== ";"){
+        $solucion = $solucion.";";
+    }
     
+
+    $guardarDatosEditar = array($user_tablas, $_POST['categoria'], $nivel, $deshabilitar, $descripcion, $enunciado, $solucion);
+    $_SESSION['guardarDatosEditar']= $guardarDatosEditar;
+    // var_dump( $_SESSION['guardarDatosEditar']);
+
     $arrayComillas = array("`", "'");
     $solucion = str_replace($arrayComillas, '"', $solucion);
 
@@ -131,9 +139,9 @@
         return $ok;
     }
     function sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno){
-    //var_dump($tablasSolucionSinDueno);
-    //var_dump($solucion);
-    //var_dump($dueno);
+            //var_dump($tablasSolucionSinDueno);
+            //var_dump($solucion);
+            //var_dump($dueno);
             $cambios = array('!='=>' ', ','=>' ', '('=>' ', ')'=>' ', '='=>' ', '>'=>' ', '<'=>' ', '>='=>' ', '<='=>' ', '<>'=>' ', '&&'=>' ', '||'=>' ');
 
             $aux = strtr($solucion,$cambios);
@@ -279,7 +287,7 @@
             // }
 
             $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
-            var_dump($solucion);
+            
             $resultadoSolucion = $ejer->executeSolucion($solucion);
 
             if($resultadoSolucion[0] === false){
@@ -449,16 +457,17 @@
     }
 
     $resultado = distinguirSentencia($solucion, $user_tablas); 
-     var_dump($resultado);
+     // var_dump($resultado);
     if($resultado[0]){
         
             $ejer = new Ejercicio();
             $resultadoEditar = "";
 
-            $resultadoEditar = $ejer->update($id,$nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$solucion,$user);
+            $resultadoEditar = $ejer->update($id,$nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$solucion,$user,$resultado[1]);
              var_dump($resultadoEditar);
             if($resultadoEditar){
                 $ejer->enviarAviso($id);
+                unset($_SESSION['guardarDatosEditar']);
                 header("Location: ../templates/configuration_exercises.php");
             }else{
                 $_SESSION['message_edit_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>

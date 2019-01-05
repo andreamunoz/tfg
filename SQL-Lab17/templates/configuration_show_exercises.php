@@ -6,6 +6,7 @@
     include_once '../inc/ejercicio.php';
     include_once '../inc/tablas.php';
     include_once '../inc/usa.php';
+    include_once '../inc/user.php';
     $ejer = new Ejercicio();
     $id_ejer = $_GET['exercise'];
     $des = $ejer->getDescripcionEjercicio($id_ejer);
@@ -29,6 +30,8 @@
         $ejercicioId = $ejer->getEjercicioById($id_ejer);
         $dueño = $ejercicioId['dueño_tablas'];
         $tab = $tabla->getTablasByProfesor($dueño);
+        $user = new User();
+        $nombre_completo = $user->getNombreApellidosUsuario($dueño);
         ?>
         <div class="col-md-10">
             <p><?php echo trad('Muestra el ejercicio con todos sus campos que se encuentran en la BBDD.', $lang) ?></p>
@@ -38,7 +41,7 @@
         <div class="col-md-12 ">
             <div class="row">
                 <!-- <div class="col-md-4">
-                    <label><strong><?php echo trad('Creador Tablas',$lang) ?> <span class="red"> *</span></strong></label>
+                    <label><strong><?php //echo trad('Creador Tablas',$lang) ?> <span class="red"> *</span></strong></label>
                     <div class=" selector-user" >
                         <table id="columnas" class="form-control" ><tbody></tbody></table>
                                             
@@ -46,10 +49,10 @@
                 </div> -->
                 <div class="col-md-3">
                     <label><strong><?php echo trad('Creador Tablas',$lang) ?></strong></label>
-                    
                     <table class="form-control">
                         <tbody>
-                            <tr><td> <?php echo $ejercicioId['dueño_tablas']; ?> </td></tr>
+
+                            <tr><td> <?php echo $nombre_completo[0]." ".$nombre_completo[1]; ?> </td></tr>
                         </tbody>
                     </table>
                     
@@ -132,7 +135,7 @@
                     <label><strong><?php echo trad('Enunciado',$lang) ?></strong></label>
                     <table class="form-control">
                         <tbody>
-                            <tr><td style="padding-bottom: 25px"> <?php echo $ejercicioId['enunciado']; ?> </td></tr>
+                            <tr><td style="padding-bottom: 25px"> <div style="word-break: break-all;"><?php echo $ejercicioId['enunciado']; ?> </div></td></tr>
                         </tbody>
                     </table>
                     

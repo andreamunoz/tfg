@@ -248,6 +248,16 @@ class User {
         return $name;
     }
 
+    function getNombreApellidosUsuario($user){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT nombre, apellidos FROM sqlab_usuario WHERE user='$user'";
+        $consulta = mysqli_query($conexion, $sql);
+        $name = mysqli_fetch_array($consulta);
+        $connect->disconnectDB($conexion);
+        return $name;
+    }
+
     function getChangePassword($email, $pass){
               
         $connect = new Tools();

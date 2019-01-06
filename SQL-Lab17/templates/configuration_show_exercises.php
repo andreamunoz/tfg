@@ -28,10 +28,12 @@
         <?php
         $tabla = new Tablas();
         $ejercicioId = $ejer->getEjercicioById($id_ejer);
-        $dueño = $ejercicioId['dueño_tablas'];
-        $tab = $tabla->getTablasByProfesor($dueño);
+        $dueno = $ejercicioId['dueño_tablas'];
+        $tab = $tabla->getTablasByProfesor($dueno);
         $user = new User();
-        $nombre_completo = $user->getNombreApellidosUsuario($dueño);
+        $nombre_completo_dueno = $user->getNombreApellidosUsuario($dueno);
+        $creador = $ejercicioId['creador_ejercicio'];
+        $nombre_completo_creador = $user->getNombreApellidosUsuario($creador);
         ?>
         <div class="col-md-10">
             <p><?php echo trad('Muestra el ejercicio con todos sus campos que se encuentran en la BBDD.', $lang) ?></p>
@@ -40,22 +42,22 @@
     <div class="row mt-5">
         <div class="col-md-12 ">
             <div class="row">
-                <!-- <div class="col-md-4">
-                    <label><strong><?php //echo trad('Creador Tablas',$lang) ?> <span class="red"> *</span></strong></label>
-                    <div class=" selector-user" >
-                        <table id="columnas" class="form-control" ><tbody></tbody></table>
-                                            
-                    </div>
-                </div> -->
                 <div class="col-md-3">
                     <label><strong><?php echo trad('Creador Tablas',$lang) ?></strong></label>
                     <table class="form-control">
                         <tbody>
 
-                            <tr><td> <?php echo $nombre_completo[0]." ".$nombre_completo[1]; ?> </td></tr>
+                            <tr><td> <?php echo $nombre_completo_dueno[0]." ".$nombre_completo_dueno[1]; ?> </td></tr>
                         </tbody>
                     </table>
-                    
+                    <br>
+                    <label><strong><?php echo trad('Diseñador del ejercicio',$lang) ?></strong></label>
+                    <table class="form-control">
+                        <tbody>
+
+                            <tr><td> <?php echo $nombre_completo_creador[0]." ".$nombre_completo_creador[1]; ?> </td></tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="col-md-3">
                     <label><strong><?php echo trad('Tablas',$lang) ?></strong></label>

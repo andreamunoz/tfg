@@ -50,18 +50,18 @@
 
     function quitarPalabrasFinales($frase){
 
-            $palabrasBuscar = array(" where "," group "," having "," order "," limit ", ";", "select");
-            $palabras = array("where","group","having","order","limit", ";","select");
-            $quitarFinal[0] = $frase;
-            $nuevafrase = $frase;
-            for($i=0; $i<count($palabras); $i++){
-                    if(stripos($nuevafrase, $palabrasBuscar[$i])!== false){
-                            $quitarFinal = preg_split("/".$palabras[$i]."/i", $quitarFinal[0],2);
-                            $nuevafrase = $quitarFinal[0];
-                            $quitarFinal = trim($quitarFinal[0]);
-                    }
+        $palabrasBuscar = array(" where "," group "," having "," order "," limit ", ";", "select");
+        $palabras = array("where","group","having","order","limit", ";","select");
+        $quitarFinal[0] = $frase;
+        $nuevafrase = $frase;
+        for($i=0; $i<count($palabras); $i++){
+            if(stripos($nuevafrase, $palabrasBuscar[$i])!== false){
+                $quitarFinal = preg_split("/".$palabras[$i]."/i", $quitarFinal[0],2);
+                $nuevafrase = $quitarFinal[0];
+                $quitarFinal = trim($quitarFinal[0]);
             }
-            return $quitarFinal;
+        }
+        return $quitarFinal;
     }
 
     function quitarPalabrasIntermadias($frase){
@@ -108,44 +108,44 @@
 
     function juntarArrayRecursivo(&$total, $array1, &$count){
 
-            if(is_array($array1)){
-                    foreach ($array1 as $key => $value) {
-                            if(is_array($array1[$key])){
-                                    juntarArrayRecursivo($total, $array1[$key], $count);
-                            }else{
+        if(is_array($array1)){
+            foreach ($array1 as $key => $value) {
+                if(is_array($array1[$key])){
+                    juntarArrayRecursivo($total, $array1[$key], $count);
+                }else{
 
-                                    if($value !== ""){
+                    if($value !== ""){
 
-                                            $total[$count] = trim($value);
-                                            $count++;
-                                    }
-                            }
+                        $total[$count] = trim($value);
+                        $count++;
                     }
+                }
             }
+        }
     }
 
     function eliminarRepetidos($array){
-            foreach($array as $key => $value){
-                    $auxValue = str_replace(")","",$value);
-                    $auxValue = str_replace(",","",$auxValue);
-                    $array[$key] = $auxValue;
-            }
-            $aux = array_unique($array);
-            $total = array();
-            $contadorReal = 0;
-            foreach ($aux as $key => $value) {
-                    $total[$contadorReal] = $value;
-                    $contadorReal++;
-            }
-            return $total;
+        foreach($array as $key => $value){
+            $auxValue = str_replace(")","",$value);
+            $auxValue = str_replace(",","",$auxValue);
+            $array[$key] = $auxValue;
+        }
+        $aux = array_unique($array);
+        $total = array();
+        $contadorReal = 0;
+        foreach ($aux as $key => $value) {
+            $total[$contadorReal] = $value;
+            $contadorReal++;
+        }
+        return $total;
     }
 
     function anadirDueno($tablas, $dueno){
-            $solucion = array();
-            for($i = 0; $i < count($tablas); $i++){
-                    $solucion[$i] = $dueno."_".$tablas[$i];
-            }
-            return $solucion;
+        $solucion = array();
+        for($i = 0; $i < count($tablas); $i++){
+                $solucion[$i] = $dueno."_".$tablas[$i];
+        }
+        return $solucion;
     }
 
     function validarTablas(&$tSolucion, $tDisponibles){
@@ -161,193 +161,253 @@
 
     function sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno){
         //var_dump($tablasSolucionSinDueno);
-        //var_dump($solucion);
+        // var_dump($solucion);
         //var_dump($dueno);
-            $cambios = array('!='=>' ', ','=>' ', '('=>' ', ')'=>' ', '='=>' ', '>'=>' ', '<'=>' ', '>='=>' ', '<='=>' ', '<>'=>' ', '&&'=>' ', '||'=>' ');
+        $cambios = array('!='=>'#', ','=>'#', '('=>'#', ')'=>'#', '='=>'#', '>'=>'#', '<'=>'#', '>='=>'##', '<='=>'##', '<>'=>'##', '&&'=>'##', '||'=>'##', '+'=>'#','*'=>'#','-'=>'#', '%'=>'#');
 
-            $aux = strtr($solucion,$cambios);
-            // $cuantosFrom = substr_count($aux,"from");
+        $aux = strtr($solucion,$cambios);
+        // $cuantosFrom = substr_count($aux,"from");
 
-            $copiaAux = strtolower($aux);
-            $coincidencias = substr_count($copiaAux, "from");
+        $copiaAux = strtolower($aux);
+        $coincidencias = substr_count($copiaAux, "from");
 
-            $avance = 0;
-            for($i=0; $i<$coincidencias; $i++){
-                    //var_dump("Avance:".$avance);
-                    //buscar select y from
-                    $posInicioParteUno = strpos($aux, "select", $avance);
-                    //var_dump("posInicioParteUno:".$posInicioParteUno);
-                    $posFinParteUno = strpos($aux, "from", $avance);
-                    //var_dump("posFrom".$posFrom);
-                    $longParteUno = $posFinParteUno - $posInicioParteUno;
-                    $parteUno = substr($aux, $posInicioParteUno, $longParteUno);
-                    
-                    foreach($tablasSolucionSinDueno as $key => $value){
-                            for($j=0; $j<10; $j++){
-                                    $compara = " ".$value.".";
-                                    $posNombreSiExiste = strpos($parteUno, $compara);
-                                    $posNombre = $posNombreSiExiste + $avance +1;
-                                    if($posNombreSiExiste != false){
-                                            $aux = substr($aux, 0,$posNombre). $dueno."_".substr($aux, $posNombre);
-                                            $solucion = substr($solucion, 0, $posNombre). $dueno."_".substr($solucion, $posNombre);
-                                            $posFinParteUno = strpos($aux, "from", $avance);
-                                            $parteUno = substr($aux, $posInicioParteUno, $posFinParteUno);
-
-                                    }
-                            }
+        $avance = 0;
+        for($i=0; $i<$coincidencias; $i++){
+            //var_dump("Avance:".$avance);
+            //buscar select y from
+            $posInicioParteUno = strpos($aux, "select", $avance);
+            //var_dump("posInicioParteUno:".$posInicioParteUno);
+            $posFinParteUno = strpos($aux, "from", $avance);
+            //var_dump("posFrom".$posFrom);
+            $longParteUno = $posFinParteUno - $posInicioParteUno;
+            $parteUno = substr($aux, $posInicioParteUno, $longParteUno);
+            
+            foreach($tablasSolucionSinDueno as $key => $value){
+                for($j=0; $j<10; $j++){
+                    $compara = " ".$value.".";
+                    $posNombreSiExiste = strpos($parteUno, $compara);
+                    $posNombre = $posNombreSiExiste + $avance +1;
+                    if($posNombreSiExiste != false){
+                        $aux = substr($aux, 0,$posNombre). $dueno."_".substr($aux, $posNombre);
+                        $solucion = substr($solucion, 0, $posNombre). $dueno."_".substr($solucion, $posNombre);
+                        $posFinParteUno = strpos($aux, "from", $avance);
+                        $parteUno = substr($aux, $posInicioParteUno, $posFinParteUno);
                     }
-                    //var_dump($aux);
-                    $palabras = array(" where "," group "," having "," order "," limit ", ";");
-                    $posPalabraFinParteDosArray = array();
-                    foreach($palabras as $key => $value){
-                            $posAux = strpos($aux,$value,$avance);
-                            if($posAux != false){
-                                    $posPalabraFinParteDosArray[$key] = $posAux;
-                                    //var_dump($posAux);
-                            }
-                    }
-                    if(count($posPalabraFinParteDosArray) > 0){
-                            arsort($posPalabraFinParteDosArray);
-                    }else{
-                            array_push($posPalabraFinParteDosArray, strlen($aux));
-                    }
-                    $posFinParteDos = array_pop($posPalabraFinParteDosArray);
+                }
+            }
+            //var_dump($aux);
+            $palabras = array(" where "," group "," having "," order "," limit ", ";");
+            $posPalabraFinParteDosArray = array();
+            foreach($palabras as $key => $value){
+                $posAux = strpos($aux,$value,$avance);
+                if($posAux != false){
+                    $posPalabraFinParteDosArray[$key] = $posAux;
+                    //var_dump($posAux);
+                }
+            }
+            if(count($posPalabraFinParteDosArray) > 0){
+                    arsort($posPalabraFinParteDosArray);
+            }else{
+                    array_push($posPalabraFinParteDosArray, strlen($aux));
+            }
+            $posFinParteDos = array_pop($posPalabraFinParteDosArray);
             //var_dump($posFinParteDos);
-                    $longParteDos = $posFinParteDos - $posFinParteUno +1;
+            $longParteDos = $posFinParteDos - $posFinParteUno +1;
             //var_dump($longParteDos);
-                    $parteDos = substr($aux, $posFinParteUno, $longParteDos);
+            $parteDos = substr($aux, $posFinParteUno, $longParteDos);
             //var_dump($parteDos);
-                    //var_dump("Fin parte Uno: ".$posFinParteUno."; Fin parte dos: ".$posFinParteDos);
-                    //var_dump("Parte dos: ".$parteDos);
-                    foreach($tablasSolucionSinDueno as $key => $value){
+            // var_dump("Fin parte Uno: ".$posFinParteUno."; Fin parte dos: ".$posFinParteDos);
+            // var_dump("Parte dos: ".$parteDos);
+            // var_dump($solucion);
+            foreach($tablasSolucionSinDueno as $key => $value){
 
-                            $posNombreParteDos = stripos($parteDos, " ".$value." ");
-                            if($posNombreParteDos == false) { //si justo despues de la tabla hay ;
-                                    $posNombreParteDos = stripos($parteDos, " ".$value.";");
-                            }
-                            $posNombre = $posNombreParteDos + $posFinParteUno + 1;
-
-                            if($posNombreParteDos != false){
-                                    $aux = substr($aux, 0,$posNombre). $dueno."_". substr($aux, $posNombre);
-                                    $solucion = substr($solucion, 0, $posNombre). $dueno."_". substr($solucion, $posNombre);
-                                    $posFinParteDos = $posFinParteDos + strlen($dueno) + 1;
-                                    $longParteDos = $posFinParteDos - $posFinParteUno +1;
-                                    $parteDos = substr($aux, $posFinParteUno, $longParteDos);
-                            }
-
+                    $posNombreParteDos = stripos($parteDos, " ".$value." ");
+                    if($posNombreParteDos == false) { //si justo despues de la tabla hay ;
+                            $posNombreParteDos = stripos($parteDos, " ".$value.";");
                     }
-
-                    if($i+1 == $coincidencias){
-
-                            $posFinParteTres = strlen($aux);
-
-                    }else{
-                            $posFinParteTres = strpos($aux, "select", $posFinParteDos);
+                    $posNombre = $posNombreParteDos + $posFinParteUno + 1;
+                    // var_dump($posNombreParteDos." ".$posFinParteUno);
+                    if($posNombreParteDos != false){
+                        $aux = substr($aux, 0, $posNombre). $dueno."_". substr($aux, $posNombre);
+                        $solucion = substr($solucion, 0, $posNombre). $dueno."_". substr($solucion, $posNombre);
+                        $posFinParteDos = $posFinParteDos + strlen($dueno) + 1;
+                        $longParteDos = $posFinParteDos - $posFinParteUno +1;
+                        $parteDos = substr($aux, $posFinParteUno, $longParteDos);
                     }
-                    //var_dump($posFinParteTres);
-                    $longParteTres = $posFinParteTres - $posFinParteDos;
-                    $parteTres = substr($aux,$posFinParteDos, $longParteTres);
-                    //var_dump($parteTres);
-                    foreach($tablasSolucionSinDueno as $key => $value){
-
-                            for($j=0; $j<10; $j++){
-                                    $posNombreParteTres = strpos($parteTres, " ".$value.".");
-                                    $posNombre = $posNombreParteTres + $posFinParteDos +1;
-
-                                    if($posNombreParteTres != false){
-                                            $aux = substr($aux, 0,$posNombre). $dueno."_".substr($aux, $posNombre);
-                                            $solucion = substr($solucion, 0, $posNombre). $dueno."_".substr($solucion, $posNombre);
-                                            $posFinParteTres = $posFinParteTres + strlen($dueno)+1;
-                                            $longParteTres = $posFinParteTres - $posFinParteDos;
-                                            $parteTres = substr($aux, $posFinParteDos, $longParteTres);
-                                    }
-                            }
-                    }
-                    $avance = $posFinParteTres;
 
             }
-            //var_dump("fuera del for: ->");
-            //var_dump($aux);
-            //var_dump($solucion);
-            return $solucion;
+
+            if($i+1 == $coincidencias){
+
+                    $posFinParteTres = strlen($aux);
+
+            }else{
+                    $posFinParteTres = strpos($aux, "select", $posFinParteDos);
+            }
+            //var_dump($posFinParteTres);
+            $longParteTres = $posFinParteTres - $posFinParteDos;
+            $parteTres = substr($aux,$posFinParteDos, $longParteTres);
+            //var_dump($parteTres);
+            foreach($tablasSolucionSinDueno as $key => $value){
+
+                for($j=0; $j<10; $j++){
+                    $posNombreParteTres = strpos($parteTres, " ".$value.".");
+                    $posNombre = $posNombreParteTres + $posFinParteDos +1;
+
+                    if($posNombreParteTres != false){
+                        $aux = substr($aux, 0,$posNombre). $dueno."_".substr($aux, $posNombre);
+                        $solucion = substr($solucion, 0, $posNombre). $dueno."_".substr($solucion, $posNombre);
+                        $posFinParteTres = $posFinParteTres + strlen($dueno)+1;
+                        $longParteTres = $posFinParteTres - $posFinParteDos;
+                        $parteTres = substr($aux, $posFinParteDos, $longParteTres);
+                    }
+                }
+            }
+            $avance = $posFinParteTres;
+
+        }
+        //var_dump("fuera del for: ->");
+        //var_dump($aux);
+        // var_dump($solucion);
+        return $solucion;
     }
 
 
     function validarSelect($solucion, $dueno){
-            $cambios = array('('=>' ', ')'=>' ');
-            $aux = strtr($solucion, $cambios);
-            $quitarFrom = preg_split("/ from /i", $aux);
+        $cambios = array('('=>' ', ')'=>' ');
+        $aux = strtr($solucion, $cambios);
+        $quitarFrom = preg_split("/ from /i", $aux);
 
-            $i=1;
-            $tablas= array();
-            while ($i < count($quitarFrom)){
-                    $tablas[$i - 1] = quitarPalabrasFinales($quitarFrom[$i]);
-                    //var_dump($tablas);
-                    $tablas[$i - 1] = quitarPalabrasIntermadias($tablas[$i - 1]);
-                    // var_dump($tablas[$i - 1]);
-                    $tablas[$i - 1] = quitarAlias($tablas[$i - 1]);
-                    // var_dump($tablas[$i - 1]);
-                    $i++;
+        $i=1;
+        $tablas= array();
+        while ($i < count($quitarFrom)){
+                $tablas[$i - 1] = quitarPalabrasFinales($quitarFrom[$i]);
+                //var_dump($tablas);
+                $tablas[$i - 1] = quitarPalabrasIntermadias($tablas[$i - 1]);
+                // var_dump($tablas[$i - 1]);
+                $tablas[$i - 1] = quitarAlias($tablas[$i - 1]);
+                // var_dump($tablas[$i - 1]);
+                $i++;
+        }
+        $total = array();
+        $count = 0;
+
+        juntarArrayRecursivo($total, $tablas, $count);
+
+        $tablasSolucionSinDueno = eliminarRepetidos($total);
+        //var_dump($tablasSolucionSinDueno);
+        $tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
+        //var_dump($tablasSolucion);
+        $ejer = new Ejercicio();
+        $tablasDisponibles = $ejer->getTodasTablas();
+        
+        $ok = validarTablas($tablasSolucion, $tablasDisponibles);
+                //var_dump($tablasSolucion);
+                //var_dump($tablasDisponibles);
+
+        $resultado = array();
+        if($ok){
+            $ejer = new Ejercicio();
+            
+            $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
+            // var_dump($solucion);
+            $resultadoSolucion = $ejer->executeSolucion($solucion, $tablasSolucion[0]);
+
+            if($resultadoSolucion[0] === false){
+                $resultado[0] = false;
+                $resultado[4] = $resultadoSolucion[1];
+            }else{
+                $resultado[0] = true;
+                $resultado[1] = $tablasSolucion;
+                $resultado[2] = $resultadoSolucion;
+                $resultado[3] = $solucion;
             }
 
-            $total = array();
-            $count = 0;
+        }else{
+            $resultado[0] = false;
+        }
 
-            juntarArrayRecursivo($total, $tablas, $count);
+        return $resultado;
+    }
 
-            $tablasSolucionSinDueno = eliminarRepetidos($total);
-            //var_dump($tablasSolucionSinDueno);
-            $tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
-            //var_dump($tablasSolucion);
+    function validarInsert($solucion, $dueno){
+        $sentencia = explode(" ", $solucion);
+        if(in_array("select",$sentencia)){
+            $i=0;
+            $palabras = array("low_priority","delayed","high_priority","ignore","into",";");
+            while ($i < count($palabras)){
+                if(in_array($palabras[$i], $sentencia)){
+                    $pos = array_search($palabras[$i], $sentencia);
+                    unset($sentencia[$pos]);
+                }
+                $i++;
+            }
+            $contador = 0;
+            foreach ($sentencia as $key => $value) {
+                if($contador > 1){
+                    unset($sentencia[$key]);
+                }
+                $contador++;
+            }
+            $tabla = array();
+            $tabla[0] = array_pop($sentencia);
+
+            $tablasSolucion = anadirDueno($tabla, $dueno);
+
             $ejer = new Ejercicio();
             $tablasDisponibles = $ejer->getTodasTablas();
-            
+
             $ok = validarTablas($tablasSolucion, $tablasDisponibles);
-                    //var_dump($tablasSolucion);
-                    //var_dump($tablasDisponibles);
-            $resultado = array();
+
             if($ok){
-                    $ejer = new Ejercicio();
-                    
-                    $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
-                    //var_dump($solucion);
-                    $resultadoSolucion = $ejer->executeSolucion($solucion, $tablasSolucion[0]);
+                $nombreAntiguo = " ".$tabla[0];
+                $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+
+                $inicio = strpos($solucion, "select");
+                $solo_select = substr($solucion, $inicio);
+
+                $resultado_select = validarSelect($solo_select, $dueno);
+
+                if(!$resultado_select[0]){
+                    $resultado[0] = false;
+                    $resultado[4] = "El Select no devuelve datos válidos: ".$resultado_select[4];
+                }else{
+
+                    $nueva_solucion = substr($solucion,0,$inicio).$resultado_select[3];
+                    // var_dump($nueva_solucion);
+
+                    $resultadoSolucion = $ejer->executeSolucionNoSelect($nueva_solucion, $tablasSolucion[0]);
 
                     if($resultadoSolucion[0] === false){
-                            $resultado[0] = false;
-                            $resultado[1] = $resultadoSolucion[1];
+                        $resultado[0] = false;
+                        $resultado[1] = $resultadoSolucion[1];
                     }else{
-                            $resultado[0] = true;
-                            $resultado[1] = $tablasSolucion;
-                            $resultado[2] = $resultadoSolucion;
+                        $resultado[0] = true;
+                        $resultado[1] = $tablasSolucion;
+                        $resultado[2] = $resultadoSolucion;
                     }
+                }
 
             }else{
                 $resultado[0] = false;
                 $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
-            }
-
-            return $resultado;
-    }
-
-    function validarInsert($solucion, $dueno){
-            $sentencia = explode(" ", $solucion);
-
+            }    
+        }else{
             $i=0;
             $palabras = array("low_priority","delayed","high_priority","ignore","into",";");
             while ($i < count($palabras)){
-                    if(in_array($palabras[$i], $sentencia)){
-                            $pos = array_search($palabras[$i], $sentencia);
-                            unset($sentencia[$pos]);
-                    }
-                    $i++;
+                if(in_array($palabras[$i], $sentencia)){
+                    $pos = array_search($palabras[$i], $sentencia);
+                    unset($sentencia[$pos]);
+                }
+                $i++;
             }
             $contador = 0;
             foreach ($sentencia as $key => $value) {
-                    if($contador > 1){
-                            unset($sentencia[$key]);
-                    }
-                    $contador++;
+                if($contador > 1){
+                    unset($sentencia[$key]);
+                }
+                $contador++;
             }
             $tabla = array();
             $tabla[0] = array_pop($sentencia);
@@ -365,19 +425,20 @@
                 $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion, $tablasSolucion[0]);
 
                 if($resultadoSolucion[0] === false){
-                        $resultado[0] = false;
-                        $resultado[1] = $resultadoSolucion[1];
+                    $resultado[0] = false;
+                    $resultado[1] = $resultadoSolucion[1];
                 }else{
-                        $resultado[0] = true;
-                        $resultado[1] = $tablasSolucion;
-                        $resultado[2] = $resultadoSolucion;
+                    $resultado[0] = true;
+                    $resultado[1] = $tablasSolucion;
+                    $resultado[2] = $resultadoSolucion;
                 }
 
             }else{
-                    $resultado[0] = false;
-                    $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
+                $resultado[0] = false;
+                $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
             }
-            return $resultado;
+        }
+        return $resultado;
     }
 
     function validarUpdate($solucion, $dueno){
@@ -476,7 +537,9 @@
         $solucionPropuesta = utf8_encode($solucionPropuesta);
         //var_dump("encode".$solucionPropuesta);
 
+        // var_dump($solucionPropuesta);
         $solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
+        // var_dump($solucionPropuesta);
         $sentencia = explode(" ", $solucionPropuesta, 2);
 
         $resultado = array();

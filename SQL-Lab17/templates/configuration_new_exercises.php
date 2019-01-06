@@ -4,16 +4,9 @@
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_exercises.php" > <?php echo trad('Ejercicios',$lang) ?></a> > <a class="enlace" href="configuration_new_exercises.php" > <?php echo trad('Nuevo Ejercicio',$lang) ?></a></label>
     <h2 id="userPrincipal" data-name="<?php echo $_SESSION['user']; ?>"><strong><?php echo trad('Nuevo Ejercicio',$lang) ?></strong></h2>
-    <!-- <div class="row mb-5">
-        <div class="col-md-12">
-            <p><?php //echo trad('Añade un nuevo ejercicio a la lista.',$lang) ?></p>
-        </div>
-    </div>  --> 
-
-
     <section id="tabs">
         <div class="">
-            <div class="row mt-5">
+            <div class="row mt-3">
                 <div class="col-md-12 ">
                     <form id="new_sheets" method="post" action="../handler/validate_new_exercises.php">
                         <div class="row">

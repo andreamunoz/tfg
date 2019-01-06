@@ -7,7 +7,7 @@
     $exist = $ejer->getExistEjercicio($descripcion);
     $user_tablas = $_POST['user_tablas'];
     $enunciado = $_POST['enunciado'];
-    $solucion = $_POST['solucion'];
+    $solucion = trim($_POST['solucion']);
     $nivel = $_POST['nivel'];
     $deshabilitar = $_POST['deshabilitar'];
     $tipo = $_POST['categoria'];

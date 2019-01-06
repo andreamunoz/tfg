@@ -11,16 +11,30 @@
     $id_ejer = $_GET['exercise'];
     $des = $ejer->getDescripcionEjercicio($id_ejer);
     ?>
+    <div class='modal fade show sol_message' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' style='display:block; visibility: hidden; '>
+        <div class='modal-dialog modal-dialog-centered' role='document'>
+            <div class='modal-content'>
+                <div class='modal-header'>
+                    <div class='close sol_close' id='close-modal'>
+                        <i class='fas fa-times' data-dismiss='modal'></i>
+                    </div>
+                </div>
+                <div class='modal-body'>
+                    <h2></h2>
+                </div>
+            </div>
+        </div>   
+    </div>
     <label><a class="enlace" href="index.php" ><?php echo trad('Inicio', $lang) ?> </a> > <a class="enlace" href="exercises.php" ><?php echo trad('Ejercicios', $lang) ?> </a> > <a class="enlace" href="perform_exercise.php?exercise=<?php echo $id_ejer ?>" > <?php echo trad('Realizar Ejercicio', $lang) ?></a></label>
     <h2><strong><?php echo $des ?></strong></h2>
     <div class="row mb-5">
         <?php
         $tabla = new Tablas();
-        $ejercicioId = $ejer->getEjercicioById($id_ejer);
-        $dueño = $ejercicioId['dueño_tablas'];
-        $_SESSION["solProf"] = $ejercicioId['solucion'];
-        $_SESSION["duenoTablas"] = $ejercicioId['dueño_tablas'];
-        $_SESSION["idEjer"] = $ejercicioId['id_ejercicio'];
+        $datos_ejercicioId = $ejer->getEjercicioById($id_ejer);
+        $dueño = $datos_ejercicioId['dueño_tablas'];
+        $_SESSION["solProf"] = $datos_ejercicioId['solucion'];
+        $_SESSION["duenoTablas"] = $datos_ejercicioId['dueño_tablas'];
+        $_SESSION["idEjer"] = $datos_ejercicioId['id_ejercicio'];
         $tab = $tabla->getTablasByProfesor($dueño);
         ?>
         <div class="col-md-10">
@@ -37,7 +51,9 @@
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-exercisesD-tab" data-toggle="tab" href="#nav-new-exercises" role="tab" aria-controls="nav-new-exercises" aria-selected="true"><?php echo trad('Resolver',$lang) ?></a>
+                            <?php if ($datos_ejercicioId["tipo"] !== "Operaciones Manipulacion de Datos" ) {?>
                             <a class="nav-item nav-link" id="nav-exercisesE-tab" data-toggle="tab" href="#nav-exercisesE" role="tab" aria-controls="nav-enun-sol" aria-selected="false"><?php echo trad('Resultados',$lang) ?></a>
+                            <?php } ?>
                             <a class="nav-item nav-link" id="nav-exercises-historico" data-toggle="tab" href="#nav-historico" role="tab" aria-controls="nav-exercise-hist" aria-selected="false"><?php echo trad('Soluciones previas', $lang) ?></a>
                         </div>
                     </nav>
@@ -81,7 +97,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                            <td style="padding-left: 75px; padding-right: 75px;"> <?php echo $ejercicioId['enunciado']; ?> </td>
+                                            <td style="padding-left: 75px; padding-right: 75px;"> <?php echo $datos_ejercicioId['enunciado']; ?> </td>
                                             </tbody>
                                         </table>
                                     </div>
@@ -135,6 +151,7 @@
                                 </div>
                             </div>
                         </div>
+                        <?php if ($datos_ejercicioId["tipo"] !== "Operaciones Manipulacion de Datos" ) {?>
                         <div class="tab-pane fade mt-3 pl-4" id="nav-exercisesE" role="tabpanel" aria-labelledby="nav-exercisesE-tab">
                             <div class="float-right col-md-6 pl-0 pl-3" id="contenedorDeResultados">
                                 <div class="card">  
@@ -162,7 +179,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>  
+                        </div>
+                        <?php } ?>  
                         <div class="tab-pane fade mt-3 pl-4" id="nav-historico" role="tabpanel" aria-labelledby="nav-exercises-historico">
                             <div id="accordion ">
                                 <div class="card pt-4">  

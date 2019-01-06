@@ -526,8 +526,19 @@ $(document).ready(function () {
         var sol_propuesta = $(this).find("td:eq(3)").text();
 
         solucion = sol_propuesta.trim();
-        $('.nav-tabs a[href="#nav-new-exercises"]').tab('show');
-        $('#solucion').val(solucion);
+
+        $('.sol_message .modal-body h2').html(solucion);
+        $('.sol_message').css("visibility", "visible");
+        $('.sol_message').css("display", "block");
+        
+        //$('.nav-tabs a[href="#nav-new-exercises"]').tab('show');
+        //$('#solucion').val(solucion);
+    });
+
+    $(".sol_close").click(function(){
+        $('.sol_message').css("display", "none")
+        $('.sol_message').css("visibility", "hidden");
+        // $('#modal-close').hide();
     });
     
 });

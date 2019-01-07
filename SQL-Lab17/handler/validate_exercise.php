@@ -6,7 +6,7 @@ include_once ("../inc/solucion.php");
 $sol = new Solucion();
 //Comprobar la ejecucion del alumno
 $id = $_GET['exercise'];
-$solucion_alumno = $_POST['sol_ejercicio'];
+$solucion_alumno = trim($_POST['sol_ejercicio']);
 $solucion_profesor = $_SESSION["solProf"];
 $_SESSION["solAlum"] = $_POST['sol_ejercicio'];
 $dueno_tabla = $_SESSION['duenoTablas'];

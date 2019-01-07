@@ -27,9 +27,9 @@
                 <table id="employee_data" class="table table-striped-conf table-bordered">
                     <thead>
                         <tr>
-                            <th style="width:20%;"><?php echo trad('Descripción',$lang) ?></th>
+                            <th style="width:40%;"><?php echo trad('Descripción',$lang) ?></th>
                             <th style="width:15%;"><?php echo trad('Profesor',$lang) ?></th>
-                            <th style="width:10%;"><?php echo trad('Nivel',$lang) ?></th>
+                            <th style="width:15%;"><?php echo trad('Nivel',$lang) ?></th>
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
                             <th></th>
 
@@ -87,7 +87,7 @@
                                 <?php echo '<td style="text-align: right;"><a  href="perform_exercise.php?exercise='.$fila['id_ejercicio'].'"></a>';
                                 ?> 
                                 <?php if ($fila_sol['intentos'] > 0)
-                                        echo '<a class="pr-5" href="configuration_show_intent_exercise.php?hoja='.$hojaparameter.'&exercise=' . $fila['id_ejercicio'] . '"><i class="fas fa-info" style="color:black; opacity:0.9;"></i></a>';
+                                        //echo '<a class="pr-5" href="configuration_show_intent_exercise.php?hoja='.$hojaparameter.'&exercise=' . $fila['id_ejercicio'] . '"><i class="fas fa-info" style="color:black; opacity:0.9;"></i></a>';
                                 ?>
                                 <?php echo '</td>'; ?>
 

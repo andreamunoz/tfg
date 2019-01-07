@@ -300,7 +300,7 @@
 
     function sustituirNuevoNombreTablaDelete($todas_tablas, $solucion, $dueno){
         $cambios = array('!='=>'#', ','=>'#', '('=>'#', ')'=>'#', '='=>'#', '>'=>'#', '<'=>'#', '>='=>'##', '<='=>'##', '<>'=>'##', '&&'=>'##', '||'=>'##', '+'=>'#','*'=>'#','-'=>'#', '%'=>'#');
-        $cambios2 = $arrayName = array(')' => "", '('=>"" );
+        // $cambios2 = $arrayName = array(')' => "", '('=>"" );
         $aux = strtr($solucion,$cambios);
 
         $palabras = array(" where "," order "," limit ", ";");
@@ -387,12 +387,11 @@
 
 
             if ($haySelect){
-                $posInicioSelect = strpos($solucion, "select ");
+                $posInicioSelect = strpos($solucion, "(select ");
                 $posFinSelect = strlen($solucion);
                 $parteSelect = substr($solucion, $posInicioSelect, $posFinSelect);
-                $aux2 = strtr($parteSelect, $cambios2);
-
-                $quitarFrom = preg_split("/ from /i", $aux);
+                // var_dump("********".$parteSelect."====");
+                $quitarFrom = preg_split("/ from /i", $parteSelect);
                 $i=1;
                 $tablas= array();
                 while ($i < count($quitarFrom)){
@@ -408,16 +407,21 @@
                 $count = 0;
                 juntarArrayRecursivo($total, $tablas, $count);
                 $tablasSolucionSinDueno = eliminarRepetidos($total);
+                $tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
                 $ejer = new Ejercicio();
                 $tablasDisponibles = $ejer->getTodasTablas();
-        
+                // var_dump($tablasSolucion);
+                // var_dump($todas_tablas_juntas_sin_dueno);
+
                 $ok = validarTablas($tablasSolucion, $tablasDisponibles);
                 $resultado = array();
                 if($ok){
-
-                    $todas_tablas_juntas_sin_dueno = array_merge($tablasSolucionSinDueno, $todas_tablas);
-                    $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
-
+                    $todas_tablas_juntas_sin_dueno = array_merge( $todas_tablas,$tablasSolucionSinDueno);
+                    // var_dump($todas_tablas_juntas_sin_dueno);
+                    $parteSelect = sustituirNuevoNombreTabla($todas_tablas_juntas_sin_dueno, $parteSelect, $dueno);
+                    
+                    $parteDelete = substr($solucion, 0, $posInicioSelect);
+                    $solucion = $parteDelete.$parteSelect;
                 }
             }
         }
@@ -494,6 +498,15 @@
                     if($posNombreParteDos == false) { //si justo despues de la tabla hay ;
                             $posNombreParteDos = stripos($parteDos, " ".$value.";");
                     }
+                    if($posNombreParteDos == false) { //si justo despues de la tabla hay #
+                            $posNombreParteDos = stripos($parteDos, " ".$value."#");
+                    }
+                    if($posNombreParteDos == false) { //si justo despues de la tabla hay #
+                            $posNombreParteDos = stripos($parteDos, "#".$value."#");
+                    }
+                    if($posNombreParteDos == false) { //si justo despues de la tabla hay #
+                            $posNombreParteDos = stripos($parteDos, "#".$value." ");
+                    }
                     $posNombre = $posNombreParteDos + $posFinParteUno + 1;
                     // var_dump($posNombreParteDos." ".$posFinParteUno);
                     if($posNombreParteDos != false){
@@ -541,7 +554,6 @@
         return $solucion;
     }
 
-
     function validarSelect($solucion, $dueno){
         $cambios = array('('=>' ', ')'=>' ');
         $aux = strtr($solucion, $cambios);
@@ -571,8 +583,6 @@
         $tablasDisponibles = $ejer->getTodasTablas();
         
         $ok = validarTablas($tablasSolucion, $tablasDisponibles);
-                //var_dump($tablasSolucion);
-                //var_dump($tablasDisponibles);
 
         $resultado = array();
         if($ok){
@@ -600,7 +610,8 @@
 
     function validarInsert($solucion, $dueno){
         $sentencia = explode(" ", $solucion);
-        if(in_array(" select ",$sentencia)){
+        // var_dump($sentencia);
+        if(in_array("select",$sentencia)){
             $i=0;
             $palabras = array("low_priority","delayed","high_priority","ignore","into",";");
             while ($i < count($palabras)){
@@ -620,8 +631,8 @@
             $tabla = array();
             $tabla[0] = array_pop($sentencia);
 
+            // var_dump($tabla);
             $tablasSolucion = anadirDueno($tabla, $dueno);
-
             $ejer = new Ejercicio();
             $tablasDisponibles = $ejer->getTodasTablas();
 
@@ -710,7 +721,7 @@
     }
 
     function validarUpdate($solucion, $dueno){
-        
+
         $sentencia = explode(" ", $solucion);
 
         if(in_array("set", $sentencia)){
@@ -805,13 +816,14 @@
             $tablasSolucionSinDueno = eliminarRepetidos($total);
             //var_dump($tablasSolucionSinDueno);
             $tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
-            // var_dump($tablasSolucion);
             $ejer = new Ejercicio();
             $tablasDisponibles = $ejer->getTodasTablas();
+            // var_dump($tablasDisponibles);
             $ok = validarTablas($tablasSolucion, $tablasDisponibles);
-            //var_dump($tablasSolucion);
+            // var_dump($tablasSolucion);
 
             $resultado = array();
+                        // var_dump($ok);
             if($ok){
                 
                 $solucion = sustituirNuevoNombreTablaDelete($tablasSolucionSinDueno, $solucion, $dueno);

@@ -298,7 +298,7 @@
 
     function sustituirNuevoNombreTablaDelete($todas_tablas, $solucion, $dueno){
         $cambios = array('!='=>'#', ','=>'#', '('=>'#', ')'=>'#', '='=>'#', '>'=>'#', '<'=>'#', '>='=>'##', '<='=>'##', '<>'=>'##', '&&'=>'##', '||'=>'##', '+'=>'#','*'=>'#','-'=>'#', '%'=>'#');
-        $cambios2 = $arrayName = array(')' => "", '('=>"" );
+        // $cambios2 = $arrayName = array(')' => "", '('=>"" );
         $aux = strtr($solucion,$cambios);
 
         $palabras = array(" where "," order "," limit ", ";");
@@ -388,7 +388,6 @@
                 $posInicioSelect = strpos($solucion, "select ");
                 $posFinSelect = strlen($solucion);
                 $parteSelect = substr($solucion, $posInicioSelect, $posFinSelect);
-                $aux2 = strtr($parteSelect, $cambios2);
 
                 $quitarFrom = preg_split("/ from /i", $aux);
                 $i=1;
@@ -406,6 +405,7 @@
                 $count = 0;
                 juntarArrayRecursivo($total, $tablas, $count);
                 $tablasSolucionSinDueno = eliminarRepetidos($total);
+                $tablasSolucion = anadirDueno($tablasSolucionSinDueno, $dueno);
                 $ejer = new Ejercicio();
                 $tablasDisponibles = $ejer->getTodasTablas();
         
@@ -413,8 +413,11 @@
                 $resultado = array();
                 if($ok){
 
-                    $todas_tablas_juntas_sin_dueno = array_merge($tablasSolucionSinDueno, $todas_tablas);
-                    $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
+                    $todas_tablas_juntas_sin_dueno = array_merge($todas_tablas, $tablasSolucionSinDueno);
+                    $parteSelect = sustituirNuevoNombreTabla($todas_tablas_juntas_sin_dueno, $parteSelect, $dueno);
+                    
+                    $parteDelete = substr($solucion, 0, $posInicioSelect);
+                    $solucion = $parteDelete.$parteSelect;
 
                 }
             }
@@ -488,19 +491,28 @@
                     //var_dump("Parte dos: ".$parteDos);
                     foreach($tablasSolucionSinDueno as $key => $value){
 
-                            $posNombreParteDos = stripos($parteDos, " ".$value." ");
-                            if($posNombreParteDos == false) { //si justo despues de la tabla hay ;
-                                    $posNombreParteDos = stripos($parteDos, " ".$value.";");
-                            }
-                            $posNombre = $posNombreParteDos + $posFinParteUno + 1;
+                        $posNombreParteDos = stripos($parteDos, " ".$value." ");
+                        if($posNombreParteDos == false) { //si justo despues de la tabla hay ;
+                            $posNombreParteDos = stripos($parteDos, " ".$value.";");
+                        }
+                        if($posNombreParteDos == false) { //si justo despues de la tabla hay #
+                            $posNombreParteDos = stripos($parteDos, " ".$value."#");
+                        }
+                        if($posNombreParteDos == false) { //si justo despues de la tabla hay #
+                            $posNombreParteDos = stripos($parteDos, "#".$value."#");
+                        }
+                        if($posNombreParteDos == false) { //si justo despues de la tabla hay #
+                            $posNombreParteDos = stripos($parteDos, "#".$value." ");
+                        }
+                        $posNombre = $posNombreParteDos + $posFinParteUno + 1;
 
-                            if($posNombreParteDos != false){
-                                    $aux = substr($aux, 0, $posNombre). $dueno."_". substr($aux, $posNombre);
-                                    $solucion = substr($solucion, 0, $posNombre). $dueno."_". substr($solucion, $posNombre);
-                                    $posFinParteDos = $posFinParteDos + strlen($dueno) + 1;
-                                    $longParteDos = $posFinParteDos - $posFinParteUno +1;
-                                    $parteDos = substr($aux, $posFinParteUno, $longParteDos);
-                            }
+                        if($posNombreParteDos != false){
+                            $aux = substr($aux, 0, $posNombre). $dueno."_". substr($aux, $posNombre);
+                            $solucion = substr($solucion, 0, $posNombre). $dueno."_". substr($solucion, $posNombre);
+                            $posFinParteDos = $posFinParteDos + strlen($dueno) + 1;
+                            $longParteDos = $posFinParteDos - $posFinParteUno +1;
+                            $parteDos = substr($aux, $posFinParteUno, $longParteDos);
+                        }
 
                     }
 

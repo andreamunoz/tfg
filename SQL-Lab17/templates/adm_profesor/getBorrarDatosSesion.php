@@ -14,6 +14,8 @@
 	unset($_SESSION['guardarDatos']);
 	unset($_SESSION['guardarDatosEditar']);
 	unset($_SESSION['guardarDatosTablas']);
+	unset($_SESSION['msg_solucion_ok']);
+	unset($_SESSION['msg_solucion']);
 	unset($_SESSION["solAlum"]);
 	session_destroy();
 ?>

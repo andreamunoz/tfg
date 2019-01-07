@@ -507,7 +507,7 @@ if ($resultado_alumno[0] !== false) {
         //$solucion_profesor = $ejer->getSolucionEjercicios($id);
         //if (strcasecmp($solucion_alumno, $solucion_profesor) == 0) {
         if ($resultado_alumno[2][0] == $resultado_profesor[2][0]) {
-            $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+            $_SESSION['msg_solucion_ok'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                             <div class='modal-dialog modal-dialog-centered' role='document'>
                                 <div class='modal-content'>
                                     <div class='modal-header'>
@@ -531,7 +531,7 @@ if ($resultado_alumno[0] !== false) {
                 $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 1);
             }
 
-            header("Location: ../templates/perform_exercise.php?exercise=" . $id);
+            header("Location: ../templates/exercises.php");
 
         } else {
 

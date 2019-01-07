@@ -90,7 +90,11 @@
                     </tbody>
                 </table>
             </div>  
-        </div> 
+        </div>
+        <?php if (isset($_SESSION['msg_solucion_ok'])) {
+                echo $_SESSION['msg_solucion_ok'];
+                unset($_SESSION['msg_solucion_ok']);
+        } ?>
     </div>
 </div>
 <?php include("footer.php"); ?>

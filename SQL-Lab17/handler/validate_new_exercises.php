@@ -623,10 +623,10 @@
             if($ok){
 
                 $solucionConDueno = sustituirNuevoNombreTablaUpdate($todas_tablas_sin_dueno, $solucion, $dueno);
-                var_dump($solucionConDueno);
-                var_dump("***********************************************");
+                // var_dump($solucionConDueno);
+                // var_dump("***********************************************");
                 $resultadoSolucion = $ejer->executeSolucionNoSelect($solucionConDueno, $todas_tablas[0]);
-                var_dump($resultadoSolucion);
+                // var_dump($resultadoSolucion);
                 if($resultadoSolucion[0] === false){
                         $resultado[0] = false;
                         $resultado[1] = $resultadoSolucion[1];

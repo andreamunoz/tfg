@@ -272,6 +272,23 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('.addFieldsResol').click(function(){      
+        var tabla = $(this).attr("data-name");
+        $('tr').removeClass("gradient");
+        $(this).closest('tr').addClass("gradient");
+        $.ajax({
+            method: "POST",
+            url: "../templates/adm_profesor/getStructure.php",
+            data: { tabla: tabla },
+            success: function(response)
+            {
+                $('#structure_table thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
+                var resultado = response.substring(23);
+                $('#structure_table tbody').html(resultado).fadeIn();
+            }
+        });
+    });
     
     $('.deleteExercise').click(function(){
         var table = $('#employee_data').DataTable();
@@ -527,7 +544,7 @@ $(document).ready(function () {
 
         solucion = sol_propuesta.trim();
 
-        $('.sol_message .modal-body h2').html(solucion);
+        $('.sol_message .modal-body p').html(solucion);
         $('.sol_message').css("visibility", "visible");
         $('.sol_message').css("display", "block");
         

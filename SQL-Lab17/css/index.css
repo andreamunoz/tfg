@@ -829,6 +829,14 @@ p#small{
     padding: 5px 18px !important;
 }
 
+.light-style .trow{
+    font-size: 12px;
+}
+
+.light-style .trow th{
+    border: none !important;
+}
+
 #contenedorDeResultados{
     height: 600px;
     overflow: auto;
@@ -836,8 +844,8 @@ p#small{
 }
 
 #tituloCabe{
-    background: black;
-    color: white;
+    background: white;
+    color: black;
     opacity: 0.9;
     text-align: center;
     font-size: 12px;
@@ -858,3 +866,21 @@ p#small{
 .ancho_sol{
     width:62% !important;
 }
+
+#p_boton{
+    display: inline-block;
+}
+
+.f_right{
+    float: right !important;
+}
+
+.dis_pt{
+    padding-top: 20px; 
+}
+
+.employee_table_hoja thead tr th{
+    background-color: white !important;
+    color: black !important;
+}
+

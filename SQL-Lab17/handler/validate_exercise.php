@@ -640,7 +640,7 @@ if ($resultado_alumno[0] !== false) {
                     $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 1);
                 }
 
-                header("Location: ../templates/perform_exercise.php?exercise=" . $id);
+                header("Location: ../templates/exercises.php");
 
             } else {
                 $datosVeredictoIntentos = $sol->getInfoVeredictoParaTabla($id,$user);

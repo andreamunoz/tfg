@@ -126,17 +126,17 @@
                                 <label><strong><?php echo trad('Enunciado',$lang) ?> <span class="red"> *</span></strong></label>
 
                                 <?php if (isset($_SESSION['guardarDatos'])) { ?>
-                                    <textarea maxlength="300" id="enunciado" name="enunciado" class="form-control" rows="10" required><?php echo $_SESSION['guardarDatos'][5] ?></textarea>
+                                    <textarea maxlength="600" id="enunciado" name="enunciado" class="form-control" rows="10" required><?php echo $_SESSION['guardarDatos'][5] ?></textarea>
                                 <?php } else { ?>
-                                    <textarea maxlength="300" id="enunciado" name="enunciado" class="form-control" rows="10" required></textarea>
+                                    <textarea maxlength="600" id="enunciado" name="enunciado" class="form-control" rows="10" required></textarea>
                                 <?php } ?>
                             </div>
                             <div class="col-md-6">
                                 <label><strong><?php echo trad('Solución',$lang) ?> <span class="red"> *</span></strong></label>
                                 <?php if (isset($_SESSION['guardarDatos'])) { ?>
-                                    <textarea maxlength="300" id="solucion" name="solucion" class="form-control" rows="10" required><?php echo $_SESSION['guardarDatos'][6] ?></textarea>
+                                    <textarea maxlength="600" id="solucion" name="solucion" class="form-control" rows="10" required><?php echo $_SESSION['guardarDatos'][6] ?></textarea>
                                 <?php }else { ?>
-                                    <textarea maxlength="300" id="solucion" name="solucion" class="form-control" rows="10" required></textarea>
+                                    <textarea maxlength="600" id="solucion" name="solucion" class="form-control" rows="10" required></textarea>
                                 <?php } ?>
                             </div>
                         </div>

@@ -16,7 +16,7 @@
                     <!--<form id="new_sheets" method="post" action="../handler/validate_new_sheets.php">-->
                         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                             <div class="form-group text-right">
-                                <button class="btn btn-primary pl-5 pr-5 createSheet" name=""><?php echo trad('Crear Hoja',$lang) ?></button>
+                                <button class="btn btn-primary pl-5 pr-5 createSheet" name=""><?php echo trad('Guardar Hoja',$lang) ?></button>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 p-0">
@@ -26,6 +26,18 @@
                             <div class="row">
                                 <div class="col-md-3 p-0">                                    
                                     <input type="text" maxlength="50" id="new_name_sheet" name="new_name_sheet" placeholder="Nombre Hoja" class="form-control form-control-sm" required/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 p-0">
+                                    <div id="error-list">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8 p-0">
+                                    <div id="error-list-select">
+                                    </div>
                                 </div>
                             </div>
                             <div id="accordion">

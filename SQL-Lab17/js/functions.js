@@ -321,15 +321,24 @@ $(document).ready(function () {
             }
         });
         
-        $.ajax({
-            method: "POST",
-            url: "../templates/adm_profesor/getAñadirHoja.php",
-            data: {name: name, seleccionados: seleccionados},
-            success: function(seleccionados)
-            {
-               location.assign("../templates/configuration_sheets.php");
+        if(name != ""){  
+            if(seleccionados.length != 0){
+                $.ajax({
+                    method: "POST",
+                    url: "../templates/adm_profesor/getAñadirHoja.php",
+                    data: {name: name, seleccionados: seleccionados},
+                    success: function(seleccionados)
+                    {
+                       location.assign("../templates/configuration_sheets.php");
+                    }
+                });
             }
-        });
+            else {
+                $('<div class="alert alert-danger pt-1 pb-1"><button type="button" class="close" data-dismiss="alert">&times;</button>Seleccione al menos un ejercicio de la lista</div>').appendTo('#error-list-select');
+            }
+        }else {
+            $('<div class="alert alert-danger pt-1 pb-1"><button type="button" class="close" data-dismiss="alert">&times;</button>Rellene el nombre de la hoja</div>').appendTo('#error-list');
+        }
     });
     
     $('.updateSheet').click(function(){

@@ -49,6 +49,10 @@
         <div class="">
             <div class="row">
                 <div class="col-md-12 ">                  
+                    <?php echo '<form action="../handler/validate_exercise.php?exercise=' . $id_ejer . '" method="post">' ?>
+                    <div class="col-md-12" id="p_boton">
+                        <button type="submit" id="alert-sol" class="btn btn-primary mt-0 mb-2 pl-5 pr-5 f_right"><?php echo trad('Validar', $lang) ?></button>
+                    </div>
                     <nav>
                         <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
                             <a class="nav-item nav-link active" id="nav-exercisesD-tab" data-toggle="tab" href="#nav-new-exercises" role="tab" aria-controls="nav-new-exercises" aria-selected="true"><?php echo trad('Resolver',$lang) ?></a>
@@ -61,10 +65,6 @@
                     <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                         <div class="tab-pane fade show active mt-3 pl-4" id="nav-new-exercises" role="tabpanel" aria-labelledby="nav-exercisesD-tab">
                             <div>
-                                <?php echo '<form action="../handler/validate_exercise.php?exercise=' . $id_ejer . '" method="post">' ?>
-                                <div class="col-md-12" id="p_boton">
-                                    <button type="submit" id="alert-sol" class="btn btn-primary mt-0 mb-2 pl-5 pr-5 f_right"><?php echo trad('Ejecutar', $lang) ?></button>
-                                </div>
                                 <div class="row">
                                     
                                     <div class="col-md-6 pl-0 mb-3" id="accordion ">
@@ -141,7 +141,6 @@
                                                         </tr> 
                                                     </tbody>
                                                 </table>
-                                                <?php echo '</form>'; ?>
                                             </div>
                                         </div>
                                     </div>
@@ -223,6 +222,7 @@
                             </div>
                         </div>
                     </div>                   
+                    <?php echo '</form>'; ?>
                 </div>
             </div>
         </div>

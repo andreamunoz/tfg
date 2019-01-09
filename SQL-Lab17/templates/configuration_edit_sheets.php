@@ -38,6 +38,12 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-md-3 p-0">
+                                <div id="error-list">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-3 p-0 pt-4">
                                 <p for="name" ><strong><?php echo trad('Ejercicios Seleccionados', $lang) ?> </strong></p>                                    
                             </div>

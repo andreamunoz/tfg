@@ -355,16 +355,22 @@ $(document).ready(function () {
                 i++;
             }
         });
-        
-        $.ajax({
-            method: "POST",
-            url: "../templates/adm_profesor/getEditarHoja.php",
-            data: {hoja: hoja, name: name, seleccionados: seleccionados},
-            success: function(seleccionados)
-            {
-               location.reload();
+        if(name != ""){
+            if(seleccionados.length != 0){
+                $.ajax({
+                    method: "POST",
+                    url: "../templates/adm_profesor/getEditarHoja.php",
+                    data: {hoja: hoja, name: name, seleccionados: seleccionados},
+                    success: function(seleccionados)
+                    {
+                       location.reload();
+                       //location.assign("../templates/configuration_sheets.php");
+                    }
+                });
             }
-        });
+        }else {
+            $('<div class="alert alert-danger pt-1 pb-1"><button type="button" class="close" data-dismiss="alert">&times;</button>Rellene el nombre de la hoja</div>').appendTo('#error-list');
+        }
     });
     
     $('#employee_table_hoja').DataTable({
@@ -435,6 +441,7 @@ $(document).ready(function () {
         var tipo = $(this).attr("value");
         var table = $('#employee_data').DataTable();
         table.columns(3).search(tipo).draw(false);
+        console.log(tipo);
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/select/getSelectTipo.php",
@@ -584,21 +591,22 @@ function selects(){
     var profe = $('#select_pro').find(":selected").text();
     if(profe === "Todos Profesores ")
         profe = '';
-    // console.log(profe);
+    console.log(profe);
     var table = $('#employee_data').DataTable();
     table.columns(1).search(profe).draw(false);
     
     var nivel = $('#select_niv').find(":selected").text();
     if(nivel === "Todos Niveles ")
         nivel = '';
-    // console.log(nivel);
+    console.log(nivel);
     var table = $('#employee_data').DataTable();
     table.columns(2).search(nivel).draw(false);
     
     var tipo = $('#select_tip').find(":selected").text();
+    console.log(tipo);
     if(tipo === "Todas Categorías ")
         tipo = '';
-    // console.log(tipo);
+    
     var table = $('#employee_data').DataTable();
     table.columns(3).search(tipo).draw(false);
     //alert(name);

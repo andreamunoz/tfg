@@ -1,7 +1,7 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
-<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t'])?>
+<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t']); unset($_SESSION['value_cab']); unset($_SESSION['select_cab']); $_SESSION['showNumber']="";?>
 <img class="img_index" src="../img/img_index.png"/>
 <div class='contenedor'>
     <h1 class="left_title"><?php echo trad('Hola', $lang) ?> <?php echo $_SESSION['name']; ?>!</h1>

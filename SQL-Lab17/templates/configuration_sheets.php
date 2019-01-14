@@ -1,14 +1,20 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
-<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t'])?>
+<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t']); unset($_SESSION['value_cab']); unset($_SESSION['select_cab']); $_SESSION['showNumber']="";?>
 <div class="container-tabla pt-4 pb-5">
+    <?php 
+    include_once '../inc/hoja_ejercicio.php';
+    $hoja = new HojaEjercicio();
+    $maxHoja = $hoja->getMaximasHojas();
+    $maxHoja++;
+    ?>
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
     <h2><strong><?php echo trad('Hoja de Ejercicios',$lang) ?></strong></h2>
     <div class="row mb-150">
         <div class="col-md-12">
             <div class="text-right pl-5">
-                <a class="btn btn-primary pl-5 pr-5" href="configuration_new_sheets.php" ><?php echo trad('Crear Hoja',$lang) ?></a>
+                <a class="btn btn-primary pl-5 pr-5" href="configuration_news_sheets.php?hoja=<?php echo $maxHoja ?>" ><?php echo trad('Crear Hoja',$lang) ?></a>
             </div>
         </div>
     </div>
@@ -39,6 +45,12 @@
                                 echo "<option name=". $row_hoja['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_hoja['nombre'].' '. $row_hoja['apellidos']. " </option>";
                             }
                             echo '</select>';
+                            if($_SESSION["showNumber"] != ''){
+                        ?>
+                            <p class="showNumberEntries display-none"><?php echo $_SESSION['showNumber'] ?></p>
+                        <?php } else { ?>
+                            <p class="showNumberEntries display-none">10</p>
+                        <?php } 
                             $result = $hojaejer->getAllHojas();
                             while ($fila_hoja = mysqli_fetch_array($result)) {
                                 ?>
@@ -55,7 +67,7 @@
                                     ?>
                                     <?php if($_SESSION['user'] == $fila_hoja['creador_hoja']){ ?>
                                     <?php echo '<td style="text-align:right;">'
-                                            . ' <a class="highlight_e" href="configuration_edit_sheets.php?hoja=' . $fila_hoja['id_hoja'] . '"><i class="fas fa-edit mr-3" style="color:black; opacity:0.9;" title="Editar"></i></a>'
+                                            . ' <a class="highlight_e" href="configuration_edits_sheets.php?hoja=' . $fila_hoja['id_hoja'] . '"><i class="fas fa-edit mr-3" style="color:black; opacity:0.9;" title="Editar"></i></a>'
                                             . ' <a class="btn-sin-fondo highlight_b" href="../handler/validate_eliminar_hoja.php?eliminar_hoja=' . $fila_hoja['id_hoja'] . '"> <i class="fas fa-trash mr-3" style="color:black; opacity:0.9;" title="Eliminar"> </i></a> '                                  
                                             . '</td>'; 
                                     } else {?>
@@ -75,6 +87,14 @@
                     if(isset($_SESSION['message_sheets'])){
                         echo $_SESSION['message_sheets'];
                         unset($_SESSION['message_sheets']);
+                    }
+                    if(isset($_SESSION['message_new_sheets'])){
+                        echo $_SESSION['message_new_sheets'];
+                        unset($_SESSION['message_new_sheets']);
+                    }
+                    if(isset($_SESSION['message_edit_sheets'])){
+                        echo $_SESSION['message_edit_sheets'];
+                        unset($_SESSION['message_edit_sheets']);
                     }
                     if(isset($_SESSION['msg_eleminar_hoja'])){
                         echo $_SESSION['msg_eleminar_hoja'];

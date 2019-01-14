@@ -8,6 +8,7 @@ $apellidos = $_POST["apellidos"];
 $name_user = strtolower($_POST["nombre_usuario"]);
 $autoriza = $_POST["checkAutoriza"];
 $rol = $_POST['profe_alumno'];
+$asociado = $_POST['asociar_profesor'];
 $user = new User($email, $pass);
 $result = $user->existUserEmail($email);
 $result2 = $user->existUsername($name_user);
@@ -29,7 +30,7 @@ if ($result == 0 and $result2 == 0) {
     else {
         $autoriza = 0;
     }
-    $user->createUser($name, $apellidos, $name_user, $rol, $email, $pass, $autoriza);
+    $user->createUser($name, $apellidos, $name_user, $rol, $email, $pass, $autoriza, $asociado);
     $_SESSION['email'] = $user->getEmail();
     $_SESSION['password'] = $user->getPassword();
     $_SESSION['rol'] = $user->getRol();
@@ -38,6 +39,7 @@ if ($result == 0 and $result2 == 0) {
     $_SESSION['name'] = $user->getName();
     $_SESSION['apellidos'] = $user->getApellidos();
     $_SESSION['modo'] = $user->getModo();
+    $_SESSION['asociado'] = $user->getAsociado();
     if ($user->getRol() == false){
         $_SESSION['msg_congratulations'] = 
            "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>

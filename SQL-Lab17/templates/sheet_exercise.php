@@ -81,6 +81,12 @@
                                 echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
                             }
                             echo '</select>';
+                            if($_SESSION["showNumber"] != ''){
+                        ?>
+                            <p class="showNumberEntries display-none"><?php echo $_SESSION['showNumber'] ?></p>
+                        <?php } else { ?>
+                            <p class="showNumberEntries display-none">10</p>
+                        <?php } 
                         $result = $hojaejer->getHojasYEjerciciosById($hojaparameter);
                         while ($fila = mysqli_fetch_array($result)) {
                             $id = $fila['id_ejercicio'];

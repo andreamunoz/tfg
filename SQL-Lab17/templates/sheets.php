@@ -1,6 +1,7 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
+<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t']); unset($_SESSION['value_cab']); unset($_SESSION['select_cab']); $_SESSION['showNumber']="";?>
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlace" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="sheets.php" > <?php echo trad('Hoja de Ejercicios',$lang) ?></a></label>
     <h2><strong><?php echo trad('Hoja de Ejercicios',$lang) ?></strong></h2>
@@ -32,6 +33,12 @@
                                 echo "<option name=". $row_hoja['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_hoja['nombre'].' '. $row_hoja['apellidos'] . " </option>";
                             }
                             echo '</select>';
+                            if($_SESSION["showNumber"] != ''){
+                            ?>
+                                <p class="showNumberEntries display-none"><?php echo $_SESSION['showNumber'] ?></p>
+                            <?php } else { ?>
+                                <p class="showNumberEntries display-none">10</p>
+                            <?php } 
                             $result = $hojaejer->getAllHojas();
                             while ($fila_hoja = mysqli_fetch_array($result)) {
                                 ?>

@@ -121,7 +121,8 @@ class HojaEjercicio{
         $conexion = $connect->connectDB();
         $sql = "update sqlab_hoja_ejercicios set nombre_hoja = '$nombre' , creador_hoja = '$user' where id_hoja='$id'" ;
         $consulta = mysqli_query($conexion,$sql);
-        
+        $sq = "delete from sqlab_esta_contenido where id_hoja='$id'";
+        $consul = mysqli_query($conexion,$sq);
         $rs = mysqli_query($conexion,"SELECT MAX(id_hoja) AS id FROM sqlab_hoja_ejercicios");
         if( $row = mysqli_fetch_row($rs)){
             $id_e = trim($row[0]);
@@ -230,4 +231,14 @@ class HojaEjercicio{
         return $res;
     }
   
+    function  getMaximasHojas(){
+        
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+    	$sql = "SELECT MAX(id_hoja) FROM sqlab_hoja_ejercicios";
+        $consulta = mysqli_query($conexion,$sql);
+        $res = mysqli_fetch_assoc($consulta);
+        $connect->disconnectDB($conexion);
+        return $res['MAX(id_hoja)'];
+    }
 }

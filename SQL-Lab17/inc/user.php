@@ -13,6 +13,7 @@ class User {
     public $autoriza;
     public $name;
     public $apellidos;
+    public $asociado;
 
     public function __contruct($email, $pass) {
 
@@ -20,7 +21,7 @@ class User {
         $this->pass = $pass;
     }
 
-    public function __construct2($email, $pass, $name, $apellidos, $username, $rol, $modo, $autoriza) {
+    public function __construct2($email, $pass, $name, $apellidos, $username, $rol, $modo, $autoriza,$asociado) {
 
         $this->email = $email;
         $this->pass = $pass;
@@ -30,6 +31,7 @@ class User {
         $this->rol = $rol;
         $this->modo = $modo;
         $this->autoriza = $autoriza;
+        $this->asociado = $asociado;
     }
 
     public function existUser($email, $pass) {
@@ -47,6 +49,7 @@ class User {
             $this->apellidos = $row[4];
             $this->rol = $row[5];
             $this->autoriza = $row[6];
+            $this->asociado = $row[7];
         }
         $connect->disconnectDB($conexion);
         return $filas;
@@ -78,13 +81,13 @@ class User {
     }
 
     //Crear usuario
-    function createUser($name, $apellidos, $name_user, $rol, $email, $pass, $autoriza) {
+    function createUser($name, $apellidos, $name_user, $rol, $email, $pass, $autoriza, $asociado) {
 
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "insert into sqlab_usuario (nombre, apellidos, user, rol, email, password, autoriza) 
-        values ('" . $name . "','" . $apellidos . "','" . $name_user . "','" . $rol . "','" . $email . "', AES_ENCRYPT('" . $pass . "','SQLab'),'" . $autoriza . "');";
+        $sql = "insert into sqlab_usuario (nombre, apellidos, user, rol, email, password, autoriza, asociado) 
+        values ('" . $name . "','" . $apellidos . "','" . $name_user . "','" . $rol . "','" . $email . "', AES_ENCRYPT('" . $pass . "','SQLab'),'" . $autoriza . "','" . $asociado . "');";
         $this->username = $name_user;
         $this->password = $pass;
         $this->email = $email;
@@ -92,6 +95,7 @@ class User {
         $this->apellidos = $apellidos;
         $this->rol = $rol;
         $this->autoriza = $autoriza;
+        $this->asociado = $asociado;
         if (!($consulta = mysqli_query($conexion, $sql))) {
             echo "Falló la llamada para crear usuario: " . $conexion->error;
         } else {
@@ -106,16 +110,16 @@ class User {
         return $consulta;
     }
 
-    //NO SE UTILIZA
-    function updateUser($email,  $name, $apellidos, $autoriza) {
+    function updateUser($email,  $name, $apellidos, $autoriza, $asociado) {
 
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "UPDATE sqlab_usuario SET nombre = '$name', apellidos = '$apellidos', autoriza = '$autoriza'    
+        $sql = "UPDATE sqlab_usuario SET nombre = '$name', apellidos = '$apellidos', autoriza = '$autoriza', asociado = '$asociado'   
         WHERE email='$email'";
         $this->name = $name;
         $this->apellidos = $apellidos;
         $this->autoriza = $autoriza;
+        $this->asociado = $asociado;
         $consulta = mysqli_query($conexion, $sql);
         $connect->disconnectDB($conexion);
         return $consulta;
@@ -170,7 +174,22 @@ class User {
 
         return $this->autoriza;
     }
+    
+    function setAutoriza($autoriza) {
 
+       $this->autoriza = $autoriza;
+    }
+
+    function getAsociado() {
+
+        return $this->asociado;
+    }
+    
+    function setAsociado($asociado) {
+
+       $this->asociado = $asociado;
+    }
+    
     function getAllDatosUser($email) {
         $connect = new Tools();
         $conexion = $connect->connectDB();
@@ -266,5 +285,14 @@ class User {
         $consulta = mysqli_query($conexion, $sql);
         $connect->disconnectDB($conexion);
         return $consulta;        
+    }
+    
+    function getAllProfesores(){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "SELECT nombre, apellidos FROM `sqlab_usuario` WHERE rol=0";
+        $consulta = mysqli_query($conexion, $sql);
+        $connect->disconnectDB($conexion);
+        return $consulta;  
     }
 }

@@ -4,6 +4,71 @@ include_once 'functions.php';
 
 class Administrar_schema{
 
+
+
+    function pasarAMinusculas($solucion){
+        //$aux = $solucion;
+
+        $arrayComillas = array("`", "'");
+        $solucion = str_replace($arrayComillas, '"', $solucion);
+        var_dump($solucion);
+
+        $nueva_solucion = "";
+        $miniaux = "";
+        $inicio = 0;
+        $fin = strlen($solucion);
+        $literal = false;
+        if(strpos($solucion, '"', $inicio)){
+            $posicionComillas = strpos($solucion, '"', $inicio);
+                // var_dump("****************ENTROOOO**************");
+            while ( $posicionComillas !== false){
+                // var_dump("INICIO PRE: ".$inicio);
+                // var_dump("POS PRE: ".$posicionComillas);
+                $miniaux = substr($solucion,$inicio, $posicionComillas-$inicio);
+                // var_dump($miniaux);
+                    
+                if($literal){
+                    $nueva_solucion = $nueva_solucion . $miniaux . '"';
+                }else{
+                    $nueva_solucion = $nueva_solucion . strtolower($miniaux) . '"';
+                }
+                    $literal = !$literal;
+                $inicio = $posicionComillas+1;
+                $posicionComillas = strpos($solucion, '"',$inicio);
+            // var_dump($nueva_solucion);
+                // var_dump("INICIO POST: ".$inicio);
+                // var_dump("POS POST: ".$posicionComillas);
+            }
+            // var_dump("****************SALGOOOO*************");
+            if ($posicionComillas !== $fin ){
+                $nueva_solucion = $nueva_solucion.substr($solucion,$inicio, $fin);     
+            }
+            // var_dump($nueva_solucion);
+
+        }else{
+            $nueva_solucion = strtolower($solucion);            
+        }        
+
+        return $nueva_solucion;
+    }
+
+    function transformarAMinusculas($solucion){
+        $admin = new Administrar_schema();
+        $subsentencia = explode(" ", $solucion, 4);
+        // var_dump(strtolower($subsentencia[0]));
+        if("create" === strtolower($subsentencia[0]) or "drop" === strtolower($subsentencia[0]) or "alter" === strtolower($subsentencia[0])){
+            $solucion = strtolower($solucion);
+        }else if("insert" === strtolower($subsentencia[0])){
+            var_dump("ESTOY EN INSERT");
+            $solucion = $admin->pasarAMinusculas($solucion);
+        }
+        // var_dump("****************FUERAAA*************");
+        var_dump($solucion); 
+        return $solucion;
+    }
+    
+
+
     //Ejecutar codigo
     function executeCode($code){
         
@@ -69,8 +134,9 @@ class Administrar_schema{
     function comprobarSintaxis($sentencia){
         $sentencia = preg_replace('/\s+/', ' ', $sentencia);
         $miarray = explode(" ", $sentencia);
+        // var_dump($miarray);
         $tabla = false;
-        
+
         if(in_array("create",$miarray) && in_array("table",$miarray) ){
             $agujas = array("temporary ", "if ", "not ", "exists ");
             foreach ($agujas as $value) {
@@ -102,6 +168,7 @@ class Administrar_schema{
         }else{
             $tabla= $miarray[2];
         }
+        // var_dump($tabla);
         return $tabla;
     }
 
@@ -134,17 +201,20 @@ class Administrar_schema{
             $subsentencia = array();
             while ($i < $contador ) {
 
-                $subsentencia = explode(" ", $sentencias[$i], 4);
-                $nombre_tabla_con_comillas = $admin->comprobarSintaxis($sentencias[$i]);
+                $sentencia_con_minusculas = $admin->transformarAMinusculas($sentencias[$i]);
+                $subsentencia = explode(" ", $sentencia_con_minusculas, 4);
+                $nombre_tabla_con_comillas = $admin->comprobarSintaxis($sentencia_con_minusculas);
+                var_dump($sentencia_con_minusculas);
+                // var_dump($sentencia_con_minusculas);
 
                 if($nombre_tabla_con_comillas !== FALSE){
 
-                    $miSentenciaEntera = $sentencias[$i];
+                    $miSentenciaEntera = $sentencia_con_minusculas;
 
                     //QUITAR COMILLAS DEL NOMBRE
                     $arrayComillas = array("`", '"', "'");
                     $nombre_tabla = str_replace($arrayComillas, "", $nombre_tabla_con_comillas);
-                // var_dump($nombre_tabla);
+                var_dump($nombre_tabla);
                     
                     //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
                     $nuevoNombre = $profe."_".$nombre_tabla;
@@ -154,7 +224,7 @@ class Administrar_schema{
                     //SUSTITUIMOS LAS COMILLAS POR COMILLAS DOBLES PARA QUE NO INTERFIERAN CON LAS QUE USAMOS.
                     $miSentenciaEntera = str_replace("'", '"', $miSentenciaEntera);
 
-                    if((stripos($sentencias[$i], "create"))!==FALSE){
+                    if((strtolower(stripos($sentencia_con_minusculas, "create")))!==FALSE){
 
                         //SI ES UN CREATE TABLE, BUSCAMOS SI TIENE REFERENCIAS PARA AÑADIR EL PREFIJO AL NOMBRE DE LA TABLA
                         $miSentenciaEntera = $admin->reemplazar_referencias("references ", "references ".$profe."_", $miSentenciaEntera);
@@ -163,7 +233,7 @@ class Administrar_schema{
                         //EJECUTAMOS LA SENTENCIA
                         $respuesta = $admin->executeCode($miSentenciaEntera.";");
                         //var_dump($respuesta);
-                    } elseif(((stripos($sentencias[$i], "drop"))!==FALSE) || ((stripos($sentencias[$i], "alter"))!==FALSE) ){
+                    } elseif(((strtolower(stripos($sentencia_con_minusculas, "drop")))!==FALSE) || ((strtolower(stripos($sentencia_con_minusculas, "alter")))!==FALSE) ){
                         include_once 'ejercicio.php';
                         $ejer = new Ejercicio();
                         $resultado = $ejer->comprobarSiEstaUsada($nuevoNombre);
@@ -173,8 +243,9 @@ class Administrar_schema{
                         } else{
                             $respuesta = "No se puede ejecutar porque las tablas están siendo usadas.";
                         }
-                    }elseif((stripos($sentencias[$i], "insert"))!==FALSE){
+                    }elseif((strtolower(stripos($sentencia_con_minusculas, "insert")))!==FALSE){
                         //EJECUTAMOS LA SENTENCIA
+                        var_dump($miSentenciaEntera);
                         $respuesta = $admin->executeCode($miSentenciaEntera.";");
                     }   
                     if($respuesta !== true){

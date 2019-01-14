@@ -145,7 +145,7 @@ class Ejercicio{
         $consulta = mysqli_query($conexion,$sql); 
         $count = mysqli_fetch_array($consulta);
         $connect->disconnectDB($conexion);
-        return $count;
+        return $count[0];
     }
     
     function getAllNiveles(){ // NO DEVUELVE LOS DISTINTOS NIVELES.

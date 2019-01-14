@@ -4,11 +4,8 @@
     $code = $_POST['crea_tabla'];
     $_SESSION['guardarDatosTablas'] = $_POST['crea_tabla'];
     $user_name = $_SESSION['user'];
-    $code = strtolower($_POST['crea_tabla']);
-    //$code = preg_replace('/( ){2,}/u',' ',$code);
-    //var_dump($code);
+
     $code = preg_replace('/\s\s+/', ' ',$code);
-    // print_r($_SESSION);
 
     $admin_schema = new Administrar_schema();
     $arrayResultado = $admin_schema->obtenerSentencias($code, $user_name);
@@ -25,9 +22,7 @@
             }
         }
     }else{
-        //if ($arrayResultado != ""){
-            $mensaje = $arrayResultado;
-        //}
+        $mensaje = $arrayResultado;
     }
 
     if ($mensaje != ""){

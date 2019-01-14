@@ -1,7 +1,7 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
-<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t'])?>
+<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t']); unset($_SESSION['value_cab']); unset($_SESSION['select_cab']); $_SESSION['showNumber']="";?>
 <img class="img_perfil" src="../img/img_perfil.jpeg"> 
 <div class="container contenedor-perfil pt-4">
     <?php
@@ -22,8 +22,7 @@
                 <label for = "name" ><strong><?php echo trad('Nombre',$lang) ?> </strong></label>
             </div>
             <div class = "col-md-3 ">
-                <p> <?php echo $_SESSION['name'];
-                                                                            ?> </p>
+                <p> <?php echo $_SESSION['name'];?> </p>
             </div>
         </div>
         <div class="row">
@@ -61,6 +60,16 @@
                 <?php } else if ($_SESSION['autoriza'] == "0") { ?>
                     <p> <?php echo trad('No',$lang) ?></p>
                 <?php } ?>
+            </div>
+        </div> 
+        <?php } ?>
+        <?php if($_SESSION['asociado'] != "") { ?>
+        <div class="row">
+            <div class="col-md-3 pl-4">
+                <label for="name"><strong><?php echo trad('Profesor Asociado',$lang) ?> </strong></label>		
+            </div>
+            <div class="col-md-3 ">
+                <p> <?php echo $_SESSION['asociado']; ?> </p>
             </div>
         </div> 
         <?php } ?>

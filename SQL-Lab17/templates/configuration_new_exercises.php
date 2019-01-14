@@ -27,8 +27,8 @@
                             <div class="col-md-3">
                                 <label><strong><?php echo trad('Información Tablas',$lang) ?></strong></label>
                                 <div class=" selector-tabla" >
-                                    <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm">                                               
-                                    </select>                                
+                                    <select type="text" id="tablas" name="tablas" class="select_tablas custom-select form-control-sm">                                               
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-6">

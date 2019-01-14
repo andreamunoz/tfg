@@ -1,7 +1,7 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
-<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t'])?>
+<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t']); unset($_SESSION['value_cab']); unset($_SESSION['select_cab']); $_SESSION['showNumber']="";?>
 <div class="container-tabla pt-4 pb-5">
     <label><?php if($_SESSION['rol']==1 || $_SESSION['modo']==0){ ?><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang);?> </a><?php }else {?><a class="enlance" href="configuration.php" ><?php echo trad('Modo Profesor',$lang)?> </a><?php } ?> > <a class="enlance" href="help.php" > <?php echo trad('Ayuda',$lang) ?></a> </label>
     <h2><strong><?php echo trad('Ayuda', $lang) ?></strong></h2>

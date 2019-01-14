@@ -49,7 +49,7 @@ $lang = 'en';
                     <div class="form-row">
                         <div class="form-group offset-md-2 col-md-5">
                             <label for="nom_usuario"><?php echo trad('Nombre de usuario',$lang) ?></label> 
-                            <input type="text" maxlength="40" ="" id="nom_usuario" name="nombre_usuario" class="form-control form-control-sm" required />
+                            <input type="text" maxlength="40" id="nom_usuario" name="nombre_usuario" class="form-control form-control-sm" required />
                         </div>
                         <div class="form-group col-md-4">
                             <label for="prof_alumn" required><?php echo trad('Rol',$lang) ?></label> 
@@ -57,6 +57,22 @@ $lang = 'en';
                                 <option value="alumno"><?php echo trad('Alumno',$lang) ?></option>
                                 <option value="profe"><?php echo trad('Profesor',$lang) ?></option>
                             </select> 
+                        </div>
+                    </div>
+                    <?php 
+                    include_once '../../inc/user.php';
+                    $us = new User();
+                    $profesores = $us->getAllProfesores();
+                    ?>
+                    <div class="form-row">
+                        <div class="form-group offset-md-2 col-md-5">
+                            <label for="prof_alumn" id="label_asociar_profesor" style="display: inline-block;" required><?php echo trad('Asociar Profesor al Alumno',$lang) ?></label>
+                            <select type="text" id="asociar_profesor" name="asociar_profesor" class="form-control form-control-sm" style="display: inline-block;">
+                                <option value="">Selecciona Profesor</option>
+                                <?php while ($prof = mysqli_fetch_array($profesores)) { ?>  
+                                    <option value="<?php echo $prof['nombre'].' '.$prof['apellidos']?>"><?php echo $prof['nombre'].' '.$prof['apellidos']?></option>
+                                <?php } ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-row">
@@ -91,12 +107,18 @@ $lang = 'en';
             function cambiaRol() {
                 var rol = document.getElementById("profe_alumno");
                 var myCheck = document.getElementById("myCheck");
+                var labelAsociarProfesor = document.getElementById("label_asociar_profesor");
+                var selectAsociarProfesor = document.getElementById("asociar_profesor");
                 if (rol.value == "profe"){
                     myCheck.style.display = "inline-block";
                     myCheckText.style.display = "inline-block";
+                    labelAsociarProfesor.style.display = "none";
+                    selectAsociarProfesor.style.display = "none";
                 } else {
                    myCheck.style.display = "none";
                    myCheckText.style.display = "none";
+                   labelAsociarProfesor.style.display = "inline-block";
+                   selectAsociarProfesor.style.display = "inline-block";
                 }
             }
         </script>   

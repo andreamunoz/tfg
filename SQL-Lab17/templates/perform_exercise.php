@@ -179,6 +179,7 @@
                             </div>
                         </div>
                         <?php } ?>  
+                        
                         <div class="tab-pane fade mt-3 pl-4" id="nav-historico" role="tabpanel" aria-labelledby="nav-exercises-historico">
                             <div id="accordion ">
                                 <div class="card pt-4">  
@@ -194,6 +195,12 @@
                                             </thead>
                                             <tbody id="tablaSolucionesPropuesta"> 
                                                 <?php 
+                                                if($_SESSION["showNumber"] != ''){
+                                                ?>
+                                                    <p class="showNumberEntries display-none"><?php echo $_SESSION['showNumber'] ?></p>
+                                                <?php } else { ?>
+                                                    <p class="showNumberEntries display-none">10</p>
+                                                <?php } 
                                                     /*onclick="activarTabSolucion()"*/
                                                     $sol = new Solucion(); 
                                                     $historico = $sol->getHistoricoEjercicios($id_ejer, $_SESSION ["user"]);

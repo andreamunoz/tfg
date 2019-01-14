@@ -884,3 +884,6 @@ p#small{
     color: black !important;
 }
 
+.display-none{
+    display: none;
+}

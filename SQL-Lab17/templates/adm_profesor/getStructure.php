@@ -6,6 +6,8 @@
     $sql = "SELECT COLUMN_NAME, COLUMN_TYPE, COLUMN_KEY FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" .$_REQUEST["tabla"]. "';";
     
     $consulta = mysqli_query($conexion, $sql);
+    $_SESSION["infoTabla"] = $_REQUEST["tabla"];
+//    $_SESSION["nameCreador"] = $_REQUEST["nameCreador"];
     $_SESSION["columnas"] = "";
     $_SESSION["num_col"] = 0;
     $resultado = "";

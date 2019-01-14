@@ -72,6 +72,29 @@
             </div>
         </div> 
         <?php } ?>
+        <?php 
+        include_once '../inc/user.php';
+        $us = new User();
+        $profesores = $us->getAllProfesores();
+        ?>
+        <?php if($_SESSION['asociado'] != "") { ?>
+            <div class="row mb-2">
+            <div class="col-md-3 pl-4">
+                <label for="name"><strong><?php echo trad('Profesor Asociado',$lang) ?> </strong></label>		
+            </div>
+            <div class="col-md-3 ">
+                <select type="text" id="asociado_profesor" name="asociado_profesor" class="form-control form-control-sm" style="display: inline-block;">
+                    <?php while ($prof = mysqli_fetch_array($profesores)) { 
+                        $nombreCompleto = $prof['nombre'].' '.$prof['apellidos'];
+                        if($_SESSION['asociado'] == $nombreCompleto) { ?>
+                            <option value="<?php echo $_SESSION['asociado']?>" selected><?php echo $_SESSION['asociado']?></option>
+                        <?php }else { ?>
+                            <option value="<?php echo $prof['nombre'].' '.$prof['apellidos']?>"><?php echo $prof['nombre'].' '.$prof['apellidos']?></option>
+                    <?php  } } ?>
+                </select>
+            </div>
+        </div> 
+        <?php } ?>
         <div class="row mt-5 mb-2">
             <button class="btn btn-primary pl-5 pr-5" name="editar" type="submit"><?php echo trad('Guardar Perfil',$lang) ?></button>
         </div>

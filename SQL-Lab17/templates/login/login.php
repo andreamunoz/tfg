@@ -5,7 +5,8 @@ session_start();
 <?php
 require('../languages.php');
 $lang = 'es';
-
+$_SESSION['showNumber'] = "";
+$_SESSION['nameCreador'] = "";
 ?>
 <html lang="en">
     <head>

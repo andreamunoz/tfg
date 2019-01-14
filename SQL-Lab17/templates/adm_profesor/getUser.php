@@ -43,12 +43,15 @@ while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {
 if ($nombres[0] === "") {
 	echo '<option value="0" selected="selected">Seleccionar</option>';
 }else{
+    
 	echo '<option value="'.$nombres[0].'" selected="selected">'.$nombreCompleto[0].'</option>';
 }
 
 for($j=1; $j<(count($nombres)); $j++){
-
-	echo '<option value="'.$nombres[$j].'">'.$nombreCompleto[$j].'</option>';
+//    if($_SESSION["nameCreador"].trim() === $nombres[$j])
+//	echo '<option value="'.$nombres[$j].'" selected>'.$nombreCompleto[$j].'</option>';
+//    else
+        echo '<option value="'.$nombres[$j].'">'.$nombreCompleto[$j].'</option>';
 }
 //echo '<option value="0">Seleccionar</option>';
 // while (($fila = $consulta->fetch_array(MYSQLI_ASSOC))) {

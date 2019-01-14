@@ -17,6 +17,7 @@ if (!empty($result)) {
     $_SESSION['rol'] = $user->getRol();
     $_SESSION['user'] = $user->getUserName();
     $_SESSION['autoriza'] = $user->getAutoriza();
+    $_SESSION['asociado'] = $user->getAsociado();
     $_SESSION['msg_congratulations']="";
     
     if ($user->getRol() == true){

@@ -97,7 +97,16 @@ unset($_SESSION['guardarDatosEditar']);
                                 }
                             }
                             echo '</select>';
-                        $result = $ejer->getAllEjercicios();
+                            echo '<select name="lista_hoja" class="custom-select form-control-sm  select_cabecera display-none" title="Selecciona cabecera" id="select_cab">';
+                                echo "<option value=".$_SESSION['value_cab']."> ".$_SESSION['select_cab']." </option>";
+                            echo '</select>';
+                            if($_SESSION['showNumber'] != null){
+                        ?>
+                            <p class="showNumberEntries display-none"><?php echo $_SESSION['showNumber'] ?></p>
+                        <?php } else { ?>
+                            <p class="showNumberEntries display-none">10</p>
+                        <?php } ?>
+                        <?php $result = $ejer->getAllEjercicios();
                         while ($fila = mysqli_fetch_array($result)) {
                             $resul_sol = $sol->getCuantosEjerciciosByName($fila['id_ejercicio']);
                             $fila_sol = $resul_sol->fetch_array(MYSQLI_ASSOC);

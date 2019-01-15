@@ -4,7 +4,9 @@
 	$user = $_SESSION['user'];
     $id = $_GET['exercise'];
 	$descripcion = $_POST['descripcion'];
+    $old_descripcion = $_SESSION['old_descripcion'];
     $ejer = new Ejercicio();
+
     $exist = $ejer->getExistEjercicio($descripcion);
     $user_tablas = $_SESSION['user_tablas'];
     $enunciado = $_POST['enunciado'];
@@ -44,7 +46,7 @@
     $_SESSION['guardarDatosEditar']= $guardarDatosEditar;
     // var_dump( $_SESSION['guardarDatosEditar']);
 
-    if ($exist != 0){
+    if ($exist != 0 and $descripcion != $_SESSION['old_descripcion']){
         $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                         <div class='modal-dialog modal-dialog-centered' role='document'>
                             <div class='modal-content'>
@@ -60,7 +62,7 @@
                             </div>
                         </div>   
                     </div>";
-        header("Location: ../templates/configuration_new_exercises.php");
+        header("Location: ../templates/configuration_edit_exercises.php?exercise=$id");
     } else {
 
 

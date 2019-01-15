@@ -689,6 +689,7 @@
 
             }else{
                 $resultado[0] = false;
+                $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
             }
 
             return $resultado;
@@ -1079,7 +1080,7 @@
 
             if($resultadoCrear){
                     unset($_SESSION['guardarDatos']);
-                    // header("Location: ../templates/configuration_exercises.php");
+                    header("Location: ../templates/configuration_exercises.php");
             }else{
                     $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                             <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -1096,7 +1097,7 @@
                                 </div>
                             </div>   
                         </div>";
-                    // header("Location: ../templates/configuration_new_exercises.php");
+                    header("Location: ../templates/configuration_new_exercises.php");
             }
 
         }else{
@@ -1135,7 +1136,7 @@
                 </div>";            
             }
             
-            // header("Location: ../templates/configuration_new_exercises.php");
+            header("Location: ../templates/configuration_new_exercises.php");
         }
     }
     exit();

@@ -21,6 +21,7 @@ class Ejercicio{
             $rs = mysqli_query($conexion,"SELECT MAX(id_ejercicio) AS id FROM sqlab_ejercicio");
             if( $row = mysqli_fetch_row($rs)){
                 $id = trim($row[0]);
+                var_dump($tablas);
                 foreach ($tablas as $key => $value) {
                     $dividido = explode("_", $value, 2);
                     $sql = "insert into sqlab_usa (id_ejercicio, nombre, schema_prof) values (".$id.",'".trim($value)."','".$dividido[0]."');";
@@ -406,7 +407,7 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
-    function executeSolucionNoSelect($solucion, $tabla){
+    function executeSolucionNoSelect($solucion, $tabla, $tipo){
         $connect = new Tools();
         $consulta = array();
         $conexion = $connect->connectDB();
@@ -418,24 +419,28 @@ class Ejercicio{
             $consulta[0] = false;
             $consulta[1] = $conexion->error;
         }else if ($resultado){
-
+            var_dump($resultado);
             $consulta[0] = true;
-            $sql1 = "SELECT * from $tabla;";
-            // var_dump("sentencia: ".$sql1);
-            $resultado1 = mysqli_query($conexion,$sql1);
-            if(!$resultado1){
-                $consulta[1] = false;
-                $consulta[2] = $conexion->error;
+            if($tipo ==="delete"){
+
             }else{
-                $consulta[1] = true;
-                $rawdata = array();
-                $i=0;
-                while($row = mysqli_fetch_assoc($resultado1))
-                {
-                    $rawdata[$i] = $row;
-                    $i++;
+                $sql1 = "SELECT * from $tabla;";
+                // var_dump("sentencia: ".$sql1);
+                $resultado1 = mysqli_query($conexion,$sql1);
+                if(!$resultado1){
+                    $consulta[1] = false;
+                    $consulta[2] = $conexion->error;
+                }else{
+                    $consulta[1] = true;
+                    $rawdata = array();
+                    $i=0;
+                    while($row = mysqli_fetch_assoc($resultado1))
+                    {
+                        $rawdata[$i] = $row;
+                        $i++;
+                    }
+                    $consulta[2] = $rawdata;
                 }
-                $consulta[2] = $rawdata;
             }
 
 // var_dump("LO Que DEVUELVE:");

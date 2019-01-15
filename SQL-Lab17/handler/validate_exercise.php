@@ -570,6 +570,7 @@ function validarSelect($solucion, $dueno){
             $resultado[0] = true;
             $resultado[1] = $tablasSolucion;
             $resultado[2] = $resultadoSolucion;
+            $resultado[3] = $solucion;
         }
 
     }else{
@@ -622,7 +623,7 @@ function validarInsert($solucion, $dueno){
                     $resultado[0] = false;
                     $resultado[4] = "El Select no devuelve datos válidos: ".$resultado_select[4];
                 }else{
-
+                    // var_dump($resultado_select);
                     $nueva_solucion = substr($solucion,0,$inicio).$resultado_select[3];
                     // var_dump($nueva_solucion);
 
@@ -688,6 +689,7 @@ function validarInsert($solucion, $dueno){
                 $resultado[4] = "Las tablas de la solución no pertenecen al creador de tablas seleccionado o no existen.";
             }
         }
+
         return $resultado;
 }
 
@@ -929,7 +931,7 @@ if ($resultado_alumno[0] !== false) {
                 $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 1);
             }
 
-            // header("Location: ../templates/exercises.php");
+            header("Location: ../templates/exercises.php");
 
         } else {
 
@@ -961,7 +963,7 @@ if ($resultado_alumno[0] !== false) {
                             </div>
                         </div>   
                     </div>";
-                    // header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
+                    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
                 }else{
                     $_SESSION['msg_solucion'] = 
                     "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
@@ -999,7 +1001,7 @@ if ($resultado_alumno[0] !== false) {
                         </div>
                     </div>   
                 </div>";
-                // header("Location: ../templates/perform_exercise.php?exercise=" . $id."&row=false");
+                header("Location: ../templates/perform_exercise.php?exercise=" . $id."&row=false");
             }
         }
 
@@ -1159,7 +1161,7 @@ if ($resultado_alumno[0] !== false) {
                     </div>
                 </div>   
             </div>";
-        // header("Location: ../templates/perform_exercise.php?exercise=" . $id."&all=false");
+        header("Location: ../templates/perform_exercise.php?exercise=" . $id."&all=false");
     }
 
 
@@ -1187,7 +1189,7 @@ if ($resultado_alumno[0] !== false) {
                     </div>
                 </div>   
             </div>";
-    // header("Location: ../templates/perform_exercise.php?exercise=" . $id."&all=false");
+    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&all=false");
 }
 
 ?>

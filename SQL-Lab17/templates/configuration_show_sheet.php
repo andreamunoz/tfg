@@ -17,7 +17,7 @@
     <div class="row mb-150">
         <div class="col-md-12">
             <div class="text-right pl-5">
-                <a class="btn btn-primary pl-4 pr-4" href="files/sheet_pdf.php?sheet=<?php echo $hojaparameter; ?> "><?php echo trad('DESCARGAR',$lang) ?><i style="font-size:25px; vertical-align: middle;" class="fas fa-file-pdf pl-2"></i></a>
+                <a class="btn btn-primary pl-4 pr-4" href="files/sheet_pdf.php?sheet=<?php echo $hojaparameter; ?> " target="_blank"><?php echo trad('DESCARGAR',$lang) ?><i style="font-size:25px; vertical-align: middle;" class="fas fa-file-pdf pl-2"></i></a>
             </div>
         </div>
     </div>
@@ -48,28 +48,71 @@
                         $resP = $ejer->getCreadorEjercicio();
                         if (isset($res) && isset($resC) && isset($resP)) {
                             
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona profesor" id="select_hoja">';
-                            echo "<option name='' apellido1='' apellido2=''>Todos Profesores </option>";
+                            echo '<select name="verhoja" class="custom-select form-control-sm mr-3 select_profesor" title="Selecciona profesor" id="select_pro">';
+                            echo "<option value='' >Todos Profesores </option>";
                             while ($row_profe = mysqli_fetch_array($resP)) {
+//                                $apellidos = explode(" ",$row_profe['apellidos']);
+//                                echo "<option name=". $row_profe['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_profe['nombre'].' '. $row_profe['apellidos']. " </option>";
+                                $nombre = explode(" ",$row_profe['nombre']);
                                 $apellidos = explode(" ",$row_profe['apellidos']);
-                                echo "<option name=". $row_profe['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_profe['nombre'].' '. $row_profe['apellidos']. " </option>";
+                                if ($nombre[1] == '' && $apellidos[1]=='')
+                                    $nombreCompu = "$nombre[0]-$apellidos[0]";
+                                else if($nombre[1] == '')
+                                    $nombreCompu = "$nombre[0]-$apellidos[0]-$apellidos[1]";
+                                else if($nombre[1] != '' && $apellidos[1]=='')
+                                    $nombreCompu = "$nombre[0]-$nombre[1]-$apellidos[0]";
+                                else
+                                    $nombreCompu = "$nombre[0]-$nombre[1]-$apellidos[0]-$apellidos[1]";
+                                
+                                if($_SESSION['select_p_verh'] == $nombreCompu){
+                                    echo "<option value=" . $nombreCompu . " selected>" . $row_profe['nombre'].' '. $row_profe['apellidos'] . " </option>";
+                                }else {
+                                    echo "<option value=" . $nombreCompu . " > " . $row_profe['nombre'].' '. $row_profe['apellidos'] . " </option>";
+                                }
+                                
                             }
                             echo '</select>';
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona nivel" id="select_hoja">';
-                                echo "<option value=''>Todos Niveles </option>";
-                                echo "<option value='Principiante'>Principiante </option>";
-                                echo "<option value='Intermedio'>Intermedio </option>";
-                                echo "<option value='Avanzado'>Avanzado </option>";
+                            echo '<select name="verhoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona nivel" id="select_niv">';
+                             
+                            if($_SESSION['select_n_verh'] == ''){
+                                echo "<option value='' selected>Todos Niveles </option>";  
+                                echo "<option value='Principiante'> Principiante </option>";
+                                echo "<option value='Intermedio'> Intermedio </option>";
+                                echo "<option value='Avanzado'> Avanzado </option>";
+                            }if($_SESSION['select_n_verh'] == 'Principiante'){
+                                echo "<option value=''>Todos Niveles </option>";  
+                                echo "<option value='Principiante' selected> Principiante </option>";
+                                echo "<option value='Intermedio'> Intermedio </option>";
+                                echo "<option value='Avanzado'> Avanzado </option>";
+                            }if($_SESSION['select_n_verh'] == 'Intermedio'){  
+                                echo "<option value=''>Todos Niveles </option>";  
+                                echo "<option value='Principiante'> Principiante </option>";
+                                echo "<option value='Intermedio' selected> Intermedio </option>";
+                                echo "<option value='Avanzado'> Avanzado </option>";
+                            }if($_SESSION['select_n_verh'] == 'Avanzado'){ 
+                                echo "<option value=''>Todos Niveles </option>";  
+                                echo "<option value='Principiante'> Principiante </option>";
+                                echo "<option value='Intermedio'> Intermedio </option>";
+                                echo "<option value='Avanzado' selected> Avanzado </option>";
+                            } 
                             echo '</select>';
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona categoría" id="select_hoja">';
-                            echo "<option value=" . $row_tipo['tipo'] . ">Todas Categorías </option>";
+                            echo '<select name="verhoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona categoría" id="select_tip">';
+                            echo "<option value='' >Todas Categorías </option>";
                             while ($row_tipo = mysqli_fetch_array($resC)) {
-                                echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
+                                if($_SESSION['select_t_verh'] == $row_tipo['tipo'] ){
+                                    echo "<option value=" . $row_tipo['tipo'] . " selected>" . $row_tipo['tipo'] . " </option>";
+                                }
+                                else{
+                                    echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
+                                }
                             }
                             echo '</select>';
-                        if($_SESSION['showNumber'] != ""){
+                            echo '<select name="verhoja" class="custom-select form-control-sm  select_cabecera display-none" title="Selecciona cabecera" id="select_cab">';
+                                echo "<option value=".$_SESSION['value_cab_verh']."> ".$_SESSION['select_cab_verh']." </option>";
+                            echo '</select>';
+                        if($_SESSION['showNumber_verh'] != ""){
                         ?>
-                            <p class="showNumberEntries display-none"><?php echo $_SESSION['showNumber'] ?></p>
+                            <p class="showNumberEntries display-none"><?php echo $_SESSION['showNumber_verh'] ?></p>
                         <?php } else { ?>
                             <p class="showNumberEntries display-none">10</p>
                         <?php } 

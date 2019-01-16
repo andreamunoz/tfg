@@ -1,7 +1,14 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
-<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t']); unset($_SESSION['value_cab']); unset($_SESSION['select_cab']); $_SESSION['showNumber']="";?>
+<?php 
+//variables-sesion: exercises
+unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t']); unset($_SESSION['value_cab']); unset($_SESSION['select_cab']); $_SESSION['showNumber']=""; 
+//variables-sesion: hoja
+unset($_SESSION['select_p_h']); unset($_SESSION['select_cab_h']); unset($_SESSION['value_cab_h']); $_SESSION['showNumber_h']=""; 
+//variables-sesion: ver hoja
+unset($_SESSION['select_p_verh']); unset($_SESSION['select_n_verh']); unset($_SESSION['select_t_verh']); unset($_SESSION['value_cab_verh']); unset($_SESSION['select_cab_verh']); $_SESSION['showNumber_verh']="";
+?>
 <img class="img_perfil" src="../img/img_perfil.jpeg"> 
 <div class="container contenedor-perfil pt-4">
     <?php

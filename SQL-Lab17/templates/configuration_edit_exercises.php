@@ -70,11 +70,13 @@
                                                     
                                                         $quitar = $ejercicioId['dueño_tablas'] . "_";
                                                         $onlyName = explode($quitar, $nameTable['nombre']);
-                                                        
-                                                        echo "<option value='".$nameTable['nombre']."'>".$onlyName[1]."</option>"; 
-                                                      
+                                                        if($_SESSION['perform_tabla']==$onlyName[1]){
+                                                            echo "<option value='".$nameTable['nombre']."' selected>".$onlyName[1]."</option>"; 
+                                                        }else{
+                                                            echo "<option value='".$nameTable['nombre']."'>".$onlyName[1]."</option>"; 
+                                                        }
                                                     }
-                                                ?> -->
+                                                ?> 
                                             </select>                                
                                         </div>
                                     </div>

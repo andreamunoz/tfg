@@ -1,7 +1,13 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
-<?php unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t']); unset($_SESSION['value_cab']); unset($_SESSION['select_cab']); $_SESSION['showNumber']="";?>
+<?php 
+//variables-sesion: exercises
+unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['select_t']); unset($_SESSION['value_cab']); unset($_SESSION['select_cab']); $_SESSION['showNumber']=""; 
+//variables-sesion: hoja
+unset($_SESSION['select_p_h']); 
+//variables-sesion: ver hoja
+unset($_SESSION['select_p_verh']); unset($_SESSION['select_n_verh']); unset($_SESSION['select_t_verh']);?>
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_tables.php" > <?php echo trad('Tablas',$lang) ?></a></label>
     <h2><strong><?php echo trad('Tablas',$lang) ?></strong></h2>

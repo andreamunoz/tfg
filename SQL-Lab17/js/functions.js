@@ -29,7 +29,7 @@ $(document).ready(function () {
     /*Mostrar las tablas del profesor seleccionado*/
     var form_data = {
         is_ajax: 1,
-        dueno: username
+        dueno: username,
     };
     $.ajax({
         type: "POST",
@@ -79,7 +79,7 @@ $(document).ready(function () {
         var form_data = {
             is_ajax: 1,
             tabla: $(".selector-tabla select option:checked").val(),
-            nameCreador: 'Rodi01'
+            name: $(".selector-tabla select option:checked").text()
         };
 //        console.log(form_data.tabla);
         if (form_data.tabla !== ""){
@@ -353,23 +353,34 @@ $(document).ready(function () {
         }
     });
     
-    $('#employee_data tbody').on( 'click', 'tr', function () {
-//        var id = $(this).find('td').eq(5).text();
-//        console.log(id);
+    $('#employee_data tbody').on( 'click', 'i', function () {
+        
 	var table = $('#employee_data').DataTable();
 	var table2 = $('#employee_table_hoja').DataTable();
-        table.row( this ).data()[4] = "<i class='fas fa-trash mr-3' style='color:black; opacity:0.9;' title='Eliminar'></i>";
-	table2.row.add( table.row( this ).data() ).draw( false );
-	table.row(this).remove().draw( false );
+        var tr = $(this).closest("tr");
+//        console.log(tr);
+        table.row( tr ).data()[4] = "<i class='fas fa-trash mr-3' style='color:black; opacity:0.9;' title='Eliminar'></i>";
+	table2.row.add( table.row( tr ).data() ).draw( false );
+	table.row(tr).remove().draw( false );
     } );
     
-    $('#employee_table_hoja tbody').on( 'click', 'tr', function () {
+    $('#employee_table_hoja tbody').on( 'click', 'i', function () {
         var table = $('#employee_data').DataTable();
         var table2 = $('#employee_table_hoja').DataTable();
-        table2.row( this ).data()[4] = "<i class='fas fa-arrow-up mr-3' style='color:black; opacity:0.9;' title='Añadir'></i>";
-        table.row.add( table2.row( this ).data() ).draw( false );
-        table2.row(this).remove().draw( false );
-    } );
+        var tr = $(this).closest("tr");
+//        console.log(tr);
+        table2.row( tr ).data()[4] = "<i class='fas fa-arrow-up mr-3' style='color:black; opacity:0.9;' title='Añadir'></i>";
+        table.row.add( table2.row( tr ).data() ).draw( false );
+        table2.row(tr).remove().draw( false );
+        
+    });
+//    $('#employee_table_hoja tbody').on( 'click', 'tr', function () {
+//        var table = $('#employee_data').DataTable();
+//        var table2 = $('#employee_table_hoja').DataTable();
+//        table2.row( this ).data()[4] = "<i class='fas fa-arrow-up mr-3' style='color:black; opacity:0.9;' title='Añadir'></i>";
+//        table.row.add( table2.row( this ).data() ).draw( false );
+//        table2.row(this).remove().draw( false );
+//    } );
     
     $('#employee_table_hoja').DataTable({
             paging:   false,
@@ -408,15 +419,18 @@ $(document).ready(function () {
         var profe = name.replace(/-/g,' ');
         var table = $('#employee_data').DataTable();
         table.columns(1).search(profe).draw(false);
+        var sitio = $(this).closest('.select_profesor').attr("name");
+//        alert(sitio);
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/select/getSelectProfesor.php",
-            data: {name:name},
+            data: {name:name, sitio:sitio},
             success: function(response)
             {
-                
+
             }
         });
+        
     });
 
     $('.select_nivel option').click(function(){
@@ -424,10 +438,12 @@ $(document).ready(function () {
         var nivel = $(this).attr("value");
         var table = $('#employee_data').DataTable();
         table.columns(2).search(nivel).draw(false);
+        var sitio = $(this).closest('.select_nivel').attr("name");
+//        alert(sitio);
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/select/getSelectNivel.php",
-            data: {nivel:nivel},
+            data: {nivel:nivel, sitio:sitio},
             success: function(response)
             {
                 
@@ -439,11 +455,12 @@ $(document).ready(function () {
         var tipo = $(this).attr("value");
         var table = $('#employee_data').DataTable();
         table.columns(3).search(tipo).draw(false);
-//        console.log(tipo);
+        var sitio = $(this).closest('.select_tipo').attr("name");
+//        alert(sitio);
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/select/getSelectTipo.php",
-            data: {tipo:tipo},
+            data: {tipo:tipo, sitio:sitio},
             success: function(response)
             {
                 //location.assign("../templates/configuration_new_exercises.php");
@@ -454,10 +471,12 @@ $(document).ready(function () {
     $('#employee_data th').on('click', function(){
         var nameCabecera = $(this).text();
         var ordenCabecera = $(this).attr('class').substr(8,11);
+        var sitio = $(this).closest("table").attr('name');
+//        alert(sitio);
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/select/getCabecera.php",
-            data: {nameCabecera:nameCabecera, ordenCabecera:ordenCabecera},
+            data: {nameCabecera:nameCabecera, ordenCabecera:ordenCabecera, sitio:sitio},
             success: function(response)
             {
                 //location.assign("../templates/configuration_new_exercises.php");
@@ -468,10 +487,11 @@ $(document).ready(function () {
     $('.dataTables_length select').on('change',function(){
         
         var showNumber = $(this).val();
+        var sitio = $('#select_cab').attr('name');
         $.ajax({
             method: "POST",
             url: "../templates/adm_profesor/select/getShowNumber.php",
-            data: {showNumber:showNumber},
+            data: {showNumber:showNumber, sitio:sitio},
             success: function(response)
             {
                 //location.assign("../templates/configuration_new_exercises.php");
@@ -537,7 +557,8 @@ $(document).ready(function () {
         
         var form_data = {
             is_ajax: 1,
-            tabla: $(".sel-tab-show select option:checked").val()
+            tabla: $(".sel-tab-show select option:checked").val(),
+            name: $(".sel-tab-show select option:checked").text()
         };
         if (form_data.tabla !== ""){
             
@@ -637,7 +658,7 @@ function selects(){
     
     var cabeCer = $('#select_cab').find(":selected").text();
     var ord = $('#select_cab').find(":selected").val();
-    
+    //Cabecera de ejercicios
     if(cabeCer.trim() === "Descripción" || cabeCer.trim() === "Description" ){
         table.order([0, ord]).draw(false);
     }else if(cabeCer.trim() === 'Profesor' || cabeCer.trim() === "Teacher"){
@@ -646,43 +667,82 @@ function selects(){
         table.order([2, ord]).draw(false);
     }else if(cabeCer.trim() === 'Tipo' || cabeCer.trim() === "Category"){
         table.order([3, ord]).draw(false);
+    }else if(cabeCer.trim() === 'N. Intentos' || cabeCer.trim() === "Num. Intent"){
+        table.order([4, ord]).draw(false);
+    }
+    //
+    if(cabeCer.trim() === "Nº de intento" || cabeCer.trim() === "Nº de intento" ){
+        table.order([0, ord]).draw(false);
+    }else if(cabeCer.trim() === "Fecha y hora" || cabeCer.trim() === "Description" ){
+        table.order([0, ord]).draw(false);
+    }else if(cabeCer.trim() === "Veredicto" || cabeCer.trim() === "Description" ){
+        table.order([0, ord]).draw(false);
+    }else if(cabeCer.trim() === "Solución" || cabeCer.trim() === "Description" ){
+        table.order([0, ord]).draw(false);
+    }
+    //Cabecera de Hoja
+    if(cabeCer.trim() === "Nombre Hoja" || cabeCer.trim() === "Name Sheet" ){
+        table.order([0, ord]).draw(false);
+    }else if(cabeCer.trim() === "Nombre Profesor" || cabeCer.trim() === "Name Teacher" ){
+        table.order([1, ord]).draw(false);
+    }else if(cabeCer.trim() === "N. Ejercicios" || cabeCer.trim() === "Num. of exercises" ){
+        table.order([2, ord]).draw(false);
+    }else if(cabeCer.trim() === "N. Ejercicios Resueltos" || cabeCer.trim() === "Num. of exercises solved" ){
+        table.order([3, ord]).draw(false);
+    }else if(cabeCer.trim() === "N. Ejercicios Intentados" || cabeCer.trim() === "Num. of exercises attempted" ){
+        table.order([4, ord]).draw(false);
     }
     
     var show = $('.showNumberEntries').text();
     table.page.len( show ).draw(false);
 }
 
-//function infoTablas(){
-//    var tabla = $(".selector-tabla select").val();
-//    alert(tabla);
-//    if(tabla != "Selecciona Tabla"){
+function resolverTablas(){
+    
+    var form_data = {
+        is_ajax: 1,
+        tabla: $(".sel-tab-show select option:checked").val(),
+        name: $(".sel-tab-show select option:checked").text()
+    };
+    if (form_data.tabla !== ""){
+
+        $.ajax({
+            type: "POST",
+            url: "adm_profesor/getStructure.php",
+            data: form_data,
+            success: function(response)
+            {   
+                $('.col-tab-show thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
+                $('.col-tab-show tbody').html(response).fadeIn();
+            }
+        });
+
+    }else{
+        $('.structure_table tbody').html("").fadeIn();
+    }
+}
+
+function newTablas(){
 //    var form_data = {
-//            is_ajax: 1,
-//            tabla: tabla,
-//            nameCreador: 'Rodi01'
-//        };
-////        console.log(form_data.tabla);
-//        if (form_data.tabla !== ""){
-//            $('#structure_table thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
-//
-//            $.ajax({
-//                type: "POST",
-//                url: "adm_profesor/getStructure.php",
-//                data: form_data, 
-//                success: function(response)
-//                {   
-//                    $('#structure_table tbody').html(response).fadeIn();
-//                }
-//            });
-//        }else{
-//            $('.structure-table tbody').html("").fadeIn();
+//        is_ajax: 1,
+//        dueno: username,
+//        name: $(".selector-tabla select option:checked").text()
+//    };
+//    $.ajax({
+//        type: "POST",
+//        url: "../templates/adm_profesor/getTablas.php",
+//        data: form_data,
+//        success: function (response)
+//        {
+//            $('.selector-tabla select').html(response).fadeIn();
 //        }
-//    }
-//}
+//    });
+}
 
 $( window ).on( "load", function() {    
     cargar();
     selects();
-//    infoTablas();
+    resolverTablas();
+    newTablas();
 });
 

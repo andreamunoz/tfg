@@ -10,6 +10,12 @@
     $ejer = new Ejercicio();
     $id_ejer = $_GET['exercise'];
     $des = $ejer->getDescripcionEjercicio($id_ejer);
+    if(isset($_SESSION['HOJA_VISTA'])){
+        $hojaparameter = $_SESSION['HOJA_VISTA'];
+    }
+    if (isset($_SESSION['HOJA_VISTA_NOMBRE'])){
+        $nombreHoja = $_SESSION['HOJA_VISTA_NOMBRE'];
+    }
     ?>
     <div class='modal fade show sol_message' id='modal-close-mess' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' style='display:block; visibility: hidden; '>
         <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -26,7 +32,13 @@
             </div>
         </div>   
     </div>
+    <?php
+    if($_SESSION['HOJA_EXE']== 0){
+    ?>
+    <label><a class="enlace" href="index.php" ><?php echo trad('Inicio', $lang) ?> </a> > <a class="enlace" href="sheets.php" ><?php echo trad('Hojas de Ejercicios', $lang) ?> </a> > <a class="enlance" href="sheet_exercise.php?hoja=<?php echo $hojaparameter ?>" ><?php echo $nombreHoja ?></a> > <a class="enlace" href="perform_exercise.php?exercise=<?php echo $id_ejer ?>" > <?php echo trad('Realizar Ejercicio', $lang) ?></a></label>
+    <?php } else{ ?>
     <label><a class="enlace" href="index.php" ><?php echo trad('Inicio', $lang) ?> </a> > <a class="enlace" href="exercises.php" ><?php echo trad('Ejercicios', $lang) ?> </a> > <a class="enlace" href="perform_exercise.php?exercise=<?php echo $id_ejer ?>" > <?php echo trad('Realizar Ejercicio', $lang) ?></a></label>
+     <?php } ?>
     <h2><strong><?php echo $des ?></strong></h2>
     <div class="row mb-3">
         <?php
@@ -70,7 +82,7 @@
                                     <div class="col-md-6 pl-0 mb-3" id="accordion ">
                                         <label><strong><?php echo trad('Tablas',$lang) ?></strong></label>
                                         <div class="sel-tab-show" >
-                                            <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm"> 
+                                            <select type="text" id="tablas" name="tablas" class="custom-select form-control-sm select_tabla"> 
                                                 <option value="">Selecciona Tabla</option>
                                             <?php 
                                                 $usa = new Usa();
@@ -79,12 +91,15 @@
                                                 
                                                     $quitar = $nameTable['schema_prof'] . "_";
                                                     $onlyName = explode($quitar, $nameTable['nombre']);
-                                                    
-                                                    echo "<option value='".$nameTable['nombre']."'>".$onlyName[1]."</option>"; 
-                                                  
+                                                    if($_SESSION['perform_tabla']==$onlyName[1]){
+                                                        echo "<option value='".$nameTable['nombre']."' selected>".$onlyName[1]."</option>"; 
+                                                    }else {
+                                                        echo "<option value='".$nameTable['nombre']."'>".$onlyName[1]."</option>"; 
+                                                    }
                                                 }
                                              ?>
-                                            </select>                               
+                                            </select> 
+                                            
                                         </div>
                                     </div>
                                     <div class="col-md-6 mb-2" id="accordion ">
@@ -194,6 +209,10 @@
                                                 </tr>
                                             </thead>
                                             <tbody id="tablaSolucionesPropuesta"> 
+                                                <?php echo '<select name="lista_hoja" class="custom-select form-control-sm  select_cabecera display-none" title="Selecciona cabecera" id="select_cab">';
+                                                    echo "<option value=".$_SESSION['value_cab']."> ".$_SESSION['select_cab']." </option>";
+                                                echo '</select>';
+                                                ?>
                                                 <?php 
                                                 if($_SESSION["showNumber"] != ''){
                                                 ?>

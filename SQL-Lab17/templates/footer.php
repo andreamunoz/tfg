@@ -41,23 +41,24 @@
     });
     $(document).ready(function () {
         $('.table-sortable tbody').sortable({
-            update: function (event, ui){
-                $(this).children().each(function (index){
-                    
-                    if($(this).attr('data-position') != (index+1)){
-                        $(this).attr('data-position',(index+1)).addClass('updated');
-                        var id = $(this).attr('data-index');
-                        var id_hoja = $(this).attr('data-index-sheet');
-                        var positions = $(this).attr('data-position');
-                        $.ajax({
-                            method: "POST",
-                            url: "../templates/adm_profesor/getActualizarOrden.php",
-                            data: { id: id, id_hoja: id_hoja, positions: positions}
-                        });
-                    }
-                });
-            }
+//            update: function (event, ui){
+//                $(this).children().each(function (index){
+//                    
+//                    if($(this).attr('data-position') != (index+1)){
+//                        $(this).attr('data-position',(index+1)).addClass('updated');
+//                        var id = $(this).attr('data-index');
+//                        var id_hoja = $(this).attr('data-index-sheet');
+//                        var positions = $(this).attr('data-position');
+//                        $.ajax({
+//                            method: "POST",
+//                            url: "../templates/adm_profesor/getActualizarOrden.php",
+//                            data: { id: id, id_hoja: id_hoja, positions: positions}
+//                        });
+//                    }
+//                });
+//            }
         });
+//        $( '.table-sortable tbody' ).disableSelection();
     });  
     </script>
 </html>

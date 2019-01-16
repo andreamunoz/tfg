@@ -2,7 +2,12 @@
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); 
 $_SESSION['HOJA_EXE']= 1;
-unset($_SESSION['guardarDatosEditar']);
+unset($_SESSION['guardarDatosEditar']); 
+//variables-sesion: hoja
+unset($_SESSION['select_p_h']); unset($_SESSION['select_cab_h']); unset($_SESSION['value_cab_h']); $_SESSION['showNumber_h']=""; 
+//variables-sesion: ver hoja
+unset($_SESSION['select_p_verh']); unset($_SESSION['select_n_verh']); unset($_SESSION['select_t_verh']); unset($_SESSION['value_cab_verh']); unset($_SESSION['select_cab_verh']); $_SESSION['showNumber_verh']="";
+$_SESSION['perform_tabla']="";
 ?>
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlace" href="configuration.php" ><?php echo trad('Modo Profesor',$lang) ?> </a> > <a class="enlace" href="configuration_exercises.php" > <?php echo trad('Ejercicios',$lang) ?></a></label>
@@ -18,7 +23,7 @@ unset($_SESSION['guardarDatosEditar']);
         <div class="card">  
             <div class="table-responsive no-buscar"> 
                 
-                <table id="employee_data" class="table table-striped table-bordered">  
+                <table id="employee_data" class="table table-striped table-bordered" name="exercises">  
                     <thead>
                         <tr>
                             <th style="width:35%;"><?php echo trad('Descripción',$lang) ?></th>
@@ -41,7 +46,7 @@ unset($_SESSION['guardarDatosEditar']);
                         $resP = $ejer->getCreadorEjercicio();
                         if (isset($res) && isset($resC) && isset($resP)) {
                             
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profesor" title="Selecciona profesor" id="select_pro">';
+                            echo '<select name="exercises" class="custom-select form-control-sm mr-3 select_profesor" title="Selecciona profesor" id="select_pro">';
                             echo "<option value='' >Todos Profesores </option>";  
                             while ($row_profe = mysqli_fetch_array($resP)) {
                                 $nombre = explode(" ",$row_profe['nombre']);
@@ -62,7 +67,7 @@ unset($_SESSION['guardarDatosEditar']);
                                 }
                             }
                             echo '</select>';
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona nivel" id="select_niv">';
+                            echo '<select name="exercises" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona nivel" id="select_niv">';
                              
                             if($_SESSION['select_n'] == ''){
                                 echo "<option value='' selected>Todos Niveles </option>";  
@@ -86,7 +91,7 @@ unset($_SESSION['guardarDatosEditar']);
                                 echo "<option value='Avanzado' selected> Avanzado </option>";
                             } 
                             echo '</select>';
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona categoría" id="select_tip">';
+                            echo '<select name="exercises" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona categoría" id="select_tip">';
                             echo "<option value='' >Todas Categorías </option>";
                             while ($row_tipo = mysqli_fetch_array($resC)) {
                                 if($_SESSION['select_t'] == $row_tipo['tipo'] ){
@@ -97,7 +102,7 @@ unset($_SESSION['guardarDatosEditar']);
                                 }
                             }
                             echo '</select>';
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm  select_cabecera display-none" title="Selecciona cabecera" id="select_cab">';
+                            echo '<select name="exercises" class="custom-select form-control-sm  select_cabecera display-none" title="Selecciona cabecera" id="select_cab">';
                                 echo "<option value=".$_SESSION['value_cab']."> ".$_SESSION['select_cab']." </option>";
                             echo '</select>';
                             if($_SESSION['showNumber'] != null){

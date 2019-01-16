@@ -1,6 +1,14 @@
 <?php include("layout.php"); ?>
 <?php include("menus/menu_lateral.php"); ?>
 <?php include("menus/menu_horizontal.php"); ?>
+<?php 
+$_SESSION['HOJA_EXE']= 1; 
+//variables-sesion: hoja
+unset($_SESSION['select_p_h']); unset($_SESSION['select_cab_h']); unset($_SESSION['value_cab_h']); $_SESSION['showNumber_h']=""; 
+//variables-sesion: ver hoja
+unset($_SESSION['select_p_verh']); unset($_SESSION['select_n_verh']); unset($_SESSION['select_t_verh']); unset($_SESSION['value_cab_verh']); unset($_SESSION['select_cab_verh']); $_SESSION['showNumber_verh']="";
+unset($_SESSION['perform_tabla']);
+?>
 <div class="container-tabla pt-4 pb-5">
     <label><a class="enlance" href="index.php" ><?php echo trad('Inicio',$lang) ?> </a> > <a class="enlance" href="exercises.php" > <?php echo trad('Ejercicios',$lang) ?></a> </label>
     <h2><strong><?php echo trad('Ejercicios',$lang) ?></strong></h2>
@@ -17,12 +25,6 @@
                             <th style="width:20%;"><?php echo trad('Tipo',$lang) ?></th>
                             <th style="width:10%;"><?php echo trad('N. Intentos',$lang) ?></th>                      
                             <th style="width:1%;"></th>
-                            <!-- <th style="width:20%;"><?php //echo trad('Descripción',$lang) ?></th>
-                            <th style="width:15%;"><?php //echo trad('Profesor',$lang) ?></th>
-                            <th style="width:15%;"><?php //echo trad('Nivel',$lang) ?></th>
-                            <th style="width:20%;"><?php //echo trad('Tipo',$lang) ?></th>
-                            <th style="width:10%;"><?php //echo trad('N. Intentos',$lang) ?></th>                      
-                            <th style="width:10%;"><?php //echo trad('Resultado',$lang) ?></th> -->
                         </tr>
                     </thead>
                     <tbody id="tablaEjerResolver">
@@ -37,7 +39,7 @@
                         $resC = $ejer->getAllCategorias();
                         $resP = $ejer->getCreadorEjercicio();
                         if (isset($res) && isset($resC) && isset($resP)) {
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profesor" title="Selecciona profesor" id="select_pro">';
+                            echo '<select name="exercises" class="custom-select form-control-sm mr-3 select_profesor" title="Selecciona profesor" id="select_pro">';
                             echo "<option value='' >Todos Profesores </option>";  
                             while ($row_profe = mysqli_fetch_array($resP)) {
                                 $nombre = explode(" ",$row_profe['nombre']);
@@ -58,7 +60,7 @@
                                 }
                             }
                             echo '</select>';
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona nivel" id="select_niv">';
+                            echo '<select name="exercises" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona nivel" id="select_niv">';
                              
                             if($_SESSION['select_n'] == ''){
                                 echo "<option value='' selected>Todos Niveles </option>";  
@@ -82,7 +84,7 @@
                                 echo "<option value='Avanzado' selected> Avanzado </option>";
                             } 
                             echo '</select>';
-                            echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona categoría" id="select_tip">';
+                            echo '<select name="exercises" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona categoría" id="select_tip">';
                             echo "<option value='' >Todas Categorías </option>";
                             while ($row_tipo = mysqli_fetch_array($resC)) {
                                 if($_SESSION['select_t'] == $row_tipo['tipo'] ){

@@ -24,7 +24,6 @@
 
     function pasarAMinusculas($solucion){
 
-        // var_dump($solucion);
         $nueva_solucion = "";
         $miniaux = "";
         $inicio = 0;
@@ -36,8 +35,6 @@
             $posicionComillas = strpos($solucion, '"', $inicio);
             while ( $posicionComillas !== false){
                 $miniaux = substr($solucion,$inicio, $posicionComillas-$inicio);
-                // var_dump($miniaux);
-                    
                 if($literal){
                     $nueva_solucion = $nueva_solucion . $miniaux . '"';
                 }else{
@@ -46,7 +43,6 @@
                 $literal = !$literal;
                 $inicio = $posicionComillas+1;
                 $posicionComillas = strpos($solucion, '"',$inicio);
-            // var_dump($nueva_solucion);
             }
             if ($posicionComillas !== $fin){
                 $nueva_solucion = $nueva_solucion.substr($solucion,$inicio, $fin);     
@@ -54,8 +50,6 @@
         }else{
             $nueva_solucion = strtolower($solucion);            
         }
-
-        //var_dump($nueva_solucion);
 
         return $nueva_solucion;
     }
@@ -164,9 +158,6 @@
     }
 
     function sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno){
-        //var_dump($tablasSolucionSinDueno);
-        //var_dump($solucion);
-        //var_dump($dueno);
         $aux = pasarAMinusculas($solucion);
         $cambios = array('!='=>' ', ','=>' ', '('=>' ', ')'=>' ', '='=>' ', '>'=>' ', '<'=>' ', '>='=>' ', '<='=>' ', '<>'=>' ', '&&'=>' ', '||'=>' ');
 
@@ -298,16 +289,17 @@
         if($ok){
                 
             $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
-            //var_dump($solucion);
-            $resultadoSolucion = $ejer->executeSolucion($solucion);
+
+            $resultadoSolucion = $ejer->executeSolucion($solucion, $tablasSolucion[0]);
 
             if($resultadoSolucion[0] === false){
                 $resultado[0] = false;
-                $resultado[1] = $resultadoSolucion[1];
+                $resultado[4] = $resultadoSolucion[1];
             }else{
                 $resultado[0] = true;
                 $resultado[1] = $tablasSolucion;
                 $resultado[2] = $resultadoSolucion;
+                $resultado[3] = $solucion;
             }
 
         }else{

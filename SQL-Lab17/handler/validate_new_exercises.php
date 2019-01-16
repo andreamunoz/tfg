@@ -347,14 +347,8 @@
             return $solucion;
         }
 
-        // function sustituirNuevoNombreTablaDelete($todas_tablas, $solucion, $dueno){
-            
 
-        //     return $solucion;
-
-        // }
-
-        function sustituirNuevoNombreTablaDeleteUsing($tablas, $solucion,$dueno){
+        function sustituirNuevoNombreTablaDeleteMultiple($tablas, $solucion,$dueno){
             $sentencia_copia_minusculas = $solucion;
             // var_dump($solucion);
             // var_dump($tablas);
@@ -840,7 +834,7 @@
 
                     // var_dump($tablas);
                 $todas_tablas_sin_dueno = quitarPalabrasIntermadias($tablas);
-                    // var_dump($tablas);
+                    var_dump($todas_tablas_sin_dueno);
 
                 $todas_tablas_sin_dueno = quitarAlias($todas_tablas_sin_dueno);
 
@@ -898,48 +892,26 @@
             $resultado = array();
             $ejer = new Ejercicio();
             $sentencia_copia_minusculas = pasarAMinusculas($solucion);
-            // var_dump( $sentencia_copia_minusculas);
-
-            // $palabrasBuscar = array(" low_priority "," quick "," ignore ");
-            // $palabras = array("low_priority","quick","ignore");
-            // $quitarFinal[0] = $sentencia_copia_minusculas;
-            // $nuevafrase = $sentencia_copia_minusculas;
-            // for($i=0; $i<count($palabras); $i++){
-            //     if(stripos($nuevafrase, $palabrasBuscar[$i])!== false){
-            //         $quitarFinal = preg_split("/".$palabras[$i]."/i", $quitarFinal[0],2);
-            //         $nuevafrase = $quitarFinal[0];
-            //         $quitarFinal = trim($quitarFinal[0]);
-            //     }
-            // }
 
             $sentencia = $sentencia_copia_minusculas;
             if (stripos($sentencia, " low_priority ")!== false){
                 $encontrado = stripos($sentencia, "low_priority");
                 $tamano = 13;
                 $sentencia = substr($sentencia, 0,$encontrado).substr($sentencia,$encontrado+$tamano);
-                // var_dump("low_priority:".$sentencia);
             }
             if (stripos($sentencia, " quick ")!== false){
                 $encontrado = stripos($sentencia, "quick");
                 $tamano = 6;
                 $sentencia = substr($sentencia, 0,$encontrado).substr($sentencia,$encontrado+$tamano);
-            // var_dump("quick:".$sentencia);
             }
             if (stripos($sentencia, " ignore ")!== false){
                 $encontrado = stripos($sentencia, "ignore");
                 $tamano = 7;
                 $sentencia = substr($sentencia, 0,$encontrado).substr($sentencia,$encontrado+$tamano);
-            // var_dump("ignore:".$sentencia);
             }
-            // var_dump($sentencia);
-
-            // var_dump(strpos( $sentencia, "delete from"));
-            
-            $sentencia_dividida = explode(" ", $sentencia, 3);
-            // var_dump($sentencia_dividida);
 
             if(strpos($sentencia, "delete from")!== false){
-                if (strpos($sentencia, " using ") === false){
+                if (strpos($sentencia_copia_minusculas, " using ") === false){
 
                     $buscarFin = array();
                     if (stripos($sentencia, " where ")!== false){
@@ -971,7 +943,7 @@
                     // var_dump($subcadena_tablas);
 
                     // correcta sintaxis de la subsentencia
-                    if ( strpos($sentencia, "(select ") === false and  strpos($sentencia, " select ") !== false){
+                    if ( strpos($sentencia_copia_minusculas, "(select ") === false and  strpos($sentencia_copia_minusculas, " select ") !== false){
                         $resultado[0] = false;
                         $resultado[4] = "La solución no tiene una sintaxis correcta. La subsentencia va entre parentesis.";
                         return $resultado;
@@ -979,46 +951,38 @@
 
                     //buscamos cuantas selects hay y las validamos
                     $avance = 0;
-                    $coincidencias = substr_count($sentencia, "(select ");
+                    $coincidencias = substr_count($sentencia_copia_minusculas, "(select ");
                     if($coincidencias > 0){
                         for ($i=0; $i <$coincidencias ; $i++) { 
-                            $inicio_subselect = strpos($sentencia, "(select ", $avance);
-                            $fin_subselect = strrpos($sentencia, ")");
+                            $inicio_subselect = strpos($sentencia_copia_minusculas, "(select ", $avance);
+                            $fin_subselect = strrpos($sentencia_copia_minusculas, ")");
                             $avance = $inicio_subselect +1;
 
-                            $subselect = substr($sentencia, $inicio_subselect, $fin_subselect-$inicio_subselect+1);
+                            $subselect = substr($sentencia_copia_minusculas, $inicio_subselect, $fin_subselect-$inicio_subselect+1);
                             // var_dump($subselect);
-                            // var_dump("¿?¿?¿??¿?¿?¿?¿?¿?¿?");
                             $resultado_subselect = validarSelect($subselect, $dueno);
                             // var_dump($resultado_subselect);
                             if($resultado_subselect[0] === true){
-                                $sentencia = substr($sentencia, 0, $inicio_subselect).$resultado_subselect[3].substr($sentencia,$fin_subselect + 1);
+                                $sentencia_copia_minusculas = substr($sentencia_copia_minusculas, 0, $inicio_subselect).$resultado_subselect[3].substr($sentencia_copia_minusculas,$fin_subselect + 1);
                             }else{
                                 $resultado[0] = false;
                                 $resultado[4] = "La subsentencia no es correcta.";
                                 return $resultado;
                             }
-                            // var_dump("################");
-                            // var_dump($resultado_subselect);
 
-                            // var_dump("||||||||||||||||||||||||||1");
-                            // var_dump($sentencia);
                         }
                         if (is_string($subcadena_tablas)){
                             $tablas[0] = $subcadena_tablas;
                         } 
-                        
-                        $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteSimple($tablas, $sentencia, $dueno);
+                        $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteSimple($tablas, $sentencia_copia_minusculas, $dueno);
                     }else{
                         if (is_string($subcadena_tablas)){
                             $tablas[0] = $subcadena_tablas;
                         } 
                         // var_dump($tablas);
-                        $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteSimple($tablas, $sentencia, $dueno);
+                        $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteSimple($tablas, $sentencia_copia_minusculas, $dueno);
                     }
 
-                    // var_dump("*********************************************");
-                    // var_dump($sentencia_delete_simple);
                     $resultadoSolucion = $ejer->executeSolucionNoSelect($sentencia_delete_simple, $tablas, "delete");
 
                     if($resultadoSolucion[0] === false){
@@ -1060,7 +1024,7 @@
 
                     //tenemos las tablas-> comprobar si hay subselect y sustituir el nombre.
                     // correcta sintaxis de la subsentencia
-                    if ( strpos($sentencia, "(select ") === false and  strpos($sentencia, " select ") !== false){
+                    if ( strpos($sentencia_copia_minusculas, "(select ") === false and  strpos($sentencia_copia_minusculas, " select ") !== false){
                         $resultado[0] = false;
                         $resultado[4] = "La solución no tiene una sintaxis correcta. La subsentencia va entre parentesis.";
                         return $resultado;
@@ -1068,32 +1032,30 @@
 
                     //buscamos cuantas selects hay y las validamos
                     $avance = 0;
-                    $coincidencias = substr_count($sentencia, "(select ");
+                    $coincidencias = substr_count($sentencia_copia_minusculas, "(select ");
                     if($coincidencias > 0){
                         for ($i=0; $i <$coincidencias ; $i++) { 
-                            $inicio_subselect = strpos($sentencia, "(select ", $avance);
-                            $fin_subselect = strrpos($sentencia, ")");
+                            $inicio_subselect = strpos($sentencia_copia_minusculas, "(select ", $avance);
+                            $fin_subselect = strrpos($sentencia_copia_minusculas, ")");
                             $avance = $inicio_subselect +1;
 
-                            $subselect = substr($sentencia, $inicio_subselect, $fin_subselect-$inicio_subselect+1);
+                            $subselect = substr($sentencia_copia_minusculas, $inicio_subselect, $fin_subselect-$inicio_subselect+1);
                             // var_dump($subselect);
                             // var_dump("¿?¿?¿??¿?¿?¿?¿?¿?¿?");
                             $resultado_subselect = validarSelect($subselect, $dueno);
-                            // var_dump("$$$$$$$$$");
-                            // var_dump($resultado_subselect);
-                            // var_dump("$$$$$$$$$");
                             if($resultado_subselect[0] === true){
-                                $sentencia = substr($sentencia, 0, $inicio_subselect).$resultado_subselect[3].substr($sentencia,$fin_subselect + 1);
+                                $sentencia_copia_minusculas = substr($sentencia_copia_minusculas, 0, $inicio_subselect).$resultado_subselect[3].substr($sentencia_copia_minusculas,$fin_subselect + 1);
                             }else{
                                 $resultado[0] = false;
                                 $resultado[4] = "La subsentencia no es correcta.";
                                 return $resultado;
                             }
+                            // var_dump("$$$$$$$$$");
                             // var_dump("################");
                             // var_dump($resultado_subselect);
 
                             // var_dump("||||||||||||||||||||||||||1");
-                            // var_dump($sentencia);
+                            // var_dump($sentencia_copia_minusculas);
                         }
                         if (is_string($tablas)){
                             $tabla[0] = $tablas;
@@ -1102,10 +1064,10 @@
                                 $tabla[$key] = $value;
                             }
                         }
-                        $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteUsing($tabla, $sentencia, $dueno);
-                        var_dump("||||||||||||||||||||||||||1");
-                        var_dump($sentencia_delete_simple);
-                        var_dump("||||||||||||||||||||||||||1");
+                        $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteMultiple($tabla, $sentencia_copia_minusculas, $dueno);
+                        // var_dump("||||||||||||||||||||||||||1");
+                        // var_dump($sentencia_delete_simple);
+                        // var_dump("||||||||||||||||||||||||||1");
                     }else{
                         if (is_string($tablas)){
                             $tabla[0] = $tablas;
@@ -1114,12 +1076,10 @@
                                 $tabla[$key] = $value;
                             }
                         }
-
-                        $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteUsing($tabla, $sentencia, $dueno);
-                        var_dump("||||||||||||||||||||||||||1");
-                        var_dump($sentencia_delete_simple);
-                        var_dump("||||||||||||||||||||||||||1");
+                        $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteMultiple($tabla, $sentencia_copia_minusculas, $dueno);
+                        // var_dump("||||||||||||||||||||||||||1");
                         // var_dump($sentencia_delete_simple);
+                        // var_dump("||||||||||||||||||||||||||1");
                     }
 
                     $resultadoSolucion = $ejer->executeSolucionNoSelect($sentencia_delete_simple, $tabla, "delete");
@@ -1139,7 +1099,111 @@
                 }
             
             } elseif(stripos($sentencia, " from ")){
-                
+
+                $buscarFin = array();
+                if (stripos($sentencia_copia_minusculas, " where ")!== false){
+                    $buscarFin[0] = stripos($sentencia_copia_minusculas, " where ");
+                }else{
+                    $buscarFin[0] = 9999999;
+                }
+                if (stripos($sentencia_copia_minusculas, ";")!== false){
+                    $buscarFin[1] = stripos($sentencia_copia_minusculas, ";");
+                }else{
+                    $buscarFin[1] = 9999999;
+                }
+                asort($buscarFin);
+                // var_dump($buscarFin);
+                $posFrom = stripos($sentencia_copia_minusculas, " from ") + 6;
+                $longTablas = $buscarFin[0] - $posFrom;
+                $subcadena_tablas = substr($sentencia_copia_minusculas,$posFrom, $longTablas);
+                // $subcadena_tablas = preg_replace("/delete from /i", "", $subcadena_tablas);
+                // var_dump($subcadena_tablas);
+
+                $tablas = quitarPalabrasIntermadias($subcadena_tablas);
+                $tablas = quitarAlias($tablas);
+                // var_dump($tablas);
+                //tenemos las tablas-> comprobar si hay subselect y sustituir el nombre.
+                // correcta sintaxis de la subsentencia
+                if ( strpos($sentencia_copia_minusculas, "(select ") === false and  strpos($sentencia_copia_minusculas, " select ") !== false){
+                    $resultado[0] = false;
+                    $resultado[4] = "La solución no tiene una sintaxis correcta. La subsentencia va entre parentesis.";
+                    return $resultado;
+                }
+                //buscamos cuantas selects hay y las validamos
+                $avance = 0;
+                $coincidencias = substr_count($sentencia_copia_minusculas, "(select ");
+                if($coincidencias > 0){
+                    for ($i=0; $i <$coincidencias ; $i++) { 
+                        $inicio_subselect = strpos($sentencia_copia_minusculas, "(select ", $avance);
+                        $fin_subselect = strrpos($sentencia_copia_minusculas, ")");
+                        $avance = $inicio_subselect +1;
+
+                        $subselect = substr($sentencia_copia_minusculas, $inicio_subselect, $fin_subselect-$inicio_subselect+1);
+                        // var_dump($subselect);
+                        // var_dump("¿?¿?¿??¿?¿?¿?¿?¿?¿?");
+                        $resultado_subselect = validarSelect($subselect, $dueno);
+                        // var_dump("$$$$$$$$$");
+                        // var_dump($resultado_subselect);
+                        // var_dump("$$$$$$$$$");
+                        var_dump("$$$$$$$$$");
+                        var_dump(substr($sentencia_copia_minusculas, 0, $inicio_subselect));
+                        var_dump($resultado_subselect[3]);
+                        var_dump(substr($sentencia_copia_minusculas,$fin_subselect + 1));
+                        var_dump("$$$$$$$$$");
+                        if($resultado_subselect[0] === true){
+                            $sentencia_copia_minusculas = substr($sentencia_copia_minusculas, 0, $inicio_subselect).$resultado_subselect[3].substr($sentencia_copia_minusculas,$fin_subselect + 1);
+                        }else{
+                            $resultado[0] = false;
+                            $resultado[4] = "La subsentencia no es correcta.";
+                            return $resultado;
+                        }
+                        var_dump("################");
+                        var_dump($resultado_subselect);
+
+                        // var_dump("||||||||||||||||||||||||||1");
+                        // var_dump($sentencia);
+                    }
+                    if (is_string($tablas)){
+                        $tabla[0] = $tablas;
+                    } else{
+                        foreach ($tablas as $key => $value) {
+                            $tabla[$key] = $value;
+                        }
+                    }
+                    $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteMultiple($tabla, $sentencia_copia_minusculas, $dueno);
+                    var_dump("||||||||||||||||||||||||||1");
+                    var_dump($sentencia_delete_simple);
+                    var_dump("||||||||||||||||||||||||||1");
+                }else{
+                    if (is_string($tablas)){
+                        $tabla[0] = $tablas;
+                    }else{
+                        foreach ($tablas as $key => $value) {
+                            $tabla[$key] = $value;
+                        }
+                    }
+
+                    $sentencia_delete_simple = sustituirNuevoNombreTablaDeleteMultiple($tabla, $sentencia_copia_minusculas, $dueno);
+                    var_dump("||||||||||||||||||||||||||1");
+                    var_dump($sentencia_delete_simple);
+                    var_dump("||||||||||||||||||||||||||1");
+                    // var_dump($sentencia_delete_simple);
+                }
+
+                $resultadoSolucion = $ejer->executeSolucionNoSelect($sentencia_delete_simple, $tabla, "delete");
+
+                if($resultadoSolucion[0] === false){
+                    $resultado[0] = false;
+                    $resultado[4] = $resultadoSolucion[1];
+                }else{
+                    foreach ($tabla as $key => $value) {
+                        $tablasConDueno[$key] = $dueno."_".$value;
+                    }
+                    $resultado[0] = true;
+                    $resultado[1] = $tablasConDueno;
+                    $resultado[2] = $resultadoSolucion;
+                    $resultado[3] = $sentencia_delete_simple;
+                }
 
             }else{
                 $resultado[0] = false;
@@ -1183,14 +1247,14 @@
 
             $ejer = new Ejercicio();
             $resultadoCrear = "";
-            var_dump("-------------");
+            var_dump("------------------------------");
             var_dump($resultado);
-            var_dump("-------------");
+            var_dump("------------------------------");
             $resultadoCrear = $ejer->createEjercicio($nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$user,$solucion, $resultado[1]);
 
             if($resultadoCrear){
                     unset($_SESSION['guardarDatos']);
-                    // header("Location: ../templates/configuration_exercises.php");
+                    header("Location: ../templates/configuration_exercises.php");
             }else{
                     $_SESSION['message_sheets'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                             <div class='modal-dialog modal-dialog-centered' role='document'>
@@ -1207,7 +1271,7 @@
                                 </div>
                             </div>   
                         </div>";
-                    // header("Location: ../templates/configuration_new_exercises.php");
+                    header("Location: ../templates/configuration_new_exercises.php");
             }
 
         }else{
@@ -1246,7 +1310,7 @@
                 </div>";            
             }
             
-            // header("Location: ../templates/configuration_new_exercises.php");
+            header("Location: ../templates/configuration_new_exercises.php");
         }
     // }
     exit();

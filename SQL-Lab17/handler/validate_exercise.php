@@ -12,6 +12,10 @@ $_SESSION["solAlum"] = $_POST['sol_ejercicio'];
 $dueno_tabla = $_SESSION['duenoTablas'];
 $user = $_SESSION['user'];
 
+if(substr($solucion, -1) !== ";"){
+    $solucion = $solucion.";";
+}
+
 function pasarAMinusculas($solucion){
     $nueva_solucion = "";
     $miniaux = "";
@@ -442,7 +446,7 @@ function sustituirNuevoNombreTablaDeleteSimple($tablas, $solucion,$dueno){
 
 function sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno){
     $aux = pasarAMinusculas($solucion);
-    $cambios = array('!='=>' ', ','=>' ', '('=>' ', ')'=>' ', '='=>' ', '>'=>' ', '<'=>' ', '>='=>' ', '<='=>' ', '<>'=>' ', '&&'=>' ', '||'=>' ');
+    $cambios = array('!='=>'#', ','=>'#', '('=>'#', ')'=>'#', '='=>'#', '>'=>'#', '<'=>'#', '>='=>'##', '<='=>'##', '<>'=>'##', '&&'=>'##', '||'=>'##','+'=>'#','*'=>'#','-'=>'#', '%'=>'#');
 
     $aux = strtr($aux,$cambios);
 
@@ -1152,7 +1156,7 @@ if ($resultado_alumno[0] !== false) {
                                         </div>
                                     </div>
                                     <div class='modal-body'>
-                                        <h2><strong>¡Felicidades!</strong></h2>
+                                        <h2><strong>¡Acierto!</strong></h2>
                                         <p>El ejercicio esta resuelto correctamente.</p>
                                     </div>
                                 </div>
@@ -1284,7 +1288,7 @@ if ($resultado_alumno[0] !== false) {
                                             </div>
                                         </div>
                                         <div class='modal-body'>
-                                            <h2><strong>¡Felicidades!</strong></h2>
+                                            <h2><strong>¡Acierto!</strong></h2>
                                             <p>El ejercicio esta resuelto correctamente.</p>
                                         </div>
                                     </div>

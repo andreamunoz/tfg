@@ -21,7 +21,6 @@
                               </div>
                             </div>
                             <div class='modal-body'>
-                                <h2><strong>¡Felicidades!</strong></h2>
                                 <p>La hoja se ha creado correctamente.</p>
                             </div>
                         </div>

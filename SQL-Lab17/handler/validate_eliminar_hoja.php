@@ -23,7 +23,6 @@ if (!empty($result)) {
                               </div>
                             </div>
                             <div class='modal-body'>
-                                <h2><strong>¡Felicidades!</strong></h2>
                                 <p>Se ha eliminado la hoja correctamente.</p>
                             </div>
                         </div>

@@ -56,7 +56,7 @@ class Solucion{
     function getHistoricoEjercicios($id,$user){
         $connect = new Tools();
         $conexion = $connect->connectDB();
-        $sql = "SELECT * FROM sqlab_solucion WHERE id_ejercicio=$id AND user='$user' ;";
+        $sql = "SELECT * FROM sqlab_solucion WHERE id_ejercicio=$id AND user='$user' order by fecha desc;";
         $consulta = mysqli_query($conexion,$sql);
         $connect->disconnectDB($conexion);
         return $consulta;

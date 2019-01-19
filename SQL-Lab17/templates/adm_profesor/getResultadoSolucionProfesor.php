@@ -352,11 +352,11 @@
 
     if(!$resultado[0]){
 
-        if(isset($resultado[4])){
-            $mostrar = $resultado[4];
-        }else{
+        // if(isset($resultado[4])){
+            // $mostrar = $resultado[4];
+        // }else{
             $mostrar = "";
-        }
+        // }
     }else{
         $datos = $resultado[2][0];
         $mostrar = '<thead><tr>';

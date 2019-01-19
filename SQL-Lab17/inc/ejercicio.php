@@ -419,7 +419,7 @@ class Ejercicio{
             $consulta[0] = false;
             $consulta[1] = $conexion->error;
         }else if ($resultado){
-            var_dump($resultado);
+            //var_dump($resultado);
             $consulta[0] = true;
             if($tipo ==="delete"){
 
@@ -443,12 +443,9 @@ class Ejercicio{
                 }
             }
 
-// var_dump("LO Que DEVUELVE:");
-// var_dump($consulta);
-
         }else{
-            var_dump("ELSE");
-            var_dump($resultado);
+            // var_dump("ELSE");
+            // var_dump($resultado);
             
             $rawdata = array();
             $i=0;

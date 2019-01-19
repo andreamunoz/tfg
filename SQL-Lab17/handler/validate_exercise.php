@@ -1183,6 +1183,25 @@ if ($resultado_alumno[0] !== false) {
                 $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 0);
             }
             
+            if (!$resultado_alumno[0]){
+                $_SESSION['msg_solucion'] = 
+                    "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                        <div class='modal-dialog modal-dialog-centered' role='document'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <div class='close' id='close-modal'>
+                                        <i class='fas fa-times' data-dismiss='modal'></i>
+                                    </div>
+                                </div>
+                                <div class='modal-body'>
+                                    <h2><strong>¡Error!</strong></h2>
+                                    <p>Los datos no coinciden. Consulte los resultados.</p>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>";
+                    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
+            }
             if (count($resultado_alumno_simple) == count($resultado_profesor_simple)) {
 
                 if (count($resultado_alumno_simple[0]) != count($resultado_profesor_simple[0])) {
@@ -1198,7 +1217,7 @@ if ($resultado_alumno[0] !== false) {
                                 </div>
                                 <div class='modal-body'>
                                     <h2><strong>¡Error!</strong></h2>
-                                    <p>El número de columnas de la solución propuesta no es correcto.</p>
+                                    <p>Los datos no coinciden. Consulte los resultados.</p>
                                 </div>
                             </div>
                         </div>   
@@ -1413,7 +1432,27 @@ if ($resultado_alumno[0] !== false) {
     }else if ($datosVeredictoIntentos[0] == 0){
         $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 0);
     }
-    $_SESSION['msg_solucion'] = 
+    
+    if(isset($resultado_alumno[4])){
+
+        $_SESSION['msg_solucion'] = 
+            "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <div class='close' id='close-modal'>
+                                <i class='fas fa-times' data-dismiss='modal'></i>
+                            </div>
+                        </div>
+                        <div class='modal-body'>
+                            <h2><strong>¡Error!</strong></h2>
+                            <p>".$resultado_alumno[4]."</p>
+                        </div>
+                    </div>
+                </div>   
+            </div>";
+    }else{
+        $_SESSION['msg_solucion'] = 
             "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                 <div class='modal-dialog modal-dialog-centered' role='document'>
                     <div class='modal-content'>
@@ -1429,6 +1468,8 @@ if ($resultado_alumno[0] !== false) {
                     </div>
                 </div>   
             </div>";
+    }
+
     header("Location: ../templates/perform_exercise.php?exercise=" . $id."&all=false");
 }
 

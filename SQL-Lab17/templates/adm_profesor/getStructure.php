@@ -5,8 +5,8 @@
     $conexion = $connect->connectDB();
     
     $sql = "SELECT COLUMN_NAME, COLUMN_TYPE, COLUMN_KEY FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" .$_REQUEST["tabla"]. "';";
-    if($_REQUEST["name"]!=null)
-        $_SESSION['perform_tabla'] = $_REQUEST["name"];
+//    if($_REQUEST["name"]!=null)
+    $_SESSION['perform_tabla'] = $_REQUEST["name"];
     $consulta = mysqli_query($conexion, $sql);
     $_SESSION["infoTabla"] = $_REQUEST["tabla"];
     $_SESSION["columnas"] = "";

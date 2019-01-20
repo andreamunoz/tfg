@@ -165,7 +165,24 @@
                                 </div>  
                             </div>
                         </div>
-                        
+                        <div id="accordion ">
+                            <div class="card">  
+                                <div class="table-responsive">  
+                                    <table id="employee_prueba" class="table table-striped-conf table-bordered table-sortable" value="<?php echo $id_hoja?>">  
+                                        <thead>
+                                            <th style="width:30%;"><?php echo trad('Descripción', $lang) ?></th>
+                                            <th style="width:20%;"><?php echo trad('Profesor', $lang) ?></th>
+                                            <th style="width:20%;"><?php echo trad('Nivel', $lang) ?></th>
+                                            <th style="width:20%;"><?php echo trad('Tipo', $lang) ?></th>
+                                            <th style="width:9%;"><?php echo trad('Añadir', $lang) ?></th>                                         
+                                            <th style="width:1%;"></th></thead>
+                                    <tbody>
+                                        
+                                    </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         <?php
                         if (isset($_SESSION['message_sheets'])) {
                             echo $_SESSION['message_sheets'];

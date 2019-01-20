@@ -59,6 +59,7 @@ $(document).ready(function () {
     });
 
     $(".selector-tabla select").change(function() {
+        
         var form_data = {
             is_ajax: 1,
             tabla: $(".selector-tabla select option:checked").val()
@@ -76,6 +77,7 @@ $(document).ready(function () {
 
     /*Nueva forma mostrar columnas en crear ejercicio: */
     $(".selector-tabla select").change(function() {
+        
         var form_data = {
             is_ajax: 1,
             tabla: $(".selector-tabla select option:checked").val(),
@@ -354,14 +356,32 @@ $(document).ready(function () {
     });
     
     $('#employee_data tbody').on( 'click', 'i', function () {
-        
+        var i=0; var id_hoja; var id=-1; var positions=[];
 	var table = $('#employee_data').DataTable();
 	var table2 = $('#employee_table_hoja').DataTable();
-        var tr = $(this).closest("tr");
-//        console.log(tr);
+        var tr = $(this).closest("tr"); 
+//        $('#employee_table_hoja').find('tr').each(function(){
+//            id = $(this).find('td:last-child').text();
+//            id_hoja = $(this).closest('table').attr('value');
+//            if(id != -1){
+//                if($(this).find('td:last-child').text()!=""){
+//                    positions[i] = $(this).find('td:last-child').text();
+//                    i++;
+//                }
+//            }
+//        });
+//        $.ajax({
+//            method: "POST",
+//            url: "../templates/adm_profesor/getActualizarOrden.php",
+//            data: { id: id, id_hoja: id_hoja, positions: positions}
+//        });
+//        $('#employee_table_hoja').find('tr').each(function(){
+//            alert(table2.row(0).index());
+//        });
         table.row( tr ).data()[4] = "<i class='fas fa-trash mr-3' style='color:black; opacity:0.9;' title='Eliminar'></i>";
-	table2.row.add( table.row( tr ).data() ).draw( false );
+        table2.row.add( table.row( tr ).data() ).draw();
 	table.row(tr).remove().draw( false );
+
     } );
     
     $('#employee_table_hoja tbody').on( 'click', 'i', function () {
@@ -373,18 +393,14 @@ $(document).ready(function () {
         table.row.add( table2.row( tr ).data() ).draw( false );
         table2.row(tr).remove().draw( false );
         
+        
     });
-//    $('#employee_table_hoja tbody').on( 'click', 'tr', function () {
-//        var table = $('#employee_data').DataTable();
-//        var table2 = $('#employee_table_hoja').DataTable();
-//        table2.row( this ).data()[4] = "<i class='fas fa-arrow-up mr-3' style='color:black; opacity:0.9;' title='Añadir'></i>";
-//        table.row.add( table2.row( this ).data() ).draw( false );
-//        table2.row(this).remove().draw( false );
-//    } );
     
     $('#employee_table_hoja').DataTable({
             paging:   false,
-            destroy: true,
+            lengthChange: false,
+            responsive: true,
+            destroy: false,
             ordering: false,
             searching: false
         });
@@ -724,19 +740,40 @@ function resolverTablas(){
 
 function newTablas(){
 //    var form_data = {
-//        is_ajax: 1,
-//        dueno: username,
-//        name: $(".selector-tabla select option:checked").text()
-//    };
-//    $.ajax({
-//        type: "POST",
-//        url: "../templates/adm_profesor/getTablas.php",
-//        data: form_data,
-//        success: function (response)
-//        {
-//            $('.selector-tabla select').html(response).fadeIn();
-//        }
-//    });
+//            is_ajax: 1,
+//            tabla: $(".selector-tabla select option:checked").val()
+//        };
+//        $.ajax({
+//            type: "POST",
+//            url: "adm_profesor/getColumns.php",
+//            data: form_data,
+//            success: function(response)
+//            {   
+//                $('.columnas-tabla #columnas tbody').html(response).fadeIn();
+//            }
+//        });
+    //    alert($(".selector-tabla select option:checked").val());
+    //    var form_data = {
+    //        is_ajax: 1,
+    //        tabla: $(".selector-tabla select option:checked").val(),
+    //        name: $(".selector-tabla select option:checked").text()
+    //    };
+    //    
+    //    if (form_data.tabla !== ""){
+    //        $('#structure_table thead').html('<tr> <th style="width:30%;">Nombre Columna</th><th style="width:30%;">Tipo Columna</th><th style="width:20%;">Clave</th></tr>');
+    //
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "adm_profesor/getStructure.php",
+    //            data: form_data, 
+    //            success: function(response)
+    //            {   
+    //                $('#structure_table tbody').html(response).fadeIn();
+    //            }
+    //        });
+    //    }else{
+    //        $('.structure-table tbody').html("").fadeIn();
+    //    }
 }
 
 $( window ).on( "load", function() {    

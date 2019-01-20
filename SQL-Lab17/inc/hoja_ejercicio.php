@@ -147,6 +147,15 @@ class HojaEjercicio{
         $connect->disconnectDB($conexion);
         return $count;
     }
+    
+    function getExistIdHoja($id){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $sql = "select id_hoja from sqlab_hoja_ejercicios where id_hoja='$id'";
+        $consulta = mysqli_query($conexion,$sql);
+        $connect->disconnectDB($conexion);
+        return $consulta['id_hoja'];
+    }
 
     function getHojasYEjerciciosById($id){
 

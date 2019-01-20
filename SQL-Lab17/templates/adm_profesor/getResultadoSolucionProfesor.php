@@ -21,6 +21,12 @@
 
     $tablas_usadas = $usa->getTablasUsadas($id_ejer);
     //var_dump($tablas_usadas);
+    if(substr($solucion_profesor, -1) !== ";"){
+        $solucion_profesor = $solucion_profesor.";";
+    }
+    if(substr($solucion_alumno, -1) !== ";"){
+        $solucion_alumno = $solucion_alumno.";";
+    }
 
     function pasarAMinusculas($solucion){
 
@@ -159,7 +165,7 @@
 
     function sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno){
         $aux = pasarAMinusculas($solucion);
-        $cambios = array('!='=>' ', ','=>' ', '('=>' ', ')'=>' ', '='=>' ', '>'=>' ', '<'=>' ', '>='=>' ', '<='=>' ', '<>'=>' ', '&&'=>' ', '||'=>' ');
+        $cambios = array('!='=>'#', ','=>'#', '('=>'#', ')'=>'#', '='=>'#', '>'=>'#', '<'=>'#', '>='=>'##', '<='=>'##', '<>'=>'##', '&&'=>'##', '||'=>'##','+'=>'#','*'=>'#','-'=>'#', '%'=>'#');
 
         $aux = strtr($solucion,$cambios);
 
@@ -343,13 +349,14 @@
         
         $resultado = distinguirSentencia($solucion_alumno, $dueno_tabla);
     }
+
     if(!$resultado[0]){
 
-        if(isset($resultado[4])){
-            $mostrar = $resultado[4];
-        }else{
+        // if(isset($resultado[4])){
+            // $mostrar = $resultado[4];
+        // }else{
             $mostrar = "";
-        }
+        // }
     }else{
         $datos = $resultado[2][0];
         $mostrar = '<thead><tr>';

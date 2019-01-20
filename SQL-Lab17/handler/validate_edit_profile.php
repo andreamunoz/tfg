@@ -19,7 +19,7 @@ if(isset($_POST["editar"])){
         
         $_SESSION['msg_update_register'] = "<div class='col-md-12 mt-5 alert alert-success alert-dismissable'>
                     <button type='button' class='close' data-dismiss='alert'>&times;</button>
-                    <strong>¡Felicidades!</strong> El perfil se ha podido actualizar correctamente.
+                    El perfil se ha podido actualizar correctamente.
                 </div>";
         header("Location: ../templates/edit_profile.php");
     }

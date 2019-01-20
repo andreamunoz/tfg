@@ -1137,14 +1137,14 @@
 
         $solucion = pasarAMinusculas($solucion);
         $resultado = distinguirSentencia($solucion, $user_tablas); 
-        var_dump($resultado);
+        // var_dump($resultado);
         if($resultado[0]){
             
             $ejer = new Ejercicio();
             $resultadoEditar = "";
 
             $resultadoEditar = $ejer->update($id,$nivel,$enunciado,$descripcion,$deshabilitar,$categoria,$solucion,$user,$resultado[1]);
-             var_dump($resultadoEditar);
+             // var_dump($resultadoEditar);
             if($resultadoEditar){
                 $ejer->enviarAviso($id);
                 unset($_SESSION['guardarDatosEditar']);

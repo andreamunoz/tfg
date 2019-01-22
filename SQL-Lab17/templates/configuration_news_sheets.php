@@ -174,7 +174,7 @@
                                 </div>  
                             </div>
                         </div>
-                        <div id="accordion ">
+                        <div id="accordion " class="display-none">
                             <div class="card">  
                                 <div class="table-responsive">  
                                     <table id="employee_prueba" class="table table-striped-conf table-bordered table-sortable" value="<?php echo $id_hoja?>">  

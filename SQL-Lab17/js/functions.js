@@ -356,43 +356,47 @@ $(document).ready(function () {
     });
     
     $('#employee_data tbody').on( 'click', 'i', function () {
+        
+//        var table = $('#employee_table_hoja').DataTable(); 
+        var tablaPrueba = $('#employee_prueba').DataTable();
+        var longitud = $('#employee_table_hoja').find('tr').length - 1;
         var i=0; var id_hoja; var id=-1; var positions=[];
-	var table = $('#employee_data').DataTable();
+        var table = $('#employee_data').DataTable();
 	var table2 = $('#employee_table_hoja').DataTable();
-        var tr = $(this).closest("tr"); 
-//        $('#employee_table_hoja').find('tr').each(function(){
-//            id = $(this).find('td:last-child').text();
-//            id_hoja = $(this).closest('table').attr('value');
-//            if(id != -1){
-//                if($(this).find('td:last-child').text()!=""){
-//                    positions[i] = $(this).find('td:last-child').text();
-//                    i++;
-//                }
-//            }
-//        });
-//        $.ajax({
-//            method: "POST",
-//            url: "../templates/adm_profesor/getActualizarOrden.php",
-//            data: { id: id, id_hoja: id_hoja, positions: positions}
-//        });
-//        $('#employee_table_hoja').find('tr').each(function(){
-//            alert(table2.row(0).index());
-//        });
-        table.row( tr ).data()[4] = "<i class='fas fa-trash mr-3' style='color:black; opacity:0.9;' title='Eliminar'></i>";
-        table2.row.add( table.row( tr ).data() ).draw();
-	table.row(tr).remove().draw( false );
+        var tr2 = $(this).closest("tr"); 
+        var pos=0; var arrayTr = [];
+        
+        $('#employee_table_hoja i').each(function(){
+            
+            var tr = $(this).closest("tr");
+            arrayTr[pos] = tr;
+            tablaPrueba.row.add(tr);
+            pos++;
+        });
+        
+        for(var i=0; i < pos; i++){
+            table2.row(i).data( tablaPrueba.row(arrayTr[i]).data());
+        }
+        table.row( tr2 ).data()[4] = "<i class='fas fa-trash mr-3' style='color:black; opacity:0.9;' title='Eliminar'></i>";
+        table2.row.add( table.row( tr2 ).data() ).draw();
+	table.row(tr2).remove().draw( false );
 
     } );
     
     $('#employee_table_hoja tbody').on( 'click', 'i', function () {
         var table = $('#employee_data').DataTable();
         var table2 = $('#employee_table_hoja').DataTable();
-        var tr = $(this).closest("tr");
-//        console.log(tr);
-        table2.row( tr ).data()[4] = "<i class='fas fa-arrow-up mr-3' style='color:black; opacity:0.9;' title='Añadir'></i>";
-        table.row.add( table2.row( tr ).data() ).draw( false );
-        table2.row(tr).remove().draw( false );
+        var tablaPrueba = $('#employee_prueba').DataTable();
         
+        var pos = $('#employee_table_hoja').find('tr').length - 1;
+        var index = $(this).parents('tr').index();
+        var tr2 = $(this).parents('tr');
+        tr2.find("td i").addClass('fa-plus-circle');
+        tr2.find("td i").removeClass('fa-trash');
+        tr2.find("td i").attr('title','Añadir');
+
+        table.row.add(tr2).draw();
+        table2.row(index).remove().draw();
         
     });
     

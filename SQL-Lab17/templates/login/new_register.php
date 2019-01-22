@@ -84,7 +84,7 @@ $lang = 'en';
                     <div class="form-row">
                         <div class="form-group offset-md-2 col-md-9">
                             <label for="inputEmail"><?php echo trad('Correo Electrónico',$lang) ?></label>
-                            <input type="email" maxlength="25" id="inputEmail" name="email" class="form-control form-control-sm" required />
+                            <input type="email" maxlength="40" id="inputEmail" name="email" class="form-control form-control-sm" required />
                         </div>
                         <div class="form-group offset-md-2 col-md-9">
                             <label for="inputPassword"><?php echo trad('Contraseña',$lang) ?></label>

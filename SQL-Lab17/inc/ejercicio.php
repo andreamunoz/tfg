@@ -390,9 +390,11 @@ class Ejercicio{
         $consulta = array();
         $conexion = $connect->connectDB();
         $resultado = mysqli_query($conexion,$solucion);
+        // var_dump($resultado);
         if(!$resultado){
             $consulta[0] = false;
             $consulta[1] = $conexion->error;
+            $consulta[2] = $conexion->errno;
         }else{
             $rawdata = array();
             $i=0;
@@ -418,6 +420,7 @@ class Ejercicio{
         if(!$resultado){
             $consulta[0] = false;
             $consulta[1] = $conexion->error;
+            $consulta[2] = $conexion->errno;
         }else if ($resultado){
             //var_dump($resultado);
             $consulta[0] = true;

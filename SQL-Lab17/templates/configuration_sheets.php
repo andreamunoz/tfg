@@ -46,6 +46,7 @@ unset($_SESSION['select_p_verh']); unset($_SESSION['select_n_verh']); unset($_SE
                             echo '<select name="hoja" class="custom-select form-control-sm select_profesor" title="Selecciona profesor" id="select_pro">';
 //                            echo "<option name='' apellido1='' apellido2=''>Todos Profesores </option>";
                             echo "<option value='' >Todos Profesores </option>";
+                            // echo "<option value='' >".trad("Todos Profesores", $lang)." </option>";
                             while ($row_profe = mysqli_fetch_array($res)) {
 //                                $apellidos = explode(" ",$row_hoja['apellidos']);
 //                                echo "<option name=". $row_hoja['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_hoja['nombre'].' '. $row_hoja['apellidos']. " </option>";

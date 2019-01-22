@@ -156,7 +156,7 @@
                                                     <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?> 
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                                    <?php echo '<td ><i class="fas fa-arrow-up mr-3" style="color:black; opacity:0.9;" title="Añadir"> </i></td>' ?>
+                                                    <?php echo '<td ><i class="fas fa-plus-circle mr-3" style="color:black; opacity:0.9;" title="Añadir"> </i></td>' ?>
                                                     <?php echo '<td><p style="display:none;">' . $fila['id_ejercicio'] . '</p></td>'; ?>
                                                 </tr>
                                             <?php } } }?>

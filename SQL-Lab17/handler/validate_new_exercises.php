@@ -628,7 +628,7 @@
                 $solucion = sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno);
                 
                 $resultadoSolucion = $ejer->executeSolucion($solucion, $tablasSolucion[0]);
-
+                //var_dump($resultadoSolucion);
                 if($resultadoSolucion[0] === false){
                     $resultado[0] = false;
                     $resultado[4] = $resultadoSolucion[1];
@@ -1123,12 +1123,12 @@
                     $resultado[4] = "La solución no tiene una sintaxis correcta.";
             }
 
+        // var_dump($resultado);
             return $resultado;
         }
 
         $solucion = pasarAMinusculas($solucion);
         $resultado = distinguirSentencia($solucion, $user_tablas);
-        // var_dump($resultado);
         if($resultado[0]){
 
             $ejer = new Ejercicio();

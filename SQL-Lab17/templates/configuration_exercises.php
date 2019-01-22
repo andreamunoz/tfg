@@ -48,6 +48,7 @@ $_SESSION['perform_tabla']="";
                             
                             echo '<select name="exercises" class="custom-select form-control-sm mr-3 select_profesor" title="Selecciona profesor" id="select_pro">';
                             echo "<option value='' >Todos Profesores </option>";  
+                            // echo "<option value='' >". trad("Todos Profesores", $lang). " </option>";  
                             while ($row_profe = mysqli_fetch_array($resP)) {
                                 $nombre = explode(" ",$row_profe['nombre']);
                                 $apellidos = explode(" ",$row_profe['apellidos']);
@@ -74,31 +75,50 @@ $_SESSION['perform_tabla']="";
                                 echo "<option value='Principiante'> Principiante </option>";
                                 echo "<option value='Intermedio'> Intermedio </option>";
                                 echo "<option value='Avanzado'> Avanzado </option>";
+                                // echo "<option value='' selected>". trad("Todos Niveles",$lang)." </option>";  
+                                // echo "<option value='Principiante'>". trad("Principiante",$lang)." </option>";
+                                // echo "<option value='Intermedio'> ". trad("Intermedio",$lang)."</option>";
+                                // echo "<option value='Avanzado'> ". trad("Avanzado",$lang)." </option>";
                             }if($_SESSION['select_n'] == 'Principiante'){
                                 echo "<option value=''>Todos Niveles </option>";  
                                 echo "<option value='Principiante' selected> Principiante </option>";
                                 echo "<option value='Intermedio'> Intermedio </option>";
                                 echo "<option value='Avanzado'> Avanzado </option>";
-                            }if($_SESSION['select_n'] == 'Intermedio'){  
+                                // echo "<option value=''>". trad("Todos Niveles",$lang)." </option>";  
+                                // echo "<option value='Principiante' selected> ". trad("Principiante",$lang)." </option>";
+                                // echo "<option value='Intermedio'> ". trad("Intermedio",$lang)."</option>";
+                                // echo "<option value='Avanzado'> ". trad("Avanzado",$lang)." </option>";
+                            }if($_SESSION['select_n'] == 'Intermedio'){
                                 echo "<option value=''>Todos Niveles </option>";  
                                 echo "<option value='Principiante'> Principiante </option>";
                                 echo "<option value='Intermedio' selected> Intermedio </option>";
-                                echo "<option value='Avanzado'> Avanzado </option>";
-                            }if($_SESSION['select_n'] == 'Avanzado'){ 
+                                echo "<option value='Avanzado'> Avanzado </option>";  
+                                // echo "<option value=''>". trad("Todos Niveles",$lang)." </option>";  
+                                // echo "<option value='Principiante'>". trad("Principiante",$lang)."</option>";
+                                // echo "<option value='Intermedio' selected>". trad("Intermedio",$lang)."</option>";
+                                // echo "<option value='Avanzado'> ". trad("Avanzado",$lang)."</option>";
+                            }if($_SESSION['select_n'] == 'Avanzado'){
                                 echo "<option value=''>Todos Niveles </option>";  
                                 echo "<option value='Principiante'> Principiante </option>";
                                 echo "<option value='Intermedio'> Intermedio </option>";
-                                echo "<option value='Avanzado' selected> Avanzado </option>";
+                                echo "<option value='Avanzado' selected> Avanzado </option>"; 
+                                // echo "<option value=''>". trad("Todos Niveles",$lang)." </option>";  
+                                // echo "<option value='Principiante'>". trad("Principiante",$lang)."</option>";
+                                // echo "<option value='Intermedio'> ". trad("Intermedio",$lang)." </option>";
+                                // echo "<option value='Avanzado' selected>". trad("Avanzado",$lang)."</option>";
                             } 
                             echo '</select>';
                             echo '<select name="exercises" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona categoría" id="select_tip">';
                             echo "<option value='' >Todas Categorías </option>";
+                            // echo "<option value='' >".trad("Todas Categorías",$lang)."</option>";
                             while ($row_tipo = mysqli_fetch_array($resC)) {
                                 if($_SESSION['select_t'] == $row_tipo['tipo'] ){
                                     echo "<option value=" . $row_tipo['tipo'] . " selected>" . $row_tipo['tipo'] . " </option>";
+                                    // echo "<option value=" . $row_tipo['tipo'] . " selected>" . trad($row_tipo['tipo'],$lang) . " </option>";
                                 }
                                 else{
                                     echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
+                                    // echo "<option value=" . $row_tipo['tipo'] . ">" . trad($row_tipo['tipo'],$lang) . " </option>";
                                 }
                             }
                             echo '</select>';

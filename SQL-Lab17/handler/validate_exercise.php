@@ -313,10 +313,10 @@ function sustituirNuevoNombreTablaDeleteMultiple($tablas, $solucion,$dueno){
             }
         }
         for($j=0; $j<5; $j++){
-            var_dump($value);
+            // var_dump($value);
                 $posicion_tabla = strpos($sentencia_copia_minusculas,",".$value." ");
-            var_dump($posicion_tabla."->".$limite);
-            var_dump($sentencia_copia_minusculas);
+            // var_dump($posicion_tabla."->".$limite);
+            // var_dump($sentencia_copia_minusculas);
             if ($posicion_tabla !== false and $posicion_tabla+1 < $limite){
                 $sentencia_copia_minusculas = substr($sentencia_copia_minusculas, 0,$posicion_tabla+1).$dueno."_".substr($sentencia_copia_minusculas, $posicion_tabla+1);
                 $limite = $limite + strlen($value)+1;
@@ -581,6 +581,7 @@ function validarSelect($solucion, $dueno){
         if($resultadoSolucion[0] === false){
             $resultado[0] = false;
             $resultado[1] = $resultadoSolucion[1];
+            $resultado[2] = $resultadoSolucion[2];
         }else{
             $resultado[0] = true;
             $resultado[1] = $tablasSolucion;
@@ -645,6 +646,7 @@ function validarInsert($solucion, $dueno){
                     if($resultadoSolucion[0] === false){
                         $resultado[0] = false;
                         $resultado[1] = $resultadoSolucion[1];
+                        $resultado[2] = $resultadoSolucion[2];
                     }else{
                         $resultado[0] = true;
                         $resultado[1] = $tablasSolucion;
@@ -691,6 +693,7 @@ function validarInsert($solucion, $dueno){
                 if($resultadoSolucion[0] === false){
                     $resultado[0] = false;
                     $resultado[1] = $resultadoSolucion[1];
+                    $resultado[2] = $resultadoSolucion[2];
                 }else{
                     $resultado[0] = true;
                     $resultado[1] = $tablasSolucion;
@@ -747,6 +750,7 @@ function validarUpdate($solucion, $dueno){
             if($resultadoSolucion[0] === false){
                     $resultado[0] = false;
                     $resultado[1] = $resultadoSolucion[1];
+                    $resultado[2] = $resultadoSolucion[2];
             }else{
                     $resultado[0] = true;
                     $resultado[1] = $todas_tablas;
@@ -862,6 +866,7 @@ function validarDelete($solucion, $dueno){
 
             if($resultadoSolucion[0] === false){
                 $resultado[0] = false;
+                $resultado[2] = $resultadoSolucion[2];
                 $resultado[4] = $resultadoSolucion[1];
             }else{
                 foreach ($tablas as $key => $value) {
@@ -948,6 +953,7 @@ function validarDelete($solucion, $dueno){
 
             if($resultadoSolucion[0] === false){
                 $resultado[0] = false;
+                $resultado[2] = $resultadoSolucion[2];
                 $resultado[4] = $resultadoSolucion[1];
             }else{
                 foreach ($tabla as $key => $value) {
@@ -1033,6 +1039,7 @@ function validarDelete($solucion, $dueno){
 
         if($resultadoSolucion[0] === false){
             $resultado[0] = false;
+            $resultado[2] = $resultadoSolucion[2];
             $resultado[4] = $resultadoSolucion[1];
         }else{
             foreach ($tabla as $key => $value) {
@@ -1255,7 +1262,7 @@ if ($resultado_alumno[0] !== false) {
                             </div>
                             <div class='modal-body'>
                                 <h2><strong>¡Error!</strong></h2>
-                                <p>Filas de la consulta INCORRECTAS.</p>
+                                <p>Los datos no coinciden. Consulte los resultados.</p>
                             </div>
                         </div>
                     </div>   
@@ -1348,7 +1355,7 @@ if ($resultado_alumno[0] !== false) {
                                     </div>
                                     <div class='modal-body'>
                                         <h2><strong>¡Error!</strong></h2>
-                                        <p>El número de columnas de la solución propuesta no es correcto.</p>
+                                        <p>Los datos no coinciden. Consulte los resultados.</p>
                                     </div>
                                 </div>
                             </div>   
@@ -1366,7 +1373,7 @@ if ($resultado_alumno[0] !== false) {
                                     </div>
                                     <div class='modal-body'>
                                         <h2><strong>¡Error!</strong></h2>
-                                        <p>Los datos introducidos no son válidos. Repase el enunciado.</p>
+                                        <p>Los datos no coinciden. Consulte los resultados.</p>
                                     </div>
                                 </div>
                             </div>   
@@ -1386,7 +1393,7 @@ if ($resultado_alumno[0] !== false) {
                                 </div>
                                 <div class='modal-body'>
                                     <h2><strong>¡Error!</strong></h2>
-                                    <p>Filas de la consulta INCORRECTAS.</p>
+                                    <p>Los datos no coinciden. Consulte los resultados.</p>
                                 </div>
                             </div>
                         </div>   
@@ -1432,7 +1439,7 @@ if ($resultado_alumno[0] !== false) {
     }else if ($datosVeredictoIntentos[0] == 0){
         $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 0);
     }
-    
+
     if(isset($resultado_alumno[4])){
 
         $_SESSION['msg_solucion'] = 

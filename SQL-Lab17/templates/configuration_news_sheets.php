@@ -48,9 +48,9 @@
                                             <tr> 
                                                 <th style="width:30%;"><?php echo trad('Descripción', $lang) ?></th>
                                                 <th style="width:20%;"><?php echo trad('Profesor', $lang) ?></th>
-                                                <th style="width:20%;"><?php echo trad('Nivel', $lang) ?></th>
+                                                <th style="width:14%;"><?php echo trad('Nivel', $lang) ?></th>
                                                 <th style="width:25%;"><?php echo trad('Tipo', $lang) ?></th>
-                                                <th style="width:9%;"><?php echo trad('Seleccionados', $lang) ?></th>
+                                                <th style="width:10%;"></th>
                                                 <th style="width:1%;"></th>
                                             </tr>
                                         </thead>
@@ -76,6 +76,7 @@
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
                                                     <?php echo '<td ><i id='.$id_hoja.' value=' . $fila["id_ejercicio"] . ' class="fas fa-trash mr-3" style="color:black; opacity:0.9;" title="Eliminar"> </i></td>' ?>
                                                     <?php echo '<td><p style="display:none;">' . $fila['id_ejercicio'] . '</p></td>'; ?>
+                                                    <?php echo '<input type="hidden" value="'.$fila['id_ejercicio'].'" id="item" name="item"> '?>
                                                 </tr>
                                             <?php } }?>
                                         </tbody>
@@ -96,9 +97,9 @@
                                             <tr> 
                                                 <th style="width:30%;"><?php echo trad('Descripción', $lang) ?></th>
                                                 <th style="width:20%;"><?php echo trad('Profesor', $lang) ?></th>
-                                                <th style="width:20%;"><?php echo trad('Nivel', $lang) ?></th>
-                                                <th style="width:20%;"><?php echo trad('Tipo', $lang) ?></th>
-                                                <th style="width:9%;"><?php echo trad('Añadir', $lang) ?></th>                                         
+                                                <th style="width:14%;"><?php echo trad('Nivel', $lang) ?></th>
+                                                <th style="width:25%;"><?php echo trad('Tipo', $lang) ?></th>
+                                                <th style="width:10%;"><?php echo trad('Añadir', $lang) ?></th>                                         
                                                 <th style="width:1%;"></th>
                                             </tr>
                                         </thead>
@@ -116,6 +117,7 @@
                                             if (isset($res) && isset($resC) && isset($resP)) {
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_profe" title="Selecciona Profesor" id="select_hoja">';
                                                 echo "<option name='' apellido1='' apellido2=''>Todos Profesores </option>";
+                                                // echo "<option name='' apellido1='' apellido2=''>".trad("Todos Profesores",$lang)." </option>";
                                                 while ($row_profe = mysqli_fetch_array($resP)) {
                                                     $apellidos = explode(" ",$row_profe['apellidos']);
                                                     echo "<option name=". $row_profe['nombre']." apellido1=".$apellidos[0]." apellido2=".$apellidos[1].">" . $row_profe['nombre'].' '.$row_profe['apellidos'] . " </option>";
@@ -123,16 +125,22 @@
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_nivel" title="Selecciona Nivel" id="select_hoja">';
                                                 echo "<option value=". $row_nivel['nivel'] .">Todos Niveles </option>";
-                                                
+                                                // echo "<option value=". $row_nivel['nivel'] .">".trad("Todos Niveles",$lang)." </option>";
+
                                                     echo "<option value='Principiante'>Principiante</option>";
                                                     echo "<option value='Intermadio'>Intermedio</option>";
                                                     echo "<option value='Avanzado'>Avanzado</option>";
+                                                    // echo "<option value='Principiante'>".trad("Principiante",$lang)."</option>";
+                                                    // echo "<option value='Intermadio'>".trad("Intermedio",$lang)."</option>";
+                                                    // echo "<option value='Avanzado'>".trad("Avanzado",$lang)."</option>";
 
                                                 echo '</select>';
                                                 echo '<select name="lista_hoja" class="custom-select form-control-sm mr-3 select_tipo" title="Selecciona Categoria" id="select_hoja">';
                                                 echo "<option value=''>Todas Categorías</option>";
+                                                echo "<option value=''>".trad("Todas Categorías",$lang)."</option>";
                                                 while ($row_tipo = mysqli_fetch_array($resC)) {
                                                     echo "<option value=" . $row_tipo['tipo'] . ">" . $row_tipo['tipo'] . " </option>";
+                                                    // echo "<option value=" . $row_tipo['tipo'] . ">" . trad($row_tipo['tipo'], $lang) . " </option>";
                                                 }
                                                 echo '</select>'; 
                                             if($_SESSION['showNumber'] != ""){
@@ -154,8 +162,10 @@
                                                     <?php echo '<td>' . $fila['descripcion'] . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['nombre'].' '.$fila['apellidos'] . '</td>'; ?> 
                                                     <?php echo '<td>' . $fila['nivel'] . '</td>'; ?>
+                                                    <?php //echo '<td>' . trad($fila['nivel'],$lang) . '</td>'; ?>
                                                     <?php echo '<td>' . $fila['tipo'] . '</td>'; ?>
-                                                    <?php echo '<td ><i class="fas fa-arrow-up mr-3" style="color:black; opacity:0.9;" title="Añadir"> </i></td>' ?>
+                                                    <?php //echo '<td>' . trad($fila['tipo'],$lang) . '</td>'; ?>
+                                                    <?php echo '<td ><i class="fas fa-plus-circle mr-3" style="color:black; opacity:0.9;" title="Añadir"> </i></td>' ?>
                                                     <?php echo '<td><p style="display:none;">' . $fila['id_ejercicio'] . '</p></td>'; ?>
                                                 </tr>
                                             <?php } } }?>
@@ -171,9 +181,9 @@
                                         <thead>
                                             <th style="width:30%;"><?php echo trad('Descripción', $lang) ?></th>
                                             <th style="width:20%;"><?php echo trad('Profesor', $lang) ?></th>
-                                            <th style="width:20%;"><?php echo trad('Nivel', $lang) ?></th>
-                                            <th style="width:20%;"><?php echo trad('Tipo', $lang) ?></th>
-                                            <th style="width:9%;"><?php echo trad('Añadir', $lang) ?></th>                                         
+                                            <th style="width:14%;"><?php echo trad('Nivel', $lang) ?></th>
+                                            <th style="width:25%;"><?php echo trad('Tipo', $lang) ?></th>
+                                            <th style="width:10%;"><?php echo trad('Añadir', $lang) ?></th>                                         
                                             <th style="width:1%;"></th></thead>
                                     <tbody>
                                         

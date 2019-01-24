@@ -130,8 +130,10 @@
                                                     var_dump($niveles[$i]);
                                                     if ($ejercicioId['nivel'] === $niveles[$i]){                                                   
                                                         echo "<option value=".$niveles[$i]." selected>".$niveles[$i]." </option>";
+                                                        // echo "<option value=".$niveles[$i]." selected>". trad($niveles[$i],$lang) ." </option>";
                                                     } else {
                                                         echo "<option value=".$niveles[$i]." >".$niveles[$i]." </option>";
+                                                        // echo "<option value=".$niveles[$i]." >". trad($niveles[$i], $lang)." </option>";
                                                     }
                                                 }   
                                                 ?> 
@@ -156,8 +158,10 @@
                                                     } else { 
                                                         if($value === $ejercicioId['tipo']){ ?>
                                                             <option value=<?php echo $newKey ?> selected="selected"> <?php echo $value ?> </option>
+                                                            <!-- <option value=<?php //echo $newKey ?> selected="selected"> <?php //echo trad($value,$lang) ?> </option> -->
                                                         <?php } else{ ?>
                                                         <option value=<?php echo $newKey ?> > <?php echo $value ?> </option>
+                                                        <!-- <option value=<?php //echo $newKey ?> > <?php //echo trad($value,$lang) ?> </option> -->
                                                     <?php }
                                                     } 
                                                 } ?> 

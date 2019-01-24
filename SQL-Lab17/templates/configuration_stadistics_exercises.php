@@ -40,7 +40,9 @@ unset($_SESSION['select_p_verh']);unset($_SESSION['select_n_verh']);unset($_SESS
         <div class="col-md-3 mb-3">
             <select class="custom-select" title="Selecciona" id="mostrar" onclick="mostrarNC()">
                 <option value="nivel" selected>Nivel</option>
+                <!-- <option value="nivel" selected> <?php //echo trad("Nivel", $lang) ?></option> -->
                 <option value="tipo">Categoría</option>
+                <!-- <option value="tipo"><?php //echo trad("Categoría", $lang) ?></option> -->
             </select>
         </div>
     </div>	
@@ -61,6 +63,7 @@ unset($_SESSION['select_p_verh']);unset($_SESSION['select_n_verh']);unset($_SESS
             <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
             <div class="col-lg-4">
                 <p><?php echo $col['nivel'] ?></p>
+                <!-- <p><?php //echo trad($col['nivel'], $lang) ?></p> -->
                 <hr>
                 <canvas id="bar-chart-horizontal<?php echo $j ?>" width="700" height="500"></canvas>
                 <script type="text/javascript">

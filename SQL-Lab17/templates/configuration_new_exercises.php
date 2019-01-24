@@ -92,11 +92,14 @@
                                             if (isset($_SESSION['guardarDatos'])) {
                                                 if($newKey === $_SESSION['guardarDatos'][1]){ ?>
                                                     <option value=<?php echo $newKey ?> selected="selected"> <?php echo $value ?> </option>
+                                                    <!-- <option value=<?php //echo $newKey ?> selected="selected"> <?php //echo trad( $value,$lang) ?> </option> -->
                                                 <?php } else{ ?>
                                                     <option value=<?php echo $newKey ?> > <?php echo $value ?> </option>
+                                                    <!-- <option value=<?php //echo $newKey ?> > <?php //echo trad($value,$lang) ?> </option> -->
                                                 <?php } 
                                             } else { ?>
                                                 <option value=<?php echo $newKey ?> > <?php echo $value ?> </option>
+                                                <!-- <option value=<?php echo $newKey ?> > <?php echo trad($value,$lang) ?> </option> -->
                                             <?php } 
                                         } ?> 
                                 </select>               

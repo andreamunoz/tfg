@@ -32,6 +32,7 @@ $texts = array(
     'Inglés' => 'English',
     'Perfil' => 'Profile',
     'Salir' => 'Log Out',
+    'Modo Profesor' => 'Teacher Mode',
     //Mensaje cerrar sesión
     '¿Desea cerrar la sesión?' => 'Are you sure?',
     'NO' => 'NO',
@@ -144,8 +145,10 @@ $texts = array(
     //crear hoja
     'Nueva Hoja' => 'New Sheet',
     'Añade una nueva hoja de ejercicios y también puedes añadir ejercicios a esta hoja.' => 'Add a new worksheet and you can also add exercises to this sheet.',
+    'Ejercicios Seleccionados' => 'Selected Exercises',
     'Añadir Ejercicios' => 'Add Exercises',
     'Añadir' => 'Add',
+    'Guardar Hoja'=>'Save Sheet',
     //editar hoja
     'Actualizar Hoja' => 'Update Sheet',
     'Editar Ejercicio' => 'Edit Exercise',
@@ -155,6 +158,17 @@ $texts = array(
     'Usuario' => 'User',
     //Ejercicios
     'Ejercicio' => 'Exercise',
+    'Todos Profesores' => 'All teachers',
+    'Todos Niveles'=>'All levels',
+    'Todas Categorías'=>'All categories',
+    'Select-Basico'=>'Select-Basic',
+    'Select-Join'=>'Select-Join',
+    'Select-Group-Basico'=>'Select-Group-Basic',
+    'Select-Group-Having'=>'Select-Group-Having',
+    'Subqueries-Valor'=>'Subqueries-Value',
+    'Subquieries-Conjuntos'=>'Subquieries-Sets',
+    'Operaciones Manipulacion de Datos'=>'Data Manipulation Statements',
+
     'Crear Ejercicio' => 'Create Exercise',
     'Añade, edita y habilita o deshabilita los ejercicios.' => 'Add, edit and enable or disable the exercises.',
     'Rellene el nombre y selecciona el nivel, categoría y la vista, después añade las tablas que se usarán en el ejercicio y añade su enunciado y solución.' => 'Fill in the name and select the level, category and view, then add the tables that will be used in the exercise and add your statement and solution.',
@@ -206,7 +220,7 @@ $texts = array(
     'Categoría' => 'Category',
     'Nivel' => 'Level',
     'Principiante' => 'Basic',
-    'Intermedio' => 'Medium',
+    'Intermedio' => 'Intermediate',
     'Avanzado' => 'Advanced',
     'Habilitado' => 'Enabled',
     'Deshabilitado' => 'Disabled',
@@ -239,7 +253,7 @@ $texts = array(
     
     //Nuevas traducciones 
     'Volver a Modo Profesor' => 'Back to Teacher Mode',
-    'Ver Modo Alumno' => 'See Student Mode',
+    'Ver Modo Alumno' => 'Go to Student Mode',
     'Comenzar Ahora' => 'Start now',
     'Si' => 'Yes',
     'Gestión de Tablas' => 'Tables Management',

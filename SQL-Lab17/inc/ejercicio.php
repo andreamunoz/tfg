@@ -339,11 +339,9 @@ class Ejercicio{
     function getRowsSolucion($solucion){
         $connect = new Tools();
         $consulta = array();
-        var_dump($solucion);
         $conexion = $connect->connectDB();
         $resultado=mysqli_query($conexion,$solucion);
-        var_dump("PREERROR: ".$resultado);
-        //$fila = $resultado->num_rows;
+        $fila = $resultado->num_rows;
         $fila = 0;
         $connect->disconnectDB($conexion);
         return $fila;
@@ -353,7 +351,6 @@ class Ejercicio{
         $consulta = array();
         $conexion = $connect->connectDB();
         $resultado=mysqli_query($conexion,$solucion);
-        var_dump($resultado);
         $col = mysqli_num_fields($resultado);
         $connect->disconnectDB($conexion);
         return $col;
@@ -372,19 +369,19 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
-    // function compareSolucion($solucionA,$solucionP){
-    //     $connect = new Tools();
-    //     $consulta = array();
-    //     $conexion = $connect->connectDB();
-    //     $resultadoA=mysqli_query($conexion,$solucionA);
-    //     $resultadoP=mysqli_query($conexion,$solucionP);
-    //     if($resultadoA == $resultadoP)
-    //         $ok = true;
-    //     else
-    //         $ok = false;
-    //     $connect->disconnectDB($conexion);
-    //     return $ok;
-    // }
+    function compareSolucions($solucionA,$solucionP){
+        $connect = new Tools();
+        $consulta = array();
+        $conexion = $connect->connectDB();
+        $resultadoA=mysqli_query($conexion,$solucionA);
+        $resultadoP=mysqli_query($conexion,$solucionP);
+        if($resultadoA == $resultadoP)
+            $ok = true;
+        else
+            $ok = false;
+        $connect->disconnectDB($conexion);
+        return $ok;
+    }
     function executeSolucion($solucion){
         $connect = new Tools();
         $consulta = array();
@@ -409,6 +406,61 @@ class Ejercicio{
         $connect->disconnectDB($conexion);
         return $consulta;
     }
+
+    function executeSolution($solucion, $solucionProf, $tablas, $user){
+        $connect = new Tools();
+        $consulta = array();
+        $conexion = $connect->connectDB();
+
+        //creamos la tabla temporal con el nombre: temp_user_nombreTabla
+        foreach ($tablas as $key => $value) {
+            $consulta_crear_tabla_temp = "CREATE TEMPORARY TABLE temp_".$user."_".$value." SELECT * FROM ".$value;
+            $resultado = mysqli_query($conexion, $consulta_crear_tabla_temp);
+        }
+        $conexion->autocommit(FALSE);
+        $conexion->begin_transaction();
+
+        $resultado = mysqli_query($conexion,$solucion);
+
+        if(!$resultado){
+            $consulta[0] = false;
+            $consulta[1] = $conexion->error;
+            $consulta[2] = $conexion->errno;
+        }else if ($resultado){
+            //var_dump($resultado);
+            $consulta[0] = true;
+            
+            $sql1 = "SELECT * from $tabla;";
+            // var_dump("sentencia: ".$sql1);
+            $resultado1 = mysqli_query($conexion,$sql1);
+            if(!$resultado1){
+                $consulta[1] = false;
+                $consulta[2] = $conexion->error;
+            }else{
+                $consulta[1] = true;
+                $rawdata = array();
+                $i=0;
+                while($row = mysqli_fetch_assoc($resultado1))
+                {
+                    $rawdata[$i] = $row;
+                    $i++;
+                }
+                $consulta[2] = $rawdata;
+            }
+
+            $conexion->rollback();
+        }
+
+        //eliminamos la tabla temporal
+        foreach ($tablas as $key => $value) {
+            $consulta_borrar_tabla_temp = "DROP TEMPORARY TABLE temp_".$user."_".$value;
+            $resultado = mysqli_query($conexion, $consulta_borrar_tabla_temp);
+        
+        }
+        $connect->disconnectDB($conexion);
+        return $consulta;
+    }
+
     function executeSolucionNoSelect($solucion, $tabla, $tipo){
         $connect = new Tools();
         $consulta = array();
@@ -424,27 +476,25 @@ class Ejercicio{
         }else if ($resultado){
             //var_dump($resultado);
             $consulta[0] = true;
-            if($tipo ==="delete"){
-
+            
+            $sql1 = "SELECT * from $tabla;";
+            // var_dump("sentencia: ".$sql1);
+            $resultado1 = mysqli_query($conexion,$sql1);
+            if(!$resultado1){
+                $consulta[1] = false;
+                $consulta[2] = $conexion->error;
             }else{
-                $sql1 = "SELECT * from $tabla;";
-                // var_dump("sentencia: ".$sql1);
-                $resultado1 = mysqli_query($conexion,$sql1);
-                if(!$resultado1){
-                    $consulta[1] = false;
-                    $consulta[2] = $conexion->error;
-                }else{
-                    $consulta[1] = true;
-                    $rawdata = array();
-                    $i=0;
-                    while($row = mysqli_fetch_assoc($resultado1))
-                    {
-                        $rawdata[$i] = $row;
-                        $i++;
-                    }
-                    $consulta[2] = $rawdata;
+                $consulta[1] = true;
+                $rawdata = array();
+                $i=0;
+                while($row = mysqli_fetch_assoc($resultado1))
+                {
+                    $rawdata[$i] = $row;
+                    $i++;
                 }
+                $consulta[2] = $rawdata;
             }
+            
 
         }else{
             // var_dump("ELSE");

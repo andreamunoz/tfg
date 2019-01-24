@@ -7,11 +7,9 @@ class Administrar_schema{
 
 
     function pasarAMinusculas($solucion){
-        //$aux = $solucion;
 
         $arrayComillas = array("`", "'");
         $solucion = str_replace($arrayComillas, '"', $solucion);
-        var_dump($solucion);
 
         $nueva_solucion = "";
         $miniaux = "";
@@ -20,12 +18,8 @@ class Administrar_schema{
         $literal = false;
         if(strpos($solucion, '"', $inicio)){
             $posicionComillas = strpos($solucion, '"', $inicio);
-                // var_dump("****************ENTROOOO**************");
             while ( $posicionComillas !== false){
-                // var_dump("INICIO PRE: ".$inicio);
-                // var_dump("POS PRE: ".$posicionComillas);
                 $miniaux = substr($solucion,$inicio, $posicionComillas-$inicio);
-                // var_dump($miniaux);
                     
                 if($literal){
                     $nueva_solucion = $nueva_solucion . $miniaux . '"';
@@ -35,15 +29,11 @@ class Administrar_schema{
                     $literal = !$literal;
                 $inicio = $posicionComillas+1;
                 $posicionComillas = strpos($solucion, '"',$inicio);
-            // var_dump($nueva_solucion);
-                // var_dump("INICIO POST: ".$inicio);
-                // var_dump("POS POST: ".$posicionComillas);
+
             }
-            // var_dump("****************SALGOOOO*************");
             if ($posicionComillas !== $fin ){
                 $nueva_solucion = $nueva_solucion.substr($solucion,$inicio, $fin);     
             }
-            // var_dump($nueva_solucion);
 
         }else{
             $nueva_solucion = strtolower($solucion);            
@@ -55,15 +45,11 @@ class Administrar_schema{
     function transformarAMinusculas($solucion){
         $admin = new Administrar_schema();
         $subsentencia = explode(" ", $solucion, 4);
-        // var_dump(strtolower($subsentencia[0]));
         if("create" === strtolower($subsentencia[0]) or "drop" === strtolower($subsentencia[0]) or "alter" === strtolower($subsentencia[0])){
             $solucion = strtolower($solucion);
         }else if("insert" === strtolower($subsentencia[0])){
-            var_dump("ESTOY EN INSERT");
             $solucion = $admin->pasarAMinusculas($solucion);
         }
-        // var_dump("****************FUERAAA*************");
-        var_dump($solucion); 
         return $solucion;
     }
     
@@ -76,9 +62,7 @@ class Administrar_schema{
         $conexion = $connect->connectDB();
             
         if (!($resultado = mysqli_query($conexion, "CALL sp_ejecutar_script('".$code."');"))) {
-            //echo "Falló la llamada para ejecutar el codigo: " . $conexion->error;
             $resultado = $conexion->error;
-            //echo $resultado;
         }else{
             $resultado = true;
         }
@@ -204,7 +188,6 @@ class Administrar_schema{
                 $sentencia_con_minusculas = $admin->transformarAMinusculas($sentencias[$i]);
                 $subsentencia = explode(" ", $sentencia_con_minusculas, 4);
                 $nombre_tabla_con_comillas = $admin->comprobarSintaxis($sentencia_con_minusculas);
-                var_dump($sentencia_con_minusculas);
                 // var_dump($sentencia_con_minusculas);
 
                 if($nombre_tabla_con_comillas !== FALSE){
@@ -214,7 +197,6 @@ class Administrar_schema{
                     //QUITAR COMILLAS DEL NOMBRE
                     $arrayComillas = array("`", '"', "'");
                     $nombre_tabla = str_replace($arrayComillas, "", $nombre_tabla_con_comillas);
-                var_dump($nombre_tabla);
                     
                     //CREAMOS EL NUEVO NOMBRE Y LO REEMPLAZAMOS 
                     $nuevoNombre = $profe."_".$nombre_tabla;
@@ -245,7 +227,6 @@ class Administrar_schema{
                         }
                     }elseif((strtolower(stripos($sentencia_con_minusculas, "insert")))!==FALSE){
                         //EJECUTAMOS LA SENTENCIA
-                        var_dump($miSentenciaEntera);
                         $respuesta = $admin->executeCode($miSentenciaEntera.";");
                     }   
                     if($respuesta !== true){

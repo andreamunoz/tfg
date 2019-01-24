@@ -597,7 +597,7 @@ function validarSelect($solucion, $dueno){
     return $resultado;
 }
 
-function validarInsert($solucion, $dueno){
+function validarInsert($solucion, $dueno, $tabla_temp, $solucion_profesor){
         $sentencia = explode(" ", $solucion);
         if(in_array("select",$sentencia)){
             $i=0;
@@ -642,6 +642,7 @@ function validarInsert($solucion, $dueno){
                     $nueva_solucion = substr($solucion,0,$inicio).$resultado_select[3];
 
                     $resultadoSolucion = $ejer->executeSolucionNoSelect($nueva_solucion, $tablasSolucion[0], "insert");
+                    $resultadSolucion = $ejer->executeSolution($nueva_solucion, $tablasSolucion[0], $user);
 
                     if($resultadoSolucion[0] === false){
                         $resultado[0] = false;
@@ -688,7 +689,9 @@ function validarInsert($solucion, $dueno){
             if($ok){
                 $nombreAntiguo = " ".$tabla[0];
                 $solucion = str_replace($nombreAntiguo, " ".$tablasSolucion[0], $solucion);
+
                 $resultadoSolucion = $ejer->executeSolucionNoSelect($solucion, $tablasSolucion[0],"insert");
+                $resultadSolucion = $ejer->executeSolution($solucion, $tablasSolucion[0], $user);
 
                 if($resultadoSolucion[0] === false){
                     $resultado[0] = false;
@@ -709,7 +712,7 @@ function validarInsert($solucion, $dueno){
         return $resultado;
 }
 
-function validarUpdate($solucion, $dueno){
+function validarUpdate($solucion, $dueno, $tabla_temp, $solucion_profesor){
     $sentencia = explode(" ", $solucion);
 
     if(in_array("set", $sentencia)){
@@ -745,8 +748,10 @@ function validarUpdate($solucion, $dueno){
         if($ok){
 
             $solucionConDueno = sustituirNuevoNombreTablaUpdate($todas_tablas_sin_dueno, $solucion, $dueno);
+
             $resultadoSolucion = $ejer->executeSolucionNoSelect($solucionConDueno, $todas_tablas[0], "update");
-            // var_dump($resultadoSolucion);
+            $resultadSolucion = $ejer->executeSolution($solucionConDueno, $todas_tablas[0], $user);
+            // var_dump($resultadSolucion);
             if($resultadoSolucion[0] === false){
                     $resultado[0] = false;
                     $resultado[1] = $resultadoSolucion[1];
@@ -770,7 +775,7 @@ function validarUpdate($solucion, $dueno){
     return $resultado;        
 }
 
-function validarDelete($solucion, $dueno){
+function validarDelete($solucion, $dueno, $tabla_temp, $solucion_profesor){
 
     $resultado = array();
     $ejer = new Ejercicio();
@@ -863,6 +868,7 @@ function validarDelete($solucion, $dueno){
             }
 
             $resultadoSolucion = $ejer->executeSolucionNoSelect($sentencia_delete_simple, $tablas, "delete");
+            $resultadSolucion = $ejer->executeSolution($sentencia_delete_simple, $tablas, $user);
 
             if($resultadoSolucion[0] === false){
                 $resultado[0] = false;
@@ -950,6 +956,7 @@ function validarDelete($solucion, $dueno){
             }
 
             $resultadoSolucion = $ejer->executeSolucionNoSelect($sentencia_delete_simple, $tabla, "delete");
+            $resultadSolucion = $ejer->executeSolution($sentencia_delete_simple, $tabla, $user);
 
             if($resultadoSolucion[0] === false){
                 $resultado[0] = false;
@@ -1036,6 +1043,7 @@ function validarDelete($solucion, $dueno){
         }
 
         $resultadoSolucion = $ejer->executeSolucionNoSelect($sentencia_delete_simple, $tabla, "delete");
+        $resultadSolucion = $ejer->executeSolution($sentencia_delete_simple, $tabla, $user);
 
         if($resultadoSolucion[0] === false){
             $resultado[0] = false;
@@ -1067,18 +1075,20 @@ function distinguirSentencia($solucionPropuesta, $user_tablas){
     $solucionPropuesta = preg_replace('/\s+/', ' ', $solucionPropuesta);
     $sentencia = explode(" ", $solucionPropuesta, 2);
 
+    $nombre_temp = "temp_".$user."_".$dueno_tabla;
+
     $resultado = array();
     if ($sentencia[0] === "select"){
         $resultado = validarSelect($solucionPropuesta, $user_tablas);
         $resultado[10] = "select";
     }elseif ($sentencia[0] === "insert"){
-        $resultado = validarInsert($solucionPropuesta, $user_tablas);
+        $resultado = validarInsert($solucionPropuesta, $user_tablas, $nombre_temp, $solucion_profesor);
         $resultado[10] = "otro";
     }elseif ($sentencia[0] === "update") {
-        $resultado = validarUpdate($solucionPropuesta, $user_tablas);
+        $resultado = validarUpdate($solucionPropuesta, $user_tablas, $nombre_temp, $solucion_profesor);
         $resultado[10] = "otro";
     }elseif ($sentencia[0] === "delete"){
-        $resultado = validarDelete($solucionPropuesta, $user_tablas);
+        $resultado = validarDelete($solucionPropuesta, $user_tablas, $nombre_temp, $solucion_profesor);
         $resultado[10] = "otro";
 
     }else{
@@ -1094,6 +1104,7 @@ $arrayComillas = array("`", "'");
 $solucion_alumno = str_replace($arrayComillas, '"', $solucion_alumno);
 $solucion_alumno = pasarAMinusculas($solucion_alumno);
 // var_dump($solucion_alumno);
+
 $resultado_alumno = distinguirSentencia($solucion_alumno, $dueno_tabla);
 
 // var_dump($resultado_alumno);
@@ -1188,27 +1199,8 @@ if ($resultado_alumno[0] !== false) {
                 $resultadoGuardarSolucion = $sol->insertarOtroIntentoDeSolucion($user, $id, $solucion_alumno, $intentos, 0);
             }else if ($datosVeredictoIntentos[0] == 0){
                 $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 0);
-            }
-            
-            if (!$resultado_alumno[0]){
-                $_SESSION['msg_solucion'] = 
-                    "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
-                        <div class='modal-dialog modal-dialog-centered' role='document'>
-                            <div class='modal-content'>
-                                <div class='modal-header'>
-                                    <div class='close' id='close-modal'>
-                                        <i class='fas fa-times' data-dismiss='modal'></i>
-                                    </div>
-                                </div>
-                                <div class='modal-body'>
-                                    <h2><strong>¡Error!</strong></h2>
-                                    <p>Los datos no coinciden. Consulte los resultados.</p>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>";
-                    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
-            }
+            }        
+
             if (count($resultado_alumno_simple) == count($resultado_profesor_simple)) {
 
                 if (count($resultado_alumno_simple[0]) != count($resultado_profesor_simple[0])) {
@@ -1248,11 +1240,10 @@ if ($resultado_alumno[0] !== false) {
                         </div>   
                     </div>"; 
                     header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
-
                 }
+
             } else {
-                 $_SESSION['msg_solucion'] = 
-                "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                     <div class='modal-dialog modal-dialog-centered' role='document'>
                         <div class='modal-content'>
                             <div class='modal-header'>
@@ -1269,15 +1260,15 @@ if ($resultado_alumno[0] !== false) {
                 </div>";
                 header("Location: ../templates/perform_exercise.php?exercise=" . $id."&row=false");
             }
+        
         }
 
-    }else if ($resultado_alumno[10] === "otro"){ // INSERT - UPDATE - DELETE
-        //$solucion_profesor = strtolower($solucion_profesor);
+    } else if ($resultado_alumno[10] === "otro"){ // INSERT - UPDATE - DELETE
+
         $solucion_profesor = pasarAMinusculas($solucion_profesor);
         $solucion_profesor = str_replace($arrayComillas, '"', $solucion_profesor);
-        // var_dump($resultado_alumno);    
         $resultado_profesor = distinguirSentencia($solucion_profesor, $dueno_tabla);
-        // var_dump($resultado_profesor);  
+
 
         if($resultado_alumno[0] and $resultado_profesor[0]){ //si las dos ejecuciones han ido bien
             foreach ($resultado_alumno[2][2] as $key => $value) {
@@ -1299,13 +1290,9 @@ if ($resultado_alumno[0] !== false) {
                 $resultado_profesor_simple[$key] = $array_aux; 
             }
             
-            //var_dump($resultado_profesor_simple);
-
-            // var_dump($resultado_alumno_simple == $resultado_profesor_simple);
-
 
             if ($resultado_alumno_simple == $resultado_profesor_simple) {
-                $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                $_SESSION['msg_solucion_ok'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                                 <div class='modal-dialog modal-dialog-centered' role='document'>
                                     <div class='modal-content'>
                                         <div class='modal-header'>
@@ -1332,6 +1319,7 @@ if ($resultado_alumno[0] !== false) {
                 header("Location: ../templates/exercises.php");
 
             } else {
+
                 $datosVeredictoIntentos = $sol->getInfoVeredictoParaTabla($id,$user);
                 if($datosVeredictoIntentos[0] >= 1){
                     $intentos = $datosVeredictoIntentos[0] + 1;
@@ -1344,8 +1332,7 @@ if ($resultado_alumno[0] !== false) {
 
                     if (count($resultado_alumno_simple[0]) != count($resultado_profesor_simple[0])) {
 
-                        $_SESSION['msg_solucion'] = 
-                        "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                        $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                             <div class='modal-dialog modal-dialog-centered' role='document'>
                                 <div class='modal-content'>
                                     <div class='modal-header'>
@@ -1362,8 +1349,7 @@ if ($resultado_alumno[0] !== false) {
                         </div>";
                         header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
                     }else{
-                        $_SESSION['msg_solucion'] = 
-                        "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                        $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                             <div class='modal-dialog modal-dialog-centered' role='document'>
                                 <div class='modal-content'>
                                     <div class='modal-header'>
@@ -1378,12 +1364,11 @@ if ($resultado_alumno[0] !== false) {
                                 </div>
                             </div>   
                         </div>"; 
-                        header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
 
+                        header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
                     }
                 } else {
-                     $_SESSION['msg_solucion'] = 
-                    "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                    $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
                         <div class='modal-dialog modal-dialog-centered' role='document'>
                             <div class='modal-content'>
                                 <div class='modal-header'>
@@ -1400,7 +1385,26 @@ if ($resultado_alumno[0] !== false) {
                     </div>";
                     header("Location: ../templates/perform_exercise.php?exercise=" . $id."&row=false");
                 }
+
             }
+
+        } else {
+            $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                            <div class='modal-dialog modal-dialog-centered' role='document'>
+                                <div class='modal-content'>
+                                    <div class='modal-header'>
+                                        <div class='close' id='close-modal'>
+                                            <i class='fas fa-times' data-dismiss='modal'></i>
+                                        </div>
+                                    </div>
+                                    <div class='modal-body'>
+                                        <h2><strong>¡Error!</strong></h2>
+                                        <p>Los datos no coinciden. Consulte los resultados.</p>
+                                    </div>
+                                </div>
+                            </div>   
+                        </div>";
+            header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
         }
 
     }else{
@@ -1440,44 +1444,59 @@ if ($resultado_alumno[0] !== false) {
         $resultadoGuardarSolucion = $sol->insertarSolucion($user, $id, $solucion_alumno, 0);
     }
 
-    if(isset($resultado_alumno[4])){
-
-        $_SESSION['msg_solucion'] = 
-            "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
-                <div class='modal-dialog modal-dialog-centered' role='document'>
-                    <div class='modal-content'>
-                        <div class='modal-header'>
-                            <div class='close' id='close-modal'>
-                                <i class='fas fa-times' data-dismiss='modal'></i>
+    if($resultado_alumno[2] === 1146){
+        $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                        <div class='modal-dialog modal-dialog-centered' role='document'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <div class='close' id='close-modal'>
+                                        <i class='fas fa-times' data-dismiss='modal'></i>
+                                    </div>
+                                </div>
+                                <div class='modal-body'>
+                                    <h2><strong>¡Error!</strong></h2>
+                                    <p>El ejercicio es INCORRECTO.</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class='modal-body'>
-                            <h2><strong>¡Error!</strong></h2>
-                            <p>".$resultado_alumno[4]."</p>
-                        </div>
-                    </div>
-                </div>   
-            </div>";
+                        </div>   
+                    </div>";
+    } else if($resultado_alumno[2] === 1451){
+        $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                        <div class='modal-dialog modal-dialog-centered' role='document'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <div class='close' id='close-modal'>
+                                        <i class='fas fa-times' data-dismiss='modal'></i>
+                                    </div>
+                                </div>
+                                <div class='modal-body'>
+                                    <h2><strong>¡Error!</strong></h2>
+                                    <p>No puede borrarse o actualizarse la fila. Una restriccion de clave foránea falla.</p>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>";
+    
     }else{
-        $_SESSION['msg_solucion'] = 
-            "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
-                <div class='modal-dialog modal-dialog-centered' role='document'>
-                    <div class='modal-content'>
-                        <div class='modal-header'>
-                            <div class='close' id='close-modal'>
-                                <i class='fas fa-times' data-dismiss='modal'></i>
+        $_SESSION['msg_solucion'] = "<div class='modal fade show' id='modal-close' tabindex='-1' role='dialog' aria-labelledby='exampleModalCenterTitle' aria-hidden='true' style='display:block'>
+                        <div class='modal-dialog modal-dialog-centered' role='document'>
+                            <div class='modal-content'>
+                                <div class='modal-header'>
+                                    <div class='close' id='close-modal'>
+                                        <i class='fas fa-times' data-dismiss='modal'></i>
+                                    </div>
+                                </div>
+                                <div class='modal-body'>
+                                    <h2><strong>¡Error! ajsdkajsda</strong></h2>
+                                    <p>".$resultado_alumno[1]."</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class='modal-body'>
-                            <h2><strong>¡Error!</strong></h2>
-                            <p>El ejercicio es INCORRECTO.</p>
-                        </div>
-                    </div>
-                </div>   
-            </div>";
+                        </div>   
+                    </div>";
     }
+                
+    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&col=false");
 
-    header("Location: ../templates/perform_exercise.php?exercise=" . $id."&all=false");
 }
 
 ?>

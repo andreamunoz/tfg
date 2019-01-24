@@ -164,7 +164,7 @@
     }
 
     function sustituirNuevoNombreTabla($tablasSolucionSinDueno, $solucion, $dueno){
-        $aux = pasarAMinusculas($solucion);
+        // $aux = pasarAMinusculas($solucion);
         $cambios = array('!='=>'#', ','=>'#', '('=>'#', ')'=>'#', '='=>'#', '>'=>'#', '<'=>'#', '>='=>'##', '<='=>'##', '<>'=>'##', '&&'=>'##', '||'=>'##','+'=>'#','*'=>'#','-'=>'#', '%'=>'#');
 
         $aux = strtr($solucion,$cambios);
@@ -213,16 +213,16 @@
             foreach($tablasSolucionSinDueno as $key => $value){
 
                 $posNombreParteDos = stripos($parteDos, " ".$value." ");
-                if($posNombreParteDos == false) { //si justo despues de la tabla hay ;
+                if($posNombreParteDos === false) { //si justo despues de la tabla hay ;
                     $posNombreParteDos = stripos($parteDos, " ".$value.";");
                 }
-                if($posNombreParteDos == false) { //si justo despues de la tabla hay #
+                if($posNombreParteDos === false) { //si justo despues de la tabla hay #
                     $posNombreParteDos = stripos($parteDos, " ".$value."#");
                 }
-                if($posNombreParteDos == false) { //si justo antes y despues de la tabla hay #
+                if($posNombreParteDos === false) { //si justo antes y despues de la tabla hay #
                     $posNombreParteDos = stripos($parteDos, "#".$value."#");
                 }
-                if($posNombreParteDos == false) { //si justo antes de la tabla hay #
+                if($posNombreParteDos === false) { //si justo antes de la tabla hay #
                     $posNombreParteDos = stripos($parteDos, "#".$value." ");
                 }
                 $posNombre = $posNombreParteDos + $posFinParteUno + 1;

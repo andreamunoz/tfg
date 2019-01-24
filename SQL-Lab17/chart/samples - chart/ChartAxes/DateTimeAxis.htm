@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+    DateTime Axis Example - HTML5 jQuery Chart Plugin by jqChart
+</title>
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.jqChart.css" />
+	<link rel="stylesheet" type="text/css" href="../../themes/le-frog/styles.css" />
+	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="../../js/jquery.jqChart.min.js" type="text/javascript"></script>
+	
+    <script lang="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $('#jqChart').jqChart({
+                title: { text: 'DateTime Axis' },
+                animation: { duration: 1 },
+                axes: [
+                    {
+                        type: 'dateTime',
+                        location: 'bottom',
+                        minimum: new Date(2011, 1, 4),
+                        maximum: new Date(2011, 1, 18),
+                        interval: 1,
+                        intervalType: 'days' // 'years' |  'months' | 'weeks' | 'days' | 'minutes' | 'seconds' | 'millisecond'
+                    }
+                ],
+                series: [
+                    {
+                        type: 'line',
+                        data: [[new Date(2011, 1, 6), 70], [new Date(2011, 1, 8), 82],
+                               [new Date(2011, 1, 10), 85], [new Date(2011, 1, 12), 70],
+                               [new Date(2011, 1, 14), 65], [new Date(2011, 1, 16), 68]]
+                    }
+                ]
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div>
+        <div id="jqChart" style="width: 500px; height: 300px;"></div>
+    </div>
+</body>
+</html>

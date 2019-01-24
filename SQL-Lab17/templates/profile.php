@@ -73,7 +73,7 @@ unset($_SESSION['select_p_verh']); unset($_SESSION['select_n_verh']); unset($_SE
         <?php if($_SESSION['asociado'] != "") { ?>
         <div class="row">
             <div class="col-md-3 pl-4">
-                <label for="name"><strong><?php echo trad('Profesor Asociado',$lang) ?> </strong></label>		
+                <label for="name"><strong><?php echo trad('Profesor de Referencia',$lang) ?> </strong></label>		
             </div>
             <div class="col-md-3 ">
                 <p> <?php echo $_SESSION['asociado']; ?> </p>

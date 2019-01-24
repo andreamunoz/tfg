@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+    Trendline Example - HTML5 jQuery Chart Plugin by jqChart
+</title>
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.jqChart.css" />
+	<link rel="stylesheet" type="text/css" href="../../themes/le-frog/styles.css" />
+	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="../../js/jquery.jqChart.min.js" type="text/javascript"></script>
+	
+    <script lang="javascript" type="text/javascript">
+        function addDays(date, value) {
+            var newDate = new Date(date.getTime());
+            newDate.setDate(date.getDate() + value);
+            return newDate;
+        }
+
+        function round(d) {
+            return Math.round(100 * d) / 100;
+        }
+
+        var data = [];
+
+        var yValue = 50;
+
+        var date = new Date(2010, 0, 1);
+
+        for (var i = 0; i < 40; i++) {
+
+            yValue += Math.random() * 10 - 5;
+            data.push([date, round(yValue)]);
+
+            date = addDays(date, 1);
+        }
+
+        $(document).ready(function () {
+            $('#jqChart').jqChart({
+                title: { text: 'Trendline' },
+                animation: { duration: 1 },
+                series: [
+                    {
+                        title: 'Line',
+                        type: 'line',
+                        data: data
+                    },
+                    {
+                        title: 'Trendline',
+                        type: 'trendline',
+                        trendlineType: 'linear', // 'linear' or 'exponential'
+                        data: data
+                    }
+                ]
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div>
+        <div id="jqChart" style="width: 500px; height: 300px;">
+        </div>
+    </div>
+</body>
+</html>

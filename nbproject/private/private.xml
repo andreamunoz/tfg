@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/xampp/htdocs/tfg/SQL-Lab17/templates/configuration_news_sheets.php</file>
+            <file>file:/C:/xampp/htdocs/tfg/SQL-Lab17/templates/configuration_stadistics_exercises.php</file>
+            <file>file:/C:/xampp/htdocs/tfg/SQL-Lab17/templates/configuration_stadistic.php</file>
             <file>file:/C:/xampp/htdocs/tfg/SQL-Lab17/templates/footer.php</file>
             <file>file:/C:/xampp/htdocs/tfg/SQL-Lab17/templates/adm_profesor/getActualizarOrden.php</file>
             <file>file:/C:/xampp/htdocs/tfg/SQL-Lab17/js/functions.js</file>
-            <file>file:/C:/xampp/htdocs/tfg/SQL-Lab17/templates/configuration_edits_sheets.php</file>
+            <file>file:/C:/xampp/htdocs/tfg/SQL-Lab17/templates/menus/menu_lateral.php</file>
         </group>
     </open-files>
 </project-private>

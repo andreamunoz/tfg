@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+    Category Axis Example - HTML5 jQuery Chart Plugin by jqChart
+</title>
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.jqChart.css" />
+	<link rel="stylesheet" type="text/css" href="../../themes/le-frog/styles.css" />
+	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="../../js/jquery.jqChart.min.js" type="text/javascript"></script>
+	
+    <script lang="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $('#jqChart').jqChart({
+                title: { text: 'Category Axis' },
+                animation: { duration: 1 },
+                axes: [
+                    {
+                        type: 'category',
+                        location: 'bottom',
+                        categories: ['Cat 1', 'Cat 2', 'Cat 3', 'Cat 4', 'Cat 5', 'Cat 6']
+                    }
+                ],
+                series: [
+                    {
+                        type: 'column',
+                        data: [70, 40, 85, 50, 25, 40]
+                    }
+                ]
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div>
+        <div id="jqChart" style="width: 500px; height: 300px;"></div>
+    </div>
+</body>
+</html>

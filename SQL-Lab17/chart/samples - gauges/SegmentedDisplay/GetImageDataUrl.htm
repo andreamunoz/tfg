@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+    Get Image Data URL Example - HTML5 jQuery Segmented Display Plugin by jqChart
+</title>
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.jqGauges.css" />
+	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="../../js/jquery.jqGauges.min.js" type="text/javascript"></script>
+	
+    <script lang="javascript" type="text/javascript">
+        $(document).ready(function () {
+
+            $('#jqSegmentedDisplay').jqSegmentedDisplay({
+                background: '#DCDCDC',
+                border: {
+                    padding: 10,
+                    lineWidth: 4,
+                    strokeStyle: '#76786A'
+                },
+                digits: 10,
+                segmentMode: 'sevenSegment',
+                text: '0123456789',
+                textForeground: '#333333',
+                textForegroundUnlit: 'rgba(201, 201, 201, 0.5)'
+            });
+
+            $('#button').click(function () {
+                var dataURL = $('#jqSegmentedDisplay').jqSegmentedDisplay('todataurl', 'image/png');
+                document.getElementById("canvasImg").src = dataURL;
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div>
+        <input id="button" type="button" value="Click to view the chart as an image" />
+        <br />
+        <table>
+            <tr>
+                <td>
+                    <div id="jqSegmentedDisplay" style="width: 500px; height: 100px;">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="" id="canvasImg" alt="Click on the button to see me" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

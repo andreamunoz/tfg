@@ -641,6 +641,19 @@ $(document).ready(function () {
         // $('#modal-close').hide();
     });
     
+    $(".select-graficos i").click(function(){
+        var grafico = $(this).attr('id');
+        
+        $.ajax({
+            type: "POST",
+            data:{grafico: grafico},
+            url: "adm_profesor/getSelectGraficos.php",
+            success: function(response)
+            {   
+                location.reload();
+            }
+        });
+    });
 });
 
 function cargar(){

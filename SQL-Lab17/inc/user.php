@@ -247,6 +247,15 @@ class User {
         return $resultado;
     }
     
+    function getNombreAlumnosAsociados($nombreCompleto){
+        $connect = new Tools();
+        $conexion = $connect->connectDB();
+        $consulta = "SELECT nombre, apellidos FROM sqlab_usuario WHERE rol = '1' AND asociado='$nombreCompleto';";
+        $resultado = mysqli_query($conexion, $consulta);
+        $connect->disconnectDB($conexion);
+        return $resultado;
+    }
+    
     function existEmail($email){
         $connect = new Tools();
         $conexion = $connect->connectDB();

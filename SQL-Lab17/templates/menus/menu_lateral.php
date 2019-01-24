@@ -32,7 +32,7 @@
             <p class="text-menu"><?php echo trad('Hoja de Ejercicios',$lang) ?></p>
         </div></a>
     <hr class="hrr">
-    <a class="menu-item" href="stadistics_exercises.php"><div class="contenedor-item">  
+    <a class="menu-item" href="stadistic.php"><div class="contenedor-item">  
         <div class="logo-interior">
             <i class="far fa-chart-bar"></i>
         </div>
@@ -95,7 +95,7 @@
         <p class="text-menu"><?php echo trad('Gestión de Hojas',$lang) ?></p>
         </div></a>
     <hr class="hrr">
-    <a class="menu-item" href="configuration_stadistics_exercises.php"><div class="contenedor-item">  
+    <a class="menu-item" href="configuration_stadistic.php"><div class="contenedor-item">  
         <div class="logo-interior">
             <i class="far fa-chart-bar"></i>
         </div>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+    Drill-Down Example - HTML5 jQuery Chart Plugin by jqChart
+</title>
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.jqChart.css" />
+	<link rel="stylesheet" type="text/css" href="../../themes/le-frog/styles.css" />
+	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="../../js/jquery.jqChart.min.js" type="text/javascript"></script>
+	
+    <script lang="javascript" type="text/javascript">
+        $(document).ready(function () {
+
+            var data = [['2010', 1530], ['2011', 2280], ['2012', 3030]];
+
+            var subData1 = [['Q1', 315], ['Q2', 360], ['Q3', 405], ['Q4', 450]];
+            var subData2 = [['Q1', 495], ['Q2', 540], ['Q3', 600], ['Q4', 645]];
+            var subData3 = [['Q1', 690], ['Q2', 735], ['Q3', 780], ['Q4', 825]];
+
+            var subData = [subData1, subData2, subData3];
+
+            function initChart() {
+                $('#jqChart').jqChart({
+                    title: 'Revenue per Year',
+                    animation: { duration: 1 },
+                    series: [
+                            {
+                                title: 'Revenue',
+                                type: 'column',
+                                data: data,
+                                cursor: 'pointer'
+                            }
+                        ]
+                });
+            }
+
+            initChart();
+
+            $('#jqChart').bind('dataPointMouseDown', function (event, data) {
+
+                var title = $('#jqChart').jqChart('option', 'title');
+                if (title.text != 'Revenue per Year') {
+                    return;
+                }
+
+                var newData = subData[data.index];
+
+                $('#jqChart').jqChart({
+                    title: 'Revenue per Quarter',
+                    animation: { duration: 1 },
+                    series: [
+                            {
+                                title: 'Revenue',
+                                type: 'column',
+                                data: newData
+                            }
+                        ]
+                });
+
+            });
+
+            $('#jqChart').bind("contextmenu", function (e) {
+
+                var title = $('#jqChart').jqChart('option', 'title');
+                if (title.text == 'Revenue per Year') {
+                    return;
+                }
+
+                initChart();
+
+                return false;
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div id="jqChart" style="width: 500px; height: 300px;">
+    </div>
+</body>
+</html>

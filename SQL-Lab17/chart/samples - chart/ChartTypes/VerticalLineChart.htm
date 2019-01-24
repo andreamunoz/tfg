@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+    Vertical Line Chart - HTML5 jQuery Chart Plugin by jqChart
+</title>
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.jqChart.css" />
+	<link rel="stylesheet" type="text/css" href="../../themes/le-frog/styles.css" />
+	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="../../js/jquery.jqChart.min.js" type="text/javascript"></script>
+	
+    <script lang="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $('#jqChart').jqChart({
+                title: { text: 'Vertical Line Chart' },
+                animation: { duration: 1 },
+                axes: [
+                    {
+                        type: 'category',
+                        location: 'left',
+                        categories: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+                    }
+                ],
+                series: [
+                    {
+                        type: 'verticalLine',
+                        title: 'Series 1',
+                        data: [62, 70, 68, 58, 52, 60, 48],
+                        labels: {
+                            stringFormat: '%d K',
+                            font: '12px sans-serif'
+                        }
+                    },
+                    {
+                        type: 'verticalLine',
+                        title: 'Series 2',
+                        data: [56, 30, 62, 65, 40, 36, 70],
+                        labels: {
+                            stringFormat: '%d K',
+                            font: '12px sans-serif'
+                        }
+                    }
+                ]
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div>
+        <div id="jqChart" style="width: 500px; height: 300px;">
+        </div>
+    </div>
+</body>
+</html>

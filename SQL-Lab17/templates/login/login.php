@@ -8,6 +8,7 @@ $lang = 'es';
 $_SESSION['showNumber'] = "";
 $_SESSION['showNumber_h'] = "";
 $_SESSION['showNumber_verh']="";
+$_SESSION['grafico']="circular";
 ?>
 <html lang="en">
     <head>

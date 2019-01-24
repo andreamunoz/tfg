@@ -66,7 +66,7 @@ $lang = 'en';
                     ?>
                     <div class="form-row">
                         <div class="form-group offset-md-2 col-md-5">
-                            <label for="prof_alumn" id="label_asociar_profesor" style="display: inline-block;" required><?php echo trad('Asociar Profesor al Alumno',$lang) ?></label>
+                            <label for="prof_alumn" id="label_asociar_profesor" style="display: inline-block;" required><?php echo trad('Profesor de Referencia',$lang) ?></label>
                             <select type="text" id="asociar_profesor" name="asociar_profesor" class="form-control form-control-sm" style="display: inline-block;">
                                 <option value="">Selecciona Profesor</option>
                                 <?php while ($prof = mysqli_fetch_array($profesores)) { ?>  

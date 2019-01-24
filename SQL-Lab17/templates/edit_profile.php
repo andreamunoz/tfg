@@ -80,7 +80,7 @@
         <?php if($_SESSION['asociado'] != "") { ?>
             <div class="row mb-2">
             <div class="col-md-3 pl-4">
-                <label for="name"><strong><?php echo trad('Profesor Asociado',$lang) ?> </strong></label>		
+                <label for="name"><strong><?php echo trad('Profesor de Referencia',$lang) ?> </strong></label>		
             </div>
             <div class="col-md-3 ">
                 <select type="text" id="asociado_profesor" name="asociado_profesor" class="form-control form-control-sm" style="display: inline-block;">

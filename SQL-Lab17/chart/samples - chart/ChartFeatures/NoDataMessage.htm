@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+    No Data Message Example - HTML5 jQuery Chart Plugin by jqChart
+</title>
+	<link rel="stylesheet" type="text/css" href="../../css/jquery.jqChart.css" />
+	<link rel="stylesheet" type="text/css" href="../../themes/le-frog/styles.css" />
+	<script src="../../js/jquery-1.11.1.min.js" type="text/javascript"></script>
+	<script src="../../js/jquery.jqChart.min.js" type="text/javascript"></script>
+	
+    <script lang="javascript" type="text/javascript">
+        $(document).ready(function () {
+            $('#jqChart').jqChart({
+                noDataMessage: {
+                    text: 'No data available',
+                    font: '20px sans-serif'
+                },
+                series: [
+                    {
+                        type: 'column'
+                    }
+                ]
+            });
+        });
+    </script>
+
+</head>
+<body>
+    <div>
+        <div id="jqChart" style="width: 500px; height: 300px;">
+        </div>
+    </div>
+</body>
+</html>

@@ -8,6 +8,7 @@ unset($_SESSION['select_p']); unset($_SESSION['select_n']); unset($_SESSION['sel
 unset($_SESSION['select_p_h']); unset($_SESSION['select_cab_h']); unset($_SESSION['value_cab_h']); $_SESSION['showNumber_h']=""; 
 //variables-sesion: ver hoja
 unset($_SESSION['select_p_verh']); unset($_SESSION['select_n_verh']);unset($_SESSION['select_t_verh']); unset($_SESSION['value_cab_verh']); unset($_SESSION['select_cab_verh']); $_SESSION['showNumber_verh']="";
+$_SESSION['grafico']="circular";
 ?>
 <img class="img_index" src="../img/img_index.png"/>
 <div class='contenedor'>
